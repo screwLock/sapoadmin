@@ -109,7 +109,7 @@ class Sapoadmin_Admin {
 
 		 $page_title = 'SAPO Admin';
 		 $menu_title = 'SAPO Admin';
-		 $capability = 'manage options';
+		 $capability = 'manage_options';
 		 $menu_slug = $this->plugin_name;
 		 $function = array($this, 'display_plugin_setup_page');
 		 
