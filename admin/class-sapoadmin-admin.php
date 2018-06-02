@@ -113,7 +113,7 @@ class Sapoadmin_Admin {
 		 $menu_slug = $this->plugin_name;
 		 $function = array($this, 'display_plugin_setup_page');
 		 
-		add_plugins_page($page_title, $menu_title, $capability, $menu_slug, $function);
+		add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function);
 	}
 
 	/*
