@@ -106,14 +106,14 @@ class Sapoadmin_Admin {
 		 * Add a settings page for this plugin to the Settings menu.
 		 * 		
 		 */
-
-		 $page_title = 'SAPO Admin';
-		 $menu_title = 'SAPO Admin';
-		 $capability = 'manage_options';
-		 $menu_slug = $this->plugin_name;
-		 $function = array($this, 'display_plugin_setup_page');
+		add_menu_page(
+			'SAPO Admin',
+			'SAPO Admin',
+			'manage_options',
+			$this->plugin_name,
+			array($this, 'display_plugin_setup_page')
+		);
 		 
-		add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function);
 	}
 
 	/*
