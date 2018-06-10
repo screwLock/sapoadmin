@@ -52,7 +52,7 @@ class Sapoadmin_Activator {
 			  id BIGINT(20) NOT NULL AUTO_INCREMENT,
 			  user_id BIGINT(20) NOT NULL,
 			  zipcode VARCHAR(6) NOT NULL,
-			  created_at datetime NOT NULL DEFAULT current_timestamp,
+			  created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 			  PRIMARY KEY  (id)    
 		   ) $charset_collate;";
 		}
@@ -67,9 +67,9 @@ class Sapoadmin_Activator {
 	       $sql[] = "CREATE TABLE $blackout_dates_table(
 		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
 		      user_id BIGINT(20) NOT NULL,
-		      blackout_date date NOT NULL,
+		      blackout_date DATE NOT NULL,
 			  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
-		      created_at datetime NOT NULL DEFAULT current_timestamp,
+		      created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 		      UNIQUE (id),
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
@@ -83,18 +83,18 @@ class Sapoadmin_Activator {
 		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
 		      user_id BIGINT(20) NOT NULL,
 		      priority TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-		      pickup_date DATE,
+		      pickup_date DATE NOT NULL,
 		      street_address VARCHAR(100) NOT NULL,
 		      city VARCHAR(30) NOT NULL,
 		      state_province CHAR(2) NOT NULL,
 		      postal_code VARCHAR(6) NOT NULL,
-		      truck_number BIGINT(20),
+		      truck_number BIGINT(20) NOT NULL,
 		      size VARCHAR(15) NOT NULL,
 		      items VARCHAR(100) NOT NULL,
-		      confirmed BOOLEAN, 
-		      completed BOOLEAN, 
+		      confirmed BOOLEAN NOT NULL, 
+		      completed BOOLEAN NOT NULL, 
 		      updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
-		      created_at datetime NOT NULL DEFAULT current_timestamp,
+		      created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 		      UNIQUE (id),
 		      PRIMARY KEY  (id)
 		   ) $charset_collate;";   
@@ -112,7 +112,7 @@ class Sapoadmin_Activator {
 		      driver_phone VARCHAR(10) NOT NULL,
 		      driver_email VARCHAR(30),
 			  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
-		      created_at datetime NOT NULL DEFAULT current_timestamp,
+		      created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 		      UNIQUE(id),
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
@@ -124,8 +124,9 @@ class Sapoadmin_Activator {
 		   $sql[] = "CREATE TABLE $employees_table(
 		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
 		      user_id BIGINT(20) NOT NULL,
+			  employee_id BIGINT(20) NOT NULL,
 		      updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
-		      created_at datetime NOT NULL DEFAULT current_timestamp,
+		      created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 	          UNIQUE(id),
 		      PRIMARY KEY  (id)
 		   ) $charset_collate;";   
