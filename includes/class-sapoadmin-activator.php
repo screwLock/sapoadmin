@@ -30,7 +30,111 @@ class Sapoadmin_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
+		self::sapo_tables_install();
 	}
 
+	public static function sapo_tables_install() {
+
+		global $wpdb;
+	 
+		$sql = array();
+		$charset_collate = $wpdb->get_charset_collate();
+	 
+		
+		//1. Create the zipcodes table
+		//In another part of code,
+		//use the count() function
+		//with query to mepr_
+		$zipcodes_table = $wpdb->prefix . "sapo_zipcodes";
+	 
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $zipcodes_table . "'") !== $zipcodes_table) {
+		   $sql[] = "CREATE TABLE $zipcodes_table (
+			  id BIGINT(20) NOT NULL AUTO_INCREMENT,
+			  user_id BIGINT(20) NOT NULL,
+			  zipcode VARCHAR(6) NOT NULL,
+			  created_at datetime NOT NULL DEFAULT current_timestamp,
+			  PRIMARY KEY  (id)    
+		   ) $charset_collate;";
+		}
+	 
+	 
+	 
+		//2. Create the blackout dates table
+		$blackout_dates_table = $wpdb->prefix . "sapo_blackout_dates";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $blackout_dates_table . "'") !== $blackout_dates_table) {
+
+	       $sql[] = "CREATE TABLE $blackout_dates_table(
+		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
+		      user_id BIGINT(20) NOT NULL,
+		      blackout_date date NOT NULL,
+			  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+		      created_at datetime NOT NULL DEFAULT current_timestamp,
+		      UNIQUE (id),
+			  PRIMARY KEY  (id)
+			) $charset_collate;";
+		}
+	 
+		//3. Create the pickups table
+		$pickups_table = $wpdb->prefix . "sapo_pickups";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $pickups_table . "'") !== $pickups_table) {
+	       $sql[] = "CREATE TABLE $pickups_table(
+		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
+		      user_id BIGINT(20) NOT NULL,
+		      priority TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+		      pickup_date DATE,
+		      street_address VARCHAR(100) NOT NULL,
+		      city VARCHAR(30) NOT NULL,
+		      state_province CHAR(2) NOT NULL,
+		      postal_code VARCHAR(6) NOT NULL,
+		      truck_number BIGINT(20),
+		      size VARCHAR(15) NOT NULL,
+		      items VARCHAR(100) NOT NULL,
+		      confirmed BOOLEAN, 
+		      completed BOOLEAN, 
+		      updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+		      created_at datetime NOT NULL DEFAULT current_timestamp,
+		      UNIQUE (id),
+		      PRIMARY KEY  (id)
+		   ) $charset_collate;";   
+		}
+
+		//4. Create Trucks table
+		$trucks_table = $wpdb->prefix . "sapo_trucks";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $trucks_table . "'") !== $trucks_table) {
+	       $sql[] = "CREATE TABLE $trucks_table(
+		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
+		      user_id BIGINT(20) NOT NULL,
+		      truck_number BIGINT(20) NOT NULL,
+		      driver_name VARCHAR(30) NOT NULL,
+		      driver_phone VARCHAR(10) NOT NULL,
+		      driver_email VARCHAR(30),
+			  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+		      created_at datetime NOT NULL DEFAULT current_timestamp,
+		      UNIQUE(id),
+			  PRIMARY KEY  (id)
+			) $charset_collate;";
+		}
+        //5.  Create Employees table
+		$employees_table = $wpdb->prefix . "sapo_employees";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $employees_table . "'") !== $employees_table) { 
+		   $sql[] = "CREATE TABLE $employees_table(
+		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
+		      user_id BIGINT(20) NOT NULL,
+		      updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+		      created_at datetime NOT NULL DEFAULT current_timestamp,
+	          UNIQUE(id),
+		      PRIMARY KEY  (id)
+		   ) $charset_collate;";   
+		}
+
+		if(!empty($sql)){
+		   require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		   dbDelta($sql);
+		}
+	 }
+	 
 }

@@ -179,6 +179,8 @@ class Sapoadmin {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+        $this->loader->add_shortcode( "testShortcode", $plugin_public, "shortcode_function", 10, 2 );
+
 
 	}
 
@@ -222,4 +224,13 @@ class Sapoadmin {
 		return $this->version;
 	}
 
+
+	/**
+	 * Shortcode functions go below
+	 * 
+	 */
+
+	public function shortcode_function(){
+		echo 'Test the plugin';
+	}
 }
