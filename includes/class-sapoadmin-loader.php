@@ -41,7 +41,7 @@ class Sapoadmin_Loader {
 	 * 
 	 */
 	protected $filters;
-	
+
 	/**
 	 * The array of shortcodes registered with Wordpress.
 	 * 
@@ -61,7 +61,7 @@ class Sapoadmin_Loader {
 
 		$this->actions = array();
 		$this->filters = array();
-
+        $this->shortcodes = array();
 	}
 
     /**
@@ -148,7 +148,7 @@ class Sapoadmin_Loader {
 		}
 		
 		foreach ( $this->shortcodes as $hook ) {
-            add_shortcode( $hook['hook'], array( $hook['component'], $hook['callback'] ) );
+            add_shortcode( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
         }
 	}
 
