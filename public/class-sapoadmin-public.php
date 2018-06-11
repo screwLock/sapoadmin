@@ -74,7 +74,9 @@ class Sapoadmin_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/sapoadmin-public.css', array(), $this->version, 'all' );
-		//wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+
+		//Stylesheet for the datepicker
+		wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/flick/jquery-ui.css');
 
 	}
 
@@ -97,7 +99,7 @@ class Sapoadmin_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/sapoadmin-public.js', array( 'jquery', 'jquery-ui-core' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/sapoadmin-public.js', array( 'jquery', 'jquery-ui-datepicker' ), $this->version, false );
 
 	}
 
