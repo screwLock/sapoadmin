@@ -97,7 +97,7 @@ class Sapoadmin_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/sapoadmin-public.js', array( 'jquery', 'jquery-ui core' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/sapoadmin-public.js', array( 'jquery', 'jquery-ui-core' ), $this->version, false );
 
 	}
 
@@ -125,6 +125,6 @@ class Sapoadmin_Public {
 	public function shortcode_function(){
 		wp_enqueue_script( 'script-name' );
 
-		return '<div id="sapo_datepicker">Date</div>';
+		return '';
 	}
 }
