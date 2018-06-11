@@ -176,7 +176,8 @@ class Sapoadmin {
 	private function define_public_hooks() {
 
 		$plugin_public = new Sapoadmin_Public( $this->get_plugin_name(), $this->get_version() );
-
+		
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'register_scripts' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
         $this->loader->add_shortcode( 'testShortcode', $this, 'shortcode_function' , 10, 2 );
@@ -225,12 +226,15 @@ class Sapoadmin {
 	}
 
 
+
 	/**
 	 * Shortcode functions go below
 	 * 
 	 */
 
 	public function shortcode_function(){
+		wp_enqueue_script( 'script-name' );
+
 		return 'Test the plugin';
 	}
 }

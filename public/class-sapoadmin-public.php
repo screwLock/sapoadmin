@@ -101,4 +101,16 @@ class Sapoadmin_Public {
 
 	}
 
+	/**
+	 * This function is for registering scripts that are not going to be used sitewide
+	 * but for shortcodes instead.  This function is to be called in define_public_hooks()
+	 * of the class-sapoadmin class.
+	 * 
+	 * 
+	 */
+	public function register_scripts() {
+		wp_register_script( 'script-name', plugin_dir_url( __FILE__ ) . 'js/scripts.js', array(), $this->version, true );
+	}
+	
+
 }

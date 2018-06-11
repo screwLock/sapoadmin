@@ -117,7 +117,8 @@ class Sapoadmin_Activator {
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
 		}
-        //5.  Create Employees table
+		//5.  Create Employees table
+		//TODO:  If user not in employee table or is not parent account, cannot access main page
 		$employees_table = $wpdb->prefix . "sapo_employees";
 
 		if($wpdb->get_var("SHOW TABLES LIKE '" . $employees_table . "'") !== $employees_table) { 
