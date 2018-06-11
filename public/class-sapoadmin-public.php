@@ -125,6 +125,6 @@ class Sapoadmin_Public {
 	public function shortcode_function(){
 		wp_enqueue_script( 'script-name' );
 
-		return 'Test the plugin';
+		return '<div id="sapo_datepicker">Date</div>';
 	}
 }

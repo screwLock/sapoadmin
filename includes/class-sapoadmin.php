@@ -227,14 +227,5 @@ class Sapoadmin {
 
 
 
-	/**
-	 * Shortcode functions go below
-	 * 
-	 */
 
-	public function shortcode_function(){
-		wp_enqueue_script( 'script-name' );
-
-		return 'Test the plugin';
-	}
 }
