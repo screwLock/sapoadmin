@@ -101,7 +101,10 @@ class Sapoadmin_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/sapoadmin-public.js', array( 'jquery', 'jquery-ui-datepicker' ), $this->version, false );
 		
-		//wp_enqueue_script( 'google_js', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyALjQTE9_fxGsFeWK-CulzUYAfkUOFtm94', '', '' );
+		//wp_enqueue_script( 'google_maps', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyALjQTE9_fxGsFeWK-CulzUYAfkUOFtm94&callback=initMap', array('scripts'));
+		
+		//Add 'async defer' tags to google maps script
+		//add_filter('script_loader_tag', array($this, 'google_maps_script_attributes'), 10, 2);
 	}
 
 	/**
@@ -113,7 +116,7 @@ class Sapoadmin_Public {
 	 */
 	public function register_scripts() {
 		wp_register_script( 'script-name', plugin_dir_url( __FILE__ ) . 'js/scripts.js', array(), $this->version, true );
-		wp_register_script('google_js',  'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyALjQTE9_fxGsFeWK-CulzUYAfkUOFtm94', array('script-name'), $this->version);
+		wp_register_script('google_maps',  'https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAP9TsRTrHitDF4jNAwSXLLKajKM4LTGVc&callback=initMap', array('script-name'), $this->version);
 	}
 	
 
@@ -128,7 +131,18 @@ class Sapoadmin_Public {
 
 	public function shortcode_function(){
 		wp_enqueue_script( 'script-name' );
-		wp_enqueue_script( 'google_js');
+		wp_enqueue_script( 'google_maps');
+		add_filter('script_loader_tag', array($this, 'google_maps_script_attributes'), 10, 2);
 		return '';
 	}
+
+	// Add async and defer attributes
+function google_maps_script_attributes( $tag, $handle) {
+    if ( 'google_maps' !== $handle ) {
+        return $tag;
+  }
+    
+    return str_replace( ' src', ' async="async" defer src', $tag );
+}
+//
 }

@@ -164,6 +164,7 @@ class Sapoadmin {
 		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' );
 		$this->loader->add_filter( 'plugin_action_links_' . $plugin_basename, $plugin_admin, 'add_action_links' );
 
+
 	}
 
 	/**
@@ -182,6 +183,8 @@ class Sapoadmin {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
         $this->loader->add_shortcode( 'ta', $plugin_public, 'shortcode_function' , 10, 2 );
 
+		//Add 'async defer' tags to google maps script
+		//$this->loader->add_filter('script_loader_tag', 'google_maps_script_attributes', 10, 2);
 
 	}
 
@@ -224,7 +227,6 @@ class Sapoadmin {
 	public function get_version() {
 		return $this->version;
 	}
-
 
 
 
