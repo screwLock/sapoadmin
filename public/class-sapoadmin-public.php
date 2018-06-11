@@ -100,7 +100,8 @@ class Sapoadmin_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/sapoadmin-public.js', array( 'jquery', 'jquery-ui-datepicker' ), $this->version, false );
-
+		
+		//wp_enqueue_script( 'google_js', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyALjQTE9_fxGsFeWK-CulzUYAfkUOFtm94', '', '' );
 	}
 
 	/**
@@ -112,6 +113,7 @@ class Sapoadmin_Public {
 	 */
 	public function register_scripts() {
 		wp_register_script( 'script-name', plugin_dir_url( __FILE__ ) . 'js/scripts.js', array(), $this->version, true );
+		wp_register_script('google_js',  'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyALjQTE9_fxGsFeWK-CulzUYAfkUOFtm94', array('script-name'), $this->version);
 	}
 	
 
@@ -126,7 +128,7 @@ class Sapoadmin_Public {
 
 	public function shortcode_function(){
 		wp_enqueue_script( 'script-name' );
-
+		wp_enqueue_script( 'google_js');
 		return '';
 	}
 }
