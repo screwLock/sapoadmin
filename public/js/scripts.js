@@ -11,11 +11,8 @@ jQuery(document).ready(function($){
                      .column(2)
                      .search(15)
                      .draw();
-
-         console.log(wpDataTables.table_1.DataTable()
-                     .columns(3)
-                     .data()
-                     .concat(wpDataTables.table_1.DataTable().columns(4).data()));
+   
+         
         });
     });
 
