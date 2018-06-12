@@ -28,7 +28,7 @@ jQuery(window).load(function(){
          });
     });
 
-    //Display dates upon completion of DOM
+    //Display dates loaded on page load
     wpDataTables.table_1.DataTable()
        .column(13)
        .data()
@@ -69,29 +69,33 @@ function deleteMarkers() {
 
 var markers = [];
 
-    function codeAddress(address) {
-       geocoder.geocode( { 'address': address}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-          map.setCenter(results[0].geometry.location);
+function codeAddress(address) {
+   geocoder.geocode( { 'address': address}, function(results, status) {
+   if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
           
-          marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-          });
+      marker = new google.maps.Marker({
+        map: map,
+        position: results[0].geometry.location
+      });
           
-          infowindow = new google.maps.InfoWindow({
-              content: address
-          });
+      var infowindow = new google.maps.InfoWindow({
+        content: address
+      });
 
-          marker.addListener('click', function() {
-             infowindow.open(map, marker);
-             map.setZoom(17);
-             map.panTo(marker.position);
-          });
+       marker.addListener('click', addInfoWindow.bind(this, marker, infowindow)
+       );
 
-         markers.push(marker);
-       } else {
-          alert('Geocode was not successful for the following reason: ' + status);
-         }
-       });
-    }   
+       markers.push(marker);
+       } 
+   else {
+      alert('Geocode was not successful for the following reason: ' + status);
+   }
+   });
+}   
+
+function addInfoWindow(marker, infowindow){
+    infowindow.open(map, marker);
+    map.setZoom(17);
+    map.panTo(marker.position);
+}
