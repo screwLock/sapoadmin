@@ -1,45 +1,54 @@
 
-jQuery(document).ready(function($){
-    $('#sapo_datepicker').datepicker({
+jQuery(window).load(function(){
+    jQuery('#sapo_datepicker').datepicker({
        dateFormat: 'dd-mm-yy'
        }).datepicker('setDate', 'today')
          .datepicker( 'option' , 'onSelect', function(dateText, insta) {
          
+            deleteMarkers();
 
          //TODO:  Change column and search to reflect date, not priority
          wpDataTables.table_1.DataTable()
                      .column(2)
                      .search(15)
                      .draw();
-
-         deleteMarkers();
-
-         wpDataTables.table_1.DataTable()
-                     .column(13)
-                     .data()
-                     .each(function(value){
-                        codeAddress(value);
-                          });
-                     
+                     //.column(13)
+                     //.data()
+                     //.each(function(value){
+                     //    codeAddress(value);
+                     //});
          
-        });
+         wpDataTables.table_1.addOnDrawCallback(function(){
+            wpDataTables.table_1.DataTable()
+                    .column(13)
+                    .data()
+                    .each(function(value){
+                        codeAddress(value);
+                    });
+         });
     });
 
+    //Display dates upon completion of DOM
+    wpDataTables.table_1.DataTable()
+       .column(13)
+       .data()
+       .each(function(value){
+          codeAddress(value);
+       });
 
-(function($) {
-    //runs jquery before DOM is ready
-})(jQuery);
 
+})        
+    
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('sapo_map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 11
+    center: {lat: 48.3552767, lng: -99.9995795},
+    zoom: 3
     
     });
     geocoder = new google.maps.Geocoder;
-    infowindow = new google.maps.InfoWindow;
-    marker = new google.maps.Marker;
+    //infowindow = new google.maps.InfoWindow;
+   // marker = new google.maps.Marker;
     
 }
 
@@ -64,10 +73,22 @@ var markers = [];
        geocoder.geocode( { 'address': address}, function(results, status) {
        if (status == google.maps.GeocoderStatus.OK) {
           map.setCenter(results[0].geometry.location);
+          
           marker = new google.maps.Marker({
           map: map,
           position: results[0].geometry.location
-       });
+          });
+          
+          infowindow = new google.maps.InfoWindow({
+              content: address
+          });
+
+          marker.addListener('click', function() {
+             infowindow.open(map, marker);
+             map.setZoom(17);
+             map.panTo(marker.position);
+          });
+
          markers.push(marker);
        } else {
           alert('Geocode was not successful for the following reason: ' + status);

@@ -35,3 +35,8 @@
 	
 
 })( jQuery );
+
+
+(function($) {
+    //runs jquery before DOM is ready
+})(jQuery);
