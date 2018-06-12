@@ -42,7 +42,9 @@ class Sapoadmin_Activator {
 	 
 		
 		//1. Create the zipcodes table
-		//In another part of code,
+		//---This table should be used as a reference table for 
+		//---creating pickup addresses
+		//TODO: In another part of code,
 		//use the count() function
 		//with query to mepr_
 		$zipcodes_table = $wpdb->prefix . "sapo_zipcodes";
@@ -133,6 +135,34 @@ class Sapoadmin_Activator {
 		   ) $charset_collate;";   
 		}
 
+		//6. Crate Reference Table for Yes/No values
+		$confirmation_status_table = $wpdb->prefix . "sapo_confirmation_status";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $confirmation_status_table . "'") !== $confirmation_status_table){
+			$sql[] = "CREATE TABLE $confirmation_status_table(
+			   id BIGINT(20) NOT NULL AUTO_INCREMENT,
+			   status VARCHAR(5) NOT NULL,
+			   PRIMARY KEY  (id)
+			) $charset_collate;";
+		}
+
+		//7. Create Categories Table
+		$categories_table = $wpdb->prefix . "sapo_categories";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $categories_table . "'") !== $categories_table){
+			$sql[] = "CREATE TABLE $categories_table(
+			   id BIGINT(20) NOT NULL AUTO_INCREMENT,
+			   user_id BIGINT(20) NOT NULL,
+			   category VARCHAR(30) NOT NULL,
+			   comments VARCHAR(200) NOT NULL,
+			   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+		       created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+	           UNIQUE(id),
+		       PRIMARY KEY  (id)
+		   ) $charset_collate;";   
+		}
+			
+		
 		if(!empty($sql)){
 		   require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		   dbDelta($sql);
