@@ -12,6 +12,8 @@ jQuery(document).ready(function($){
                      .search(15)
                      .draw();
 
+         deleteMarkers();
+
          wpDataTables.table_1.DataTable()
                      .column(13)
                      .data()
@@ -28,24 +30,45 @@ jQuery(document).ready(function($){
     //runs jquery before DOM is ready
 })(jQuery);
 
-var map;
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('sapo_map'), {
     center: {lat: -34.397, lng: 150.644},
     zoom: 11
+    
     });
+    geocoder = new google.maps.Geocoder;
+    infowindow = new google.maps.InfoWindow;
+    marker = new google.maps.Marker;
+    
 }
 
+function clearMarkers() {
+    setMapOnAll(null);
+  }
+
+function deleteMarkers() {
+    clearMarkers();
+    markers = [];
+  }
+
+  function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  }
+
+var markers = [];
 
     function codeAddress(address) {
-       //var address = document.getElementById('address').value;
        geocoder.geocode( { 'address': address}, function(results, status) {
        if (status == google.maps.GeocoderStatus.OK) {
           map.setCenter(results[0].geometry.location);
-          var marker = new google.maps.Marker({
+          marker = new google.maps.Marker({
           map: map,
           position: results[0].geometry.location
        });
+         markers.push(marker);
        } else {
           alert('Geocode was not successful for the following reason: ' + status);
          }

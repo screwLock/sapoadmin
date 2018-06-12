@@ -117,6 +117,7 @@ class Sapoadmin_Public {
 	public function register_scripts() {
 		wp_register_script( 'script-name', plugin_dir_url( __FILE__ ) . 'js/scripts.js', array(), $this->version, true );
 		wp_register_script('google_maps',  'https://maps.googleapis.com/maps/api/js?key=AIzaSyAP9TsRTrHitDF4jNAwSXLLKajKM4LTGVc&callback=initMap', array('script-name'), $this->version);
+
 	}
 	
 
