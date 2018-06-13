@@ -1,32 +1,31 @@
 
 jQuery(window).load(function(){
+
+  var mapTable = wpDataTables.table_1.DataTable();
+
     jQuery('#sapo_datepicker').datepicker({
        dateFormat: 'dd-mm-yy'
        }).datepicker('setDate', 'today')
          .datepicker( 'option' , 'onSelect', function(dateText, insta) {
          
-            deleteMarkers();
+            
 
          //TODO:  Change column and search to reflect date, not priority
-         wpDataTables.table_1.DataTable()
+            wpDataTables.table_1.DataTable()
                      .column(2)
                      .search(15)
                      .draw();
-                     //.column(13)
-                     //.data()
-                     //.each(function(value){
-                     //    codeAddress(value);
-                     //});
-         
+            });
          wpDataTables.table_1.addOnDrawCallback(function(){
+            deleteMarkers();
             wpDataTables.table_1.DataTable()
                     .column(13)
                     .data()
                     .each(function(value){
                         codeAddress(value);
+                    //});
                     });
          });
-    });
 
     //Display dates loaded on page load
     wpDataTables.table_1.DataTable()
@@ -35,6 +34,17 @@ jQuery(window).load(function(){
        .each(function(value){
           codeAddress(value);
        });
+       
+       //complete this when sample database complete
+       //mapTableData is address->Not lat/long->Not marker
+
+       jQuery('#table_1 tbody').on('click', 'tr', function(){
+        if(!$(this).hasClass('selected')){
+          //deleteMarkers();
+          var mapTableData = mapTable.rows(0).data()[0][13];
+          if(markers.includes(mapTableData))console.log(mapTableData);
+        }
+      });
 
 
 })        
@@ -46,10 +56,7 @@ function initMap() {
     zoom: 3
     
     });
-    geocoder = new google.maps.Geocoder;
-    //infowindow = new google.maps.InfoWindow;
-   // marker = new google.maps.Marker;
-    
+    geocoder = new google.maps.Geocoder;    
 }
 
 function clearMarkers() {
@@ -76,6 +83,7 @@ function codeAddress(address) {
           
       marker = new google.maps.Marker({
         map: map,
+        animation: google.maps.Animation.DROP,
         position: results[0].geometry.location
       });
           
