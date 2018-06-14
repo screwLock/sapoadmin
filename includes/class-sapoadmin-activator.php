@@ -161,17 +161,6 @@ class Sapoadmin_Activator {
 		       PRIMARY KEY  (id)
 		   ) $charset_collate;";   
 		}
-
-		//8.  Create Zipcodes Reference Table
-		$ref_zipcodes_table = $wpdb->prefix . "sapo_ref_zipcodes";
-
-		if($wpdb->get_var("SHOW TABLES LIKE '" . $ref_zipcodes_table . "'") !== $ref_zipcodes_table){
-			$sql[] = "CREATE TABLE $ref_zipcodes_table(
-			   id BIGINT(20) NOT NULL AUTO_INCREMENT,
-			   zipcode VARCHAR(10) NOT NULL,
-			   PRIMARY KEY  (id)
-			) $charset_collate;";
-		}
 			
 		
 		if(!empty($sql)){
