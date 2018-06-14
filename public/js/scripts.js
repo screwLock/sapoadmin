@@ -1,6 +1,7 @@
 
 jQuery(window).load(function(){
-
+  var dateColumn = 2;
+  var addressColumn = 13;
   var mapTable = wpDataTables.table_1.DataTable();
 
     jQuery('#sapo_datepicker').datepicker({
@@ -12,14 +13,14 @@ jQuery(window).load(function(){
 
          //TODO:  Change column and search to reflect date, not priority
             wpDataTables.table_1.DataTable()
-                     .column(2)
+                     .column(dateColumn)
                      .search(15)
                      .draw();
             });
          wpDataTables.table_1.addOnDrawCallback(function(){
             deleteMarkers();
             wpDataTables.table_1.DataTable()
-                    .column(13)
+                    .column(addressColumn)
                     .data()
                     .each(function(value){
                         codeAddress(value);
