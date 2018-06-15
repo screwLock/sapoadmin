@@ -5,7 +5,7 @@ jQuery(window).load(function(){
   var mapTable = wpDataTables.table_1.DataTable();
 
     jQuery('#sapo_datepicker').datepicker({
-       dateFormat: 'dd-mm-yy'
+       dateFormat: 'yy-mm-dd'
        }).datepicker('setDate', 'today')
          .datepicker( 'option' , 'onSelect', function(dateText, insta) {
          
