@@ -1,6 +1,6 @@
 
 jQuery(window).load(function(){
-  var dateColumn = 2;
+  var dateColumn = 3;
   var addressColumn = 13;
   var mapTable = wpDataTables.table_1.DataTable();
 
@@ -14,7 +14,7 @@ jQuery(window).load(function(){
          //TODO:  Change column and search to reflect date, not priority
             wpDataTables.table_1.DataTable()
                      .column(dateColumn)
-                     .search(15)
+                     .search(moment().format('L'))
                      .draw();
             });
          wpDataTables.table_1.addOnDrawCallback(function(){
@@ -30,7 +30,7 @@ jQuery(window).load(function(){
 
     //Display dates loaded on page load
     wpDataTables.table_1.DataTable()
-       .column(13)
+       .column(addressColumn)
        .data()
        .each(function(value){
           codeAddress(value);
@@ -38,6 +38,7 @@ jQuery(window).load(function(){
        
        //complete this when sample database complete
        //mapTableData is address->Not lat/long->Not marker
+       //also check for when table is empty(otherwise get error)
 
        jQuery('#table_1 tbody').on('click', 'tr', function(){
         if(!$(this).hasClass('selected')){
