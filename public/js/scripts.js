@@ -14,7 +14,7 @@ jQuery(window).load(function(){
          //TODO:  Change column and search to reflect date, not priority
             wpDataTables.table_1.DataTable()
                      .column(dateColumn)
-                     .search(moment().format('L'))
+                     .search(dateText)
                      .draw();
             });
          wpDataTables.table_1.addOnDrawCallback(function(){
@@ -23,7 +23,8 @@ jQuery(window).load(function(){
                     .column(addressColumn)
                     .data()
                     .each(function(value){
-                        codeAddress(value);
+                      ;
+                       // codeAddress(value);
                     //});
                     });
          });
