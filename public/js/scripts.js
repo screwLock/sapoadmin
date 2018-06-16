@@ -2,7 +2,6 @@
 jQuery(window).load(function(){
   var dateColumn = 3;
   var addressColumn = 13;
-  var mapTable = wpDataTables.table_1.DataTable();
 
     jQuery('#sapo_datepicker').datepicker( {dateFormat: 'yy-mm-dd'})
         .datepicker('setDate', 'today')
@@ -34,7 +33,7 @@ jQuery(window).load(function(){
         {
           if(!jQuery(this).hasClass('selected')){
             deleteMarkers();
-            var mapTableData = mapTable.rows(0).data()[0][13];
+            var mapTableData = wpDataTables.table_1.DataTable().rows(0).data()[0][addressColumn];
             codeAddress(mapTableData);
           }
         }
@@ -74,6 +73,7 @@ function clearMarkers() {
 
 function deleteMarkers() {
     clearMarkers();
+    map.setZoom(3);
     markers = [];
   }
 
