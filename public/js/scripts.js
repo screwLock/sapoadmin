@@ -4,30 +4,21 @@ jQuery(window).load(function(){
   var addressColumn = 13;
   var mapTable = wpDataTables.table_1.DataTable();
 
-    jQuery('#sapo_datepicker').datepicker({
-       dateFormat: 'yy-mm-dd'
-       }).datepicker('setDate', 'today')
-         .datepicker( 'option' , 'onSelect', function(dateText, insta) {
+    jQuery('#sapo_datepicker').datepicker( {dateFormat: 'yy-mm-dd'})
+        .datepicker('setDate', 'today')
+        .datepicker( 'option' , 'onSelect', function(dateText) {
          
-            
-
-         //TODO:  Change column and search to reflect date, not priority
             wpDataTables.table_1.DataTable()
                      .column(dateColumn)
                      .search(dateText)
                      .draw();
             });
-         wpDataTables.table_1.addOnDrawCallback(function(){
-            deleteMarkers();
-            wpDataTables.table_1.DataTable()
-                    .column(addressColumn)
-                    .data()
-                    .each(function(value){
-                      ;
-                       // codeAddress(value);
-                    //});
-                    });
-         });
+
+         wpDataTables.table_1.addOnDrawCallback(function() { 
+          updateMarkersOnRedraw(wpDataTables.table_1, addressColumn)
+          });
+           
+         
 
     //Display dates loaded on page load
     wpDataTables.table_1.DataTable()
@@ -109,4 +100,19 @@ function addInfoWindow(marker, infowindow){
     infowindow.open(map, marker);
     map.setZoom(17);
     map.panTo(marker.position);
+}
+
+
+//TODO: Change back to codeAddress and remove logging 
+function updateMarkersOnRedraw(tableName, column){
+  deleteMarkers();
+  tableName.DataTable()
+          .column(column)
+          .data()
+          .each(function(value){
+            console.log(value);
+             // codeAddress(value);
+          //});
+          });
+
 }
