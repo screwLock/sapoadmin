@@ -14,13 +14,15 @@ jQuery(window).load(function(){
 
     //Display dates loaded on page load
     drawTableByDate(wpDataTables.table_1, dateColumn, moment().utc().format('YYYY-MM-DD'));
-    //Add a timeout so table can finish drawing before search
+    //Add a timeout so table can finish drawing before search (prevents annoying geocoding popups)
     setTimeout(function() {changeMarkers(wpDataTables.table_1, addressColumn);}, 500);
-
-    wpDataTables.table_1.addOnDrawCallback(function() { 
-      updateMarkersOnRedraw(wpDataTables.table_1, addressColumn)
-      });
-
+    
+    //Add a timeout to prevent double entry of first marker
+    setTimeout(function(){
+        wpDataTables.table_1.addOnDrawCallback(function() { 
+        updateMarkersOnRedraw(wpDataTables.table_1, addressColumn)
+        });
+        }, 1000);
        
        //complete this when sample database complete
        //mapTableData is address->Not lat/long->Not marker
@@ -79,8 +81,8 @@ function codeAddress(address) {
         content: address
       });
 
-       marker.addListener('click', addInfoWindow.bind(this, marker, infowindow));
-
+       marker.addListener('click', addInfoWindow.bind(this, marker, infowindow, 15));
+      console.log("agin");
        markers.push(marker);
        } 
    else {
@@ -89,9 +91,9 @@ function codeAddress(address) {
    });
 }   
 
-function addInfoWindow(marker, infowindow){
+function addInfoWindow(marker, infowindow, zoom){
     infowindow.open(map, marker);
-    map.setZoom(17);
+    map.setZoom(zoom);
     map.panTo(marker.position);
 }
 
