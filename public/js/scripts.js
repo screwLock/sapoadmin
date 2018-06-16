@@ -21,12 +21,9 @@ jQuery(window).load(function(){
          
 
     //Display dates loaded on page load
-    wpDataTables.table_1.DataTable()
-       .column(addressColumn)
-       .data()
-       .each(function(value){
-          codeAddress(value);
-       });
+    changeMarkersByDate(wpDataTables.table_1, addressColumn);
+
+
        
        //complete this when sample database complete
        //mapTableData is address->Not lat/long->Not marker
@@ -106,13 +103,16 @@ function addInfoWindow(marker, infowindow){
 //TODO: Change back to codeAddress and remove logging 
 function updateMarkersOnRedraw(tableName, column){
   deleteMarkers();
-  tableName.DataTable()
-          .column(column)
-          .data()
-          .each(function(value){
-            console.log(value);
-             // codeAddress(value);
-          //});
-          });
+  changeMarkersByDate(tableName, column); 
+}
 
+function changeMarkersByDate(tableName, dateColumn){
+  tableName.DataTable()
+  .column(dateColumn)
+  .data()
+  .each(function(value){
+    console.log(value);
+     // codeAddress(value);
+  //});
+  });
 }
