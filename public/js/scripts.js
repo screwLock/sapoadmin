@@ -32,10 +32,12 @@ jQuery(window).load(function(){
        jQuery('#table_1 tbody').on('click', 'tr', function(){
         if(!jQuery(this).hasClass('selected')){
           deleteMarkers();
-          var mapTableData = mapTable.rows(0).data()[0][13];
-          //if marker does not already exist, delete marker
-          //if(markers.includes(mapTableData))console.log(mapTableData);
-          changeMarkers(wpDataTables.table_1, addressColumn);
+          if(wpDataTables.table_1.DataTable().data().any()){
+            var mapTableData = mapTable.rows(0).data()[0][13];
+            //if marker does not already exist, delete marker
+            //if(markers.includes(mapTableData))console.log(mapTableData);
+            changeMarkers(wpDataTables.table_1, addressColumn);
+          }
         }
       });
 
