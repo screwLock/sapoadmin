@@ -27,12 +27,15 @@ jQuery(window).load(function(){
        //complete this when sample database complete
        //mapTableData is address->Not lat/long->Not marker
        //also check for when table is empty(otherwise get error)
+       //could also create array of address
 
        jQuery('#table_1 tbody').on('click', 'tr', function(){
         if(!jQuery(this).hasClass('selected')){
-          //deleteMarkers();
+          deleteMarkers();
           var mapTableData = mapTable.rows(0).data()[0][13];
-          if(markers.includes(mapTableData))console.log(mapTableData);
+          //if marker does not already exist, delete marker
+          //if(markers.includes(mapTableData))console.log(mapTableData);
+          changeMarkers(wpDataTables.table_1, addressColumn);
         }
       });
 
