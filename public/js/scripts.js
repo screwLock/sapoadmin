@@ -7,22 +7,19 @@ jQuery(window).load(function(){
     jQuery('#sapo_datepicker').datepicker( {dateFormat: 'yy-mm-dd'})
         .datepicker('setDate', 'today')
         .datepicker( 'option' , 'onSelect', function(dateText) {
-         
-            wpDataTables.table_1.DataTable()
-                     .column(dateColumn)
-                     .search(dateText)
-                     .draw();
-            });
+           drawTableByDate(wpDataTables.table_1, dateColumn, dateText);
+        });
 
-         wpDataTables.table_1.addOnDrawCallback(function() { 
-          updateMarkersOnRedraw(wpDataTables.table_1, addressColumn)
-          });
-           
-         
+
 
     //Display dates loaded on page load
-    changeMarkersByDate(wpDataTables.table_1, addressColumn);
+    drawTableByDate(wpDataTables.table_1, dateColumn, moment().utc().format('YYYY-MM-DD'));
+    //Add a timeout so table can finish drawing before search
+    setTimeout(function() {changeMarkers(wpDataTables.table_1, addressColumn);}, 500);
 
+    wpDataTables.table_1.addOnDrawCallback(function() { 
+      updateMarkersOnRedraw(wpDataTables.table_1, addressColumn)
+      });
 
        
        //complete this when sample database complete
@@ -30,7 +27,7 @@ jQuery(window).load(function(){
        //also check for when table is empty(otherwise get error)
 
        jQuery('#table_1 tbody').on('click', 'tr', function(){
-        if(!$(this).hasClass('selected')){
+        if(!jQuery(this).hasClass('selected')){
           //deleteMarkers();
           var mapTableData = mapTable.rows(0).data()[0][13];
           if(markers.includes(mapTableData))console.log(mapTableData);
@@ -82,8 +79,7 @@ function codeAddress(address) {
         content: address
       });
 
-       marker.addListener('click', addInfoWindow.bind(this, marker, infowindow)
-       );
+       marker.addListener('click', addInfoWindow.bind(this, marker, infowindow));
 
        markers.push(marker);
        } 
@@ -100,19 +96,23 @@ function addInfoWindow(marker, infowindow){
 }
 
 
-//TODO: Change back to codeAddress and remove logging 
 function updateMarkersOnRedraw(tableName, column){
   deleteMarkers();
-  changeMarkersByDate(tableName, column); 
+  changeMarkers(tableName, column); 
 }
 
-function changeMarkersByDate(tableName, dateColumn){
+function changeMarkers(tableName, addressColumn){
+  tableName.DataTable()
+  .column(addressColumn)
+  .data()
+  .each(function(address){
+    codeAddress(address);
+  });
+}
+
+function drawTableByDate(tableName, dateColumn, date){
   tableName.DataTable()
   .column(dateColumn)
-  .data()
-  .each(function(value){
-    console.log(value);
-     // codeAddress(value);
-  //});
-  });
+  .search(date)
+  .draw();
 }
