@@ -12,7 +12,7 @@ jQuery(window).load(function(){
 
 
     //Display dates loaded on page load
-    drawTableByDate(wpDataTables.table_1, dateColumn, moment().utc().format('YYYY-MM-DD'));
+    drawTableByDate(wpDataTables.table_1, dateColumn, moment().local().format('YYYY-MM-DD'));
     //Add a timeout so table can finish drawing before search (prevents annoying geocoding popups)
     setTimeout(function() {changeMarkers(wpDataTables.table_1, addressColumn);}, 500);
     
