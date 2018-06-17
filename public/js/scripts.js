@@ -3,10 +3,16 @@ jQuery(window).load(function(){
   var dateColumn = 3;
   var addressColumn = 13;
 
-    jQuery('#sapo_datepicker').datepicker( {dateFormat: 'yy-mm-dd'})
-        .datepicker('setDate', 'today')
-        .datepicker( 'option' , 'onSelect', function(dateText) {
-           drawTableByDate(wpDataTables.table_1, dateColumn, dateText);
+    jQuery('#sapo_datepicker').datepicker( 
+      {
+        format: 'yyyy-mm-dd',
+        toggleActive: true,
+        todayBtn: "linked",
+      });
+    jQuery('#sapo_datepicker').datepicker('setDate', 'today');
+    jQuery('#sapo_datepicker').on( 'changeDate', function(dateText) {
+      console.log(dateText.date);
+           drawTableByDate(wpDataTables.table_1, dateColumn, moment(dateText.date).format('YYYY-MM-DD'))
         });
 
 
