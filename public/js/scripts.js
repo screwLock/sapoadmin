@@ -8,6 +8,7 @@ jQuery(window).load(function(){
         format: 'yyyy-mm-dd',
         toggleActive: true,
         todayBtn: "linked",
+        todayHighlight: true
       });
     jQuery('#sapo_datepicker').datepicker('setDate', 'today');
     jQuery('#sapo_datepicker').on( 'changeDate', function(dateText) {
@@ -20,14 +21,14 @@ jQuery(window).load(function(){
     //Display dates loaded on page load
     drawTableByDate(wpDataTables.table_1, dateColumn, moment().local().format('YYYY-MM-DD'));
     //Add a timeout so table can finish drawing before search (prevents annoying geocoding popups)
-    setTimeout(function() {changeMarkers(wpDataTables.table_1, addressColumn);}, 500);
+    setTimeout(function() {changeMarkers(wpDataTables.table_1, addressColumn);}, 1000);
     
     //Add a timeout to prevent double entry of first marker
     setTimeout(function(){
         wpDataTables.table_1.addOnDrawCallback(function() { 
         updateMarkersOnRedraw(wpDataTables.table_1, addressColumn)
         });
-        }, 1000);
+        }, 1100);
        
        //complete this when sample database complete
        //mapTableData is address->Not lat/long->Not marker
