@@ -1,4 +1,13 @@
-
+/**
+ * This script provides most of the functionality for the Overview page
+ * of the SAPO product.  Requires datepicker html, the wpDatatables plugin,
+ * and Google map markup to function.
+ * 
+ * @since      1.0.0
+ *
+ * @package    Sapoadmin
+ * @subpackage Sapoadmin/public
+ */
 jQuery(window).load(function(){
   var dateColumn = 3;
   var addressColumn = 13;

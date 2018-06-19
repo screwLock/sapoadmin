@@ -4,6 +4,7 @@
  * Copyright 2012 Stefan Petre
  * Improvements by Andrew Rowls
  * Licensed under the Apache License v2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+ * Modified by SAPO to appear more like a Material UI datepicker 2018.
  */
 .datepicker {
   direction: ltr;
@@ -115,6 +116,7 @@
   border-radius: 50%;
   font-size: 12px;
 }
+
 .table-striped .datepicker table tr td,
 .table-striped .datepicker table tr th {
   background-color: transparent;
@@ -672,7 +674,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 .datepicker .next,
 .datepicker tfoot tr th {
   cursor: pointer;
-  height: 50px;
+  height: 60px;
   font-weight: normal;
 }
 /*.datepicker .datepicker-switch:hover,  */

@@ -73,11 +73,9 @@ class Sapoadmin_Public {
 		 * class.
 		 */
 
-		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/sapoadmin-public.css', array(), $this->version, 'all' );
+		//Stylesheet for the datepicker
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bootstrap-datepicker3.standalone.css', array(), $this->version, false );
 
-		//Stylesheet for the datepicker
-		//wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/flick/jquery-ui.css');
 
 	}
 
@@ -100,13 +98,8 @@ class Sapoadmin_Public {
 		 * class.
 		 */
 
-		//wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/sapoadmin-public.js', array( 'jquery', 'jquery-ui-datepicker' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bootstrap-datepicker.js', array('jquery'), $this->version, false );
-
-		//wp_enqueue_script( 'google_maps', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyALjQTE9_fxGsFeWK-CulzUYAfkUOFtm94&callback=initMap', array('scripts'));
-		
-		//Add 'async defer' tags to google maps script
-		//add_filter('script_loader_tag', array($this, 'google_maps_script_attributes'), 10, 2);
+		//The overview datepicker JS
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bootstrap-datepicker.js', array('jquery'), $this->version, false );		
 	}
 
 	/**
@@ -117,8 +110,8 @@ class Sapoadmin_Public {
 	 * 
 	 */
 	public function register_scripts() {
-		wp_register_script( 'script-name', plugin_dir_url( __FILE__ ) . 'js/scripts.js', array(), $this->version, true );
-		wp_register_script('google_maps',  'https://maps.googleapis.com/maps/api/js?key=AIzaSyAP9TsRTrHitDF4jNAwSXLLKajKM4LTGVc&callback=initMap', array('script-name'), $this->version);
+		wp_register_script( 'overview', plugin_dir_url( __FILE__ ) . 'js/overview.js', array(), $this->version, true );
+		wp_register_script('google_maps',  'https://maps.googleapis.com/maps/api/js?key=AIzaSyAP9TsRTrHitDF4jNAwSXLLKajKM4LTGVc&callback=initMap', array('overview'), $this->version);
 
 	}
 	
@@ -132,8 +125,8 @@ class Sapoadmin_Public {
 	 * --------------------------------------------------------------------------------------------------------------------------------------------
 	 */
 
-	public function shortcode_function(){
-		wp_enqueue_script( 'script-name' );
+	public function overview_shortcode(){
+		wp_enqueue_script( 'overview' );
 		wp_enqueue_script( 'google_maps');
 		add_filter('script_loader_tag', array($this, 'google_maps_script_attributes'), 10, 2);
 		return '';
