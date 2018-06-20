@@ -110,8 +110,12 @@ class Sapoadmin_Public {
 	 * 
 	 */
 	public function register_scripts() {
+		//Overview page
 		wp_register_script( 'overview', plugin_dir_url( __FILE__ ) . 'js/overview.js', array(), $this->version, true );
 		wp_register_script('google_maps',  'https://maps.googleapis.com/maps/api/js?key=AIzaSyAP9TsRTrHitDF4jNAwSXLLKajKM4LTGVc&callback=initMap', array('overview'), $this->version);
+
+		//blackoutDates page
+		wp_register_script( 'blackout_dates', plugin_dir_url( __FILE__ ) . 'js/blackoutDates.js', array(), $this->version, true );
 
 	}
 	
@@ -131,6 +135,12 @@ class Sapoadmin_Public {
 		add_filter('script_loader_tag', array($this, 'google_maps_script_attributes'), 10, 2);
 		return '';
 	}
+
+	public function blackout_dates_shortcode(){
+		wp_enqueue_script('blackout_dates');
+		return '';
+	}
+
 
 	// Add async and defer attributes
 function google_maps_script_attributes( $tag, $handle) {

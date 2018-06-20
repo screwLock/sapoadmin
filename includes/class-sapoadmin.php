@@ -182,6 +182,7 @@ class Sapoadmin {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
         $this->loader->add_shortcode( 'overview', $plugin_public, 'overview_shortcode' , 10, 2 );
+        $this->loader->add_shortcode( 'blackout_dates', $plugin_public, 'blackout_dates_shortcode' , 10, 2 );
 
 	}
 

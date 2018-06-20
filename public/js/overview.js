@@ -21,7 +21,6 @@ jQuery(window).load(function(){
       });
     jQuery('#sapo_datepicker').datepicker('setDate', 'today');
     jQuery('#sapo_datepicker').on( 'changeDate', function(dateText) {
-      console.log(dateText.date);
            drawTableByDate(wpDataTables.table_1, dateColumn, moment(dateText.date).format('YYYY-MM-DD'))
         });
 
