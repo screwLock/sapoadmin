@@ -138,6 +138,7 @@ class Sapoadmin_Public {
 
 	public function blackout_dates_shortcode(){
 		wp_enqueue_script('blackout_dates');
+		include_once('partials/blackout_dates_card_template.php');
 		return '';
 	}
 
