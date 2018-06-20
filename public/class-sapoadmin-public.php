@@ -133,6 +133,7 @@ class Sapoadmin_Public {
 		wp_enqueue_script( 'overview' );
 		wp_enqueue_script( 'google_maps');
 		add_filter('script_loader_tag', array($this, 'google_maps_script_attributes'), 10, 2);
+		include_once('partials/overview.php');
 		return '';
 	}
 
