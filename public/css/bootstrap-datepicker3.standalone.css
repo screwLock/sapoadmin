@@ -671,10 +671,15 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 /*Datepicker table head elements*/
 .datepicker .datepicker-switch,
 .datepicker .prev,
-.datepicker .next,
-.datepicker tfoot tr th {
+.datepicker .next{
   cursor: pointer;
   height: 60px;
+  font-weight: normal;
+}
+/*Datepicker footer*/
+.datepicker tfoot tr th {
+  cursor: pointer;
+  height: 30px;
   font-weight: normal;
 }
 /*.datepicker .datepicker-switch:hover,  */
