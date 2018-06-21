@@ -9,6 +9,7 @@
  * @package    Sapoadmin
  * @subpackage Sapoadmin/public/partials
  */
+
 ?>
 
 <div id="sapo_datepicker"></div>

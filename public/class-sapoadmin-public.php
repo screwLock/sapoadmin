@@ -111,11 +111,16 @@ class Sapoadmin_Public {
 	 */
 	public function register_scripts() {
 		//Overview page
-		wp_register_script( 'overview', plugin_dir_url( __FILE__ ) . 'js/overview.js', array(), $this->version, true );
+		wp_register_script('overview', plugin_dir_url( __FILE__ ) . 'js/overview.js', array(), $this->version, true );
 		wp_register_script('google_maps',  'https://maps.googleapis.com/maps/api/js?key=AIzaSyAP9TsRTrHitDF4jNAwSXLLKajKM4LTGVc&callback=initMap', array('overview'), $this->version);
 
 		//blackoutDates page
-		wp_register_script( 'blackout_dates', plugin_dir_url( __FILE__ ) . 'js/blackoutDates.js', array(), $this->version, true );
+		//watch these two...could be a source of error/conflict with wpdatatables
+
+		wp_register_style('sapo_bootstrap_css', "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+		wp_register_script('sapo_bootstrap_js', "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js");
+
+		wp_register_script('blackout_dates', plugin_dir_url( __FILE__ ) . 'js/blackoutDates.js', array(), $this->version, true );
 
 	}
 	
@@ -138,6 +143,10 @@ class Sapoadmin_Public {
 	}
 
 	public function blackout_dates_shortcode(){
+		//watch these two...could be a source of error/conflict with wpdatatables
+		wp_enqueue_style('sapo_bootstrap_css');
+		wp_enqueue_script('sapo_bootstrap_js');
+
 		wp_enqueue_script('blackout_dates');
 		include_once('partials/blackout_dates_card_template.php');
 		return '';
@@ -150,7 +159,7 @@ function google_maps_script_attributes( $tag, $handle) {
         return $tag;
   }
     
-    return str_replace( ' src', ' async="async" defer src', $tag );
+    return str_replace('src', ' async="async" defer src', $tag );
 }
 //
 }
