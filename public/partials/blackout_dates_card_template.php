@@ -12,6 +12,12 @@
 
 ?>
 
+<div class="alert alert-warning" id="date-present-alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Error</strong>
+    :Date Already Added 
+</div>
+
 <div class="container">
 <div class="form-group row">
     <div class="col-xs-2">
@@ -27,21 +33,17 @@
 
 <div class="container">
 
-<div class="panel panel-default">
-    <div class="panel-heading text-center">New Dates</div>
-    <table class="table table-hover" id="new-date-table">
-    <tbody>
-      <tr>
-        <td class="date-to-be-disabled">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-        <td class="text-right text-nowrap">
-          <button class="btn btn-xs btn-warning">
-            <span class="glyphicon glyphicon-trash" id="remove-date-button"></span>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">New Dates</div>
+        <table class="table table-hover" id="new-date-table">
+            <tbody>
+                <tr>
+                    <td class="date-to-be-disabled">Needs to be here but change content</td>
+                    <td class="text-right text-nowrap"></td>
+                </tr>
+            </tbody>
+        </table>
+    <div class="panel-footer"><button class="btn btn-default" id="panel-submit">Submit</button></div>
+    </div>
 </div>
 
