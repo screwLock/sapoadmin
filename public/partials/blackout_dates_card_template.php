@@ -18,17 +18,17 @@
     :Date Already Added 
 </div>
 
+
 <div class="container">
-<div class="form-group row">
-    <div class="col-xs-2">
-        <div class="input-group">
-        <input type="text" class="form-control" id="blackout-dates">
-        <span class="input-group-btn">
-        <button  class="btn btn-default" id="add-date-button"><i class="glyphicon glyphicon-plus-sign"></i></button>
-        </span>  
+    <div class="form-row">
+        <div class="form-group col-xs-2">
+            <input type="text" class="form-control" id="blackout-dates">
+        </div>
+        <div class="input-group col-xs-4">
+            <input type="text" class="form-control" id="reason">
+            <span class="input-group-btn"><button  class="btn btn-default" id="add-date-button"><i class="glyphicon glyphicon-plus-sign"></i></button></span>  
         </div>
     </div>
-</div>
 </div>
 
 <div class="container">
@@ -39,6 +39,7 @@
             <tbody>
                 <tr>
                     <td class="date-to-be-disabled">Needs to be here but change content</td>
+                    <td class="reason-to-be-disabled">Needs to be here but change content</td>
                     <td class="text-right text-nowrap"></td>
                 </tr>
             </tbody>
