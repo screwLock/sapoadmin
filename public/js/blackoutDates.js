@@ -13,22 +13,14 @@ jQuery(window).load(function(){
     });
 });
 
-//Add reason column to disabled dates tables
-//get current date from input box jQuery('#blackout-dates').val()
-//check that date isnt already in date box
 
 function addNewDisabledDate() {
     var presentFlag = 0;
-    var index = 0;
-    jQuery('#new-date-table tr').each(function (i, row) {
-        // reference all the stuff you need first
-        index = i;
-        var row = jQuery(row);
+    jQuery('#new-date-table tr td.date-to-be-disabled').each(function () {
 
-        //consult the api docs-first() is not properly used
-        var date = row.first('td.date-to-be-disabled');
         //check if date is already in table
-        if(jQuery('#blackout-dates').val() === date.text()){
+        if(jQuery('#blackout-dates').val() === jQuery(this).text()){
+            //show warning if it is
             jQuery("#date-present-alert").fadeTo(2000, 500).slideUp(500, function(){
                 jQuery("#date-present-alert").slideUp(500);
                  });   
@@ -36,6 +28,7 @@ function addNewDisabledDate() {
             presentFlag = 1;
         }
     });
+        //if date is not present, add the new date row to the table
         if(presentFlag === 0){
             jQuery('#new-date-table tr:last').after('<tr><td class="date-to-be-disabled">' +
                                                 jQuery('#blackout-dates').val() + '</td>' +
