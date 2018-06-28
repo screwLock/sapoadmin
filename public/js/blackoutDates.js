@@ -1,5 +1,7 @@
 jQuery(window).load(function(){
-    jQuery("#date-present-alert").hide();
+    jQuery('#date-present-alert').hide();
+    jQuery('#weekdays').hide();
+    jQuery('#range-dates').hide();
     jQuery('#blackout-dates').datepicker( 
         {
           format: 'yyyy-mm-dd',
@@ -8,7 +10,30 @@ jQuery(window).load(function(){
           todayHighlight: true
         });
     jQuery('#blackout-dates').datepicker('setDate', 'today');
-    jQuery('#add-date-button').on('click', function(){
+
+    jQuery('input[type=radio][name=dateradio]').on('change', function(){
+        switch(jQuery(this).val()){
+            case 'single-date-radio':
+                jQuery('#weekdays').hide();
+                jQuery('#range-dates').hide();
+                jQuery('#single-date').show();
+                break;
+            case 'date-range-radio':
+                jQuery('#single-date').hide();
+                jQuery('#weekdays').hide();
+                jQuery('#range-dates').show();
+                break;
+            case 'week-day-radio':
+                jQuery('#single-date').hide();
+                jQuery('#range-dates').hide();
+                jQuery('#weekdays').show();
+                break;
+        }
+    });
+    jQuery('#add-date-button').on('click', function(e){
+        //for some reason without preventing default behavior
+        //clicking button redirects to homepage
+        e.preventDefault();
         addNewDisabledDate();
     });
 });
