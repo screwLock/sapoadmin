@@ -33,8 +33,8 @@
 <div class="container" id="range-dates">
     <form class="form-inline">
         <div class="form-group">
-            <input type="text" class="form-control" id="blackout-date-range-first" placeholder="Start Date">
-            <input type="text" class="form-control" id="blackout-date-range-second" placeholder="End Date">
+            <input type="text" class="form-control" id="blackout-date-range-start" placeholder="Start Date">
+            <input type="text" class="form-control" id="blackout-date-range-end" placeholder="End Date">
             <input type="text" class="form-control" id="" placeholder="Reason">
             <span><button class="btn btn-primary" id="add-date-range-button"><strong>+</strong> Add</button></span>  
         </div>

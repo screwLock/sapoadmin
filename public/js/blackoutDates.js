@@ -1,6 +1,8 @@
 jQuery(window).load(function(){
     jQuery('#date-present-alert').hide();
     jQuery('#range-dates').hide();
+    
+    //Single date datepicker
     jQuery('#blackout-dates-single').datepicker( 
         {
           format: 'yyyy-mm-dd',
@@ -9,6 +11,25 @@ jQuery(window).load(function(){
           todayHighlight: true
         });
     jQuery('#blackout-dates-single').datepicker('setDate', 'today');
+
+    //Start range datepicker
+    jQuery('#blackout-date-range-start').datepicker( 
+        {
+          format: 'yyyy-mm-dd',
+          toggleActive: true
+        });
+    jQuery('#blackout-date-range-start').datepicker('setDate', 'today');
+    jQuery('#blackout-date-range-start').on('change', function(){
+        jQuery('#blackout-date-range-end').datepicker('setStartDate', jQuery('#blackout-date-range-start').val());
+    }); 
+
+    //End range datepicker
+    jQuery('#blackout-date-range-end').datepicker( 
+        {
+          format: 'yyyy-mm-dd',
+          toggleActive: true
+        });
+    jQuery('#blackout-date-range-end').datepicker('setDate', '+1d'); 
 
     jQuery('input[type=radio][name=dateradio]').on('change', function(){
         switch(jQuery(this).val()){
