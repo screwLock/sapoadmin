@@ -1,6 +1,5 @@
 jQuery(window).load(function(){
     jQuery('#date-present-alert').hide();
-    jQuery('#weekdays').hide();
     jQuery('#range-dates').hide();
     jQuery('#blackout-dates').datepicker( 
         {
@@ -14,19 +13,12 @@ jQuery(window).load(function(){
     jQuery('input[type=radio][name=dateradio]').on('change', function(){
         switch(jQuery(this).val()){
             case 'single-date-radio':
-                jQuery('#weekdays').hide();
                 jQuery('#range-dates').hide();
                 jQuery('#single-date').show();
                 break;
             case 'date-range-radio':
                 jQuery('#single-date').hide();
-                jQuery('#weekdays').hide();
                 jQuery('#range-dates').show();
-                break;
-            case 'week-day-radio':
-                jQuery('#single-date').hide();
-                jQuery('#range-dates').hide();
-                jQuery('#weekdays').show();
                 break;
         }
     });
@@ -35,6 +27,9 @@ jQuery(window).load(function(){
         //clicking button redirects to homepage
         e.preventDefault();
         addNewDisabledDate();
+    });
+    jQuery('#add-date-range-button').on('click', function(e){
+        e.preventDefault();
     });
 });
 
@@ -68,6 +63,10 @@ function addNewDisabledDate() {
         }
 }       
 
-
+function getCheckedValues(){
+    return jQuery('input[name="weekday-cb"]:checked').map(function(){
+                        return jQuery(this).val();
+                         }).get();
+}
 
 

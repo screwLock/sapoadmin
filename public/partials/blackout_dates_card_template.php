@@ -16,7 +16,6 @@
     <div class="btn-group" data-toggle="buttons" id="date-radio-buttons">
         <label class="radio-inline"><input type="radio" name="dateradio" value="single-date-radio" checked>Single Date</label>
         <label class="radio-inline"><input type="radio" name="dateradio" value="date-range-radio">Date Range</label>
-        <label class="radio-inline"><input type="radio" name="dateradio" value="week-day-radio">Week Days</label>
     </div>
 </div>
 
@@ -33,25 +32,19 @@
 </div>
 
 
-
 <div class="container" id="range-dates">
     <form class="form-inline">
-        <div class="input-group input-daterange">
-            <input type="text" class="form-control">
-            <input type="text" class="form-control">
+        <div class="form-group">
+            <input type="text" class="form-control" id="blackout-date-range-first" placeholder="Start Date">
+            <input type="text" class="form-control" id="blackout-date-range-second" placeholder="End Date">
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" id="" placeholder="Reason">
+            <span class="input-group-btn"><button class="btn btn-default" id="add-date-range-button"><i class="glyphicon glyphicon-plus-sign"></i></button></span>  
         </div>
     </form>
 </div>
 
-<div class="container" id="weekdays">
-    <label class="checkbox-inline"><input type="checkbox" value="">Sundays</label>
-    <label class="checkbox-inline"><input type="checkbox" value="">Mondays</label>
-    <label class="checkbox-inline"><input type="checkbox" value="">Tuesdays</label>
-    <label class="checkbox-inline"><input type="checkbox" value="">Wednesdays</label> 
-    <label class="checkbox-inline"><input type="checkbox" value="">Thursdays</label>
-    <label class="checkbox-inline"><input type="checkbox" value="">Fridays</label>
-    <label class="checkbox-inline"><input type="checkbox" value="">Saturdays</label>
-</div>
 
 
 <div class="alert alert-warning" id="date-present-alert">
@@ -74,7 +67,17 @@
                 </tr>
             </tbody>
         </table>
-    <div class="panel-footer"><button class="btn btn-default" id="panel-submit">Submit</button></div>
+    <div class="panel-footer">
+        <div id="weekday-checkbox">
+            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Sundays">Sundays</label>
+            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Mondays">Mondays</label>
+            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Tuesdays">Tuesdays</label>
+            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Wednesdays">Wednesdays</label> 
+            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Thursdays">Thursdays</label>
+            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Fridays">Fridays</label>
+            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Saturdays">Saturdays</label>
+        </div>
+        <div><button class="btn btn-default" id="panel-submit">Submit</button></div></div>
     </div>
 </div>
 
