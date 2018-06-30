@@ -23,10 +23,8 @@
     <form class="form-inline">
         <div class="form-group">
             <input type="text" class="form-control" id="blackout-dates">
-        </div>
-        <div class="input-group">
             <input type="text" class="form-control" id="reason" placeholder="Reason">
-            <span class="input-group-btn"><button class="btn btn-default" id="add-date-button"><i class="glyphicon glyphicon-plus-sign"></i></button></span>  
+            <span><button class="btn btn-primary" id="add-date-button"><strong>+</strong> Add</button></span>  
         </div>
     </form>
 </div>
@@ -37,10 +35,8 @@
         <div class="form-group">
             <input type="text" class="form-control" id="blackout-date-range-first" placeholder="Start Date">
             <input type="text" class="form-control" id="blackout-date-range-second" placeholder="End Date">
-        </div>
-        <div class="input-group">
             <input type="text" class="form-control" id="" placeholder="Reason">
-            <span class="input-group-btn"><button class="btn btn-default" id="add-date-range-button"><i class="glyphicon glyphicon-plus-sign"></i></button></span>  
+            <span><button class="btn btn-primary" id="add-date-range-button"><strong>+</strong> Add</button></span>  
         </div>
     </form>
 </div>
@@ -77,7 +73,7 @@
             <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Fridays">Fridays</label>
             <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Saturdays">Saturdays</label>
         </div>
-        <div><button class="btn btn-default" id="panel-submit">Submit</button></div></div>
+        <div><button class="btn btn-primary" id="panel-submit">Submit</button></div></div>
     </div>
 </div>
 
