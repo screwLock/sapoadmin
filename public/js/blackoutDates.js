@@ -1,14 +1,14 @@
 jQuery(window).load(function(){
     jQuery('#date-present-alert').hide();
     jQuery('#range-dates').hide();
-    jQuery('#blackout-dates').datepicker( 
+    jQuery('#blackout-dates-single').datepicker( 
         {
           format: 'yyyy-mm-dd',
           toggleActive: true,
           todayBtn: "linked",
           todayHighlight: true
         });
-    jQuery('#blackout-dates').datepicker('setDate', 'today');
+    jQuery('#blackout-dates-single').datepicker('setDate', 'today');
 
     jQuery('input[type=radio][name=dateradio]').on('change', function(){
         switch(jQuery(this).val()){
@@ -39,7 +39,7 @@ function addNewDisabledDate() {
     jQuery('#new-date-table tr td.date-to-be-disabled').each(function () {
 
         //check if date is already in table
-        if(jQuery('#blackout-dates').val() === jQuery(this).text()){
+        if(jQuery('#blackout-dates-single').val() === jQuery(this).text()){
             //show warning if it is
             jQuery("#date-present-alert").fadeTo(2000, 500).slideUp(500, function(){
                 jQuery("#date-present-alert").slideUp(500);
@@ -51,7 +51,7 @@ function addNewDisabledDate() {
         //if date is not present, add the new date row to the table
         if(presentFlag === 0){
             jQuery('#new-date-table tr:last').after('<tr><td class="date-to-be-disabled">' +
-                                                jQuery('#blackout-dates').val() + '</td>' +
+                                                jQuery('#blackout-dates-single').val() + '</td>' +
                                                 '<td class="reason-to-be-disabled">' + jQuery('#reason').val() + '</td>' +
                                                 '<td class="text-center text-nowrap">' + 
                                                 '<button class="btn btn-xs btn-default">' +
