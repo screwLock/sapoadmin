@@ -686,7 +686,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 .datepicker .prev:hover,
 .datepicker .next:hover,
 .datepicker tfoot tr th:hover {
-  background: #eeeeee;
+  /*background: #eeeeee;*/
 }
 .datepicker .cw {
   font-size: 10px;
