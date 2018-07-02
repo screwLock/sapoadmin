@@ -48,6 +48,11 @@
     Date Already Added
 </div>
 
+<div class="alert alert-warning" id="date-range-alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    First Date Must Precede Second Selected Date
+</div>
+
 
 
 

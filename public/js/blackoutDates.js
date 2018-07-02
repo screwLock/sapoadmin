@@ -1,5 +1,6 @@
 jQuery(window).load(function(){
     jQuery('#date-present-alert').hide();
+    jQuery('#date-range-alert').hide();
     jQuery('#range-dates').hide();
     
     //Single date datepicker
@@ -105,8 +106,17 @@ function getCheckedValues(){
 function addDateRange(){
     var startDate = jQuery('#blackout-date-range-start').datepicker('getDate');
     var endDate = jQuery('#blackout-date-range-end').datepicker('getDate');
-    var currentDate = new Date(startDate.getTime());
 
+    //check if end date is after startdate
+    if(startDate > endDate){
+        jQuery("#date-range-alert").fadeTo(2000, 500).slideUp(500, function(){
+            jQuery("#date-range-alert").slideUp(500);
+            });  
+        return;
+        }
+    
+    //add the dates
+    var currentDate = new Date(startDate.getTime());
     while(currentDate <= endDate){
         addNewDisabledDate(currentDate.toISOString().split('T')[0], jQuery('#date-range-reason').val());
         currentDate.setDate(currentDate.getDate() + 1);
