@@ -58,14 +58,15 @@
 
 <div class="container">
     <div class="panel panel-default">
-        <div class="panel-heading text-center">New Dates</div>
-        <table class="table table-hover" id="new-date-table">
+        <div class="panel-heading text-center"><h5>New Dates</h5></div>
+        <table class="table table-hover table-bordered" id="new-date-table">
             <tbody>
                 <tr>
                     <td class="date-to-be-disabled">Needs to be here but change content</td>
                     <td class="reason-to-be-disabled">Needs to be here but change content</td>
                     <td class="text-right text-nowrap"></td>
                 </tr>
+                <?php get_previous_blackout_dates(); ?>
             </tbody>
         </table>
     <div class="panel-footer">
@@ -83,3 +84,17 @@
     </div>
 </div>
 
+<?php
+    function get_previous_blackout_dates() {
+        global $wpdb;
+        $blackout_dates_table = $wpdb->prefix . "sapo_blackout_dates";
+        $result = $wpdb->get_results( "SELECT blackout_date, reason FROM " . $blackout_dates_table . 
+                                      " WHERE USER_ID = " . get_current_user_id() . " ORDER BY blackout_date ASC;");
+        foreach ( $result as $print )   {
+            echo '<tr>';
+            echo '<td>' . $print->date.'</td>';
+            echo '<td>' . $print->reason.'</td>';
+            echo '</tr>';
+        };
+    }
+?>

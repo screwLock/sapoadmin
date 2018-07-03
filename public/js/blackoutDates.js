@@ -63,6 +63,14 @@ jQuery(window).load(function(){
     //add click event listener to submit button
     jQuery('#submit').on('click', function(e){
         e.preventDefault();
+      /*  jQuery.ajax({
+            type: "GET",
+            url: "submit_blackout_dates.php",
+            dataType: "html",
+            success: function(response){
+                console.log(response);
+            }
+        });//end of ajax */
     })
 });
 
@@ -123,3 +131,8 @@ function addDateRange(){
     }
     
 }
+
+//SELECT date, reason FROM SAPO_DATES WHERE USER_ID = current_user ORDER BY date ASCENDING;
+//SELECT * FROM SAPO_DAYS WHERE USER_ID = current_user;
+
+//popup-for whether mysql was successful after submit clicked
