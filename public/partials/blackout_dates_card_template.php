@@ -59,7 +59,7 @@
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading text-center"><h5>New Dates</h5></div>
-        <table class="table table-hover table-bordered" id="new-date-table">
+        <table class="table table-hover" id="new-date-table">
             <tbody>
                 <tr>
                     <td class="date-to-be-disabled">Needs to be here but change content</td>
@@ -71,13 +71,7 @@
         </table>
     <div class="panel-footer">
         <div id="weekday-checkbox"> 
-            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Sundays">Sundays</label>
-            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Mondays">Mondays</label>
-            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Tuesdays">Tuesdays</label>
-            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Wednesdays">Wednesdays</label> 
-            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Thursdays">Thursdays</label>
-            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Fridays">Fridays</label>
-            <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Saturdays">Saturdays</label>
+           <?php get_weekdays(); ?>
         </div>
         <div><button class="btn btn-primary" id="submit">Submit</button></div>
         </div>
@@ -98,4 +92,58 @@
             echo '</tr>';
         };
     }
+?>
+
+<?php
+    function get_weekdays(){
+        global $wpdb;
+        $blackout_weekdays_table = $wpdb->prefix . "sapo_blackout_weekdays";
+        $weekdays = $wpdb->get_row("SELECT sunday,monday,tuesday,wednesday,thursday,friday, saturday FROM " . $blackout_weekdays_table . 
+                                       " WHERE USER_ID = " . get_current_user_id());
+
+        //if there is no data in the result set, display unchecked boxes and return
+        if(empty($weekdays)) {
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Sundays">Sundays</label>';
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Mondays">Mondays</label>' ;
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Tuesdays">Tuesdays</label>';
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Wednesdays">Wednesdays</label>';
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Thursdays">Thursdays</label>';
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Fridays">Fridays</label>';
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Saturdays">Saturdays</label>';
+            return;
+        };
+        
+                                       
+        //if there is data in the result set, render the checkboxes according to the results 
+        if($weekdays->sunday)
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Sundays" checked>Sundays</label>';
+        else   
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Sundays">Sundays</label>';
+        if($weekdays->monday)
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Mondays" checked>Mondays</label>';
+        else   
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Mondays">Mondays</label>';
+        if($weekdays->tuesday)
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Tuesdays" checked>Tuesdays</label>';
+        else   
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Tuesdays">Tuesdays</label>';
+        if($weekdays->wednesday)
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Wednesdays" checked>Wednesdays</label>';
+        else   
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Wednesdays">Wednesdays</label>';
+        if($weekdays->thursday)
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Thursdays" checked>Thursdays</label>';
+        else   
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Thursdays">Thursdays</label>';
+        if($weekdays->friday)
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Fridays" checked>Fridays</label>';
+        else   
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Fridays">Fridays</label>';    
+        if($weekdays->saturday)
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Saturdays" checked>Saturdays</label>';
+        else   
+            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Saturdays">Saturdays</label>';
+    }
+        
+        
 ?>
