@@ -21,6 +21,13 @@ function sapo_tables_install() {
 			  id BIGINT(20) NOT NULL AUTO_INCREMENT,
 			  user_id BIGINT(20) NOT NULL,
 			  zipcode VARCHAR(6) NOT NULL,
+			  sunday BOOLEAN NOT NULL DEFAULT 0,
+			  monday BOOLEAN NOT NULL DEFAULT 0,
+			  tuesday BOOLEAN NOT NULL DEFAULT 0,
+			  wednesday BOOLEAN NOT NULL DEFAULT 0,
+			  thursday BOOLEAN NOT NULL DEFAULT 0,
+			  friday BOOLEAN NOT NULL DEFAULT 0,
+			  saturday BOOLEAN NOT NULL DEFAULT 0,
 			  created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 			  PRIMARY KEY  (id)    
 		   ) $charset_collate;";
