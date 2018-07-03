@@ -96,6 +96,7 @@ function sapo_tables_install() {
 		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
 		      user_id BIGINT(20) NOT NULL,
 			  employee_id BIGINT(20) NOT NULL,
+			  access_level VARCHAR(10) NOT NULL DEFAULT 'employee',
 		      updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
 		      created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 	          UNIQUE(id),
@@ -103,7 +104,7 @@ function sapo_tables_install() {
 		   ) $charset_collate;";   
 		}
 
-		//6. Crate Reference Table for Yes/No values
+		//6. Create Reference Table for Yes/No values
 		$confirmation_status_table = $wpdb->prefix . "sapo_confirmation_status";
 
 		if($wpdb->get_var("SHOW TABLES LIKE '" . $confirmation_status_table . "'") !== $confirmation_status_table){
@@ -129,6 +130,40 @@ function sapo_tables_install() {
 		       PRIMARY KEY  (id)
 		   ) $charset_collate;";   
 		}
+
+		//8. Create the blackout weekdays table
+		$blackout_weekdays_table = $wpdb->prefix . "sapo_blackout_weekdays";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $blackout_weekdays_table . "'") !== $blackout_weekdays_table) {
+
+	       $sql[] = "CREATE TABLE $blackout_weekdays_table(
+		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
+		      user_id BIGINT(20) NOT NULL,
+			  sunday BOOLEAN,
+			  monday BOOLEAN,
+			  tuesday BOOLEAN,
+			  wednesday BOOLEAN,
+			  thursday BOOLEAN,
+			  friday BOOLEAN,
+			  saturday BOOLEAN,
+			  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+		      created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+		      UNIQUE (id),
+			  PRIMARY KEY  (id)
+			) $charset_collate;";
+		}
+
+		//9. Create the maximum pickups per weekday table
+		$max_pickups_table = $wpdb->prefix . "sapo_max_pickups";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $max_pickups_table . "'") !== $max_pickups_table){
+			$sql[] = "CREATE TABLE $max_pickups_table(
+			   id BIGINT(20) NOT NULL AUTO_INCREMENT,
+			   user_id BIGINT(20) NOT NULL,
+			   max_pickups TINYINT(200) NOT NULL DEFAULT 5,
+			   PRIMARY KEY  (id)
+			) $charset_collate;";
+		}		
 			
 		
 		if(!empty($sql)){

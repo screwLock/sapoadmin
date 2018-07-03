@@ -70,7 +70,7 @@
             </tbody>
         </table>
     <div class="panel-footer">
-        <div id="weekday-checkbox">
+        <div id="weekday-checkbox"> 
             <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Sundays">Sundays</label>
             <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Mondays">Mondays</label>
             <label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Tuesdays">Tuesdays</label>
@@ -92,8 +92,9 @@
                                       " WHERE USER_ID = " . get_current_user_id() . " ORDER BY blackout_date ASC;");
         foreach ( $result as $print )   {
             echo '<tr>';
-            echo '<td>' . $print->date.'</td>';
-            echo '<td>' . $print->reason.'</td>';
+            echo "<td class='date-to-be-disabled'>" . $print->blackout_date.'</td>';
+            echo "<td class='reason-to-be-disabled'>" . $print->reason.'</td>';
+            echo '<td class="text-center text-nowrap"><button class="btn btn-xs btn-default"><span class="glyphicon glyphicon-trash"></span></button></td>';
             echo '</tr>';
         };
     }

@@ -99,7 +99,7 @@ function addNewDisabledDate(date, reason) {
                                                 '<span class="glyphicon glyphicon-trash"></span>' +
                                                 '</button></td></tr>');
             jQuery('#new-date-table tr:last button').on('click', function(){
-            jQuery(this).closest('tr').remove();
+                jQuery(this).closest('tr').remove();
             });
         }
 }       
