@@ -12,10 +12,12 @@
 
 ?>
 
-<div class="container">
-    <div class="btn-group" data-toggle="buttons" id="date-radio-buttons">
-        <label class="radio-inline"><input type="radio" name="dateradio" value="single-date-radio" checked>Single Date</label>
-        <label class="radio-inline"><input type="radio" name="dateradio" value="date-range-radio">Date Range</label>
+<div class="container"> 
+    <div class="form-check form-check-inline">
+        <label class="form-check-label"><input class="form-check-input" type="radio" name="dateradio" value="single-date-radio" checked>Single Date</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <label class="form-check-label"><input class="form-check-input" type="radio" name="dateradio" value="date-range-radio">Date Range</label>
     </div>
 </div>
 
@@ -57,8 +59,6 @@
 
 
 <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading text-center"><h5>New Dates</h5></div>
         <table class="table table-hover" id="new-date-table">
             <tbody>
                 <tr>
@@ -69,13 +69,10 @@
                 <?php get_previous_blackout_dates(); ?>
             </tbody>
         </table>
-    <div class="panel-footer">
         <div id="weekday-checkbox"> 
            <?php get_weekdays(); ?>
         </div>
         <div><button class="btn btn-primary" id="submit">Submit</button></div>
-        </div>
-    </div>
 </div>
 
 <?php
