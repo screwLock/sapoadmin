@@ -1,3 +1,6 @@
+var blackoutDates= [];
+
+
 jQuery(window).load(function(){
     jQuery('#date-present-alert').hide();
     jQuery('#date-range-alert').hide();
@@ -51,13 +54,13 @@ jQuery(window).load(function(){
         //for some reason without preventing default behavior
         //clicking button redirects to homepage
         e.preventDefault();
-        addNewDisabledDate(jQuery('#blackout-dates-single').val(), jQuery('#single-date-reason').val());
+        addNewDisabledDate(jQuery('#blackout-dates-single').val(), jQuery('#single-date-reason').val(), blackoutDates);
     });
 
     //add click event listener to date-range add button
     jQuery('#add-date-range-button').on('click', function(e){
         e.preventDefault();
-        addDateRange();
+        addDateRange(blackoutDates);
     });
 
     //add click event listener to submit button
@@ -75,7 +78,7 @@ jQuery(window).load(function(){
 });
 
 
-function addNewDisabledDate(date, reason) {
+function addNewDisabledDate(date, reason, dateArray) {
     var presentFlag = 0;
     jQuery('#new-date-table tr td.date-to-be-disabled').each(function () {
 
@@ -89,8 +92,10 @@ function addNewDisabledDate(date, reason) {
             presentFlag = 1;
         }
     });
-        //if date is not present, add the new date row to the table
+        //if date is not present, add the new date to the date array and as a row to the table
         if(presentFlag === 0){
+            var newBlackoutDate = createBlackoutDate(date, reason);
+            dateArray.push(newBlackoutDate);
             jQuery('#new-date-table tr:last').after('<tr><td class="date-to-be-disabled">' +
                                                 date + '</td>' +
                                                 '<td class="reason-to-be-disabled">' + reason + '</td>' +
@@ -100,6 +105,7 @@ function addNewDisabledDate(date, reason) {
                                                 '</button></td></tr>');
             jQuery('#new-date-table tr:last button').on('click', function(){
                 jQuery(this).closest('tr').remove();
+                dateArray.pop(newBlackoutDate);
             });
         }
 }       
@@ -111,7 +117,7 @@ function getCheckedValues(){
 }
 
 
-function addDateRange(){
+function addDateRange(dateArray){
     var startDate = jQuery('#blackout-date-range-start').datepicker('getDate');
     var endDate = jQuery('#blackout-date-range-end').datepicker('getDate');
 
@@ -126,11 +132,19 @@ function addDateRange(){
     //add the dates
     var currentDate = new Date(startDate.getTime());
     while(currentDate <= endDate){
-        addNewDisabledDate(currentDate.toISOString().split('T')[0], jQuery('#date-range-reason').val());
+        addNewDisabledDate(currentDate.toISOString().split('T')[0], jQuery('#date-range-reason').val(), dateArray);
         currentDate.setDate(currentDate.getDate() + 1);
     }
     
 }
+
+function createBlackoutDate(date, reason){
+    blackoutDate = {
+        date: date,
+        reason: reason
+    };
+    return blackoutDate;
+};
 
 //SELECT date, reason FROM SAPO_DATES WHERE USER_ID = current_user ORDER BY date ASCENDING;
 //SELECT * FROM SAPO_DAYS WHERE USER_ID = current_user;

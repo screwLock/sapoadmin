@@ -22,7 +22,7 @@
         </div>
 
         <div id="single-date">
-            <form class="form-inline">
+            <form class="form-group row">
                 <label class="sr-only" for="inlineFormInput">Single Blackout Date</label>
                 <input type="text" class="form-control" id="blackout-dates-single">
                 <label class="sr-only" for="inlineFormInput">Single Date Reason</label>
@@ -33,14 +33,17 @@
 
         <div id="range-dates">
             <form class="form-inline">
-                <div class="form-group">
+                <div class="form-group row input-daterange">
                     <input type="text" class="form-control" id="blackout-date-range-start" placeholder="Start Date">
                     <input type="text" class="form-control" id="blackout-date-range-end" placeholder="End Date">
+                </div>
+                <div class="form-group row">
                     <input type="text" class="form-control" id="date-range-reason" placeholder="Reason">
                     <span><button class="btn btn-primary" id="add-date-range-button"><strong>+</strong> Add</button></span>  
                 </div>
             </form>
         </div>
+
     </div>
 </div>
 
