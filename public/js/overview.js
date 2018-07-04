@@ -73,6 +73,7 @@ function initMap() {
     
     });
     geocoder = new google.maps.Geocoder;    
+    jQuery("#cover").hide();
 }
 
 /**

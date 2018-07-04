@@ -21,7 +21,7 @@ jQuery(window).load(function(){
         });
     jQuery('#blackout-date-range-start').datepicker('setDate', 'today');
     jQuery('#blackout-date-range-start').on('change', function(){
-        jQuery('#blackout-date-range-end').datepicker('setStartDate', jQuery('#blackout-date-range-start').val());
+        //jQuery('#blackout-date-range-end').datepicker('setStartDate', jQuery('#blackout-date-range-start').val());
     }); 
 
     //End range datepicker

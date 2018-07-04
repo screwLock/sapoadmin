@@ -12,49 +12,51 @@
 
 ?>
 
-<div class="container"> 
-    <div class="form-check form-check-inline">
-        <label class="form-check-label"><input class="form-check-input" type="radio" name="dateradio" value="single-date-radio" checked>Single Date</label>
-    </div>
-    <div class="form-check form-check-inline">
-        <label class="form-check-label"><input class="form-check-input" type="radio" name="dateradio" value="date-range-radio">Date Range</label>
-    </div>
-</div>
-
-<div class="container" id="single-date">
-    <form class="form-inline">
-        <div class="form-group">
-            <input type="text" class="form-control" id="blackout-dates-single">
-            <input type="text" class="form-control" id="single-date-reason" placeholder="Reason">
-            <span><button class="btn btn-primary" id="add-date-button"><strong>+</strong> Add</button></span>  
+<div class="card">
+    <div class="card-body">
+        <div class="form-check form-check-inline">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="dateradio" value="single-date-radio" checked>Single Date</label>
         </div>
-    </form>
-</div>
-
-
-<div class="container" id="range-dates">
-    <form class="form-inline">
-        <div class="form-group">
-            <input type="text" class="form-control" id="blackout-date-range-start" placeholder="Start Date">
-            <input type="text" class="form-control" id="blackout-date-range-end" placeholder="End Date">
-            <input type="text" class="form-control" id="date-range-reason" placeholder="Reason">
-            <span><button class="btn btn-primary" id="add-date-range-button"><strong>+</strong> Add</button></span>  
+        <div class="form-check form-check-inline">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="dateradio" value="date-range-radio">Date Range</label>
         </div>
-    </form>
+
+        <div id="single-date">
+            <form class="form-inline">
+                <label class="sr-only" for="inlineFormInput">Single Blackout Date</label>
+                <input type="text" class="form-control" id="blackout-dates-single">
+                <label class="sr-only" for="inlineFormInput">Single Date Reason</label>
+                <input type="text" class="form-control" id="single-date-reason" placeholder="Reason">
+                <span><button class="btn btn-primary" id="add-date-button"><strong>+</strong> Add</button></span>  
+            </form>
+        </div>
+
+        <div id="range-dates">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="blackout-date-range-start" placeholder="Start Date">
+                    <input type="text" class="form-control" id="blackout-date-range-end" placeholder="End Date">
+                    <input type="text" class="form-control" id="date-range-reason" placeholder="Reason">
+                    <span><button class="btn btn-primary" id="add-date-range-button"><strong>+</strong> Add</button></span>  
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
+<div class="container">
+    <div class="alert alert-warning" id="date-present-alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        Date Already Added
+    </div>
+<div class="container">
 
-
-<div class="alert alert-warning" id="date-present-alert">
-    <button type="button" class="close" data-dismiss="alert">x</button>
-    Date Already Added
+<div class="container"
+    <div class="alert alert-warning" id="date-range-alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        First Date Must Precede Second Selected Date
+    </div>
 </div>
-
-<div class="alert alert-warning" id="date-range-alert">
-    <button type="button" class="close" data-dismiss="alert">x</button>
-    First Date Must Precede Second Selected Date
-</div>
-
 
 
 
@@ -100,46 +102,46 @@
 
         //if there is no data in the result set, display unchecked boxes and return
         if(empty($weekdays)) {
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Sundays">Sundays</label>';
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Mondays">Mondays</label>' ;
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Tuesdays">Tuesdays</label>';
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Wednesdays">Wednesdays</label>';
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Thursdays">Thursdays</label>';
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Fridays">Fridays</label>';
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Saturdays">Saturdays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="Sundays">Sundays</label></div>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="Mondays">Mondays</label></div>' ;
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="Tuesdays">Tuesdays</label></div>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="Wednesdays">Wednesdays</label></div>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="Thursdays">Thursdays</label></div>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="Fridays">Fridays</label></div>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="Saturdays">Saturdays</label></div>';
             return;
         };
         
                                        
         //if there is data in the result set, render the checkboxes according to the results 
         if($weekdays->sunday)
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Sundays" checked>Sundays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Sundays" checked>Sundays</label></div>';
         else   
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Sundays">Sundays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Sundays">Sundays</label></div>';
         if($weekdays->monday)
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Mondays" checked>Mondays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Mondays" checked>Mondays</label></div>';
         else   
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Mondays">Mondays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Mondays">Mondays</label></div>';
         if($weekdays->tuesday)
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Tuesdays" checked>Tuesdays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Tuesdays" checked>Tuesdays</label></div>';
         else   
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Tuesdays">Tuesdays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Tuesdays">Tuesdays</label></div>';
         if($weekdays->wednesday)
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Wednesdays" checked>Wednesdays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Wednesdays" checked>Wednesdays</label></div>';
         else   
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Wednesdays">Wednesdays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Wednesdays">Wednesdays</label></div>';
         if($weekdays->thursday)
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Thursdays" checked>Thursdays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Thursdays" checked>Thursdays</label></div>';
         else   
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Thursdays">Thursdays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Thursdays">Thursdays</label></div>';
         if($weekdays->friday)
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Fridays" checked>Fridays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Fridays" checked>Fridays</label></div>';
         else   
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Fridays">Fridays</label>';    
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Fridays">Fridays</label></div>';    
         if($weekdays->saturday)
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Saturdays" checked>Saturdays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Saturdays" checked>Saturdays</label></div>';
         else   
-            echo '<label class="checkbox-inline"><input type="checkbox" name="weekday-cb" value="Saturdays">Saturdays</label>';
+            echo '<div class="form-check-inline"><label class="form-check-label"><input class="form-check-input"type="checkbox" name="weekday-cb" value="Saturdays">Saturdays</label></div>';
     }
         
         
