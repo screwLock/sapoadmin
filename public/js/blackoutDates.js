@@ -96,6 +96,7 @@ function addNewDisabledDate(date, reason, dateArray) {
         if(presentFlag === 0){
             var newBlackoutDate = createBlackoutDate(date, reason);
             dateArray.push(newBlackoutDate);
+            
             jQuery('#new-date-table tr:last').after('<tr><td class="date-to-be-disabled">' +
                                                 date + '</td>' +
                                                 '<td class="reason-to-be-disabled">' + reason + '</td>' +

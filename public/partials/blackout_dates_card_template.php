@@ -13,13 +13,17 @@
 ?>
 
 <div class="card">
+
     <div class="card-body">
+        <h5 class="card-title">Create New Blackout Dates</h5>
+
         <div class="form-check form-check-inline">
             <label class="form-check-label"><input class="form-check-input" type="radio" name="dateradio" value="single-date-radio" checked>Single Date</label>
         </div>
         <div class="form-check form-check-inline">
             <label class="form-check-label"><input class="form-check-input" type="radio" name="dateradio" value="date-range-radio">Date Range</label>
         </div>
+
 
         <div id="single-date">
             <form>
@@ -65,6 +69,15 @@
     </div>
 </div>
 
+<div class="card">
+    <div class="card-body">
+    <h5 class="card-title">Disable Weekdays</h5>
+        <div class="weekday-checkbox">
+            <?php get_weekdays() ?>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="alert alert-warning" id="date-present-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
@@ -92,9 +105,6 @@
                 <?php get_previous_blackout_dates(); ?>
             </tbody>
         </table>
-        <div id="weekday-checkbox"> 
-           <?php get_weekdays(); ?>
-        </div>
         <div><button class="btn btn-primary" id="submit">Submit</button></div>
 </div>
 
