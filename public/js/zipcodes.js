@@ -4,3 +4,7 @@ function validZip(zip) {
   
     return zip.match(reUS) || zip.match(reCA);
   }
+
+  //create callback function
+  //also validate in server-side
+  if (validZip(this.value)) {alert('*** Please enter a valid zip code.')};

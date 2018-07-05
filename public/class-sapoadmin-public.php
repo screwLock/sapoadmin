@@ -127,6 +127,7 @@ class Sapoadmin_Public {
 
 
 		wp_register_script('blackout_dates', plugin_dir_url( __FILE__ ) . 'js/blackoutDates.js', array(), $this->version, true );
+		wp_register_script('zipcodes', plugin_dir_url( __FILE__ ) . 'js/zipcodes.js', array(), $this->version, true );
 
 	}
 	
@@ -159,6 +160,15 @@ class Sapoadmin_Public {
 
 		wp_enqueue_script('blackout_dates');
 		include_once('partials/blackout_dates_card_template.php');
+		return '';
+	}
+
+	public function zipcodes_shortcode(){
+		wp_enqueue_style('sapo_bootstrap_css');
+		wp_enqueue_script('sapo_popper_js');
+		wp_enqueue_script('sapo_bootstrap_js');
+		wp_enqueue_script('zipcodes');
+		include_once('partials/zipcodes_template.php');
 		return '';
 	}
 
