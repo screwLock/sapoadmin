@@ -5,6 +5,7 @@ jQuery(window).load(function(){
     jQuery('#date-present-alert').hide();
     jQuery('#date-range-alert').hide();
     jQuery('#range-dates').hide();
+    jQuery('.input-daterange').datepicker();
     
     //Single date datepicker
     jQuery('#blackout-dates-single').datepicker( 

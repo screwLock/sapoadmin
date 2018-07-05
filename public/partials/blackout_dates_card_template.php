@@ -45,7 +45,7 @@
 
         <div id="range-dates">
             <form>
-                <div class="form-group row">
+                <div class="form-group row input-daterange">
                     <div class="col-4">
                         <input type="text" class="form-control" id="blackout-date-range-start" placeholder="Start Date">
                     </div>
