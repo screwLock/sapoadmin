@@ -34,6 +34,8 @@ jQuery(window).load(function(){
           toggleActive: true
         });
     jQuery('#blackout-date-range-end').datepicker('setDate', '+1d'); 
+
+    jQuery('#max-time').timepicker();
     
     //only show forms relevant to the datepicker (single or range)
     jQuery('input[type=radio][name=dateradio]').on('change', function(){
@@ -48,6 +50,13 @@ jQuery(window).load(function(){
                 break;
         }
     });
+
+    jQuery('input[type=radio][name=max-time-radio]').on('change', function(){
+        return;
+ 
+    });
+        
+   
 
     //add click event listener to single date add button
     jQuery('#add-date-button').on('click', function(e){
@@ -96,7 +105,7 @@ function addNewDisabledDate(date, reason, dateArray) {
         if(presentFlag === 0){
             var newBlackoutDate = createBlackoutDate(date, reason);
             dateArray.push(newBlackoutDate);
-            
+
             jQuery('#new-date-table tr:last').after('<tr><td class="date-to-be-disabled">' +
                                                 date + '</td>' +
                                                 '<td class="reason-to-be-disabled">' + reason + '</td>' +

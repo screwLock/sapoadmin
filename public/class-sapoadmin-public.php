@@ -122,6 +122,8 @@ class Sapoadmin_Public {
 		wp_register_script('sapo_popper_js', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js');
 
 		wp_register_script('sapo_bootstrap_js', "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js", array('jquery', 'popper'));
+		wp_register_script('sapo_timepicker_js', 'https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.js');
+
 
 		wp_register_script('blackout_dates', plugin_dir_url( __FILE__ ) . 'js/blackoutDates.js', array(), $this->version, true );
 
@@ -150,6 +152,7 @@ class Sapoadmin_Public {
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_script('sapo_popper_js');
 		wp_enqueue_script('sapo_bootstrap_js');
+		wp_enqueue_script('sapo_timepicker_js');
 		
 
 		wp_enqueue_script('blackout_dates');

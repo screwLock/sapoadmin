@@ -78,6 +78,43 @@
     </div>
 </div>
 
+<div class="card">
+    <div class="card-body">
+    <h5 class="card-title">Set Max Time</h5>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Sunday" checked>Sunday</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Monday">Monday</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Tuesday">Tuesday</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Wednesday">Wednesday</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Thursday">Thursday</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Friday">Friday</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Saturday">Saturday</label>
+        </div>
+        <div class="row">
+            <form>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label class="sr-only" for="inlineFormInput">Select Max Time</label>
+                        <input type="text" class="form-control" id="max-time">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="alert alert-warning" id="date-present-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
