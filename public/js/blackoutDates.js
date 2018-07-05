@@ -35,7 +35,13 @@ jQuery(window).load(function(){
         });
     jQuery('#blackout-date-range-end').datepicker('setDate', '+1d'); 
 
-    jQuery('#max-time').timepicker();
+    jQuery('#max-time').timepicker(
+        {
+            useSelect: true,
+            minTime: '08:00:00', // 11:45:00 AM,
+            startTime: '08:00:00',
+            step: 15
+        });
     
     //only show forms relevant to the datepicker (single or range)
     jQuery('input[type=radio][name=dateradio]').on('change', function(){
