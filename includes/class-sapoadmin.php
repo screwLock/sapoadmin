@@ -184,6 +184,7 @@ class Sapoadmin {
         $this->loader->add_shortcode( 'overview', $plugin_public, 'overview_shortcode' , 10, 2 );
 		$this->loader->add_shortcode( 'blackout_dates', $plugin_public, 'blackout_dates_shortcode' , 10, 2 );
 		$this->loader->add_shortcode( 'zipcodes', $plugin_public, 'zipcodes_shortcode' , 10, 2 );
+		$this->loader->add_shortcode( 'categories', $plugin_public, 'categories_shortcode' , 10, 2 );
 
 
 	}

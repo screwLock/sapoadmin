@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The functionality for the blackout_dates 
+ * The view for the zipcodes page
  *
  * @link       https://github.com/screwLock
  * @since      1.0.0
