@@ -73,6 +73,11 @@
     <h5 class="card-title">Disable Weekdays</h5>
         <div class="weekday-checkbox">
             <?php get_weekdays() ?>
+            <div class="row">
+                <div class="col-4">
+                    <button class="btn btn-primary" id="change-weekdays">Save</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -103,10 +108,15 @@
         </div>
         <form>
             <div class="row">
-                    <div class="col-4">
-                        <label class="sr-only" for="inlineFormInput">Select Max Time</label>
-                        <input type="text" class="form-control" id="max-time">
-                    </div>
+                <div class="col-4">
+                    <label class="sr-only" for="inlineFormInput">Select Max Time</label>
+                    <input type="text" class="form-control" id="max-time">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">                    
+                    <button class="btn btn-primary" id="change-max-time">Save</button>
+                </div>
             </div>
         </form>
     </div>
@@ -119,14 +129,8 @@
     </div>
 <div class="container">
 
-<div class="container"
-    <div class="alert alert-warning" id="date-range-alert">
-        <button type="button" class="close" data-dismiss="alert">x</button>
-        First Date Must Precede Second Selected Date
-    </div>
+<div id="new-date-cards">
 </div>
-
-
 
 <div class="container">
         <table class="table table-hover" id="new-date-table">

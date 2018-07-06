@@ -69,13 +69,14 @@ jQuery(window).load(function(){
         //for some reason without preventing default behavior
         //clicking button redirects to homepage
         e.preventDefault();
-        addNewDisabledDate(jQuery('#blackout-dates-single').val(), jQuery('#single-date-reason').val(), blackoutDates);
+        addSingleDate(jQuery('#blackout-dates-single').val(), jQuery('#single-date-reason').val(), blackoutDates);
     });
 
     //add click event listener to date-range add button
     jQuery('#add-date-range-button').on('click', function(e){
         e.preventDefault();
-        addDateRange(blackoutDates);
+        addDateRange(jQuery('#blackout-date-range-start').datepicker('getDate'), jQuery('#blackout-date-range-end').datepicker('getDate'), 
+            jQuery('#date-range-reason').val(), blackoutDates);
     });
 
     //add click event listener to submit button
@@ -95,35 +96,36 @@ jQuery(window).load(function(){
 
 function addNewDisabledDate(date, reason, dateArray) {
     var presentFlag = 0;
-    jQuery('#new-date-table tr td.date-to-be-disabled').each(function () {
-
-        //check if date is already in table
-        if(date === jQuery(this).text()){
+    
+    //check if date is already in array
+    dateArray.forEach(function(oldDate){
+        if(oldDate.date===date){
             //show warning if it is
+            presentFlag++;
             jQuery("#date-present-alert").fadeTo(2000, 500).slideUp(500, function(){
                 jQuery("#date-present-alert").slideUp(500);
-                 });   
-                  
-            presentFlag = 1;
-        }
+            
+            });   
+        };
     });
-        //if date is not present, add the new date to the date array and as a row to the table
-        if(presentFlag === 0){
-            var newBlackoutDate = createBlackoutDate(date, reason);
-            dateArray.push(newBlackoutDate);
+    
+    if(presentFlag > 0) return false;
+    //if date is not present, add the new date to the date array and as a row to the table
+    var newBlackoutDate = createBlackoutDate(date, reason);
+    dateArray.push(newBlackoutDate);
 
-            jQuery('#new-date-table tr:last').after('<tr><td class="date-to-be-disabled">' +
-                                                date + '</td>' +
-                                                '<td class="reason-to-be-disabled">' + reason + '</td>' +
-                                                '<td class="text-center text-nowrap">' + 
-                                                '<button class="btn btn-xs btn-default">' +
-                                                '<span class="glyphicon glyphicon-trash"></span>' +
-                                                '</button></td></tr>');
-            jQuery('#new-date-table tr:last button').on('click', function(){
-                jQuery(this).closest('tr').remove();
-                dateArray.pop(newBlackoutDate);
-            });
-        }
+    jQuery('#new-date-table tr:last').after('<tr><td class="date-to-be-disabled">' +
+                                            date + '</td>' +
+                                            '<td class="reason-to-be-disabled">' + reason + '</td>' +
+                                            '<td class="text-center text-nowrap">' + 
+                                            '<button class="btn btn-xs btn-default">' +
+                                            '<span class="glyphicon glyphicon-trash"></span>' +
+                                            '</button></td></tr>');
+    jQuery('#new-date-table tr:last button').on('click', function(){
+        jQuery(this).closest('tr').remove();
+        dateArray.pop(newBlackoutDate); //ERROR NOT POPPING PROPER DATE
+    });
+    return true;
 }       
 
 function getCheckedValues(){
@@ -132,26 +134,47 @@ function getCheckedValues(){
                          }).get();
 }
 
+function addDateCard(){
+    var newDateCard = '<div class="card">' +
+                        '<div class="card-body">' +
+                        '<h5 class="card-title">PUT DATE HERE</h5>' +
+                        '<div class="row">' +
+                        '<div class="col-4">' +
+                        '<button class="btn btn-primary">Delete</button>'
+                        '</div></div></div></div></div>';
+    return newDateCard;
+}
 
-function addDateRange(dateArray){
-    var startDate = jQuery('#blackout-date-range-start').datepicker('getDate');
-    var endDate = jQuery('#blackout-date-range-end').datepicker('getDate');
 
-    //check if end date is after startdate
-    if(startDate > endDate){
-        jQuery("#date-range-alert").fadeTo(2000, 500).slideUp(500, function(){
-            jQuery("#date-range-alert").slideUp(500);
-            });  
-        return;
-        }
-    
-    //add the dates
+function addDateRange(start, end, reason, dateArray){
+    var startDate = start;
+    var endDate = end;
     var currentDate = new Date(startDate.getTime());
+    var isNewDate = false;
+
+    //add the dates
     while(currentDate <= endDate){
-        addNewDisabledDate(currentDate.toISOString().split('T')[0], jQuery('#date-range-reason').val(), dateArray);
+        isNewDate = addNewDisabledDate(currentDate.toISOString().split('T')[0], reason, dateArray);
+        //if the date is already been added, return false and DO NOT RENDER A NEW CARD
+        if(!isNewDate) return false;
+
         currentDate.setDate(currentDate.getDate() + 1);
     }
-    
+
+    //if the date is not present, render a new card
+    if(isNewDate)jQuery('#new-date-cards').after(addDateCard());
+    return true;
+}
+
+function addSingleDate(date, reason, dateArray){
+    var isNewDate = false;
+    isNewDate = addNewDisabledDate(date, reason, dateArray);
+    //if the date is already present, return false
+    if(!isNewDate) return false;
+
+    //if the date is not present, render a new card
+    jQuery('#new-date-cards').after(addDateCard());
+    return true;
 }
 
 function createBlackoutDate(date, reason){
