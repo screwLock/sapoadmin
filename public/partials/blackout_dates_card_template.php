@@ -127,7 +127,7 @@
         <button type="button" class="close" data-dismiss="alert">x</button>
         Date Already Added
     </div>
-<div class="container">
+</div>
 
 <div id="new-date-cards">
 </div>
