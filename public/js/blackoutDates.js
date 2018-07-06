@@ -126,10 +126,10 @@ function getCheckedValues(){
 function addSingleDateCard(addedDate, reason){
     var newDateCard = '<div class="card">' +
                         '<div class="card-body">' +
-                        '<h5 class="card-title">' + addedDate + '</h5>' +
+                        '<h5 class="card-title">' + reason + '</h5>' +
                         '<div class="row">' +
                         '<div class="col-4">' +
-                        reason +
+                        addedDate +
                         '<button class="btn btn-primary">Delete</button>' +
                         '</div></div></div></div></div>';
     return newDateCard;
@@ -138,10 +138,10 @@ function addSingleDateCard(addedDate, reason){
 function addRangeDateCard(startDate, endDate, reason){
     var newDateCard = '<div class="card">' +
                         '<div class="card-body">' +
-                        '<h5 class="card-title">' + startDate + '-' + endDate + '</h5>' +
+                        '<h5 class="card-title">' + reason + '</h5>' +
                         '<div class="row">' +
                         '<div class="col-4">' +
-                        reason +
+                        startDate + '-' + endDate +
                         '<button class="btn btn-primary">Delete</button>' +
                         '</div></div></div></div></div>';
     return newDateCard;
@@ -163,7 +163,7 @@ function addDateRange(start, end, reason, dateArray){
     }
 
     //if the date is not present, render a new card
-    if(isNewDate)jQuery('#new-date-cards').after(addRangeDateCard(start, end, reason));
+    if(isNewDate)jQuery('#new-date-cards').after(addRangeDateCard(jQuery('#blackout-date-range-start').val(), jQuery('#blackout-date-range-end').val(), reason));
         return true;
 }
 
