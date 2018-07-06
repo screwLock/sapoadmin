@@ -123,17 +123,29 @@ function getCheckedValues(){
                          }).get();
 }
 
-function addDateCard(){
+function addSingleDateCard(addedDate, reason){
     var newDateCard = '<div class="card">' +
                         '<div class="card-body">' +
-                        '<h5 class="card-title">PUT DATE HERE</h5>' +
+                        '<h5 class="card-title">' + addedDate + '</h5>' +
                         '<div class="row">' +
                         '<div class="col-4">' +
-                        '<button class="btn btn-primary">Delete</button>'
+                        reason +
+                        '<button class="btn btn-primary">Delete</button>' +
                         '</div></div></div></div></div>';
     return newDateCard;
 }
 
+function addRangeDateCard(startDate, endDate, reason){
+    var newDateCard = '<div class="card">' +
+                        '<div class="card-body">' +
+                        '<h5 class="card-title">' + startDate + '-' + endDate + '</h5>' +
+                        '<div class="row">' +
+                        '<div class="col-4">' +
+                        reason +
+                        '<button class="btn btn-primary">Delete</button>' +
+                        '</div></div></div></div></div>';
+    return newDateCard;
+}
 
 function addDateRange(start, end, reason, dateArray){
     var startDate = start;
@@ -151,8 +163,8 @@ function addDateRange(start, end, reason, dateArray){
     }
 
     //if the date is not present, render a new card
-    if(isNewDate)jQuery('#new-date-cards').after(addDateCard());
-    return true;
+    if(isNewDate)jQuery('#new-date-cards').after(addRangeDateCard(start, end, reason));
+        return true;
 }
 
 function addSingleDate(date, reason, dateArray){
@@ -162,7 +174,7 @@ function addSingleDate(date, reason, dateArray){
     if(!isNewDate) return false;
 
     //if the date is not present, render a new card
-    jQuery('#new-date-cards').after(addDateCard());
+    jQuery('#new-date-cards').after(addSingleDateCard(date, reason));
     return true;
 }
 
