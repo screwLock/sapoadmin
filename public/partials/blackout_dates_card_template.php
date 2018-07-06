@@ -129,7 +129,7 @@
     </div>
 </div>
 
-<div id="new-date-cards">
+<div class="card-deck" id="new-date-cards">
 </div>
 
 

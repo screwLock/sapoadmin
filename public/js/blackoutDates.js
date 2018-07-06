@@ -131,11 +131,11 @@ function addSingleDateCard(addedDate, reason){
     var newDateCard = '<div class="card">' +
                         '<div class="card-body">' +
                         '<h5 class="card-title">' + reason + '</h5>' +
-                        '<div class="row">' +
-                        '<div class="col-4">' +
-                        formattedDate +
-                        '<button class="btn btn-primary">Delete</button>' +
-                        '</div></div></div></div></div>';
+                        '<p class="card-text">' +
+                        formattedDate + '</p>' +
+                        '</div><div class="card-footer">' +
+                        '<button class="btn btn-primary btn-sm">Delete</button>' +
+                        '</div></div>';
     return newDateCard;
 }
 
@@ -179,7 +179,7 @@ function addDateRange(start, end, reason, dateArray){
     }
 
     //if the date is not present, render a new card
-    if(isNewDate)jQuery('#new-date-cards').after(addRangeDateCard(start, end, reason));
+    if(isNewDate)jQuery('#new-date-cards').append(addRangeDateCard(start, end, reason));
     return true;
 }
 
@@ -190,7 +190,7 @@ function addSingleDate(date, reason, dateArray){
     if(!isNewDate) return false;
 
     //if the date is not present, render a new card
-    jQuery('#new-date-cards').after(addSingleDateCard(date, reason));
+    jQuery('#new-date-cards').append(addSingleDateCard(date, reason));
     return true;
 }
 
