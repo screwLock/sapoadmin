@@ -10,9 +10,7 @@ jQuery(window).load(function(){
     jQuery('#blackout-dates-single').datepicker( 
         {
           format: 'yyyy-mm-dd',
-          toggleActive: true,
-          todayBtn: "linked",
-          todayHighlight: true
+          toggleActive: true
         });
     jQuery('#blackout-dates-single').datepicker('setDate', 'today');
 
