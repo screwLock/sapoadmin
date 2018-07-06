@@ -67,7 +67,7 @@ jQuery(window).load(function(){
         //for some reason without preventing default behavior
         //clicking button redirects to homepage
         e.preventDefault();
-        addSingleDate(jQuery('#blackout-dates-single').val(), jQuery('#single-date-reason').val(), blackoutDates);
+        addSingleDate(jQuery('#blackout-dates-single').datepicker('getDate'), jQuery('#single-date-reason').val(), blackoutDates);
     });
 
     //add click event listener to date-range add button
@@ -122,30 +122,47 @@ function getCheckedValues(){
 }
 
 function addSingleDateCard(addedDate, reason){
+    var formattedDate = addedDate.toLocaleDateString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+    });
+
     var newDateCard = '<div class="card">' +
                         '<div class="card-body">' +
                         '<h5 class="card-title">' + reason + '</h5>' +
                         '<div class="row">' +
                         '<div class="col-4">' +
-                        addedDate +
+                        formattedDate +
                         '<button class="btn btn-primary">Delete</button>' +
                         '</div></div></div></div></div>';
     return newDateCard;
 }
 
 function addRangeDateCard(startDate, endDate, reason){
+    var formattedStartDate = startDate.toLocaleDateString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+    });
+    var formattedEndDate = endDate.toLocaleDateString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+    });
     var newDateCard = '<div class="card">' +
                         '<div class="card-body">' +
                         '<h5 class="card-title">' + reason + '</h5>' +
                         '<div class="row">' +
                         '<div class="col-4">' +
-                        startDate + '-' + endDate +
+                        formattedStartDate + '-' + formattedEndDate +
                         '<button class="btn btn-primary">Delete</button>' +
                         '</div></div></div></div></div>';
     //jQuery()
     return newDateCard;
 }
 
+//BUG:  need to check dates added before check
 function addDateRange(start, end, reason, dateArray){
     var startDate = start;
     var endDate = end;
@@ -162,13 +179,13 @@ function addDateRange(start, end, reason, dateArray){
     }
 
     //if the date is not present, render a new card
-    if(isNewDate)jQuery('#new-date-cards').after(start, end, reason);
+    if(isNewDate)jQuery('#new-date-cards').after(addRangeDateCard(start, end, reason));
     return true;
 }
 
 function addSingleDate(date, reason, dateArray){
     var isNewDate = false;
-    isNewDate = addNewDisabledDate(date, reason, dateArray);
+    isNewDate = addNewDisabledDate(date.toISOString().split('T')[0], reason, dateArray);
     //if the date is already present, return false
     if(!isNewDate) return false;
 
