@@ -153,11 +153,11 @@ function addRangeDateCard(startDate, endDate, reason){
     var newDateCard = '<div class="card">' +
                         '<div class="card-body">' +
                         '<h5 class="card-title">' + reason + '</h5>' +
-                        '<div class="row">' +
-                        '<div class="col-4">' +
-                        formattedStartDate + '-' + formattedEndDate +
-                        '<button class="btn btn-primary">Delete</button>' +
-                        '</div></div></div></div></div>';
+                        '<p class="card-text">' +
+                        formattedStartDate + ' - ' + formattedEndDate + '</p>' +
+                        '</div><div class="card-footer">' +
+                        '<button class="btn btn-primary btn-sm">Delete</button>' +
+                        '</div></div>';
     //jQuery()
     return newDateCard;
 }
