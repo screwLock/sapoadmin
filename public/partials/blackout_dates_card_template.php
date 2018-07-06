@@ -132,19 +132,7 @@
 <div id="new-date-cards">
 </div>
 
-<div class="container">
-        <table class="table table-hover" id="new-date-table">
-            <tbody>
-                <tr>
-                    <td class="date-to-be-disabled">Needs to be here but change content</td>
-                    <td class="reason-to-be-disabled">Needs to be here but change content</td>
-                    <td class="text-right text-nowrap"></td>
-                </tr>
-                <?php get_previous_blackout_dates(); ?>
-            </tbody>
-        </table>
-        <div><button class="btn btn-primary" id="submit">Submit</button></div>
-</div>
+
 
 <?php
     function get_previous_blackout_dates() {

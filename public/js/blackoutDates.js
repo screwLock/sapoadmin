@@ -114,17 +114,6 @@ function addNewDisabledDate(date, reason, dateArray) {
     var newBlackoutDate = createBlackoutDate(date, reason);
     dateArray.push(newBlackoutDate);
 
-    jQuery('#new-date-table tr:last').after('<tr><td class="date-to-be-disabled">' +
-                                            date + '</td>' +
-                                            '<td class="reason-to-be-disabled">' + reason + '</td>' +
-                                            '<td class="text-center text-nowrap">' + 
-                                            '<button class="btn btn-xs btn-default">' +
-                                            '<span class="glyphicon glyphicon-trash"></span>' +
-                                            '</button></td></tr>');
-    jQuery('#new-date-table tr:last button').on('click', function(){
-        jQuery(this).closest('tr').remove();
-        dateArray.pop(newBlackoutDate); //ERROR NOT POPPING PROPER DATE
-    });
     return true;
 }       
 
