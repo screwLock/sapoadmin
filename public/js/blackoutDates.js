@@ -142,6 +142,7 @@ function addRangeDateCard(startDate, endDate, reason){
                         startDate + '-' + endDate +
                         '<button class="btn btn-primary">Delete</button>' +
                         '</div></div></div></div></div>';
+    //jQuery()
     return newDateCard;
 }
 
@@ -161,8 +162,8 @@ function addDateRange(start, end, reason, dateArray){
     }
 
     //if the date is not present, render a new card
-    if(isNewDate)jQuery('#new-date-cards').after(addRangeDateCard(jQuery('#blackout-date-range-start').val(), jQuery('#blackout-date-range-end').val(), reason));
-        return true;
+    if(isNewDate)jQuery('#new-date-cards').after(start, end, reason);
+    return true;
 }
 
 function addSingleDate(date, reason, dateArray){
