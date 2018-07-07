@@ -167,7 +167,8 @@ function addRangeDateCard(startDate, endDate, reason, dateID){
                         '</div></div>';
 
     jQuery("#new-date-cards").on("click", buttonID, function(event){
-        jQuery(this).closest(".card").remove();
+        var target = jQuery(this).closest(".card");
+        target.fadeOut(300, function(){jQuery(this).remove()});
         blackoutDates = deleteBlackoutDates(dateID, blackoutDates);
     });
 
