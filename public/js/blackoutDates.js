@@ -59,7 +59,6 @@ jQuery(window).load(function(){
         return;
  
     });
-        
 
     //add click event listener to single date add button
     jQuery('#add-date-button').on('click', function(e){
@@ -67,11 +66,6 @@ jQuery(window).load(function(){
         //clicking button redirects to homepage
         e.preventDefault();
         addSingleDate(jQuery('#blackout-dates-single').datepicker('getDate'), jQuery('#single-date-reason').val(), blackoutDates);
-        /*
-        jQuery(this).popover({
-            content: "fuck"
-        });
-        */
     });
 
     //add click event listener to date-range add button
@@ -142,8 +136,9 @@ function addSingleDateCard(addedDate, reason, dateID){
                         '<button class="btn btn-primary btn-sm" id = "' + dateID + '">Delete</button>' +
                         '</div></div>';
     
-    jQuery("#new-date-cards").on("click", buttonID, function(event){
-        jQuery(this).closest(".card").remove();
+    jQuery("#new-date-cards").on("click", buttonID, function(){
+        var target = jQuery(this).closest(".card");
+        target.fadeOut(300, function(){jQuery(this).remove()});
         blackoutDates = deleteBlackoutDates(dateID, blackoutDates);
     });                        
     return newDateCard;
