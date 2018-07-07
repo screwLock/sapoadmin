@@ -121,25 +121,30 @@ function getCheckedValues(){
                          }).get();
 }
 
-function addSingleDateCard(addedDate, reason){
+function addSingleDateCard(addedDate, reason, dateID){
     var formattedDate = addedDate.toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'short',
         year: 'numeric'
     });
 
+    var buttonID = '#' + dateID;
     var newDateCard = '<div class="card">' +
                         '<div class="card-body">' +
                         '<h5 class="card-title">' + reason + '</h5>' +
                         '<p class="card-text">' +
                         formattedDate + '</p>' +
                         '</div><div class="card-footer">' +
-                        '<button class="btn btn-primary btn-sm">Delete</button>' +
+                        '<button class="btn btn-primary btn-sm" id = "' + dateID + '">Delete</button>' +
                         '</div></div>';
+    
+    jQuery("#new-date-cards").on("click", buttonID, function(event){
+        jQuery(this).closest(".card").remove();
+    });                        
     return newDateCard;
 }
 
-function addRangeDateCard(startDate, endDate, reason){
+function addRangeDateCard(startDate, endDate, reason, dateID){
     var formattedStartDate = startDate.toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'short',
@@ -150,17 +155,19 @@ function addRangeDateCard(startDate, endDate, reason){
         month: 'short',
         year: 'numeric'
     });
+
+    var buttonID = '#' + dateID;
     var newDateCard = '<div class="card">' +
                         '<div class="card-body">' +
                         '<h5 class="card-title">' + reason + '</h5>' +
                         '<p class="card-text">' +
                         formattedStartDate + ' - ' + formattedEndDate + '</p>' +
                         '</div><div class="card-footer">' +
-                        '<button class="btn btn-primary btn-sm">Delete</button>' +
+                        '<button class="btn btn-primary btn-sm" id = "' + dateID + '">Delete</button>' +
                         '</div></div>';
 
-    jQuery("#new-date-cards").on("click", "btn", function(event){
-        console.log('ufkc');
+    jQuery("#new-date-cards").on("click", buttonID, function(event){
+        jQuery(this).closest(".card").remove();
     });
 
     return newDateCard;
@@ -183,7 +190,7 @@ function addDateRange(start, end, reason, dateArray){
     }
 
     //if the date is not present, render a new card
-    if(isNewDate)jQuery('#new-date-cards').append(addRangeDateCard(start, end, reason));
+    if(isNewDate)jQuery('#new-date-cards').append(addRangeDateCard(start, end, reason, start.toISOString().split('T')[0]));
     return true;
 }
 
@@ -194,7 +201,7 @@ function addSingleDate(date, reason, dateArray){
     if(!isNewDate) return false;
 
     //if the date is not present, render a new card
-    jQuery('#new-date-cards').append(addSingleDateCard(date, reason));
+    jQuery('#new-date-cards').append(addSingleDateCard(date, reason, date.toISOString().split('T')[0]));
     return true;
 }
 
