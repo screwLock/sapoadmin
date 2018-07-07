@@ -138,7 +138,7 @@ function addSingleDateCard(addedDate, reason, dateID){
     
     jQuery("#new-date-cards").on("click", buttonID, function(){
         var target = jQuery(this).closest(".card");
-        target.fadeOut(300, function(){jQuery(this).remove()});
+        target.fadeOut(500, function(){jQuery(this).remove()});
         blackoutDates = deleteBlackoutDates(dateID, blackoutDates);
     });                        
     return newDateCard;
@@ -168,7 +168,7 @@ function addRangeDateCard(startDate, endDate, reason, dateID){
 
     jQuery("#new-date-cards").on("click", buttonID, function(event){
         var target = jQuery(this).closest(".card");
-        target.fadeOut(300, function(){jQuery(this).remove()});
+        target.fadeOut(500, function(){jQuery(this).remove()});
         blackoutDates = deleteBlackoutDates(dateID, blackoutDates);
     });
 
