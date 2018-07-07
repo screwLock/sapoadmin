@@ -123,7 +123,7 @@
 </div>
 
 
-<div class="card-deck" id="new-date-cards">
+<div class="row" id="new-date-cards">
 </div>
 
 

@@ -146,14 +146,15 @@ function addSingleDateCard(addedDate, reason, dateID){
     });
 
     var buttonID = '#' + dateID;
-    var newDateCard = '<div class="card">' +
+    var newDateCard = '<div class="col-auto mb-3">' +
+                        '<div class="card" style="width: 18rem;">' +
                         '<div class="card-body">' +
                         '<h5 class="card-title">' + reason + '</h5>' +
                         '<p class="card-text">' +
                         formattedDate + '</p>' +
                         '</div><div class="card-footer">' +
                         '<button class="btn btn-primary btn-sm" id = "' + dateID + '">Delete</button>' +
-                        '</div></div>';
+                        '</div></div></div>';
     
     jQuery("#new-date-cards").on("click", buttonID, function(){
         var target = jQuery(this).closest(".card");
