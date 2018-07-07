@@ -45,12 +45,12 @@ jQuery(window).load(function(){
     jQuery('input[type=radio][name=dateradio]').on('change', function(){
         switch(jQuery(this).val()){
             case 'single-date-radio':
-                jQuery('#range-dates').hide();
-                jQuery('#single-date').show();
+                jQuery('#range-dates').hide('fast');
+                jQuery('#single-date').show('fast');
                 break;
             case 'date-range-radio':
-                jQuery('#single-date').hide();
-                jQuery('#range-dates').show();
+                jQuery('#single-date').hide('fast');
+                jQuery('#range-dates').show('fast');
                 break;
         }
     });
@@ -206,7 +206,7 @@ function addDateRange(start, end, reason, dateArray){
     }
 
     //if the date is not present, render a new card
-    if(isNewDate)jQuery('#new-date-cards').append(addRangeDateCard(start, end, reason, start.toISOString().split('T')[0]));
+    if(isNewDate)jQuery('#new-date-cards').append(addRangeDateCard(start, end, reason, start.toISOString().split('T')[0])).hide().show('slow');
     return true;
 }
 
@@ -217,7 +217,7 @@ function addSingleDate(date, reason, dateArray){
     if(!isNewDate) return false;
 
     //if the date is not present, render a new card
-    jQuery('#new-date-cards').append(addSingleDateCard(date, reason, date.toISOString().split('T')[0]));
+    jQuery('#new-date-cards').append(addSingleDateCard(date, reason, date.toISOString().split('T')[0])).hide().show('slow');
     return true;
 }
 
