@@ -122,12 +122,6 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="alert alert-warning" id="date-present-alert">
-        <button type="button" class="close" data-dismiss="alert">x</button>
-        Date Already Added
-    </div>
-</div>
 
 <div class="card-deck" id="new-date-cards">
 </div>

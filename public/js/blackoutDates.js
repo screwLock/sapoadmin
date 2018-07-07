@@ -75,6 +75,18 @@ jQuery(window).load(function(){
             jQuery('#date-range-reason').val(), blackoutDates);
     });
 
+    jQuery('#add-date-button').popover({
+        content: "Date is already present",
+        title: "ERROR",
+        trigger: "manual"
+    });
+
+    jQuery('#add-date-range-button').popover({
+        content: "Date is already present",
+        title: "ERROR",
+        trigger: "manual"
+    });
+
     //add click event listener to submit button
     jQuery('#submit').on('click', function(e){
         e.preventDefault();
@@ -98,11 +110,13 @@ function addNewDisabledDate(date, reason, dateID, dateArray) {
         if(oldDate.date===date){
             //show warning if it is
             presentFlag++;
-            jQuery("#date-present-alert").fadeTo(2000, 500).slideUp(500, function(){
-                jQuery("#date-present-alert").slideUp(500);
-            
-            });   
-        };
+            jQuery('#add-date-button').popover('show');
+            jQuery('#add-date-range-button').popover('show');
+            setTimeout(function(){ 
+                jQuery('#add-date-button').popover('hide');
+                jQuery('#add-date-range-button').popover('hide');
+            }, 1000);
+        }
     });
     
     if(presentFlag > 0) return false;
