@@ -140,6 +140,7 @@ function addSingleDateCard(addedDate, reason, dateID){
     
     jQuery("#new-date-cards").on("click", buttonID, function(event){
         jQuery(this).closest(".card").remove();
+        blackoutDates = deleteBlackoutDates(dateID, blackoutDates);
     });                        
     return newDateCard;
 }
@@ -168,6 +169,7 @@ function addRangeDateCard(startDate, endDate, reason, dateID){
 
     jQuery("#new-date-cards").on("click", buttonID, function(event){
         jQuery(this).closest(".card").remove();
+        blackoutDates = deleteBlackoutDates(dateID, blackoutDates);
     });
 
     return newDateCard;
@@ -215,8 +217,8 @@ function createBlackoutDate(date, reason, id){
 };
 
 function deleteBlackoutDates(dateID, dateArray){
-    return dateArray.filter(function(element){
-            element === element;
+    return dateArray.filter(function(date){
+            return date.id !== dateID;
         });
 }
 
