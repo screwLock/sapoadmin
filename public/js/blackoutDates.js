@@ -92,7 +92,7 @@ jQuery(window).load(function(){
 });
 
 
-function addNewDisabledDate(date, reason, dateArray) {
+function addNewDisabledDate(date, reason, dateID, dateArray) {
     var presentFlag = 0;
     
     //check if date is already in array
@@ -109,7 +109,7 @@ function addNewDisabledDate(date, reason, dateArray) {
     
     if(presentFlag > 0) return false;
     //if date is not present, add the new date to the date array and as a row to the table
-    var newBlackoutDate = createBlackoutDate(date, reason);
+    var newBlackoutDate = createBlackoutDate(date, reason, dateID);
     dateArray.push(newBlackoutDate);
 
     return true;
@@ -158,11 +158,15 @@ function addRangeDateCard(startDate, endDate, reason){
                         '</div><div class="card-footer">' +
                         '<button class="btn btn-primary btn-sm">Delete</button>' +
                         '</div></div>';
-    //jQuery()
+
+    jQuery("#new-date-cards").on("click", "btn", function(event){
+        console.log('ufkc');
+    });
+
     return newDateCard;
 }
 
-//BUG:  need to check dates added before check
+//BUG:  need to check dates added before check in addNewDisabledDate
 function addDateRange(start, end, reason, dateArray){
     var startDate = start;
     var endDate = end;
@@ -171,7 +175,7 @@ function addDateRange(start, end, reason, dateArray){
 
     //add the dates
     while(currentDate <= endDate){
-        isNewDate = addNewDisabledDate(currentDate.toISOString().split('T')[0], reason, dateArray);
+        isNewDate = addNewDisabledDate(currentDate.toISOString().split('T')[0], reason, start.toISOString().split('T')[0], dateArray);
         //if the date is already been added, return false and DO NOT RENDER A NEW CARD
         if(!isNewDate) return false;
 
@@ -185,7 +189,7 @@ function addDateRange(start, end, reason, dateArray){
 
 function addSingleDate(date, reason, dateArray){
     var isNewDate = false;
-    isNewDate = addNewDisabledDate(date.toISOString().split('T')[0], reason, dateArray);
+    isNewDate = addNewDisabledDate(date.toISOString().split('T')[0], reason, date.toISOString().split('T')[0], dateArray);
     //if the date is already present, return false
     if(!isNewDate) return false;
 
@@ -194,13 +198,20 @@ function addSingleDate(date, reason, dateArray){
     return true;
 }
 
-function createBlackoutDate(date, reason){
+function createBlackoutDate(date, reason, id){
     blackoutDate = {
         date: date,
-        reason: reason
+        reason: reason,
+        id: id
     };
     return blackoutDate;
 };
+
+function deleteBlackoutDates(dateID, dateArray){
+    return dateArray.filter(function(element){
+            element === element;
+        });
+}
 
 //SELECT date, reason FROM SAPO_DATES WHERE USER_ID = current_user ORDER BY date ASCENDING;
 //SELECT * FROM SAPO_DAYS WHERE USER_ID = current_user;
