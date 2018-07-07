@@ -75,6 +75,11 @@ jQuery(window).load(function(){
             jQuery('#date-range-reason').val(), blackoutDates);
     });
 
+    //add event listener to the max time save button
+    jQuery('#change-max-time').on('click', function(e){
+        e.preventDefault();
+    });
+
     jQuery('#add-date-button').popover({
         content: "Date is already present",
         title: "ERROR",
