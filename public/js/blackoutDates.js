@@ -60,7 +60,6 @@ jQuery(window).load(function(){
  
     });
         
-   
 
     //add click event listener to single date add button
     jQuery('#add-date-button').on('click', function(e){
@@ -68,6 +67,11 @@ jQuery(window).load(function(){
         //clicking button redirects to homepage
         e.preventDefault();
         addSingleDate(jQuery('#blackout-dates-single').datepicker('getDate'), jQuery('#single-date-reason').val(), blackoutDates);
+        /*
+        jQuery(this).popover({
+            content: "fuck"
+        });
+        */
     });
 
     //add click event listener to date-range add button

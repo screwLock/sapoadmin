@@ -120,9 +120,7 @@ class Sapoadmin_Public {
 		wp_register_style('sapo_bootstrap_css', "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css");
 		wp_register_style('sapo_timepicker_css', "https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.css");
 
-		wp_register_script('sapo_popper_js', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js');
-
-		wp_register_script('sapo_bootstrap_js', "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js", array('jquery', 'popper'));
+		wp_register_script('sapo_bootstrap_js', "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js", array('jquery'));
 		wp_register_script('sapo_timepicker_js', 'https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.js');
 
 
@@ -154,7 +152,6 @@ class Sapoadmin_Public {
 		//watch these two...could be a source of error/conflict with wpdatatables
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_style('sapo_timepicker_css');
-		wp_enqueue_script('sapo_popper_js');
 		wp_enqueue_script('sapo_bootstrap_js');
 		wp_enqueue_script('sapo_timepicker_js');
 		
@@ -166,7 +163,6 @@ class Sapoadmin_Public {
 
 	public function zipcodes_shortcode(){
 		wp_enqueue_style('sapo_bootstrap_css');
-		wp_enqueue_script('sapo_popper_js');
 		wp_enqueue_script('sapo_bootstrap_js');
 		wp_enqueue_script('zipcodes');
 		include_once('partials/zipcodes_template.php');
@@ -175,7 +171,6 @@ class Sapoadmin_Public {
 
 	public function categories_shortcode(){
 		wp_enqueue_style('sapo_bootstrap_css');
-		wp_enqueue_script('sapo_popper_js');
 		wp_enqueue_script('sapo_bootstrap_js');
 		//wp_enqueue_script('categories');
 		include_once('partials/categories_template.php');
