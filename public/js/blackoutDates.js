@@ -111,7 +111,7 @@ function addNewDisabledDate(date, reason, dateID, dateArray) {
     var presentFlag = 0;
     
     //check if date is already in array
-    dateArray.forEach(function(oldDate){
+    /*dateArray.forEach(function(oldDate){
         if(oldDate.date===date){
             //show warning if it is
             presentFlag++;
@@ -122,7 +122,7 @@ function addNewDisabledDate(date, reason, dateID, dateArray) {
                 jQuery('#add-date-range-button').popover('hide');
             }, 1000);
         }
-    });
+    }); */
     
     if(presentFlag > 0) return false;
     //if date is not present, add the new date to the date array and as a row to the table
@@ -195,35 +195,24 @@ function addDateRange(start, end, reason, dateArray){
     var startDate = start;
     var endDate = end;
     var currentDate = new Date(startDate.getTime());
-    var isNewDate = false;
 
-    //while(currentDate <= endDate){
-        //dateArray.forEach(function(element) {if(element.date === currentDate) console.log('found a match');});
-    //}
+    if(!areDatesPresent(startDate, endDate, dateArray)){
 
-    //add the dates
-    while(currentDate <= endDate){
-        isNewDate = addNewDisabledDate(currentDate.toISOString().split('T')[0], reason, start.toISOString().split('T')[0], dateArray);
-        //if the date is already been added, return false and DO NOT RENDER A NEW CARD
-        if(!isNewDate) return false;
+        while(currentDate <= endDate){
+            addNewDisabledDate(currentDate.toISOString().split('T')[0], reason, start.toISOString().split('T')[0], dateArray);
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+        jQuery('#new-date-cards').append(addRangeDateCard(start, end, reason, start.toISOString().split('T')[0])).hide().show('slow');
 
-        currentDate.setDate(currentDate.getDate() + 1);
     }
-
-    //if the date is not present, render a new card
-    if(isNewDate)jQuery('#new-date-cards').append(addRangeDateCard(start, end, reason, start.toISOString().split('T')[0])).hide().show('slow');
-    return true;
 }
 
 function addSingleDate(date, reason, dateArray){
-    var isNewDate = false;
-    isNewDate = addNewDisabledDate(date.toISOString().split('T')[0], reason, date.toISOString().split('T')[0], dateArray);
-    //if the date is already present, return false
-    if(!isNewDate) return false;
 
-    //if the date is not present, render a new card
-    jQuery('#new-date-cards').append(addSingleDateCard(date, reason, date.toISOString().split('T')[0])).hide().show('slow');
-    return true;
+    if(!areDatesPresent(date, date, dateArray)){
+        addNewDisabledDate(date.toISOString().split('T')[0], reason, date.toISOString().split('T')[0], dateArray);
+        jQuery('#new-date-cards').append(addSingleDateCard(date, reason, date.toISOString().split('T')[0])).hide().show('slow');
+    }
 }
 
 function createBlackoutDate(date, reason, id){
@@ -246,12 +235,14 @@ function deleteBlackoutDates(dateID, dateArray){
 
 //popup-for whether mysql was successful after submit clicked
 
-/*
+
 function areDatesPresent(start, end, dateArray){
-    var currentDate = new Date(startDate.getTime());
-    while(currentDate <= endDate){
-        dateArray.forEach(function(element){
-            if(element.date === currentDate){
+    var currentDate = new Date(start.getTime());
+    var isDatePresent = false;
+    while(currentDate <= end){
+
+        dateArray.forEach(function(oldDate){
+            if(oldDate.date === currentDate.toISOString().split('T')[0]){
                 console.log('found a match');
                 jQuery('#add-date-button').popover('show');
                 jQuery('#add-date-range-button').popover('show');
@@ -259,11 +250,11 @@ function areDatesPresent(start, end, dateArray){
                     jQuery('#add-date-button').popover('hide');
                     jQuery('#add-date-range-button').popover('hide');
                 }, 1000);
-                 return true;
+                isDatePresent = true;
             }
-        currentDate.setDate(currentDate.getDate() + 1);
         });
+        currentDate.setDate(currentDate.getDate() + 1);
+
     }
-    return false;
+    return isDatePresent;
 }
-*/
