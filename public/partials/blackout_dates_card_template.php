@@ -122,9 +122,16 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container">
 <h5>New Dates</h5>
     <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Reason</th>
+                <th scope="col">Date</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
         <tbody id="new-date-cards">
         </tbody>
     </table>
