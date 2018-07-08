@@ -146,18 +146,15 @@ function addSingleDateCard(addedDate, reason, dateID){
     });
 
     var buttonID = '#' + dateID;
-    var newDateCard =    '<div class="col-auto mb-3">' +
-                        '<div class="card" style="width: 18rem;">' +
-                        '<div class="card-body">' +
-                        '<h5 class="card-title">' + reason + '</h5>' +
-                        '<p class="card-text">' +
-                        formattedDate + '</p>' +
-                        '</div><div class="card-footer">' +
-                        '<button class="btn btn-primary btn-sm" id = "' + dateID + '">Delete</button>' +
-                        '</div></div></div>';
+    var newDateCard =   '<tr>' +
+                        '<td>' + reason + '</td>' +
+                        '<td>' + formattedDate + '</td>' +
+                        '<td>' +
+                        '<button class="btn btn-primary btn-sm" id = "' + dateID + '">Delete</button></td>'
+                        '</tr>';
     
     jQuery("#new-date-cards").on("click", buttonID, function(){
-        var target = jQuery(this).closest(".card");
+        var target = jQuery(this).closest("tr");
         target.fadeOut(500, function(){jQuery(this).remove()});
         blackoutDates = deleteBlackoutDates(dateID, blackoutDates);
     });                        
@@ -177,18 +174,15 @@ function addRangeDateCard(startDate, endDate, reason, dateID){
     });
 
     var buttonID = '#' + dateID;
-    var newDateCard =    '<div class="col-auto mb-3">' +
-                        '<div class="card" style="width: 18rem;">' +
-                        '<div class="card-body">' +
-                        '<h5 class="card-title">' + reason + '</h5>' +
-                        '<p class="card-text">' +
-                        formattedStartDate + ' - ' + formattedEndDate + '</p>' +
-                        '</div><div class="card-footer">' +
-                        '<button class="btn btn-primary btn-sm" id = "' + dateID + '">Delete</button>' +
-                        '</div></div></div>';
+    var newDateCard =   '<tr>' +
+                        '<td>' + reason + '</td>' +
+                        '<td>' + formattedStartDate + ' - ' + formattedEndDate + '</td>' +
+                        '<td>' +
+                        '<button class="btn btn-primary btn-sm" id = "' + dateID + '">Delete</button></td>'
+                        '</tr>';
 
     jQuery("#new-date-cards").on("click", buttonID, function(event){
-        var target = jQuery(this).closest(".card");
+        var target = jQuery(this).closest("tr");
         target.fadeOut(500, function(){jQuery(this).remove()});
         blackoutDates = deleteBlackoutDates(dateID, blackoutDates);
     });

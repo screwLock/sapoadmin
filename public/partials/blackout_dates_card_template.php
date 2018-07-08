@@ -122,11 +122,13 @@
     </div>
 </div>
 
-<div class="container-fluid mt-4">
-    <h5>Dates</h5>
-    <div class="row" id="new-date-cards"></div>
+<div class="container-fluid">
+<h5>New Dates</h5>
+    <table class="table">
+        <tbody id="new-date-cards">
+        </tbody>
+    </table>
 </div>
-
 
 <?php
     function get_previous_blackout_dates() {
