@@ -107,6 +107,12 @@ jQuery(window).load(function(){
 });
 
 
+function getCheckedValues(){
+    return jQuery('input[name="weekday-cb"]:checked').map(function(){
+                        return jQuery(this).val();
+                         }).get();
+}
+
 function addNewDisabledDate(date, reason, dateID, dateArray) {
 
     var newBlackoutDate = createBlackoutDate(date, reason, dateID);
@@ -115,13 +121,7 @@ function addNewDisabledDate(date, reason, dateID, dateArray) {
     return true;
 }       
 
-function getCheckedValues(){
-    return jQuery('input[name="weekday-cb"]:checked').map(function(){
-                        return jQuery(this).val();
-                         }).get();
-}
-
-function addSingleDateCard(addedDate, reason, dateID){
+function addSingleDateEntry(addedDate, reason, dateID){
     var formattedDate = addedDate.toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'short',
@@ -144,7 +144,7 @@ function addSingleDateCard(addedDate, reason, dateID){
     return newDateCard;
 }
 
-function addRangeDateCard(startDate, endDate, reason, dateID){
+function addRangeDateEntry(startDate, endDate, reason, dateID){
     var formattedStartDate = startDate.toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'short',
@@ -184,7 +184,7 @@ function addDateRange(start, end, reason, dateArray){
             addNewDisabledDate(currentDate.toISOString().split('T')[0], reason, start.toISOString().split('T')[0], dateArray);
             currentDate.setDate(currentDate.getDate() + 1);
         }
-        jQuery('#new-date-cards').append(addRangeDateCard(start, end, reason, start.toISOString().split('T')[0])).hide().show('slow');
+        jQuery('#new-date-cards').append(addRangeDateEntry(start, end, reason, start.toISOString().split('T')[0])).hide().show('slow');
 
     }
 }
@@ -193,7 +193,7 @@ function addSingleDate(date, reason, dateArray){
 
     if(!areDatesPresent(date, date, dateArray)){
         addNewDisabledDate(date.toISOString().split('T')[0], reason, date.toISOString().split('T')[0], dateArray);
-        jQuery('#new-date-cards').append(addSingleDateCard(date, reason, date.toISOString().split('T')[0])).hide().show('slow');
+        jQuery('#new-date-cards').append(addSingleDateEntry(date, reason, date.toISOString().split('T')[0])).hide().show('slow');
     }
 }
 
