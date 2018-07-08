@@ -13,6 +13,16 @@
 ?>
 <?php require_once plugin_dir_path( __FILE__ ) . 'get_weekdays.php'; ?>
 
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-dates-tab" data-toggle="tab" href="#nav-dates" role="tab" aria-controls="nav-dates" aria-selected="true">Blackout Dates</a>
+    <a class="nav-item nav-link" id="nav-weekdays-tab" data-toggle="tab" href="#nav-weekdays" role="tab" aria-controls="nav-weekdays" aria-selected="false">Weekdays</a>
+    <a class="nav-item nav-link" id="nav-max-times-tab" data-toggle="tab" href="#nav-max-times" role="tab" aria-controls="nav-max-times" aria-selected="false">Max Times</a>
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+<div class="tab-pane fade show active" id="nav-dates" role="tabpanel" aria-labelledby="nav-home-tab">
 <div class="card">
 
     <div class="card-body">
@@ -66,8 +76,26 @@
         </div>
 
     </div>
-</div>
+</div><!-- End of blackout dates card -->
 
+<div class="container">
+<h5>Dates To Be Saved</h5>
+    <table class="table">
+        <caption>Dates Table</caption>
+        <thead>
+            <tr>
+                <th scope="col">Reason</th>
+                <th scope="col">Date</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="new-date-cards">
+        </tbody>
+    </table>
+</div>
+</div><!-- End of blackout dates tab -->
+
+<div class="tab-pane fade" id="nav-weekdays" role="tabpanel" aria-labelledby="nav-weekdays-tab">
 <div class="card">
     <div class="card-body">
     <h5 class="card-title">Disable Weekdays</h5>
@@ -80,8 +108,10 @@
             </div>
         </div>
     </div>
-</div>
+</div><!-- End of weekdays card -->
+</div><!-- End of weekdays tab -->
 
+<div class="tab-pane fade" id="nav-max-times" role="tabpanel" aria-labelledby="nav-max-times-tab">
 <div class="card">
     <div class="card-body">
     <h5 class="card-title">Set Max Time</h5>
@@ -121,22 +151,9 @@
         </form>
     </div>
 </div>
-
-<div class="container">
-<h5>Dates To Be Saved</h5>
-    <table class="table">
-        <caption>Dates Table</caption>
-        <thead>
-            <tr>
-                <th scope="col">Reason</th>
-                <th scope="col">Date</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody id="new-date-cards">
-        </tbody>
-    </table>
 </div>
+
+</div><!-- End of tab-content wrapper -->
 
 <?php
     function get_previous_blackout_dates() {
