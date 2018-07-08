@@ -32,7 +32,8 @@ jQuery(window).load(function(){
           toggleActive: true
         });
     jQuery('#blackout-date-range-end').datepicker('setDate', '+1d'); 
-
+    
+    //Initialize the max-time datepicker
     jQuery('#max-time').timepicker(
         {
             useSelect: true,
@@ -45,12 +46,14 @@ jQuery(window).load(function(){
     jQuery('input[type=radio][name=dateradio]').on('change', function(){
         switch(jQuery(this).val()){
             case 'single-date-radio':
-                jQuery('#range-dates').hide('fast');
-                jQuery('#single-date').show('fast');
+                jQuery('#range-dates').fadeOut('fast', function(){
+                    jQuery('#single-date').fadeIn('fast');
+                });
                 break;
             case 'date-range-radio':
-                jQuery('#single-date').hide('fast');
-                jQuery('#range-dates').show('fast');
+                jQuery('#single-date').fadeOut('fast', function(){
+                    jQuery('#range-dates').fadeIn('fast');
+                });
                 break;
         }
     });
