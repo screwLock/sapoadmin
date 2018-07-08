@@ -146,7 +146,7 @@ function addSingleDateCard(addedDate, reason, dateID){
     });
 
     var buttonID = '#' + dateID;
-    var newDateCard = '<div class="col-auto mb-3">' +
+    var newDateCard =    '<div class="col-auto mb-3">' +
                         '<div class="card" style="width: 18rem;">' +
                         '<div class="card-body">' +
                         '<h5 class="card-title">' + reason + '</h5>' +

@@ -122,10 +122,10 @@
     </div>
 </div>
 
-
-<div class="row" id="new-date-cards">
+<div class="container-fluid mt-4">
+    <h5>Dates</h5>
+    <div class="row justify-content-center" id="new-date-cards"></div>
 </div>
-
 
 
 <?php
