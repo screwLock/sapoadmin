@@ -108,24 +108,7 @@ jQuery(window).load(function(){
 
 
 function addNewDisabledDate(date, reason, dateID, dateArray) {
-    var presentFlag = 0;
-    
-    //check if date is already in array
-    /*dateArray.forEach(function(oldDate){
-        if(oldDate.date===date){
-            //show warning if it is
-            presentFlag++;
-            jQuery('#add-date-button').popover('show');
-            jQuery('#add-date-range-button').popover('show');
-            setTimeout(function(){ 
-                jQuery('#add-date-button').popover('hide');
-                jQuery('#add-date-range-button').popover('hide');
-            }, 1000);
-        }
-    }); */
-    
-    if(presentFlag > 0) return false;
-    //if date is not present, add the new date to the date array and as a row to the table
+
     var newBlackoutDate = createBlackoutDate(date, reason, dateID);
     dateArray.push(newBlackoutDate);
 
@@ -190,7 +173,6 @@ function addRangeDateCard(startDate, endDate, reason, dateID){
     return newDateCard;
 }
 
-//BUG:  need to check dates added before check in addNewDisabledDate
 function addDateRange(start, end, reason, dateArray){
     var startDate = start;
     var endDate = end;
@@ -243,7 +225,6 @@ function areDatesPresent(start, end, dateArray){
 
         dateArray.forEach(function(oldDate){
             if(oldDate.date === currentDate.toISOString().split('T')[0]){
-                console.log('found a match');
                 jQuery('#add-date-button').popover('show');
                 jQuery('#add-date-range-button').popover('show');
                 setTimeout(function(){ 
