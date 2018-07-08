@@ -197,6 +197,10 @@ function addDateRange(start, end, reason, dateArray){
     var currentDate = new Date(startDate.getTime());
     var isNewDate = false;
 
+    //while(currentDate <= endDate){
+        //dateArray.forEach(function(element) {if(element.date === currentDate) console.log('found a match');});
+    //}
+
     //add the dates
     while(currentDate <= endDate){
         isNewDate = addNewDisabledDate(currentDate.toISOString().split('T')[0], reason, start.toISOString().split('T')[0], dateArray);
@@ -241,3 +245,25 @@ function deleteBlackoutDates(dateID, dateArray){
 //SELECT * FROM SAPO_DAYS WHERE USER_ID = current_user;
 
 //popup-for whether mysql was successful after submit clicked
+
+/*
+function areDatesPresent(start, end, dateArray){
+    var currentDate = new Date(startDate.getTime());
+    while(currentDate <= endDate){
+        dateArray.forEach(function(element){
+            if(element.date === currentDate){
+                console.log('found a match');
+                jQuery('#add-date-button').popover('show');
+                jQuery('#add-date-range-button').popover('show');
+                setTimeout(function(){ 
+                    jQuery('#add-date-button').popover('hide');
+                    jQuery('#add-date-range-button').popover('hide');
+                }, 1000);
+                 return true;
+            }
+        currentDate.setDate(currentDate.getDate() + 1);
+        });
+    }
+    return false;
+}
+*/
