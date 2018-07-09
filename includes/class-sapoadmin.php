@@ -122,7 +122,7 @@ class Sapoadmin {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sapoadmin-public.php';
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/get_blackout_dates.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-blackout-dates-ajax.php';
 
 		
 
