@@ -26,8 +26,8 @@
 <div class="card">
 
     <div class="card-body">
-        <h5 class="card-title">Create New Blackout Dates</h5>
-        <div class="form-check form-check-inline">
+        <h5 class="card-title pb-2">Create New Blackout Dates</h5>
+        <div class="form-check form-check-inline pb-2">
             <label class="form-check-label"><input class="form-check-input" type="radio" name="dateradio" value="single-date-radio" checked>Single Date</label>
         </div>
         <div class="form-check form-check-inline">
