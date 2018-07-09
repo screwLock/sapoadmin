@@ -1,5 +1,14 @@
+//Before the DOM is ready, get the blackout dates from the database
 var blackoutDates= [];
-
+jQuery.ajax({
+    type:"POST",
+    url:"get_blackout_dates.php",
+    dataType: 'json',
+    success: function (data) {
+        console.log('success');
+        console.log(JSON.parse(data[0]));
+    }
+});
 
 jQuery(window).load(function(){
     jQuery('#date-present-alert').hide();
@@ -33,6 +42,10 @@ jQuery(window).load(function(){
         });
     jQuery('#blackout-date-range-end').datepicker('setDate', '+1d'); 
     
+    //AJAX
+    //jQuery('#each-datepicker').datepicker('setDatesDisabled', blackoutDates);
+
+
     //Initialize the max-time datepicker
     jQuery('#max-time').timepicker(
         {
@@ -96,7 +109,7 @@ jQuery(window).load(function(){
     });
 
     //add click event listener to submit button
-    jQuery('#submit').on('click', function(e){
+    jQuery('#save-dates').on('click', function(e){
         e.preventDefault();
       /*  jQuery.ajax({
             type: "GET",
@@ -116,38 +129,38 @@ function getCheckedValues(){
                          }).get();
 }
 
-function addNewDisabledDate(date, reason, dateID, dateArray) {
+function addNewDisabledDate(date, reason, groupID, dateArray) {
 
-    var newBlackoutDate = createBlackoutDate(date, reason, dateID);
+    var newBlackoutDate = createBlackoutDate(date, reason, groupID);
     dateArray.push(newBlackoutDate);
 
     return true;
 }       
 
-function addSingleDateEntry(addedDate, reason, dateID){
+function addSingleDateEntry(addedDate, reason, groupID){
     var formattedDate = addedDate.toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'short',
         year: 'numeric'
     });
 
-    var buttonID = '#' + dateID;
+    var buttonID = '#' + groupID;
     var newDateCard =   '<tr>' +
                         '<td>' + reason + '</td>' +
                         '<td>' + formattedDate + '</td>' +
                         '<td>' +
-                        '<button class="btn btn-primary btn-sm" id = "' + dateID + '">Delete</button></td>'
+                        '<button class="btn btn-primary btn-sm" id = "' + groupID + '">Delete</button></td>'
                         '</tr>';
     
     jQuery("#new-date-cards").on("click", buttonID, function(){
         var target = jQuery(this).closest("tr");
         target.fadeOut(500, function(){jQuery(this).remove()});
-        blackoutDates = deleteBlackoutDates(dateID, blackoutDates);
+        blackoutDates = deleteBlackoutDates(groupID, blackoutDates);
     });                        
     return newDateCard;
 }
 
-function addRangeDateEntry(startDate, endDate, reason, dateID){
+function addRangeDateEntry(startDate, endDate, reason, groupID){
     var formattedStartDate = startDate.toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'short',
@@ -159,18 +172,18 @@ function addRangeDateEntry(startDate, endDate, reason, dateID){
         year: 'numeric'
     });
 
-    var buttonID = '#' + dateID;
+    var buttonID = '#' + groupID;
     var newDateCard =   '<tr>' +
                         '<td>' + reason + '</td>' +
                         '<td>' + formattedStartDate + ' - ' + formattedEndDate + '</td>' +
                         '<td>' +
-                        '<button class="btn btn-primary btn-sm" id = "' + dateID + '">Delete</button></td>' +
+                        '<button class="btn btn-primary btn-sm" id = "' + groupID + '">Delete</button></td>' +
                         '</tr>';
 
     jQuery("#new-date-cards").on("click", buttonID, function(event){
         var target = jQuery(this).closest("tr");
         target.fadeOut(500, function(){jQuery(this).remove()});
-        blackoutDates = deleteBlackoutDates(dateID, blackoutDates);
+        blackoutDates = deleteBlackoutDates(groupID, blackoutDates);
     });
 
     return newDateCard;
@@ -204,14 +217,14 @@ function createBlackoutDate(date, reason, id){
     blackoutDate = {
         date: date,
         reason: reason,
-        id: id
+        groupID: id
     };
     return blackoutDate;
 };
 
-function deleteBlackoutDates(dateID, dateArray){
+function deleteBlackoutDates(groupID, dateArray){
     return dateArray.filter(function(date){
-            return date.id !== dateID;
+            return date.id !== groupID;
         });
 }
 
@@ -246,3 +259,5 @@ function areDatesPresent(start, end, dateArray){
 //ajax get old dates
 //create new date objects
 //in areDatesPresent also check for these old dates
+
+//Delete * from db where id = id;

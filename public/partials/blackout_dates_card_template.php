@@ -88,6 +88,11 @@
                 <th scope="col"></th>
             </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <td><button class="btn btn-primary" id="save-dates">Save</button></td>
+            </tr>
+        </tfoot>
         <tbody id="new-date-cards">
         </tbody>
     </table>
