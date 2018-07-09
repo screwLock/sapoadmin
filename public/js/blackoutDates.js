@@ -164,7 +164,7 @@ function addRangeDateEntry(startDate, endDate, reason, dateID){
                         '<td>' + reason + '</td>' +
                         '<td>' + formattedStartDate + ' - ' + formattedEndDate + '</td>' +
                         '<td>' +
-                        '<button class="btn btn-primary btn-sm" id = "' + dateID + '">Delete</button></td>'
+                        '<button class="btn btn-primary btn-sm" id = "' + dateID + '">Delete</button></td>' +
                         '</tr>';
 
     jQuery("#new-date-cards").on("click", buttonID, function(event){
@@ -242,3 +242,7 @@ function areDatesPresent(start, end, dateArray){
     }
     return isDatePresent;
 }
+
+//ajax get old dates
+//create new date objects
+//in areDatesPresent also check for these old dates

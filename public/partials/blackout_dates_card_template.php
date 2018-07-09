@@ -78,10 +78,9 @@
     </div>
 </div><!-- End of blackout dates card -->
 
-<div class="container">
+<div class="container-fluid">
 <h5>Dates To Be Saved</h5>
     <table class="table">
-        <caption>Dates Table</caption>
         <thead>
             <tr>
                 <th scope="col">Reason</th>
@@ -93,6 +92,7 @@
         </tbody>
     </table>
 </div>
+
 </div><!-- End of blackout dates tab -->
 
 <div class="tab-pane fade" id="nav-weekdays" role="tabpanel" aria-labelledby="nav-weekdays-tab">
@@ -100,8 +100,12 @@
     <div class="card-body">
     <h5 class="card-title">Disable Weekdays</h5>
         <div class="weekday-checkbox">
-            <?php get_weekdays() ?>
-            <div class="row">
+            <div class="row pb-2">
+                <div class="col">
+                    <?php get_weekdays() ?>
+                </div>
+            </div>
+            <div class="row p-2">
                 <div class="col-4">
                     <button class="btn btn-primary" id="change-weekdays">Save</button>
                 </div>
@@ -137,13 +141,13 @@
             <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Saturday">Saturday</label>
         </div>
         <form>
-            <div class="row">
+            <div class="row p-2">
                 <div class="col-4">
                     <label class="sr-only" for="inlineFormInput">Select Max Time</label>
                     <input type="text" class="form-control" id="max-time">
                 </div>
             </div>
-            <div class="row">
+            <div class="row p-2">
                 <div class="col-4">                    
                     <button class="btn btn-primary" id="change-max-time">Save</button>
                 </div>
