@@ -190,7 +190,7 @@ class Sapoadmin {
 
 		//Ajax related code
 		$this->loader->add_action( 'wp_ajax_get_blackout_dates', $plugin_public, 'get_blackout_dates' );
-
+		$this->loader->add_action('wp_ajax_nopriv_get_blackout_dates', $plugin_public, 'get_blackout_dates');
 	}
 
 	/**
@@ -232,7 +232,5 @@ class Sapoadmin {
 	public function get_version() {
 		return $this->version;
 	}
-
-
 
 }

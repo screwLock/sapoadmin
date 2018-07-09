@@ -150,6 +150,7 @@ class Sapoadmin_Public {
 
 	public function blackout_dates_shortcode(){
 		wp_localize_script( 'blackout_dates', 'blackout_dates_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
+
 		//watch these two...could be a source of error/conflict with wpdatatables
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_style('sapo_timepicker_css');
@@ -187,5 +188,30 @@ function google_maps_script_attributes( $tag, $handle) {
     
     return str_replace('src', ' async="async" defer src', $tag );
 }
-//
+
+//Need to move this code But it works now
+public function get_blackout_dates(){
+    global $wpdb;
+    $blackout_dates_array = array();
+    $blackout_dates_table = $wpdb->prefix . "sapo_blackout_dates";
+
+    $blackout_dates = $wpdb->get_results("SELECT blackout_date, reason, group_id FROM " . $blackout_dates_table . 
+    " WHERE USER_ID = " . get_current_user_id() . " ORDER BY DATE(blackout_date)");
+
+    //$blackout_dates = NULL;
+    //Send error message if error with query
+    if (is_null($blackout_dates) || !empty($wpdb->last_error)) wp_send_json_error();
+
+    $index = 0;
+    foreach($blackout_dates as $date){
+        $blackout_dates_array[$index] = array(
+            "date" => $date->blackout_date,
+            "reason" => $date->reason,
+            "groupID" => $date->group_id
+        );
+        $index++;
+    }
+
+    wp_send_json_success($blackout_dates_array);
+}
 }
