@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * The file that defines the blackout dates ajax functionality.
+ *
+ * A class definition that includes ajax functionality
+ *
+ * @link       https://github.com/screwLock
+ * @since      1.0.0
+ *
+ * @package    Sapoadmin
+ * @subpackage Sapoadmin/public
+ */
+
+/**
+ * All Ajax code for the blackout dates page should be
+ * set here.
+ *
+ * @since      1.0.0
+ * @package    Sapoadmin
+ * @subpackage Sapoadmin/public
+ * @author     Travus Helmly <helmlyw@gmail.com>
+ */
 class BlackoutDatesAjax {
 
     public function get_blackout_dates(){
