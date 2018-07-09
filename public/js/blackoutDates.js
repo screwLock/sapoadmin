@@ -7,6 +7,8 @@ jQuery.ajax({
     success: function (data) {
         console.log('success');
         console.log(JSON.parse(data[0]));
+        //data.map(function(oldDate)createBlackoutDate(oldDate->date,oldDate->reason,oldDate->id))
+        //OR data.forEach(function(oldDate) {blackoutDates.push(oldDate);})
     }
 });
 
