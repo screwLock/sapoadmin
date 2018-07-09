@@ -181,11 +181,15 @@ class Sapoadmin {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'register_scripts' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+		//Shortcodes
         $this->loader->add_shortcode( 'overview', $plugin_public, 'overview_shortcode' , 10, 2 );
 		$this->loader->add_shortcode( 'blackout_dates', $plugin_public, 'blackout_dates_shortcode' , 10, 2 );
 		$this->loader->add_shortcode( 'zipcodes', $plugin_public, 'zipcodes_shortcode' , 10, 2 );
 		$this->loader->add_shortcode( 'categories', $plugin_public, 'categories_shortcode' , 10, 2 );
 
+		//Ajax related code
+		$this->loader->add_action( 'wp_ajax_get_blackout_dates', $plugin_public, 'get_blackout_dates' );
 
 	}
 

@@ -149,6 +149,7 @@ class Sapoadmin_Public {
 	}
 
 	public function blackout_dates_shortcode(){
+		wp_localize_script( 'blackout_dates', 'blackout_dates_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
 		//watch these two...could be a source of error/conflict with wpdatatables
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_style('sapo_timepicker_css');

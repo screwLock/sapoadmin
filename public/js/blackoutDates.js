@@ -2,13 +2,20 @@
 var blackoutDates= [];
 jQuery.ajax({
     type:"POST",
-    url:"get_blackout_dates.php",
+    url: blackout_dates_ajax.ajax_url,
     dataType: 'json',
-    success: function (data) {
-        console.log('success');
-        console.log(JSON.parse(data[0]));
+    data: {
+        action: 'get_blackout_dates'
+    },
+    success: function (response) {
+        console.log(response);
+        console.log(blackout_dates_ajax.ajax_url);
+        //console.log(JSON.parse(data[0]));
         //data.map(function(oldDate)createBlackoutDate(oldDate->date,oldDate->reason,oldDate->id))
-        //OR data.forEach(function(oldDate) {blackoutDates.push(oldDate);})
+        //OR data.forEach(function(oldDate) {blackoutDates.push(JSON.parse(oldDate);})
+    },
+    error: function(error){
+        console.log('error');
     }
 });
 
