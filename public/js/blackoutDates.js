@@ -338,10 +338,10 @@ jQuery('#alter-old-dates').on('click', function(e){
         },
         success: function (response) {
             console.log(response);
-            jQuery("#old-date-entries").on("click", buttonID, function(event){
+            jQuery('input[name="oldDate-cb"]:checked').each(function(){
                 var target = jQuery(this).closest("tr");
                 target.fadeOut(500, function(){jQuery(this).remove()});
-                blackoutDates = deleteBlackoutDates(groupID, blackoutDates);
+                blackoutDates = deleteBlackoutDates(jQuery(this).val(), blackoutDates);
             });
         },
         error: function(error){
