@@ -8,10 +8,9 @@ jQuery.ajax({
         action: 'get_blackout_dates'
     },
     success: function (response) {
-        console.log(response);
-        //console.log(JSON.parse(data[0]));
-        //data.map(function(oldDate)createBlackoutDate(oldDate->date,oldDate->reason,oldDate->id))
-        //OR data.forEach(function(oldDate) {blackoutDates.push(JSON.parse(oldDate);})
+        response.data.map(function(oldDate){
+            blackoutDates.push(createBlackoutDate(oldDate.date,oldDate.reason,oldDate.groupID));
+        })
     },
     error: function(error){
         console.log('error');
