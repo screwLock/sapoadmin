@@ -78,8 +78,8 @@
     </div>
 </div><!-- End of blackout dates card -->
 
-<div class="container-fluid">
-<h5>Dates To Be Saved</h5>
+<div class="container-fluid pt-2">
+<h5 class="p-2">Dates To Be Saved</h5>
     <table class="table">
         <thead>
             <tr>
@@ -100,8 +100,8 @@
     </table>
 </div>
 
-<div class="container-fluid">
-<h5>Old Blackout Dates</h5>
+<div class="container-fluid pt-2">
+<h5 class="p-2">Old Blackout Dates</h5>
     <table class="table">
         <thead>
             <tr>
