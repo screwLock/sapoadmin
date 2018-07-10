@@ -45,7 +45,7 @@ function sapo_tables_install() {
 		      user_id BIGINT(20) NOT NULL,
 		      blackout_date DATE NOT NULL,
 			  reason VARCHAR(50) NOT NULL DEFAULT '',
-			  group_id VARCHAR(20) NOT NULL DEFAULT '',
+			  group_id VARCHAR(30) NOT NULL DEFAULT '',
 			  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
 		      created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 		      UNIQUE (id),

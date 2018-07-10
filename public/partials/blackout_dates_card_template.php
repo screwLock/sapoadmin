@@ -98,6 +98,21 @@
     </table>
 </div>
 
+<div class="container-fluid">
+<h5>Old Blackout Dates</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Reason</th>
+                <th scope="col">Date</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="old-date-entries">
+        </tbody>
+    </table>
+</div>
+
 </div><!-- End of blackout dates tab -->
 
 <div class="tab-pane fade" id="nav-weekdays" role="tabpanel" aria-labelledby="nav-weekdays-tab">

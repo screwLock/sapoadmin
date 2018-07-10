@@ -10,7 +10,8 @@ jQuery.ajax({
     success: function (response) {
         response.data.map(function(oldDate){
             blackoutDates.push(createBlackoutDate(oldDate.date,oldDate.reason,oldDate.groupID));
-        })
+            createAndRenderOldDate(oldDate.groupID, oldDate.reason);
+        }); 
     },
     error: function(error){
         console.log('error');
@@ -26,7 +27,7 @@ jQuery(window).load(function(){
     jQuery('#blackout-dates-single').datepicker( 
         {
           format: 'yyyy-mm-dd',
-          toggleActive: true
+          toggleActive: true,
         });
     jQuery('#blackout-dates-single').datepicker('setDate', 'today');
 
@@ -148,7 +149,8 @@ jQuery(window).load(function(){
             }
         });*/
     })
-});
+    
+}); // End of the Window load Block
 
 
 function getCheckedValues(){
@@ -249,19 +251,13 @@ function createBlackoutDate(date, reason, id){
         groupID: id
     };
     return blackoutDate;
-};
+}
 
 function deleteBlackoutDates(groupID, dateArray){
     return dateArray.filter(function(date){
             return date.groupID !== groupID;
         });
 }
-
-//SELECT date, reason FROM SAPO_DATES WHERE USER_ID = current_user ORDER BY date ASCENDING;
-//SELECT * FROM SAPO_DAYS WHERE USER_ID = current_user;
-
-//popup-for whether mysql was successful after submit clicked
-
 
 function areDatesPresent(start, end, dateArray){
     var currentDate = new Date(start.getTime());
@@ -283,5 +279,46 @@ function areDatesPresent(start, end, dateArray){
 
     }
     return isDatePresent;
+}
+
+function createAndRenderOldDate(oldGroupID, reason,){
+
+    var formattedDate = '';
+    var startDate = oldGroupID.split('_')[0];
+    var startDateParts = startDate.split('-');
+    startDate = new Date(startDateParts[0], startDateParts[1] - 1, startDateParts[2]);
+    var formattedStartDate = startDate.toLocaleDateString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+    });
+    
+    if((oldGroupID.split('_')).length>1){
+        var endDate = oldGroupID.split('_')[1];
+        var endDateParts = endDate.split('-');
+        endDate = new Date(endDateParts[0], endDateParts[1]-1, endDateParts[2]);
+        var formattedEndDate = endDate.toLocaleDateString('en-US', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+        });
+        formattedDate = formattedStartDate + ' - ' + formattedEndDate;
+    }
+    else
+        formattedDate = formattedStartDate;
+
+    var buttonID = '#' + oldGroupID;
+    var oldDateEntry =  '<tr>' +
+                        '<td>' + reason + '</td>' +
+                        '<td>' + formattedDate + '</td>' +
+                        '<td>' + '<button class="btn btn-primary btn-sm" id = "' + oldGroupID + '">Delete</button></td>' + 
+                        '</tr>';
+    jQuery('#old-date-entries').append(oldDateEntry).hide().show('slow');
+    jQuery("#old-date-entries").on("click", buttonID, function(event){
+        var target = jQuery(this).closest("tr");
+        target.fadeOut(500, function(){jQuery(this).remove()});
+        blackoutDates = deleteBlackoutDates(oldGroupID, blackoutDates);
+    });
+
 }
 
