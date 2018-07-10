@@ -206,8 +206,7 @@ function addRangeDateEntry(startDate, endDate, reason, groupID){
     var newDateCard =   '<tr>' +
                         '<td>' + reason + '</td>' +
                         '<td>' + formattedStartDate + ' - ' + formattedEndDate + '</td>' +
-                        '<td>' +
-                        '<button class="btn btn-primary btn-sm" id = "' + groupID + '">Delete</button></td>' +
+                        '<td><button class="btn btn-primary btn-sm" id = "' + groupID + '">Delete</button></td>' +
                         '</tr>';
 
     jQuery("#new-date-cards").on("click", buttonID, function(event){
@@ -222,24 +221,25 @@ function addRangeDateEntry(startDate, endDate, reason, groupID){
 function addDateRange(start, end, reason, dateArray){
     var startDate = start;
     var endDate = end;
+    var groupID = start.toISOString().split('T')[0] + '_' + end.toISOString().split('T')[0];
     var currentDate = new Date(startDate.getTime());
 
     if(!areDatesPresent(startDate, endDate, dateArray)){
 
         while(currentDate <= endDate){
-            addNewDisabledDate(currentDate.toISOString().split('T')[0], reason, start.toISOString().split('T')[0] + '_' + end.toISOString().split('T')[0], dateArray);
+            addNewDisabledDate(currentDate.toISOString().split('T')[0], reason, groupID, dateArray);
             currentDate.setDate(currentDate.getDate() + 1);
         }
-        jQuery('#new-date-cards').append(addRangeDateEntry(start, end, reason, start.toISOString().split('T')[0])).hide().show('slow');
+        jQuery('#new-date-cards').append(addRangeDateEntry(start, end, reason, groupID)).hide().show('slow');
 
     }
 }
 
 function addSingleDate(date, reason, dateArray){
-
+    var groupID = date.toISOString().split('T')[0];
     if(!areDatesPresent(date, date, dateArray)){
         addNewDisabledDate(date.toISOString().split('T')[0], reason, date.toISOString().split('T')[0], dateArray);
-        jQuery('#new-date-cards').append(addSingleDateEntry(date, reason, date.toISOString().split('T')[0])).hide().show('slow');
+        jQuery('#new-date-cards').append(addSingleDateEntry(date, reason, groupID)).hide().show('slow');
     }
 }
 
@@ -254,7 +254,7 @@ function createBlackoutDate(date, reason, id){
 
 function deleteBlackoutDates(groupID, dateArray){
     return dateArray.filter(function(date){
-            return date.id !== groupID;
+            return date.groupID !== groupID;
         });
 }
 
