@@ -119,6 +119,7 @@ class Sapoadmin_Public {
 
 		wp_register_style('sapo_bootstrap_css', "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css");
 		wp_register_style('sapo_timepicker_css', "https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.css");
+		wp_register_style('sapo_navtabs_css', plugin_dir_url( __FILE__ ) . 'css/navtabs.css', array('sapo_bootstrap_css'));
 
 		wp_register_script('sapo_bootstrap_js', "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js", array('jquery'));
 		wp_register_script('sapo_timepicker_js', 'https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.js');
@@ -155,6 +156,7 @@ class Sapoadmin_Public {
 		//watch these two...could be a source of error/conflict with wpdatatables
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_style('sapo_timepicker_css');
+		wp_enqueue_style('sapo_navtabs_css');
 		wp_enqueue_script('sapo_bootstrap_js');
 		wp_enqueue_script('sapo_timepicker_js');
 		

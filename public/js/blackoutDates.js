@@ -325,7 +325,6 @@ function getCheckedOldDates(){
                          }).get();
 }
 
-   //add click event listener to submit button
 jQuery('#alter-old-dates').on('click', function(e){
     e.preventDefault();
     jQuery.ajax({

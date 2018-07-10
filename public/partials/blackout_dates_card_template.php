@@ -13,7 +13,7 @@
 ?>
 <?php require_once plugin_dir_path( __FILE__ ) . 'get_weekdays.php'; ?>
 
-<nav>
+<nav id="sapo-nav">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-dates-tab" data-toggle="tab" href="#nav-dates" role="tab" aria-controls="nav-dates" aria-selected="true">Blackout Dates</a>
     <a class="nav-item nav-link" id="nav-weekdays-tab" data-toggle="tab" href="#nav-weekdays" role="tab" aria-controls="nav-weekdays" aria-selected="false">Weekdays</a>
