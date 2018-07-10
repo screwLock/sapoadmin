@@ -91,6 +91,8 @@
         <tfoot>
             <tr>
                 <td><button class="btn btn-primary" id="save-dates">Save</button></td>
+                <td></td>
+                <td></td>
             </tr>
         </tfoot>
         <tbody id="new-date-cards">
@@ -108,6 +110,13 @@
                 <th scope="col"></th>
             </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <td><button class="btn btn-primary" id="alter-old-dates">Delete</button></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tfoot>
         <tbody id="old-date-entries">
         </tbody>
     </table>
@@ -179,19 +188,4 @@
 
 </div><!-- End of tab-content wrapper -->
 
-<?php
-    function get_previous_blackout_dates() {
-        global $wpdb;
-        $blackout_dates_table = $wpdb->prefix . "sapo_blackout_dates";
-        $result = $wpdb->get_results( "SELECT blackout_date, reason FROM " . $blackout_dates_table . 
-                                      " WHERE USER_ID = " . get_current_user_id() . " ORDER BY blackout_date ASC;");
-        foreach ( $result as $print )   {
-            echo '<tr>';
-            echo "<td class='date-to-be-disabled'>" . $print->blackout_date.'</td>';
-            echo "<td class='reason-to-be-disabled'>" . $print->reason.'</td>';
-            echo '<td class="text-center text-nowrap"><button class="btn btn-xs btn-default"><span class="glyphicon glyphicon-trash"></span></button></td>';
-            echo '</tr>';
-        };
-    }
-?>
 

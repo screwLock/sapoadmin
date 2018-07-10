@@ -194,8 +194,8 @@ class Sapoadmin {
 		$this->loader->add_shortcode( 'categories', $plugin_public, 'categories_shortcode' , 10, 2 );
 
 		//Ajax related code
-		//$this->loader->add_action( 'wp_ajax_get_blackout_dates', $plugin_public, 'get_blackout_dates' );
 		$this->loader->add_action( 'wp_ajax_get_blackout_dates', $blackout_dates_ajax, 'get_blackout_dates' );
+		$this->loader->add_action( 'wp_ajax_delete_old_dates', $blackout_dates_ajax, 'delete_old_dates' );
 
 	}
 

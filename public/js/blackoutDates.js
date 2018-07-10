@@ -153,7 +153,7 @@ jQuery(window).load(function(){
 }); // End of the Window load Block
 
 
-function getCheckedValues(){
+function getCheckedWeekdayValues(){
     return jQuery('input[name="weekday-cb"]:checked').map(function(){
                         return jQuery(this).val();
                          }).get();
@@ -311,14 +311,41 @@ function createAndRenderOldDate(oldGroupID, reason,){
     var oldDateEntry =  '<tr>' +
                         '<td>' + reason + '</td>' +
                         '<td>' + formattedDate + '</td>' +
-                        '<td>' + '<button class="btn btn-primary btn-sm" id = "' + oldGroupID + '">Delete</button></td>' + 
+                        '<td><div class="form-check"><label class="form-check-label">' +
+                        '<input class="form-check-input"type="checkbox" name="oldDate-cb" value=' + oldGroupID + '>Remove</label></div></td>'+  
                         '</tr>';
+
     jQuery('#old-date-entries').append(oldDateEntry).hide().show('slow');
-    jQuery("#old-date-entries").on("click", buttonID, function(event){
-        var target = jQuery(this).closest("tr");
-        target.fadeOut(500, function(){jQuery(this).remove()});
-        blackoutDates = deleteBlackoutDates(oldGroupID, blackoutDates);
-    });
 
 }
 
+function getCheckedOldDates(){
+    return jQuery('input[name="oldDate-cb"]:checked').map(function(){
+                        return jQuery(this).val();
+                         }).get();
+}
+
+   //add click event listener to submit button
+jQuery('#alter-old-dates').on('click', function(e){
+    e.preventDefault();
+    jQuery.ajax({
+        type:"POST",
+        url: blackout_dates_ajax.ajax_url,
+        dataType: 'json',
+        data: {
+            action: 'delete_old_dates',
+            datesToRemove: getCheckedOldDates
+        },
+        success: function (response) {
+            console.log(response);
+            jQuery("#old-date-entries").on("click", buttonID, function(event){
+                var target = jQuery(this).closest("tr");
+                target.fadeOut(500, function(){jQuery(this).remove()});
+                blackoutDates = deleteBlackoutDates(groupID, blackoutDates);
+            });
+        },
+        error: function(error){
+            console.log('error');
+        }
+    });
+});
