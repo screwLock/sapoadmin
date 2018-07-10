@@ -9,7 +9,6 @@ jQuery.ajax({
     },
     success: function (response) {
         console.log(response);
-        console.log(blackout_dates_ajax.ajax_url);
         //console.log(JSON.parse(data[0]));
         //data.map(function(oldDate)createBlackoutDate(oldDate->date,oldDate->reason,oldDate->id))
         //OR data.forEach(function(oldDate) {blackoutDates.push(JSON.parse(oldDate);})
@@ -87,8 +86,6 @@ jQuery(window).load(function(){
 
     //add click event listener to single date add button
     jQuery('#add-date-button').on('click', function(e){
-        //for some reason without preventing default behavior
-        //clicking button redirects to homepage
         e.preventDefault();
         addSingleDate(jQuery('#blackout-dates-single').datepicker('getDate'), jQuery('#single-date-reason').val(), blackoutDates);
     });
@@ -96,8 +93,15 @@ jQuery(window).load(function(){
     //add click event listener to date-range add button
     jQuery('#add-date-range-button').on('click', function(e){
         e.preventDefault();
-        addDateRange(jQuery('#blackout-date-range-start').datepicker('getDate'), jQuery('#blackout-date-range-end').datepicker('getDate'), 
-            jQuery('#date-range-reason').val(), blackoutDates);
+        if(jQuery('#blackout-date-range-start').datepicker('getDate').toDateString() ===  jQuery('#blackout-date-range-end').datepicker('getDate').toDateString()){
+            jQuery('#blackout-date-range-end').popover('show');
+            setTimeout(function(){
+                jQuery('#blackout-date-range-end').popover('hide');
+            }, 1000);
+        }
+        else
+            addDateRange(jQuery('#blackout-date-range-start').datepicker('getDate'), jQuery('#blackout-date-range-end').datepicker('getDate'), 
+                jQuery('#date-range-reason').val(), blackoutDates);
     });
 
     //add event listener to the max time save button
@@ -117,17 +121,33 @@ jQuery(window).load(function(){
         trigger: "manual"
     });
 
+    jQuery('#blackout-date-range-end').popover({
+        content: "Start and End Dates cannot be the same",
+        title: "ERROR",
+        trigger: "manual"
+    });
+
     //add click event listener to submit button
     jQuery('#save-dates').on('click', function(e){
-        e.preventDefault();
-      /*  jQuery.ajax({
-            type: "GET",
-            url: "submit_blackout_dates.php",
-            dataType: "html",
-            success: function(response){
+        e.preventDefault();/*
+        jQuery.ajax({
+            type:"POST",
+            url: blackout_dates_ajax.ajax_url,
+            dataType: 'json',
+            data: {
+                action: 'add_blackout_dates'
+            },
+            success: function (response) {
                 console.log(response);
+                console.log(blackout_dates_ajax.ajax_url);
+                //console.log(JSON.parse(data[0]));
+                //data.map(function(oldDate)createBlackoutDate(oldDate->date,oldDate->reason,oldDate->id))
+                //OR data.forEach(function(oldDate) {blackoutDates.push(JSON.parse(oldDate);})
+            },
+            error: function(error){
+                console.log('error');
             }
-        });//end of ajax */
+        });*/
     })
 });
 
@@ -170,6 +190,7 @@ function addSingleDateEntry(addedDate, reason, groupID){
 }
 
 function addRangeDateEntry(startDate, endDate, reason, groupID){
+
     var formattedStartDate = startDate.toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'short',
@@ -206,7 +227,7 @@ function addDateRange(start, end, reason, dateArray){
     if(!areDatesPresent(startDate, endDate, dateArray)){
 
         while(currentDate <= endDate){
-            addNewDisabledDate(currentDate.toISOString().split('T')[0], reason, start.toISOString().split('T')[0], dateArray);
+            addNewDisabledDate(currentDate.toISOString().split('T')[0], reason, start.toISOString().split('T')[0] + '_' + end.toISOString().split('T')[0], dateArray);
             currentDate.setDate(currentDate.getDate() + 1);
         }
         jQuery('#new-date-cards').append(addRangeDateEntry(start, end, reason, start.toISOString().split('T')[0])).hide().show('slow');
@@ -265,8 +286,3 @@ function areDatesPresent(start, end, dateArray){
     return isDatePresent;
 }
 
-//ajax get old dates
-//create new date objects
-//in areDatesPresent also check for these old dates
-
-//Delete * from db where id = id;
