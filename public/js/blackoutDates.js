@@ -334,11 +334,11 @@ jQuery('#alter-old-dates').on('click', function(e){
             dataType: 'json',
             data: {
                 action: 'delete_old_dates',
-                datesToRemove: getCheckedOldDates
+                datesToRemove: getCheckedOldDates()
             },
             success: function (response) {
                 console.log(response);
-                if(response.success==="true"){
+                if(response.success === true){
                     jQuery('input[name="oldDate-cb"]:checked').each(function(){
                     var target = jQuery(this).closest("tr");
                     target.fadeOut(500, function(){jQuery(this).remove()});
@@ -348,8 +348,9 @@ jQuery('#alter-old-dates').on('click', function(e){
                 else
                     console.log("there was an error");
             },
-            error: function(error){
-                console.log('error');
+            error: function(xhr, status, error){
+                console.log(status);
+                console.log(error);
             }
         });
     }

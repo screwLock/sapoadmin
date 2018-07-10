@@ -49,19 +49,22 @@ class BlackoutDatesAjax {
     }
 
     public function delete_old_dates(){
-        $groupID = array();
-        if ( isset($_REQUEST) ) 
-            $groupIDArray = $_REQUEST['datesToRemove'];
-        //for()
-        
+        $groupIDs = array();
+        forEach($_POST['datesToRemove'] as $id)
+            array_push($groupIDs, $id);
+        //$groupIDs = implode(",", $groupIDs);
+        $groupIDs = "'" .implode("','", $groupIDs  ) . "'"; 
+
         global $wpdb;
         $blackout_dates_table = $wpdb->prefix . "sapo_blackout_dates";
-
-        //$isSuccess = $wpdb->delete($blackout_dates_table, array('groupID'=> ));
-
+        
+        $isSuccess = $wpdb->query( 
+            $wpdb->prepare( "DELETE FROM " . $blackout_dates_table . " WHERE group_id IN ($groupIDs) AND user_id = %d", get_current_user_id())
+        );
+        
         //Send error message if error with mysql
         //if (is_null($isSuccess) || !$isSuccess) wp_send_json_error();
-        wp_send_json_success($groupID);    
+        wp_send_json_success($isSuccess);    
     }
 
 }
