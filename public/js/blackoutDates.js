@@ -143,7 +143,7 @@ jQuery(window).load(function(){
                 },
                 success: function (response) {
                     console.log(response);
-                    console.log(blackout_dates_ajax.ajax_url);
+                    jQuery('#new-date-cards > tr').fadeOut(500, function(){jQuery(this).remove()});
                     //console.log(JSON.parse(data[0]));
                     //data.map(function(oldDate)createBlackoutDate(oldDate->date,oldDate->reason,oldDate->id))
                     //OR data.forEach(function(oldDate) {blackoutDates.push(JSON.parse(oldDate);})
