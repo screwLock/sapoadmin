@@ -52,7 +52,7 @@ class BlackoutDatesAjax {
         $groupIDs = array();
         forEach($_POST['datesToRemove'] as $id)
             array_push($groupIDs, $id);
-        //$groupIDs = implode(",", $groupIDs);
+
         $groupIDs = "'" .implode("','", $groupIDs  ) . "'"; 
 
         global $wpdb;
@@ -68,7 +68,14 @@ class BlackoutDatesAjax {
     }
 
     public function add_new_dates(){
-        wp_send_json_success();
+        global $wpdb;
+        $blackout_dates_table = $wpdb->prefix . "sapo_blackout_dates";
+
+        $query ="SELECT group_id FROM $blackout_dates_table";
+
+        $isSuccess = $wpdb->query($query);
+
+        wp_send_json_success($isSuccess);
     }
 
 }

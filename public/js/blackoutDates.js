@@ -129,25 +129,30 @@ jQuery(window).load(function(){
 
     //add click event listener to submit button
     jQuery('#save-dates').on('click', function(e){
-        e.preventDefault();/*
-        jQuery.ajax({
-            type:"POST",
-            url: blackout_dates_ajax.ajax_url,
-            dataType: 'json',
-            data: {
-                action: 'add_blackout_dates'
-            },
-            success: function (response) {
-                console.log(response);
-                console.log(blackout_dates_ajax.ajax_url);
-                //console.log(JSON.parse(data[0]));
-                //data.map(function(oldDate)createBlackoutDate(oldDate->date,oldDate->reason,oldDate->id))
-                //OR data.forEach(function(oldDate) {blackoutDates.push(JSON.parse(oldDate);})
-            },
-            error: function(error){
-                console.log('error');
-            }
-        });*/
+        e.preventDefault();
+        //Only contact the server if there is data in the table
+        //to be saved
+        if(jQuery('#new-date-cards tr').length > 0){
+            jQuery.ajax({
+                type:"POST",
+                url: blackout_dates_ajax.ajax_url,
+                dataType: 'text',
+                data: {
+                    action: 'add_new_dates',
+                    new_dates: blackoutDates
+                },
+                success: function (response) {
+                    console.log(response);
+                    console.log(blackout_dates_ajax.ajax_url);
+                    //console.log(JSON.parse(data[0]));
+                    //data.map(function(oldDate)createBlackoutDate(oldDate->date,oldDate->reason,oldDate->id))
+                    //OR data.forEach(function(oldDate) {blackoutDates.push(JSON.parse(oldDate);})
+                },
+                error: function(xhr, status, error){
+                    console.log(error);
+                }
+            });
+        }
     })
     
 }); // End of the Window load Block

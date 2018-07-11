@@ -196,6 +196,7 @@ class Sapoadmin {
 		//Ajax related code
 		$this->loader->add_action( 'wp_ajax_get_blackout_dates', $blackout_dates_ajax, 'get_blackout_dates' );
 		$this->loader->add_action( 'wp_ajax_delete_old_dates', $blackout_dates_ajax, 'delete_old_dates' );
+		$this->loader->add_action( 'wp_ajax_add_new_dates', $blackout_dates_ajax, 'add_new_dates' );
 
 	}
 
