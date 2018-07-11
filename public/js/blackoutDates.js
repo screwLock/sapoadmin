@@ -153,6 +153,8 @@ jQuery(window).load(function(){
                 }
             });
         }
+        else
+            console.log("Nothing to save");
     })
     
 }); // End of the Window load Block
@@ -184,7 +186,7 @@ function addSingleDateEntry(addedDate, reason, groupID){
                         '<td>' + reason + '</td>' +
                         '<td>' + formattedDate + '</td>' +
                         '<td>' +
-                        '<button class="btn btn-primary btn-sm" id = "' + groupID + '">Delete</button></td>'
+                        '<button class="btn btn-primary btn-sm" id = "' + groupID + '">Remove</button></td>'
                         '</tr>';
     
     jQuery("#new-date-cards").on("click", buttonID, function(){
@@ -212,7 +214,7 @@ function addRangeDateEntry(startDate, endDate, reason, groupID){
     var newDateCard =   '<tr>' +
                         '<td>' + reason + '</td>' +
                         '<td>' + formattedStartDate + ' - ' + formattedEndDate + '</td>' +
-                        '<td><button class="btn btn-primary btn-sm" id = "' + groupID + '">Delete</button></td>' +
+                        '<td><button class="btn btn-primary btn-sm" id = "' + groupID + '">Remove</button></td>' +
                         '</tr>';
 
     jQuery("#new-date-cards").on("click", buttonID, function(event){

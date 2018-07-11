@@ -112,7 +112,7 @@
         </thead>
         <tfoot>
             <tr>
-                <td><button class="btn btn-primary" id="alter-old-dates">Remove</button></td>
+                <td><button class="btn btn-primary" id="alter-old-dates">Delete</button></td>
                 <td></td>
                 <td></td>
             </tr>
