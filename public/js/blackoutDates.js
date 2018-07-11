@@ -350,7 +350,6 @@ jQuery('#alter-old-dates').on('click', function(e){
             },
             error: function(xhr, status, error){
                 console.log(status);
-                console.log(error);
             }
         });
     }
