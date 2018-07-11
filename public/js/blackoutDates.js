@@ -9,7 +9,7 @@ jQuery.ajax({
     },
     success: function (response) {
         response.data.map(function(oldDate){
-            blackoutDates.push(createBlackoutDate(oldDate.date,oldDate.reason,oldDate.groupID));
+            blackoutDates.push(createBlackoutDate(oldDate.date,oldDate.reason,oldDate.groupID, true));
             createAndRenderOldDate(oldDate.groupID, oldDate.reason);
         }); 
     },
@@ -130,19 +130,21 @@ jQuery(window).load(function(){
     //add click event listener to submit button
     jQuery('#save-dates').on('click', function(e){
         e.preventDefault();
+        newDates = getUnsavedDates(blackoutDates);
         //Only contact the server if there is data in the table
-        //to be saved
+        //to be saved or
         if(jQuery('#new-date-cards tr').length > 0){
             jQuery.ajax({
                 type:"POST",
                 url: blackout_dates_ajax.ajax_url,
-                dataType: 'text',
+                dataType: 'json',
                 data: {
                     action: 'add_new_dates',
-                    new_dates: blackoutDates
+                    new_dates: newDates
                 },
                 success: function (response) {
-                    console.log(response);
+                    console.log(response.data);
+                    registerDatesAsSaved(newDates);
                     jQuery('#new-date-cards > tr').fadeOut(500, function(){jQuery(this).remove()});
                     //console.log(JSON.parse(data[0]));
                     //data.map(function(oldDate)createBlackoutDate(oldDate->date,oldDate->reason,oldDate->id))
@@ -251,11 +253,12 @@ function addSingleDate(date, reason, dateArray){
     }
 }
 
-function createBlackoutDate(date, reason, id){
+function createBlackoutDate(date, reason, id, isSaved = false){
     blackoutDate = {
         date: date,
         reason: reason,
-        groupID: id
+        groupID: id,
+        isSaved: isSaved
     };
     return blackoutDate;
 }
@@ -331,6 +334,19 @@ function getCheckedOldDates(){
                         return jQuery(this).val();
                          }).get();
 }
+
+function registerDatesAsSaved(dateArray){
+    dateArray.forEach(function(date){
+        if(date.isSaved == false) date.isSaved = true;
+    });
+}
+
+function getUnsavedDates(dateArray){
+    return dateArray.filter(function(date){
+        return date.isSaved == false;
+    });
+}
+
 
 jQuery('#alter-old-dates').on('click', function(e){
     e.preventDefault();

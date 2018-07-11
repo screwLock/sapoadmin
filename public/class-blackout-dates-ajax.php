@@ -68,14 +68,17 @@ class BlackoutDatesAjax {
     }
 
     public function add_new_dates(){
+        $newDates = array();
+        forEach($_POST['new_dates'] as $date)
+            array_push($newDates, $date);
         global $wpdb;
         $blackout_dates_table = $wpdb->prefix . "sapo_blackout_dates";
 
-        $query ="SELECT group_id FROM $blackout_dates_table";
+        
 
         $isSuccess = $wpdb->query($query);
 
-        wp_send_json_success($isSuccess);
+        wp_send_json_success($newDates);
     }
 
 }
