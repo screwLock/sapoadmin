@@ -140,7 +140,7 @@ jQuery(window).load(function(){
                 dataType: 'json',
                 data: {
                     action: 'add_new_dates',
-                    new_dates: newDates
+                    new_dates: JSON.stringify(newDates)
                 },
                 success: function (response) {
                     console.log(response.data);
@@ -363,9 +363,9 @@ jQuery('#alter-old-dates').on('click', function(e){
                 console.log(response);
                 if(response.success === true){
                     jQuery('input[name="oldDate-cb"]:checked').each(function(){
-                    var target = jQuery(this).closest("tr");
-                    target.fadeOut(500, function(){jQuery(this).remove()});
-                    blackoutDates = deleteBlackoutDates(jQuery(this).val(), blackoutDates);
+                        var target = jQuery(this).closest("tr");
+                        target.fadeOut(500, function(){jQuery(this).remove()});
+                            blackoutDates = deleteBlackoutDates(jQuery(this).val(), blackoutDates);
                 });
                 }
                 else
