@@ -164,6 +164,38 @@ jQuery(window).load(function(){
         else
            ;// console.log("Nothing to save");
     })
+
+    //event listener and AJAX for the delete button
+    //on the old dates table
+    jQuery('#alter-old-dates').on('click', function(e){
+        e.preventDefault();
+        if(getCheckedOldDates().length >= 1){
+            jQuery.ajax({
+                type:"POST",
+                url: blackout_dates_ajax.ajax_url,
+                dataType: 'json',
+                data: {
+                    action: 'delete_old_dates',
+                    datesToRemove: getCheckedOldDates()
+                },
+                success: function (response) {
+                    console.log(response);
+                    if(response.success === true){
+                        jQuery('input[name="oldDate-cb"]:checked').each(function(){
+                            var target = jQuery(this).closest("tr");
+                            target.fadeOut(500, function(){jQuery(this).remove()});
+                                blackoutDates = deleteBlackoutDates(jQuery(this).val(), blackoutDates);
+                        });
+                    }
+                    else
+                    ;//console.log("there was an error");
+                },
+                error: function(xhr, status, error){
+                    // console.log(status);
+                }
+            });
+        }
+    });
     
 }); // End of the Window load Block
 
@@ -376,32 +408,3 @@ function removeItemFromArray(array, item){
     }
 }
 
-jQuery('#alter-old-dates').on('click', function(e){
-    e.preventDefault();
-    if(getCheckedOldDates().length >= 1){
-        jQuery.ajax({
-            type:"POST",
-            url: blackout_dates_ajax.ajax_url,
-            dataType: 'json',
-            data: {
-                action: 'delete_old_dates',
-                datesToRemove: getCheckedOldDates()
-            },
-            success: function (response) {
-                console.log(response);
-                if(response.success === true){
-                    jQuery('input[name="oldDate-cb"]:checked').each(function(){
-                        var target = jQuery(this).closest("tr");
-                        target.fadeOut(500, function(){jQuery(this).remove()});
-                            blackoutDates = deleteBlackoutDates(jQuery(this).val(), blackoutDates);
-                });
-                }
-                else
-                    ;//console.log("there was an error");
-            },
-            error: function(xhr, status, error){
-               // console.log(status);
-            }
-        });
-    }
-});
