@@ -140,7 +140,7 @@ jQuery(window).load(function(){
                 dataType: 'json',
                 data: {
                     action: 'add_new_dates',
-                    new_dates: JSON.stringify(newDates)
+                    new_dates: newDates//JSON.stringify(newDates)
                 },
                 success: function (response) {
                     console.log(response.data);
@@ -150,7 +150,7 @@ jQuery(window).load(function(){
                     //data.map(function(oldDate)createBlackoutDate(oldDate->date,oldDate->reason,oldDate->id))
                     //OR data.forEach(function(oldDate) {blackoutDates.push(JSON.parse(oldDate);})
                 },
-                error: function(xhr, status, error){
+                error: function(xhr, error, status){
                     console.log(error);
                 }
             });
@@ -254,6 +254,7 @@ function addSingleDate(date, reason, dateArray){
 }
 
 function createBlackoutDate(date, reason, id, isSaved = false){
+
     blackoutDate = {
         date: date,
         reason: reason,

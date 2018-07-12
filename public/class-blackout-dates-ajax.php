@@ -68,21 +68,24 @@ class BlackoutDatesAjax {
     }
 
     public function add_new_dates(){
-        $newDates = array();
-        $newDates = (json_decode(stripslashes($_POST['new_dates']), TRUE));
-        $queryDates = array();
-        forEach($newDates as $date){
-            ;
-        }
         global $wpdb;
         $blackout_dates_table = $wpdb->prefix . "sapo_blackout_dates";
+        $newDates = array();
+        $index = 0;
+        forEach($_POST['new_dates'] as $date){
+            $qReason= "'" . esc_sql($date['reason']) . "'";
+            $qDate = sprintf("STR_TO_DATE('%s', '%s')", $date['date'], "%Y-%m-%d");
+            $values = $qDate . ',' . $qReason . ', ' . "'" . $date['groupID'] . "'" . ', ' . get_current_user_id();
+            $q1 = sprintf("INSERT INTO %s (%s, %s, %s, %s) ", $blackout_dates_table, 'blackout_date', 'reason', 'group_id', 'user_id');
+            $q2 = sprintf("VALUES (%s) ", $values);
+            $q3 = "ON DUPLICATE KEY UPDATE id=id";
+            $newDates[$index] = ($q1 . $q2 . $q3);
+            $wpdb->query($newDates[$index]);
 
-        $idCats = array_column($newDates, 'date');
+            $index++;
+        }
 
-
-        $isSuccess = $wpdb->query($query);
-
-        wp_send_json_success($idCats);
+        wp_send_json_success($newDates[0]);
     }
 
 }
