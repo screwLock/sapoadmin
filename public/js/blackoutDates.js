@@ -60,9 +60,6 @@ jQuery(window).load(function(){
         });
     jQuery('#blackout-date-range-end').datepicker('setDate', '+1d'); 
     
-    //AJAX
-    //jQuery('#each-datepicker').datepicker('setDatesDisabled', blackoutDates);
-
 
     //Initialize the max-time datepicker
     jQuery('#max-time').timepicker(
@@ -195,6 +192,34 @@ jQuery(window).load(function(){
                 }
             });
         }
+    });
+
+    //event listener and AJAX for the save button
+    //of the disabled weekdays tab
+    jQuery('#change-weekdays').on('click', function(e){
+        e.preventDefault();
+        //if(getCheckedOldDates().length >= 1){
+            jQuery.ajax({
+                type:"POST",
+                url: blackout_dates_ajax.ajax_url,
+                dataType: 'json',
+                data: {
+                    action: 'save_disabled_weekdays',
+                    datesToRemove: getCheckedWeekdayValues()
+                },
+                success: function (response) {
+                    console.log(response);
+                    if(response.success === true){
+                        ;
+                    }
+                    else
+                    ;//console.log("there was an error");
+                },
+                error: function(xhr, status, error){
+                    // console.log(status);
+                }
+            });
+        //}
     });
     
 }); // End of the Window load Block
