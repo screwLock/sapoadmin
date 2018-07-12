@@ -1,4 +1,5 @@
 //Before the DOM is ready, get the blackout dates from the database
+var loadedCheckedWeekdays = [];
 var blackoutDates= [];
 jQuery.ajax({
     type:"POST",
@@ -194,23 +195,25 @@ jQuery(window).load(function(){
         }
     });
 
+    loadedCheckedWeekdays = getCheckedWeekdayValues();
     //event listener and AJAX for the save button
     //of the disabled weekdays tab
     jQuery('#change-weekdays').on('click', function(e){
         e.preventDefault();
-        //if(getCheckedOldDates().length >= 1){
+        var changedWeekdayValues = getCheckedWeekdayValues();
+        if(!arraysEqual(loadedCheckedWeekdays, changedWeekdayValues)){
             jQuery.ajax({
                 type:"POST",
                 url: blackout_dates_ajax.ajax_url,
                 dataType: 'json',
                 data: {
                     action: 'save_disabled_weekdays',
-                    datesToRemove: getCheckedWeekdayValues()
+                    weekdays: getCheckedWeekdayValues()
                 },
                 success: function (response) {
                     console.log(response);
                     if(response.success === true){
-                        ;
+                        loadedCheckedWeekdays = changedWeekdayValues;
                     }
                     else
                     ;//console.log("there was an error");
@@ -219,7 +222,7 @@ jQuery(window).load(function(){
                     // console.log(status);
                 }
             });
-        //}
+        }
     });
     
 }); // End of the Window load Block
@@ -411,6 +414,7 @@ function getUnsavedDates(dateArray){
     });
 }
 
+//Utility functions should be included in separate js file
 function uniq_fast(a) {
     var seen = {};
     var out = [];
@@ -431,5 +435,16 @@ function removeItemFromArray(array, item){
     if(i != -1) {
 	    array.splice(i, 1);
     }
+}
+
+function arraysEqual(arr1, arr2) {
+    if(arr1.length !== arr2.length)
+        return false;
+    for(var i = arr1.length; i--;) {
+        if(arr1[i] !== arr2[i])
+            return false;
+    }
+
+    return true;
 }
 

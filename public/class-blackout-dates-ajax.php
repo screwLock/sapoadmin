@@ -91,12 +91,15 @@ class BlackoutDatesAjax {
     public function save_disabled_weekdays(){
         global $wpdb;
         $blackout_weekdays_table = $wpdb->prefix . "sapo_blackout_weekdays";
-        forEach($_POST['weekdays'] as $weekday){
-            $q2 = sprintf("VALUES (%s) ", $values);
-            $q3 = "ON DUPLICATE KEY UPDATE id=id";
-        }
+        $values = array();
 
-        wp_send_json_success();
+        forEach($_POST['weekdays'] as $weekday){
+        //    arrayPush($values, $weekday);
+        }
+        //$q2 = sprintf("VALUES (%s) ", $values);
+        //$q3 = "ON DUPLICATE KEY UPDATE id=id";
+
+        wp_send_json_success($_POST['weekdays']);
     }
 
 } //END OF CLASS FILE
