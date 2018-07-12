@@ -73,7 +73,9 @@ class Sapoadmin_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/sapoadmin-public.css', array(), $this->version, 'all' );
+		//Stylesheet for the datepicker
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bootstrap-datepicker3.standalone.css', array(), $this->version, false );
+
 
 	}
 
@@ -96,8 +98,98 @@ class Sapoadmin_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/sapoadmin-public.js', array( 'jquery' ), $this->version, false );
+		//The overview datepicker JS
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bootstrap-datepicker.js', array('jquery'), $this->version, false );		
+	}
+
+	/**
+	 * This function is for registering scripts that are not going to be used sitewide
+	 * but for shortcodes instead.  This function is to be called in define_public_hooks()
+	 * of the class-sapoadmin class.
+	 * 
+	 * 
+	 */
+	public function register_scripts() {
+		//Overview page
+		wp_register_script('overview', plugin_dir_url( __FILE__ ) . 'js/overview.js', array(), $this->version, true );
+		wp_register_script('google_maps',  'https://maps.googleapis.com/maps/api/js?key=AIzaSyAP9TsRTrHitDF4jNAwSXLLKajKM4LTGVc&callback=initMap', array('overview'), $this->version);
+
+		//blackoutDates page
+		//watch these two...could be a source of error/conflict with wpdatatables
+
+		wp_register_style('sapo_bootstrap_css', "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css");
+		wp_register_style('sapo_timepicker_css', "https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.css");
+		wp_register_style('sapo_navtabs_css', plugin_dir_url( __FILE__ ) . 'css/navtabs.css', array('sapo_bootstrap_css'));
+
+		wp_register_script('sapo_bootstrap_js', "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js", array('jquery'));
+		wp_register_script('sapo_timepicker_js', 'https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.js');
+
+
+		wp_register_script('blackout_dates', plugin_dir_url( __FILE__ ) . 'js/blackoutDates.js', array(), $this->version, true );
+		wp_register_script('zipcodes', plugin_dir_url( __FILE__ ) . 'js/zipcodes.js', array(), $this->version, true );
+		//wp_register_script('categories', plugin_dir_url( __FILE__ ) . 'js/categories.js', array(), $this->version, true );
 
 	}
+	
+
+	/**
+	 * --------------------------------------------------------------------------------------------------------------------------------------------
+	 * --------------------------------------------------------------------------------------------------------------------------------------------
+	 * SHORTCODE CALLBACKS FOR PUBLIC FACING FUNCTIONALITY SHOULD BE INCLUDED BELOW
+	 * AT THE END OF THE PLUGIN PUBLIC CLASS DEFINITION
+	 * 
+	 * --------------------------------------------------------------------------------------------------------------------------------------------
+	 */
+
+	public function overview_shortcode(){
+		wp_enqueue_script( 'overview' );
+		wp_enqueue_script( 'google_maps');
+		add_filter('script_loader_tag', array($this, 'google_maps_script_attributes'), 10, 2);
+		include_once('partials/overview.php');
+		return '';
+	}
+
+	public function blackout_dates_shortcode(){
+		//provide the admin ajax url to the blackout page scripts
+		wp_localize_script( 'blackout_dates', 'blackout_dates_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
+
+		//watch these two...could be a source of error/conflict with wpdatatables
+		wp_enqueue_style('sapo_bootstrap_css');
+		wp_enqueue_style('sapo_timepicker_css');
+		wp_enqueue_style('sapo_navtabs_css');
+		wp_enqueue_script('sapo_bootstrap_js');
+		wp_enqueue_script('sapo_timepicker_js');
+		
+
+		wp_enqueue_script('blackout_dates');
+		include_once('partials/blackout_dates_card_template.php');
+		return '';
+	}
+
+	public function zipcodes_shortcode(){
+		wp_enqueue_style('sapo_bootstrap_css');
+		wp_enqueue_script('sapo_bootstrap_js');
+		wp_enqueue_script('zipcodes');
+		include_once('partials/zipcodes_template.php');
+		return '';
+	}
+
+	public function categories_shortcode(){
+		wp_enqueue_style('sapo_bootstrap_css');
+		wp_enqueue_script('sapo_bootstrap_js');
+		//wp_enqueue_script('categories');
+		include_once('partials/categories_template.php');
+		return '';
+	}
+
+
+	// Add async and defer attributes
+function google_maps_script_attributes( $tag, $handle) {
+    if ( 'google_maps' !== $handle ) {
+        return $tag;
+  }
+    
+    return str_replace('src', ' async="async" defer src', $tag );
+}
 
 }

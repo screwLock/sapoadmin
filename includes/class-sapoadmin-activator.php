@@ -30,7 +30,12 @@ class Sapoadmin_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
+		require_once plugin_dir_path( __FILE__ ) . 'sql/sapo_tables_install.php';
+		require_once plugin_dir_path( __FILE__ ) . 'sql/sapo_data_install.php';
+		sapo_tables_install();
+		sapo_install_all_data();
 	}
 
+
+	 
 }

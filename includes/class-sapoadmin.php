@@ -122,6 +122,10 @@ class Sapoadmin {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sapoadmin-public.php';
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-blackout-dates-ajax.php';
+
+		
+
 		$this->loader = new Sapoadmin_Loader();
 
 	}
@@ -164,6 +168,7 @@ class Sapoadmin {
 		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' );
 		$this->loader->add_filter( 'plugin_action_links_' . $plugin_basename, $plugin_admin, 'add_action_links' );
 
+
 	}
 
 	/**
@@ -176,9 +181,25 @@ class Sapoadmin {
 	private function define_public_hooks() {
 
 		$plugin_public = new Sapoadmin_Public( $this->get_plugin_name(), $this->get_version() );
-
+		$blackout_dates_ajax = new BlackoutDatesAjax();
+		
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'register_scripts' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+		//Shortcodes
+        $this->loader->add_shortcode( 'overview', $plugin_public, 'overview_shortcode' , 10, 2 );
+		$this->loader->add_shortcode( 'blackout_dates', $plugin_public, 'blackout_dates_shortcode' , 10, 2 );
+		$this->loader->add_shortcode( 'zipcodes', $plugin_public, 'zipcodes_shortcode' , 10, 2 );
+		$this->loader->add_shortcode( 'categories', $plugin_public, 'categories_shortcode' , 10, 2 );
+
+		//Ajax related code
+		//Ajax for blackoutDates
+		$this->loader->add_action( 'wp_ajax_get_blackout_dates', $blackout_dates_ajax, 'get_blackout_dates' );
+		$this->loader->add_action( 'wp_ajax_delete_old_dates', $blackout_dates_ajax, 'delete_old_dates' );
+		$this->loader->add_action( 'wp_ajax_add_new_dates', $blackout_dates_ajax, 'add_new_dates' );
+		$this->loader->add_action( 'wp_ajax_save_disabled_weekdays', $blackout_dates_ajax, 'save_disabled_weekdays' );
+
 
 	}
 
