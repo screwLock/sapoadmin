@@ -10,11 +10,21 @@ jQuery.ajax({
     success: function (response) {
         response.data.map(function(oldDate){
             blackoutDates.push(createBlackoutDate(oldDate.date,oldDate.reason,oldDate.groupID, true));
-            createAndRenderOldDate(oldDate.groupID, oldDate.reason);
         }); 
+
+        var uniqueGroupIDs = blackoutDates.map(function(oldDate){
+            return oldDate.groupID;
+        });
+        uniqueGroupIDs = uniq_fast(uniqueGroupIDs);
+        blackoutDates.forEach(function(date){
+            if(uniqueGroupIDs.includes(date.groupID)){
+                removeItemFromArray(uniqueGroupIDs, date.groupID);
+                createAndRenderOldDate(date.groupID, date.reason);
+            }
+        });
     },
     error: function(error){
-        console.log('error');
+       // console.log('error');
     }
 });
 
@@ -143,20 +153,16 @@ jQuery(window).load(function(){
                     new_dates: newDates//JSON.stringify(newDates)
                 },
                 success: function (response) {
-                    console.log(response.data);
                     registerDatesAsSaved(newDates);
                     jQuery('#new-date-cards > tr').fadeOut(500, function(){jQuery(this).remove()});
-                    //console.log(JSON.parse(data[0]));
-                    //data.map(function(oldDate)createBlackoutDate(oldDate->date,oldDate->reason,oldDate->id))
-                    //OR data.forEach(function(oldDate) {blackoutDates.push(JSON.parse(oldDate);})
                 },
                 error: function(xhr, error, status){
-                    console.log(error);
+                   // console.log(error);
                 }
             });
         }
         else
-            console.log("Nothing to save");
+           ;// console.log("Nothing to save");
     })
     
 }); // End of the Window load Block
@@ -348,6 +354,27 @@ function getUnsavedDates(dateArray){
     });
 }
 
+function uniq_fast(a) {
+    var seen = {};
+    var out = [];
+    var len = a.length;
+    var j = 0;
+    for(var i = 0; i < len; i++) {
+         var item = a[i];
+         if(seen[item] !== 1) {
+               seen[item] = 1;
+               out[j++] = item;
+         }
+    }
+    return out;
+}
+
+function removeItemFromArray(array, item){
+    var i = array.indexOf(item);
+    if(i != -1) {
+	    array.splice(i, 1);
+    }
+}
 
 jQuery('#alter-old-dates').on('click', function(e){
     e.preventDefault();
@@ -370,10 +397,10 @@ jQuery('#alter-old-dates').on('click', function(e){
                 });
                 }
                 else
-                    console.log("there was an error");
+                    ;//console.log("there was an error");
             },
             error: function(xhr, status, error){
-                console.log(status);
+               // console.log(status);
             }
         });
     }

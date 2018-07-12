@@ -85,7 +85,7 @@ class BlackoutDatesAjax {
             $index++;
         }
 
-        wp_send_json_success($newDates[0]);
+        wp_send_json_success();
     }
 
 }
