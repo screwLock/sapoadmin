@@ -219,7 +219,7 @@ jQuery(window).load(function(){
                     ;//console.log("there was an error");
                 },
                 error: function(xhr, status, error){
-                    // console.log(status);
+                    console.log(status);
                 }
             });
         }

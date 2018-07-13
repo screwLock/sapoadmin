@@ -91,15 +91,30 @@ class BlackoutDatesAjax {
     public function save_disabled_weekdays(){
         global $wpdb;
         $blackout_weekdays_table = $wpdb->prefix . "sapo_blackout_weekdays";
-        $values = array();
+        $daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        $values = ""; 
+        $columns = "";
 
-        forEach($_POST['weekdays'] as $weekday){
-        //    arrayPush($values, $weekday);
+        forEach($daysOfWeek as $key=>$weekday){
+            $columns .= vsprintf(",%s", $weekday);
+            if(in_array($weekday, $_POST['weekdays'], TRUE)){
+                $values .= vsprintf(",%s", "1");
+            }
+            else {
+                $values .= vsprintf(",%s", "0");
+            }
         }
-        //$q2 = sprintf("VALUES (%s) ", $values);
-        //$q3 = "ON DUPLICATE KEY UPDATE id=id";
+        $columns = substr($columns, 1) . ",user_id";
+        $values = substr($values, 1) . sprintf(",%d", get_current_user_id());
 
-        wp_send_json_success($_POST['weekdays']);
+        $q1 = sprintf("REPLACE INTO %s ", $blackout_weekdays_table);
+        $q2 = sprintf("(%s) ", $columns);
+        $q3 = sprintf("VALUES (%s)", $values);
+
+        $isSuccess = $wpdb->query($q1. $q2 . $q3. $q4);
+
+        wp_send_json_success($isSuccess);
+    
     }
 
 } //END OF CLASS FILE
