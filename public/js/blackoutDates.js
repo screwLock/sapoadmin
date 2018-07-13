@@ -135,6 +135,12 @@ jQuery(window).load(function(){
         trigger: "manual"
     });
 
+    jQuery('#change-weekdays').popover({
+        content: "No changes have been made",
+        title: "ERROR",
+        trigger: "manual"
+    });
+
     //add click event listener to submit button
     jQuery('#save-dates').on('click', function(e){
         e.preventDefault();
@@ -211,7 +217,7 @@ jQuery(window).load(function(){
                     weekdays: getCheckedWeekdayValues()
                 },
                 success: function (response) {
-                    console.log(response);
+                    //console.log(response);
                     if(response.success === true){
                         loadedCheckedWeekdays = changedWeekdayValues;
                     }
@@ -219,9 +225,15 @@ jQuery(window).load(function(){
                     ;//console.log("there was an error");
                 },
                 error: function(xhr, status, error){
-                    console.log(status);
+                    //console.log(status);
                 }
             });
+        }
+        else {
+            jQuery('#change-weekdays').popover('show');
+            setTimeout(function(){
+                jQuery('#change-weekdays').popover('hide');
+                }, 1000);
         }
     });
     

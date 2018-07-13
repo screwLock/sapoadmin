@@ -76,10 +76,9 @@ class BlackoutDatesAjax {
             $qReason= "'" . esc_sql($date['reason']) . "'";
             $qDate = sprintf("STR_TO_DATE('%s', '%s')", $date['date'], "%Y-%m-%d");
             $values = $qDate . ',' . $qReason . ', ' . "'" . $date['groupID'] . "'" . ', ' . get_current_user_id();
-            $q1 = sprintf("INSERT INTO %s (%s, %s, %s, %s) ", $blackout_dates_table, 'blackout_date', 'reason', 'group_id', 'user_id');
-            $q2 = sprintf("VALUES (%s) ", $values);
-            $q3 = "ON DUPLICATE KEY UPDATE id=id";
-            $newDates[$index] = ($q1 . $q2 . $q3);
+            $q1 = sprintf("REPLACE INTO %s (%s, %s, %s, %s) ", $blackout_dates_table, 'blackout_date', 'reason', 'group_id', 'user_id');
+            $q2 = sprintf("VALUES (%s)", $values);
+            $newDates[$index] = ($q1 . $q2);
             $wpdb->query($newDates[$index]);
 
             $index++;
@@ -95,6 +94,9 @@ class BlackoutDatesAjax {
         $values = ""; 
         $columns = "";
 
+        //If a day of the week is found within the 
+        //dayys of the post, insert a 1.  Otherwise
+        //insert 0
         forEach($daysOfWeek as $key=>$weekday){
             $columns .= vsprintf(",%s", $weekday);
             if(in_array($weekday, $_POST['weekdays'], TRUE)){
@@ -104,6 +106,8 @@ class BlackoutDatesAjax {
                 $values .= vsprintf(",%s", "0");
             }
         }
+
+        //Formatting the SQL
         $columns = substr($columns, 1) . ",user_id";
         $values = substr($values, 1) . sprintf(",%d", get_current_user_id());
 
