@@ -1,5 +1,35 @@
 var zipcodes = [];
 
+//load zipcodes from the database while page is loading
+jQuery.ajax({
+    type:"POST",
+    url: zipcodes_ajax.ajax_url,
+    dataType: 'json',
+    data: {
+        action: 'get_zipcodes'
+    },
+    success: function (response) {
+        response.data.map(function(oldZipcode){
+            zipcodes.push(createNewZipcode(oldZipcode.zipcode, oldZipcode.weekdays, oldZipcode.isMaxTimeEnabled, oldZipcode.maxTime));
+        }); 
+        console.log(zipcodes);
+        //var uniqueGroupIDs = blackoutDates.map(function(oldDate){
+        //    return oldDate.groupID;
+        //});
+        //uniqueGroupIDs = uniq_fast(uniqueGroupIDs);
+        //blackoutDates.forEach(function(date){
+        //    if(uniqueGroupIDs.includes(date.groupID)){
+        //        removeItemFromArray(uniqueGroupIDs, date.groupID);
+        //        createAndRenderOldDate(date.groupID, date.reason);
+        //    }
+        //});
+    },
+    error: function(error){
+       // console.log('error');
+    }
+});
+
+
 jQuery(window).load(function(){
     jQuery("#max-time-select").hide();
 

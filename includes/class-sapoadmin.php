@@ -206,6 +206,8 @@ class Sapoadmin {
 		//Ajax for zipcodes
 		$this->loader->add_action( 'wp_ajax_save_zipcodes', $zipcodes_ajax, 'save_zipcodes');
 		$this->loader->add_action('wp_ajax_delete_saved_zipcodes', $zipcodes_ajax, 'delete_saved_zipcodes');
+		$this->loader->add_action('wp_ajax_get_zipcodes', $zipcodes_ajax, 'get_zipcodes');
+
 
 	}
 

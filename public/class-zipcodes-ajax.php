@@ -83,4 +83,33 @@
         wp_send_json_success($isSuccess);
     }
 
+    public function get_zipcodes(){
+        global $wpdb;
+        $zipcodes = array();
+        $zipcodes_table = $wpdb->prefix . "sapo_zipcodes";
+
+        $daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+
+
+        $zipcodes_results = $wpdb->get_results("SELECT * FROM " . $zipcodes_table . 
+        " WHERE USER_ID = " . get_current_user_id()); //AND WHERE 
+
+        //Send error message if error with query
+        if (is_null($zipcodes) || !empty($wpdb->last_error)) wp_send_json_error();
+
+        $index = 0;
+        foreach($zipcodes_results as $zip){
+            
+            $zipcodes[$index] = array(
+                "zipcode" => $zip->zipcode,
+                "days" => $zip->zipcode,
+                "maxtime" => $zip->max_time,
+                "maxTimeEnabled" => $zip->enable_max_time
+            );
+            $index++;
+        }
+
+        wp_send_json_success($zipcodes);
+    }
+
  }
