@@ -68,12 +68,19 @@
     }
 
     public function delete_saved_zipcodes(){
+        global $wpdb;
+        $zipcodes_table = $wpdb->prefix . "sapo_zipcodes";
+
         $zipcodes = array();
         forEach($_POST['zipcodesToRemove'] as $zip)
-            array_push($zipcodess, $zip);
+            array_push($zipcodes, $zip);
 
-        $groupIDs = "'" .implode("','", $groupIDs  ) . "'"; 
-        wp_send_json_success();
+        $zipcodes = "'" .implode("','", $zipcodes  ) . "'"; 
+        $isSuccess = $wpdb->query( 
+            $wpdb->prepare( "DELETE FROM " . $zipcodes_table . " WHERE zipcode IN ($zipcodes) AND user_id = %d", get_current_user_id())
+        );
+
+        wp_send_json_success($isSuccess);
     }
 
  }

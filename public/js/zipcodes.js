@@ -113,7 +113,6 @@ function deleteZipcodes(zipNumber, zipcodeArray){
 }
 
 function addZipcodeEntry(zipcode){
-    var buttonID = '#' + zipcode.zipcode;
     var newEntry =      '<tr>' +
                         '<td>' + zipcode.zipcode + '</td>' +
                         '<td>' + zipcode.days + '</td>';
