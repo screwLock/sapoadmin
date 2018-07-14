@@ -21,7 +21,7 @@
                 <div class="form-group row">
                     <div class="col-4">
                         <label class="sr-only" for="inlineFormInput">New Zipcode</label>
-                        <input type="text" class="form-control" id="add-zipcode" placeholder="Enter a zipcode">
+                        <input type="text" class="form-control" id="add-zipcode" placeholder="Enter a zipcode" maxlength="6">
                     </div>
                     <div class="col-4">
                         <button class="btn btn-primary" id="add-zipcode-button"><strong>+</strong> Add</button>

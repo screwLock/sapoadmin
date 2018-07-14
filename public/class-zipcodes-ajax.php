@@ -68,6 +68,11 @@
     }
 
     public function delete_saved_zipcodes(){
+        $zipcodes = array();
+        forEach($_POST['zipcodesToRemove'] as $zip)
+            array_push($zipcodess, $zip);
+
+        $groupIDs = "'" .implode("','", $groupIDs  ) . "'"; 
         wp_send_json_success();
     }
 

@@ -61,7 +61,7 @@ jQuery(window).load(function(){
                 dataType: 'json',
                 data: {
                     action: 'delete_saved_zipcodes',
-                    datesToRemove: getCheckedZipcodes()
+                    zipcodesToRemove: getCheckedZipcodes()
                 },
                 success: function (response) {
                     console.log(response);
