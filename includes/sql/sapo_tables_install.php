@@ -28,6 +28,8 @@ function sapo_tables_install() {
 			  thursday BOOLEAN NOT NULL DEFAULT 0,
 			  friday BOOLEAN NOT NULL DEFAULT 0,
 			  saturday BOOLEAN NOT NULL DEFAULT 0,
+			  enable_max_time BOOLEAN NOT NULL DEFAULT 0,
+			  max_time TIME NOT NULL DEFAULT '08:00:00',
 			  created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 			  PRIMARY KEY  (id)    
 		   ) $charset_collate;";

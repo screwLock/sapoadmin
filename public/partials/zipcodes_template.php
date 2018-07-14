@@ -39,11 +39,22 @@
                     <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="saturday">Saturdays</label></div>
                     </div>
                 </div>
-                <h5 class="card-title pb-2">Select Max Time For Same Day Pickup</h5>
                 <div class="form-group row">
-                    <div class="col-2">
-                        <label class="sr-only" for="inlineFormInput">Select Max Time</label>
-                        <input type="text" class="form-control" id="max-time">
+                    <div class="col">
+                        <h5 class="pb-2">Enable Same Day Pickups For This Zipcode?</h5>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-primary btn-sm"><input type="radio" name="max-time-enabled" id="max-time-on" value="on" autocomplete="off" checked>On</label>
+                            <label class="btn btn-primary active btn-sm"><input type="radio" name="max-time-enabled" id="max-time-off" value="off" autocomplete="off" checked> Off</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="max-time-select">
+                    <h5 class="card-title pb-2">Select Max Time For Same Day Pickup</h5>
+                    <div class="form-group row">
+                        <div class="col-2">
+                            <label class="sr-only" for="inlineFormInput">Select Max Time</label>
+                            <input type="text" class="form-control" id="max-time">
+                        </div>
                     </div>
                 </div>
         </form>
