@@ -68,6 +68,7 @@
             <tr>
                 <th scope="col">Zipcode</th>
                 <th scope="col">Days</th>
+                <th scope="col">Max Time Enabled?</th>
                 <th scope="col">Max Time</th>
                 <th scope="col"></th>
             </tr>

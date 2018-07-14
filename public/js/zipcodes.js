@@ -32,10 +32,10 @@ jQuery(window).load(function(){
                     new_zipcode: newZipcode,
                 },
                 success: function (response) {
-                    console.log(response);
+                    jQuery("#saved-zipcodes").append(addZipcodeEntry(newZipcode)).hide().show('slow');
                 },
                 error: function(xhr, error, status){
-                    console.log(error);
+                    ;
                 }
             });
         }
@@ -107,12 +107,36 @@ function createNewZipcode(zip, days, maxTimeEnabled = 0, maxTime="8:00am"){
     return newZipcode;
 }
 
-function deleteZipcodes(zipcode, zipcodeArray){
+function deleteZipcodes(zipNumber, zipcodeArray){
     return zipcodeArray.filter(function(zipcode){
-            return zipcode.zipcode !== zipcode;
+            return zipcode.zipcode !== zipNumber;
         });
 }
 
+function addZipcodeEntry(zipcode){
+    var buttonID = '#' + zipcode.zipcode;
+    var newEntry =      '<tr>' +
+                        '<td>' + zipcode.zipcode + '</td>' +
+                        '<td>' + zipcode.days + '</td>';
+    if(zipcode.maxTimeEnabled){
+        newEntry +=      '<td>' + 'Yes' + '</td>' +
+                        '<td>' + zipcode.maxTime + '</td>';
+    }
+    else {
+        newEntry +=      '<td>' + 'No' + '</td>' +
+                        '<td>' + 'N/A' + '</td>';
+    }
+        newEntry +=      '<td>' +
+                        '<button class="btn btn-primary btn-sm" id = "' + zipcode.zipcode + '">Remove</button></td>'
+                        '</tr>';
+    
+    jQuery("#saved-zipcodes").on("click", buttonID, function(){
+        var target = jQuery(this).closest("tr");
+        target.fadeOut(500, function(){jQuery(this).remove()});
+        zipcodes = deleteZipcodes(zipcode.zipcode, zipcodes);
+    });                        
+    return newEntry;
+}
 function getCheckedWeekdayValues(){
     return jQuery('input[name="weekday-cb"]:checked').map(function(){
                         return jQuery(this).val();
