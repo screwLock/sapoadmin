@@ -43,8 +43,8 @@
                     <div class="col">
                         <h5 class="pb-2">Enable Same Day Pickups For This Zipcode?</h5>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-primary btn-sm"><input type="radio" name="max-time-enabled" id="max-time-on" value="on" autocomplete="off" checked>On</label>
-                            <label class="btn btn-primary active btn-sm"><input type="radio" name="max-time-enabled" id="max-time-off" value="off" autocomplete="off" checked> Off</label>
+                            <label class="btn btn-primary btn-sm"><input type="radio" name="max-time-enabled" id="max-time-on" value="1" autocomplete="off" checked>On</label>
+                            <label class="btn btn-primary active btn-sm"><input type="radio" name="max-time-enabled" id="max-time-off" value="0" autocomplete="off" checked> Off</label>
                         </div>
                     </div>
                 </div>

@@ -1,15 +1,14 @@
 var zipcodes = [];
 
 jQuery(window).load(function(){
-        //only show forms relevant to the datepicker (single or range)
     jQuery("#max-time-select").hide();
 
     jQuery('input[type=radio][name=max-time-enabled]').on('change', function(){
         switch(jQuery(this).val()){
-            case 'off':
+            case '0':
                 jQuery('#max-time-select').fadeOut('fast');
                 break;
-            case 'on':
+            case '1':
                 jQuery('#max-time-select').fadeIn('fast');
                 break;
         }
@@ -19,7 +18,7 @@ jQuery(window).load(function(){
         e.preventDefault();
         var zipEntry = jQuery("#add-zipcode").val();
         var weekdays = getCheckedWeekdayValues();
-        var isMaxTimeEnabled = jQuery('input[type=radio][name=max-time-enabled]:checked').val();
+        var isMaxTimeEnabled = parseInt(jQuery('input[type=radio][name=max-time-enabled]:checked').val());
         var maxTime = jQuery('#max-time').val();
         if(validZip(zipEntry) && !doesPropertyExist(zipEntry, "zipcode", zipcodes) && (weekdays.length > 0)){
             var newZipcode = createNewZipcode(zipEntry, weekdays, isMaxTimeEnabled, maxTime);
@@ -98,7 +97,7 @@ function validZip(zip) {
     return reUS.test(zip) || reCA.test(zip);
 }
 
-function createNewZipcode(zip, days, maxTimeEnabled="off", maxTime="8:00am"){
+function createNewZipcode(zip, days, maxTimeEnabled = 0, maxTime="8:00am"){
     newZipcode = {
         zipcode: zip,
         days: days,
