@@ -31,7 +31,7 @@ function sapo_tables_install() {
 			  enable_max_time BOOLEAN NOT NULL DEFAULT 0,
 			  max_time TIME NOT NULL DEFAULT '08:00:00',
 			  created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
-			  PRIMARY KEY  (id)    
+			  PRIMARY KEY  (user_id, zipcode)    
 		   ) $charset_collate;";
 		}
 	 
@@ -51,7 +51,7 @@ function sapo_tables_install() {
 			  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
 		      created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 		      UNIQUE (id),
-			  PRIMARY KEY  (blackout_date, group_id)
+			  PRIMARY KEY  (user_id, blackout_date, group_id)
 			) $charset_collate;";
 		}
 	 

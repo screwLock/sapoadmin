@@ -38,7 +38,7 @@
         $q_max_time = $new_zipcode['maxTime'];
         $q_max_time = sprintf("STR_TO_DATE('%s'", $q_max_time);
         $q_max_time .= ", '%h:%i %p')";
-        wp_send_json_success($q_max_time);
+        wp_send_json_success($q_weekdays);
     }
 
  }
