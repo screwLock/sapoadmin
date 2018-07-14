@@ -166,6 +166,7 @@ class Sapoadmin_Public {
 	}
 
 	public function zipcodes_shortcode(){
+		wp_localize_script( 'zipcodes', 'zipcodes_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_script('sapo_bootstrap_js');
 		wp_enqueue_script('sapo_timepicker_js');

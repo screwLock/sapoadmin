@@ -48,4 +48,27 @@
                 </div>
         </form>
     </div>
+</div> <!--End of Zipcodes Card -->
+
+<div class="container-fluid pt-2">
+<h5 class="p-2">Saved Zipcodes</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Zipcode</th>
+                <th scope="col">Days</th>
+                <th scope="col">Max Time</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td><button class="btn btn-primary" id="delete-zipcodes">Delete</button></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tfoot>
+        <tbody id="saved-zipcodes">
+        </tbody>
+    </table>
 </div>

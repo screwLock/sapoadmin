@@ -5,8 +5,25 @@ jQuery(window).load(function(){
         e.preventDefault();
         var zipEntry = jQuery("#add-zipcode").val();
         var weekdays = getCheckedWeekdayValues();
+        var maxTime = jQuery('#max-time').val();
         if(validZip(zipEntry) && !doesPropertyExist(zipEntry, "zipcode", zipcodes) && (weekdays.length > 0)){
-            zipcodes.push(createNewZipcode(zipEntry, weekdays));
+            var newZipcode = createNewZipcode(zipEntry, weekdays, maxTime);
+            zipcodes.push(newZipcode);
+            jQuery.ajax({
+                type:"POST",
+                url: zipcodes_ajax.ajax_url,
+                dataType: 'json',
+                data: {
+                    action: 'save_zipcodes',
+                    new_zipcode: newZipcode
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function(xhr, error, status){
+                   // console.log(error);
+                }
+            });
         }
     });
 
@@ -18,6 +35,40 @@ jQuery(window).load(function(){
             startTime: '08:00:00',
             step: 15
         });
+
+    //event listener and AJAX for the delete button
+    //on the saved zipcodes table
+    /*
+    jQuery('#delete-zipcodes').on('click', function(e){
+        e.preventDefault();
+        if(getCheckedZipcodes().length >= 1){
+            jQuery.ajax({
+                type:"POST",
+                url: zipcodes_ajax.ajax_url,
+                dataType: 'json',
+                data: {
+                    action: 'delete_saved_zipcodes',
+                    datesToRemove: getCheckedZipcodes()
+                },
+                success: function (response) {
+                    console.log(response);
+                    if(response.success === true){
+                        jQuery('input[name="savedZipcode-cb"]:checked').each(function(){
+                            var target = jQuery(this).closest("tr");
+                            target.fadeOut(500, function(){jQuery(this).remove()});
+                                zipcodes = deleteZipcodes(jQuery(this).val(), zipcodes);
+                        });
+                    }
+                    else
+                    console.log("there was an error");
+                },
+                error: function(xhr, status, error){
+                     console.log(status);
+                }
+            });
+        }
+    }); */
+
 
 });// End of window.load
 
@@ -32,12 +83,19 @@ function validZip(zip) {
     return reUS.test(zip) || reCA.test(zip);
 }
 
-function createNewZipcode(zip, days){
+function createNewZipcode(zip, days, maxTime){
     newZipcode = {
         zipcode: zip,
-        days: days
+        days: days,
+        maxTime: maxTime
     }
     return newZipcode;
+}
+
+function deleteZipcodes(zipcode, zipcodeArray){
+    return zipcodeArray.filter(function(zipcode){
+            return zipcode.zipcode !== zipcode;
+        });
 }
 
 function getCheckedWeekdayValues(){

@@ -123,6 +123,8 @@ class Sapoadmin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sapoadmin-public.php';
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-blackout-dates-ajax.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-zipcodes-ajax.php';
+
 
 		
 
@@ -182,6 +184,7 @@ class Sapoadmin {
 
 		$plugin_public = new Sapoadmin_Public( $this->get_plugin_name(), $this->get_version() );
 		$blackout_dates_ajax = new BlackoutDatesAjax();
+		$zipcodes_ajax = new ZipcodesAjax();
 		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'register_scripts' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
@@ -200,6 +203,8 @@ class Sapoadmin {
 		$this->loader->add_action( 'wp_ajax_add_new_dates', $blackout_dates_ajax, 'add_new_dates' );
 		$this->loader->add_action( 'wp_ajax_save_disabled_weekdays', $blackout_dates_ajax, 'save_disabled_weekdays' );
 
+		//Ajax for zipcodes
+		$this->loader->add_action( 'wp_ajax_save_zipcodes', $zipcodes_ajax, 'save_zipcodes');
 
 	}
 

@@ -137,7 +137,7 @@ jQuery(window).load(function(){
                 dataType: 'json',
                 data: {
                     action: 'add_new_dates',
-                    new_dates: newDates//JSON.stringify(newDates)
+                    new_dates: newDates
                 },
                 success: function (response) {
                     registerDatesAsSaved(newDates);
@@ -331,6 +331,13 @@ function deleteBlackoutDates(groupID, dateArray){
         });
 }
 
+/**
+ * Determine if a matching date is in the date array.
+ * Returns TRUE is a match is found
+ * @param {*} start 
+ * @param {*} end 
+ * @param {*} dateArray 
+ */
 function areDatesPresent(start, end, dateArray){
     var currentDate = new Date(start.getTime());
     var isDatePresent = false;
