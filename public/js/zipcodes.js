@@ -35,7 +35,7 @@ jQuery(window).load(function(){
                     console.log(response);
                 },
                 error: function(xhr, error, status){
-                   // console.log(error);
+                    console.log(error);
                 }
             });
         }
