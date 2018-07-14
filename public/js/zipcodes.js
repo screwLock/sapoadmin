@@ -52,7 +52,6 @@ jQuery(window).load(function(){
 
     //event listener and AJAX for the delete button
     //on the saved zipcodes table
-    /*
     jQuery('#delete-zipcodes').on('click', function(e){
         e.preventDefault();
         if(getCheckedZipcodes().length >= 1){
@@ -67,7 +66,7 @@ jQuery(window).load(function(){
                 success: function (response) {
                     console.log(response);
                     if(response.success === true){
-                        jQuery('input[name="savedZipcode-cb"]:checked').each(function(){
+                        jQuery('input[name="saved-zipcode-cb"]:checked').each(function(){
                             var target = jQuery(this).closest("tr");
                             target.fadeOut(500, function(){jQuery(this).remove()});
                                 zipcodes = deleteZipcodes(jQuery(this).val(), zipcodes);
@@ -81,7 +80,7 @@ jQuery(window).load(function(){
                 }
             });
         }
-    }); */
+    }); 
 
 
 });// End of window.load
@@ -126,15 +125,11 @@ function addZipcodeEntry(zipcode){
         newEntry +=      '<td>' + 'No' + '</td>' +
                         '<td>' + 'N/A' + '</td>';
     }
-        newEntry +=      '<td>' +
-                        '<button class="btn btn-primary btn-sm" id = "' + zipcode.zipcode + '">Remove</button></td>'
+        newEntry +=     '<td>' +
+                        '<div class="form-check"><label class="form-check-label">' +
+                        '<input class="form-check-input"type="checkbox" name="saved-zipcode-cb" value=' + zipcode.zipcode + '>Delete</label></div></td>'+  
                         '</tr>';
-    
-    jQuery("#saved-zipcodes").on("click", buttonID, function(){
-        var target = jQuery(this).closest("tr");
-        target.fadeOut(500, function(){jQuery(this).remove()});
-        zipcodes = deleteZipcodes(zipcode.zipcode, zipcodes);
-    });                        
+                          
     return newEntry;
 }
 function getCheckedWeekdayValues(){
@@ -142,7 +137,11 @@ function getCheckedWeekdayValues(){
                         return jQuery(this).val();
                          }).get();
 }
-
+function getCheckedZipcodes(){
+    return jQuery('input[name="saved-zipcode-cb"]:checked').map(function(){
+                        return jQuery(this).val();
+                         }).get();
+}
 /**
  * Determines if the input matches a property of an object
  * within an array of objects.  Returns true if match found

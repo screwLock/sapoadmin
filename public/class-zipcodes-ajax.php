@@ -67,4 +67,8 @@
         wp_send_json_success($is_success);
     }
 
+    public function delete_saved_zipcodes(){
+        wp_send_json_success();
+    }
+
  }
