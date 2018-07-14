@@ -4,8 +4,9 @@ jQuery(window).load(function(){
     jQuery('#add-zipcode-button').on('click', function(e) {
         e.preventDefault();
         var zipEntry = jQuery("#add-zipcode").val();
-        if(validZip(zipEntry) && !doesPropertyExist(zipEntry, "zipcode", zipcodes)){
-            zipcodes.push(createNewZipcode(zipEntry, getCheckedWeekdayValues()));
+        var weekdays = getCheckedWeekdayValues();
+        if(validZip(zipEntry) && !doesPropertyExist(zipEntry, "zipcode", zipcodes) && (weekdays.length > 0)){
+            zipcodes.push(createNewZipcode(zipEntry, weekdays));
         }
     });
 
