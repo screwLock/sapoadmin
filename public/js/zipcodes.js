@@ -10,6 +10,15 @@ jQuery(window).load(function(){
         }
     });
 
+    //Initialize the max-time datepicker
+    jQuery('#max-time').timepicker(
+        {
+            useSelect: true,
+            minTime: '08:00:00', 
+            startTime: '08:00:00',
+            step: 15
+        });
+
 });// End of window.load
 
   //create callback function

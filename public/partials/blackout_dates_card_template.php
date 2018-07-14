@@ -17,7 +17,6 @@
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-dates-tab" data-toggle="tab" href="#nav-dates" role="tab" aria-controls="nav-dates" aria-selected="true">Blackout Dates</a>
     <a class="nav-item nav-link" id="nav-weekdays-tab" data-toggle="tab" href="#nav-weekdays" role="tab" aria-controls="nav-weekdays" aria-selected="false">Weekdays</a>
-    <a class="nav-item nav-link" id="nav-max-times-tab" data-toggle="tab" href="#nav-max-times" role="tab" aria-controls="nav-max-times" aria-selected="false">Max Times</a>
   </div>
 </nav>
 
@@ -143,48 +142,6 @@
     </div>
 </div><!-- End of weekdays card -->
 </div><!-- End of weekdays tab -->
-
-<div class="tab-pane fade" id="nav-max-times" role="tabpanel" aria-labelledby="nav-max-times-tab">
-<div class="card">
-    <div class="card-body">
-    <h5 class="card-title">Set Max Time</h5>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Sunday" checked>Sunday</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Monday">Monday</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Tuesday">Tuesday</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Wednesday">Wednesday</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Thursday">Thursday</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Friday">Friday</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Saturday">Saturday</label>
-        </div>
-        <form>
-            <div class="row p-2">
-                <div class="col-4">
-                    <label class="sr-only" for="inlineFormInput">Select Max Time</label>
-                    <input type="text" class="form-control" id="max-time">
-                </div>
-            </div>
-            <div class="row p-2">
-                <div class="col-4">                    
-                    <button class="btn btn-primary" id="change-max-time">Save</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-</div>
 
 </div><!-- End of tab-content wrapper -->
 

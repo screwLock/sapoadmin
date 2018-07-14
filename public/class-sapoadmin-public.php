@@ -158,7 +158,6 @@ class Sapoadmin_Public {
 		wp_enqueue_style('sapo_timepicker_css');
 		wp_enqueue_style('sapo_navtabs_css');
 		wp_enqueue_script('sapo_bootstrap_js');
-		wp_enqueue_script('sapo_timepicker_js');
 		
 
 		wp_enqueue_script('blackout_dates');
@@ -169,6 +168,8 @@ class Sapoadmin_Public {
 	public function zipcodes_shortcode(){
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_script('sapo_bootstrap_js');
+		wp_enqueue_script('sapo_timepicker_js');
+
 		wp_enqueue_script('zipcodes');
 		include_once('partials/zipcodes_template.php');
 		return '';

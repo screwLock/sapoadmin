@@ -27,8 +27,9 @@
                         <button class="btn btn-primary" id="add-zipcode-button"><strong>+</strong> Add</button>
                     </div>
                 </div>
-                <h5 class="card-title">Select Days For Zipcode</h5>
+                <h5 class="card-title pb-2">Select Days For Zipcode</h5>
                 <div class="form-group row weekday-checkbox">
+                    <div class="col">
                     <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="sunday">Sundays</label></div>
                     <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="monday">Mondays</label></div>
                     <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="tuesday">Tuesdays</label></div>
@@ -36,6 +37,14 @@
                     <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="thursday">Thursdays</label></div>
                     <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="friday">Fridays</label></div>
                     <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="saturday">Saturdays</label></div>
+                    </div>
+                </div>
+                <h5 class="card-title pb-2">Select Max Time For Same Day Pickup</h5>
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label class="sr-only" for="inlineFormInput">Select Max Time</label>
+                        <input type="text" class="form-control" id="max-time">
+                    </div>
                 </div>
         </form>
     </div>

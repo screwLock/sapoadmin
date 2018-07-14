@@ -61,16 +61,7 @@ jQuery(window).load(function(){
         });
     jQuery('#blackout-date-range-end').datepicker('setDate', '+1d'); 
     
-
-    //Initialize the max-time datepicker
-    jQuery('#max-time').timepicker(
-        {
-            useSelect: true,
-            minTime: '08:00:00', 
-            startTime: '08:00:00',
-            step: 15
-        });
-    
+   
     //only show forms relevant to the datepicker (single or range)
     jQuery('input[type=radio][name=dateradio]').on('change', function(){
         switch(jQuery(this).val()){
@@ -87,10 +78,6 @@ jQuery(window).load(function(){
         }
     });
 
-    jQuery('input[type=radio][name=max-time-radio]').on('change', function(){
-        return;
- 
-    });
 
     //add click event listener to single date add button
     jQuery('#add-date-button').on('click', function(e){
@@ -112,10 +99,6 @@ jQuery(window).load(function(){
                 jQuery('#date-range-reason').val(), blackoutDates);
     });
 
-    //add event listener to the max time save button
-    jQuery('#change-max-time').on('click', function(e){
-        e.preventDefault();
-    });
 
     jQuery('#add-date-button').popover({
         content: "Date is already present",
