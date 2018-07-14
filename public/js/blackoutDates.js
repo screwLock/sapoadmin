@@ -401,7 +401,7 @@ function createAndRenderOldDate(oldGroupID, reason,){
                         '<td>' + reason + '</td>' +
                         '<td>' + formattedDate + '</td>' +
                         '<td><div class="form-check"><label class="form-check-label">' +
-                        '<input class="form-check-input"type="checkbox" name="oldDate-cb" value=' + oldGroupID + '>Remove</label></div></td>'+  
+                        '<input class="form-check-input"type="checkbox" name="oldDate-cb" value=' + oldGroupID + '>Delete</label></div></td>'+  
                         '</tr>';
 
     jQuery('#old-date-entries').append(oldDateEntry).hide().show('slow');
@@ -427,6 +427,10 @@ function getUnsavedDates(dateArray){
 }
 
 //Utility functions should be included in separate js file
+
+/**
+ * Returns an array with only unique values
+ */
 function uniq_fast(a) {
     var seen = {};
     var out = [];
