@@ -179,6 +179,8 @@ class Sapoadmin_Public {
 	public function categories_shortcode(){
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_script('sapo_bootstrap_js');
+		wp_enqueue_style('sapo_navtabs_css');
+
 		wp_enqueue_script('categories');
 		include_once('partials/categories_template.php');
 		return '';
