@@ -85,11 +85,10 @@
 
     public function get_zipcodes(){
         global $wpdb;
-        $zipcodes = array();
         $zipcodes_table = $wpdb->prefix . "sapo_zipcodes";
 
-        $daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-
+        $zipcodes = array();
+        $days_of_week = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
         $zipcodes_results = $wpdb->get_results("SELECT * FROM " . $zipcodes_table . 
         " WHERE USER_ID = " . get_current_user_id()); //AND WHERE 
@@ -98,15 +97,27 @@
         if (is_null($zipcodes) || !empty($wpdb->last_error)) wp_send_json_error();
 
         $index = 0;
-        foreach($zipcodes_results as $zip){
-            
+        forEach($zipcodes_results as $zip){
+            $days = array();
+
+            //Needs to be refactored later on
+            if($zip->monday == 1) array_push($days, 'monday');
+            if($zip->tuesday == 1) array_push($days, 'tuesday');
+            if($zip->wednesday == 1) array_push($days, 'wednesday');
+            if($zip->thursday == 1) array_push($days, 'thursday');
+            if($zip->friday == 1) array_push($days, 'friday');
+            if($zip->saturday == 1) array_push($days, 'saturday');
+            if($zip->sunday == 1) array_push($days, 'sunday');
+
+
             $zipcodes[$index] = array(
                 "zipcode" => $zip->zipcode,
-                "days" => $zip->zipcode,
-                "maxtime" => $zip->max_time,
+                "days" => $days,
+                "maxTime" => $zip->max_time,
                 "maxTimeEnabled" => $zip->enable_max_time
             );
             $index++;
+
         }
 
         wp_send_json_success($zipcodes);

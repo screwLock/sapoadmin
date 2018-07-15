@@ -10,19 +10,9 @@ jQuery.ajax({
     },
     success: function (response) {
         response.data.map(function(oldZipcode){
-            zipcodes.push(createNewZipcode(oldZipcode.zipcode, oldZipcode.weekdays, oldZipcode.isMaxTimeEnabled, oldZipcode.maxTime));
+            zipcodes.push(createNewZipcode(oldZipcode.zipcode, oldZipcode.days, oldZipcode.isMaxTimeEnabled, oldZipcode.maxTime));
+            jQuery("#saved-zipcodes").append(addZipcodeEntry(oldZipcode)).hide().show('slow');
         }); 
-        console.log(zipcodes);
-        //var uniqueGroupIDs = blackoutDates.map(function(oldDate){
-        //    return oldDate.groupID;
-        //});
-        //uniqueGroupIDs = uniq_fast(uniqueGroupIDs);
-        //blackoutDates.forEach(function(date){
-        //    if(uniqueGroupIDs.includes(date.groupID)){
-        //        removeItemFromArray(uniqueGroupIDs, date.groupID);
-        //        createAndRenderOldDate(date.groupID, date.reason);
-        //    }
-        //});
     },
     error: function(error){
        // console.log('error');

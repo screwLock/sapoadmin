@@ -78,6 +78,9 @@
                 <td><button class="btn btn-primary" id="delete-zipcodes">Delete</button></td>
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>
+
             </tr>
         </tfoot>
         <tbody id="saved-zipcodes">
