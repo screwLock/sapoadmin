@@ -28,18 +28,39 @@
                 <form>
                     <div class="form-group row pb-2">
                         <div class="col-4">
-                            <label class="sr-only" for="category-input">Category Input</label>
-                            <input type="text" class="form-control" id="category-input" aria-describedby="enter-category" placeholder="Enter A Category" maxlength=20>
+                            <label class="sr-only" for="category-input">Add Category</label>
+                            <input type="text" class="form-control" id="add-category" aria-describedby="enter-category" placeholder="Enter A Category" maxlength=20>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-4">
-                            <button class="btn btn-primary" id="add-category">Save</button>
+                            <button class="btn btn-primary" id="add-category-button">Save</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div><!-- End of categories card -->
+        <div class="container-fluid pt-2">
+            <h5 class="p-2">Saved Categories</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Category</th>
+                        <th scope="col">Description</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td><button class="btn btn-primary" id="delete-categories">Delete</button></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+                <tbody id="saved-categories">
+                </tbody>
+            </table>
+        </div>
     </div><!--End of categories tab -->
 
     <div class="tab-pane fade" id="nav-sizes" role="tabpanel" aria-labelledby="nav-sizes-tab">
@@ -65,6 +86,27 @@
                 </form>
             </div>
         </div><!-- End of sizes card -->
+        <div class="container-fluid pt-2">
+            <h5 class="p-2">Saved Sizes</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Size</th>
+                        <th scope="col">Description</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td><button class="btn btn-primary" id="delete-sizes">Delete</button></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+                <tbody id="saved-sizes">
+                </tbody>
+            </table>
+        </div>
     </div><!-- End of sizes tab -->
 
     <div class="tab-pane fade" id="nav-location-details" role="tabpanel" aria-labelledby="nav-location-details-tab">
