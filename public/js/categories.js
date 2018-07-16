@@ -24,8 +24,9 @@ jQuery(window).load(function(){
     jQuery('#add-category-button').on('click', function(e) {
         e.preventDefault();
         var categoryName = jQuery("#add-category").val();
+        var categoryDescription = jQuery("#category-description").val();
         if(categoryName && !doesPropertyExist(categoryName, "name", categories)){
-            var newCategory = createNewCategory(categoryName);
+            var newCategory = createNewCategory(categoryName,categoryDescription);
             categories.push(newCategory);
             jQuery.ajax({
                 type:"POST",
@@ -65,7 +66,7 @@ jQuery(window).load(function(){
                         jQuery('input[name="saved-category-cb"]:checked').each(function(){
                             var target = jQuery(this).closest("tr");
                             target.fadeOut(500, function(){jQuery(this).remove()});
-                                categories = deleteCategories(jQuery(this).val(), categories);
+                                categories = deleteCategories (jQuery(this).val(), categories);
                         });
                     }
                     else

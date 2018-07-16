@@ -29,7 +29,11 @@
                     <div class="form-group row pb-2">
                         <div class="col-4">
                             <label class="sr-only" for="category-input">Add Category</label>
-                            <input type="text" class="form-control" id="add-category" aria-describedby="enter-category" placeholder="Enter A Category" maxlength=20>
+                            <input type="text" class="form-control" id="add-category" aria-describedby="enter-category" placeholder="Enter A Name" maxlength=20>
+                        </div>
+                        <div class="col-4">
+                            <label class="sr-only" for="size-input">Category Description</label>
+                            <input type="text" class="form-control" id="category-description" aria-describedby="describe-category" placeholder="Describe The Category" maxlength=100>
                         </div>
                     </div>
                     <div class="row p-2">
