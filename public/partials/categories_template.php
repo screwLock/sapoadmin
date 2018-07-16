@@ -138,7 +138,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col">
-                            <h6 class="pb-2">Is This Part of A Yard Sale (Yes/No)</h6>
+                            <h6 class="pb-2">Is This Part of A Yard Sale (Yes/No) End Time?</h6>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-primary active btn-sm"><input type="radio" name="yard-radio" id="yard-off" autocomplete="off" checked> Off</label>
                                 <label class="btn btn-primary btn-sm"><input type="radio" name="yard-radio" id="yard-on" autocomplete="off"> On</label>
@@ -147,7 +147,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col">
-                            <h6 class="pb-2">Is This Part of An Estate Auction (Yes/No)</h6>
+                            <h6 class="pb-2">Is This Part of An Estate Auction (Yes/No) End Time?</h6>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-primary active btn-sm"><input type="radio" name="estate-radio" id="estate-off" autocomplete="off" checked> Off</label>
                                 <label class="btn btn-primary btn-sm"><input type="radio" name="estate-radio" id="estate-on" autocomplete="off"> On</label>
