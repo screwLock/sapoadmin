@@ -39,13 +39,11 @@
                         <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="saturday">Saturdays</label></div>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row form-inline">
                     <div class="col-5">
                         <h5>Max Amount of Daily Pickups For This Zipcode</h5>
-                    </div>
-                    <div class="col-xs-1">
                         <label class="sr-only" for="inlineFormInput">Max Pickups</label>
-                        <input type="text" class="form-control" id="add-max-pickup" maxlength="2" size="1" value="5">
+                        <input type="text" class="form-control text-center" id="add-max-pickup" maxlength="2" size="1" value="5">
                     </div>
                 </div>
                 <div class="form-group row">
