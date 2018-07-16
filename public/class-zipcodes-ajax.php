@@ -52,6 +52,7 @@
 
 
         $q_zipcode= "'" . esc_sql($new_zipcode['zipcode']) . "'";
+        $q_max_pickups = esc_sql($new_zipcode['maxPickups']);
         $q_max_time = $new_zipcode['maxTime'];
         $q_max_time = sprintf("STR_TO_DATE('%s'", $q_max_time);
         $q_max_time .= ", '%h:%i %p')";
@@ -59,8 +60,8 @@
         $q_user_id = get_current_user_id();
 
         $q_insert = sprintf("REPLACE INTO %s ", $zipcodes_table);
-        $q_columns = sprintf("(%s, %s, %s, %s, %s) ", $columns, "zipcode", "max_time", "enable_max_time", "user_id");
-        $q_values = sprintf("VALUES (%s, %s, %s, %d, %d) ", $values, $q_zipcode, $q_max_time, $q_max_time_enabled, $q_user_id);
+        $q_columns = sprintf("(%s, %s, %s, %s, %s, %s) ", $columns, "zipcode", "max_time", "enable_max_time", "user_id", "max_pickups");
+        $q_values = sprintf("VALUES (%s, %s, %s, %d, %d, %d) ", $values, $q_zipcode, $q_max_time, $q_max_time_enabled, $q_user_id, $q_max_pickups);
 
         $is_success = $wpdb->query($q_insert . $q_columns . $q_values);
 
@@ -114,7 +115,8 @@
                 "zipcode" => $zip->zipcode,
                 "days" => $days,
                 "maxTime" => $zip->max_time,
-                "maxTimeEnabled" => $zip->enable_max_time
+                "maxTimeEnabled" => $zip->enable_max_time,
+                "maxPickups" => $zip->max_pickups
             );
             $index++;
 

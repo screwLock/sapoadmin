@@ -19,7 +19,7 @@
         <h5 class="card-title">Add New Zipcodes</h5>
         <form>
                 <div class="form-group row">
-                    <div class="col-4">
+                    <div class="col-3">
                         <label class="sr-only" for="inlineFormInput">New Zipcode</label>
                         <input type="text" class="form-control" id="add-zipcode" placeholder="Enter a zipcode" maxlength="6">
                     </div>
@@ -30,13 +30,22 @@
                 <h5 class="card-title pb-2">Select Days For Zipcode</h5>
                 <div class="form-group row weekday-checkbox">
                     <div class="col">
-                    <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="sunday">Sundays</label></div>
-                    <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="monday">Mondays</label></div>
-                    <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="tuesday">Tuesdays</label></div>
-                    <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="wednesday">Wednesdays</label></div>
-                    <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="thursday">Thursdays</label></div>
-                    <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="friday">Fridays</label></div>
-                    <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="saturday">Saturdays</label></div>
+                        <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="sunday">Sundays</label></div>
+                        <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="monday">Mondays</label></div>
+                        <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="tuesday">Tuesdays</label></div>
+                        <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="wednesday">Wednesdays</label></div>
+                        <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="thursday">Thursdays</label></div>
+                        <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="friday">Fridays</label></div>
+                        <div class="form-check-inline"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="weekday-cb" value="saturday">Saturdays</label></div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-5">
+                        <h5>Max Amount of Daily Pickups For This Zipcode</h5>
+                    </div>
+                    <div class="col-xs-1">
+                        <label class="sr-only" for="inlineFormInput">Max Pickups</label>
+                        <input type="text" class="form-control" id="add-max-pickup" maxlength="2" size="1" value="5">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -68,6 +77,7 @@
             <tr>
                 <th scope="col">Zipcode</th>
                 <th scope="col">Days</th>
+                <th scope="col">Max Pickups</th>
                 <th scope="col">Same Day Pickups?</th>
                 <th scope="col">Max Time</th>
                 <th scope="col"></th>
@@ -80,7 +90,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-
+                <td></td>
             </tr>
         </tfoot>
         <tbody id="saved-zipcodes">

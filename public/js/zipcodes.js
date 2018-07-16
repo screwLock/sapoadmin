@@ -40,8 +40,9 @@ jQuery(window).load(function(){
         var weekdays = getCheckedWeekdayValues();
         var isMaxTimeEnabled = parseInt(jQuery('input[type=radio][name=max-time-enabled]:checked').val());
         var maxTime = jQuery('#max-time').val();
-        if(validZip(zipEntry) && !doesPropertyExist(zipEntry, "zipcode", zipcodes) && (weekdays.length > 0)){
-            var newZipcode = createNewZipcode(zipEntry, weekdays, isMaxTimeEnabled, maxTime);
+        var maxPickups = jQuery('#add-max-pickup').val();
+        if(validZip(zipEntry) && !doesPropertyExist(zipEntry, "zipcode", zipcodes) && (weekdays.length > 0) && validTwoDigitNumber(maxPickups)){
+            var newZipcode = createNewZipcode(zipEntry, weekdays, isMaxTimeEnabled, maxTime, maxPickups);
             zipcodes.push(newZipcode);
             jQuery.ajax({
                 type:"POST",
@@ -116,12 +117,19 @@ function validZip(zip) {
     return reUS.test(zip) || reCA.test(zip);
 }
 
-function createNewZipcode(zip, days, maxTimeEnabled = 0, maxTime="8:00am"){
+function validTwoDigitNumber(num){
+    var reTDN = /^[1-9]?\d$/;
+
+    return reTDN.test(num);
+}
+
+function createNewZipcode(zip, days, maxTimeEnabled = 0, maxTime="8:00am", maxPickups=5){
     newZipcode = {
         zipcode: zip,
         days: days,
         maxTimeEnabled: maxTimeEnabled,
-        maxTime: maxTime
+        maxTime: maxTime,
+        maxPickups: maxPickups
     }
     return newZipcode;
 }
@@ -135,7 +143,8 @@ function deleteZipcodes(zipNumber, zipcodeArray){
 function addZipcodeEntry(zipcode){
     var newEntry =      '<tr>' +
                         '<td>' + zipcode.zipcode + '</td>' +
-                        '<td>' + zipcode.days + '</td>';
+                        '<td>' + zipcode.days + '</td>' +
+                        '<td>' + zipcode.maxPickups + '</td>';
     if(zipcode.maxTimeEnabled){
         newEntry +=      '<td>' + 'Yes' + '</td>' +
                         '<td>' + zipcode.maxTime + '</td>';
