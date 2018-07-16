@@ -122,4 +122,10 @@
         wp_send_json_success($isSuccess);
     }
 
+    public function save_location_details(){
+        global $wpdb;
+        $location_details_table=$wpdb->prefix . 'sapo_location_details';
+        $location_details = $_POST['location_details'];
+    }
+
  }
