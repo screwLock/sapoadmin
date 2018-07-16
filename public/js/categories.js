@@ -50,7 +50,7 @@ jQuery.ajax({
     success: function (response) {
         response.data.map(function(oldLocationDetails){
             locationDetails.push(createNewLocationDetails(oldLocationDetails.stairs, oldLocationDetails.movingOut, oldLocationDetails.yardSale, oldLocationDetails.estateAuction));
-            setTimeout(function(){updateLocationDetailsChecks(oldLocationDetails);}, 500);
+            updateLocationDetailsChecks(oldLocationDetails);
         }); 
     },
     error: function(error){
@@ -130,6 +130,7 @@ jQuery(window).load(function(){
                 },
                 success: function (response) {
                     updateLocationDetailsChecks(newLocation);
+                    locationDetails[0] = newLocation;
                     console.log(response);
                 },
                 error: function(xhr, error, status){
@@ -283,10 +284,10 @@ function getCheckedSize(){
 }
 
 function updateLocationDetailsChecks(locationDetails){
-    if(locationDetails.stairs===1)jQuery('#stairs-on').click();
-    if(locationDetails.movingOut===1)jQuery('#move-on').click();
-    if(locationDetails.yardSale===1)jQuery('#yard-on').click();
-    if(locationDetails.estateAuction===1)jQuery('#estate-on').click();
+    if(locationDetails.stairs===1)jQuery('#stairs-on').prop('checked', true);
+    if(locationDetails.movingOut===1)jQuery('#move-on').prop('checked', true);
+    if(locationDetails.yardSale===1)jQuery('#yard-on').prop('checked', true);
+    if(locationDetails.estateAuction===1)jQuery('#estate-on').prop('checked', true);
 }
 
 /**
