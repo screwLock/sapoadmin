@@ -48,10 +48,11 @@ jQuery.ajax({
         action: 'get_location_details'
     },
     success: function (response) {
-        response.data.map(function(oldLocationDetails){
-            locationDetails.push(createNewLocationDetails(oldLocationDetails.stairs, oldLocationDetails.movingOut, oldLocationDetails.yardSale, oldLocationDetails.estateAuction));
-            updateLocationDetailsChecks(oldLocationDetails);
-        }); 
+            console.log(response.data[0]);
+            var oldLocationDetails = response.data[0];
+            locationDetails[0] = createNewLocationDetails(oldLocationDetails.stairs, oldLocationDetails.moving_out, 
+                oldLocationDetails.yard_sale, oldLocationDetails.estate_auction);
+            setTimeout(function(){updateLocationDetailsChecks(locationDetails[0]);}, 2000); 
     },
     error: function(error){
        // console.log('error');
