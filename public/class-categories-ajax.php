@@ -48,6 +48,30 @@
         wp_send_json_success($status);
     }
 
+    public function save_size(){
+        global $wpdb;
+        $sizes_table = $wpdb->prefix . 'sapo_sizes';
+        $size = $_POST['new_size'];
+        
+        $status = 
+            $wpdb->insert( 
+                $sizes_table, 
+                array( 
+                    'name' => $size['name'],
+                    'description' => $size['description'],
+                    'user_id' => get_current_user_id() 
+                ), 
+                array( 
+                    '%s', 
+                    '%s',
+                    '%d' 
+                ) 
+            );
+
+
+        wp_send_json_success($status);
+    }
+
     public function get_categories(){
         global $wpdb;
         $categories_table = $wpdb->prefix . 'sapo_categories';
@@ -56,6 +80,16 @@
 
 
         wp_send_json_success($categories);
+    }
+
+    public function get_sizes(){
+        global $wpdb;
+        $sizes_table = $wpdb->prefix . 'sapo_sizes';
+        $sizes = $wpdb->get_results("SELECT name, description FROM " . $sizes_table . 
+        " WHERE USER_ID = " . get_current_user_id());
+
+
+        wp_send_json_success($sizes);
     }
 
     public function delete_category(){
@@ -68,6 +102,21 @@
         $categories = "'" .implode("','", $categories ) . "'"; 
         $isSuccess = $wpdb->query( 
             $wpdb->prepare( "DELETE FROM " . $categories_table . " WHERE name IN ($categories) AND user_id = %d", get_current_user_id())
+        );
+
+        wp_send_json_success($isSuccess);
+    }
+    
+    public function delete_size(){
+        global $wpdb;
+        $sizes_table = $wpdb->prefix . 'sapo_sizes';
+        $sizes = array();
+        forEach($_POST['sizesToRemove'] as $size)
+            array_push($sizes, $size);
+
+        $sizes = "'" .implode("','", $sizes ) . "'"; 
+        $isSuccess = $wpdb->query( 
+            $wpdb->prepare( "DELETE FROM " . $sizes_table . " WHERE name IN ($sizes) AND user_id = %d", get_current_user_id())
         );
 
         wp_send_json_success($isSuccess);

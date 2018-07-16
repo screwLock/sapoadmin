@@ -84,7 +84,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-4">
-                            <button class="btn btn-primary" id="add-size">Save</button>
+                            <button class="btn btn-primary" id="add-size-button">Save</button>
                         </div>
                     </div>
                 </form>
@@ -152,6 +152,11 @@
                                 <label class="btn btn-primary active btn-sm"><input type="radio" name="estate-radio" id="estate-off" autocomplete="off" checked> Off</label>
                                 <label class="btn btn-primary btn-sm"><input type="radio" name="estate-radio" id="estate-on" autocomplete="off"> On</label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group row p-2">
+                        <div class="col">
+                            <button class="btn btn-primary" id="add-size">Save</button>
                         </div>
                     </div>
                 </form>

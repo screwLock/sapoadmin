@@ -215,6 +215,9 @@ class Sapoadmin {
 		$this->loader->add_action( 'wp_ajax_get_categories', $categories_ajax, 'get_categories');
 		$this->loader->add_action( 'wp_ajax_delete_category', $categories_ajax, 'delete_category');
 
+		$this->loader->add_action( 'wp_ajax_save_size', $categories_ajax, 'save_size');
+		$this->loader->add_action( 'wp_ajax_get_sizes', $categories_ajax, 'get_sizes');
+		$this->loader->add_action( 'wp_ajax_delete_size', $categories_ajax, 'delete_size');
 
 
 	}
