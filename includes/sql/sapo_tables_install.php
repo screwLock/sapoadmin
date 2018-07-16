@@ -30,6 +30,7 @@ function sapo_tables_install() {
 			  saturday BOOLEAN NOT NULL DEFAULT 0,
 			  enable_max_time BOOLEAN NOT NULL DEFAULT 0,
 			  max_time TIME NOT NULL DEFAULT '08:00:00',
+			  max_pickups TINYINT(255) UNSIGNED NOT NULL DEFAULT 5,
 			  created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 			  UNIQUE (id),
 			  PRIMARY KEY  (user_id, zipcode)    
