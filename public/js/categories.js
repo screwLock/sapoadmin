@@ -1,5 +1,6 @@
 var categories = [];
 var sizes = [];
+var locationDetails = [];
 //load categories from the database while page is loading
 jQuery.ajax({
     type:"POST",
@@ -31,6 +32,25 @@ jQuery.ajax({
         response.data.map(function(oldSize){
             sizes.push(createNewSize(oldSize.name, oldSize.description));
             jQuery("#saved-sizes").append(addSizeEntry(oldSize)).hide().show('slow');
+        }); 
+    },
+    error: function(error){
+       // console.log('error');
+    }
+});
+
+//load locationDetails from the database while page is loading
+jQuery.ajax({
+    type:"POST",
+    url: categories_ajax.ajax_url,
+    dataType: 'json',
+    data: {
+        action: 'get_location_details'
+    },
+    success: function (response) {
+        response.data.map(function(oldLocationDetails){
+            locationDetails.push(createNewLocationDetails(oldLocationDetails.stairs, oldLocationDetails.movingOut, oldLocationDetails.yardSale, oldLocationDetails.estateAuction));
+            setTimeout(function(){updateLocationDetailsChecks(oldLocationDetails);}, 500);
         }); 
     },
     error: function(error){
@@ -84,6 +104,33 @@ jQuery(window).load(function(){
                 success: function (response) {
                     jQuery("#saved-sizes").append(addSizeEntry(newSize)).hide().show('slow');
                     console.log(response.data);
+                },
+                error: function(xhr, error, status){
+                    console.log(error);
+                }
+            });
+        }
+    });
+
+    jQuery('#add-location-details-button').on('click', function(e) {
+        e.preventDefault();
+        var stairs= parseInt(jQuery('input[type=radio][name=stairs-radio]:checked').val());
+        var movingOut = parseInt(jQuery('input[type=radio][name=move-radio]:checked').val());
+        var yardSale = parseInt(jQuery('input[type=radio][name=yard-radio]:checked').val());
+        var estateAuction = parseInt(jQuery('input[type=radio][name=estate-radio]:checked').val());
+        var newLocation = createNewLocationDetails(stairs, movingOut, yardSale, estateAuction);
+        if(!isEquivalent(newLocation, locationDetails[0])){
+            jQuery.ajax({
+                type:"POST",
+                url: categories_ajax.ajax_url,
+                dataType: 'json',
+                data: {
+                    action: 'save_location_details',
+                    location_details: newLocation
+                },
+                success: function (response) {
+                    updateLocationDetailsChecks(newLocation);
+                    console.log(response);
                 },
                 error: function(xhr, error, status){
                     console.log(error);
@@ -174,7 +221,7 @@ function createNewSize(name, description = '', priority){
 }
 
 function createNewLocationDetails(stairs = 0, movingOut = 0, yardSale = 0, estateAuction = 0){
-    var newCategory = {
+    var newLocationDetails = {
         stairs: stairs,
         movingOut: movingOut,
         yardSale: yardSale,
@@ -235,7 +282,12 @@ function getCheckedSize(){
                          }).get();
 }
 
-
+function updateLocationDetailsChecks(locationDetails){
+    if(locationDetails.stairs===1)jQuery('#stairs-on').click();
+    if(locationDetails.movingOut===1)jQuery('#move-on').click();
+    if(locationDetails.yardSale===1)jQuery('#yard-on').click();
+    if(locationDetails.estateAuction===1)jQuery('#estate-on').click();
+}
 
 /**
  * Determines if the input matches a property of an object
@@ -252,4 +304,32 @@ function doesPropertyExist(property, objectProperty, objectArray){
             match = (property === object[objectProperty]);
     })
     return match;
+}
+
+//Determine if two objects have same values
+//Does not work deeply
+function isEquivalent(a, b) {
+    // Create arrays of property names
+    var aProps = Object.getOwnPropertyNames(a);
+    var bProps = Object.getOwnPropertyNames(b);
+
+    // If number of properties is different,
+    // objects are not equivalent
+    if (aProps.length != bProps.length) {
+        return false;
+    }
+
+    for (var i = 0; i < aProps.length; i++) {
+        var propName = aProps[i];
+
+        // If values of same property are not equal,
+        // objects are not equivalent
+        if (a[propName] !== b[propName]) {
+            return false;
+        }
+    }
+
+    // If we made it this far, objects
+    // are considered equivalent
+    return true;
 }

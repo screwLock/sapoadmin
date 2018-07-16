@@ -54,7 +54,7 @@
         $size = $_POST['new_size'];
         
         $status = 
-            $wpdb->insert( 
+            $wpdb->replace( 
                 $sizes_table, 
                 array( 
                     'name' => $size['name'],
@@ -126,6 +126,35 @@
         global $wpdb;
         $location_details_table=$wpdb->prefix . 'sapo_location_details';
         $location_details = $_POST['location_details'];
+        $status = 
+        $wpdb->replace( 
+            $location_details_table, 
+            array( 
+                'stairs' => $location_details['stairs'],
+                'moving_out' => $location_details['movingOut'],
+                'yard_sale' => $location_details['yardSale'],
+                'estate_auction' => $location_details['estateAuction'],
+                'user_id' => get_current_user_id() 
+            ), 
+            array( 
+                '%d', 
+                '%d',
+                '%d',
+                '%d',
+                '%d' 
+            ) 
+        );
+
+        wp_send_json_success($isSuccess);
+    }
+
+    public function get_location_details(){
+        global $wpdb;
+        $location_details_table=$wpdb->prefix . 'sapo_location_details';
+        $location_details = $wpdb->get_results("SELECT stairs, moving_out, yard_sale,estate_auction FROM " . $location_details_table . 
+        " WHERE USER_ID = " . get_current_user_id());
+
+        wp_send_json_success($location_details);
     }
 
  }

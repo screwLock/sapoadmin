@@ -122,8 +122,8 @@
                         <div class="col">
                             <h6 class="pb-2">Will There Be Stairs Involved? (Yes/No) How Many Flights?</h6>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-primary active btn-sm"><input type="radio" name="stairs-radio" id="stairs-off" autocomplete="off" checked> Off</label>
-                                <label class="btn btn-primary btn-sm"><input type="radio" name="stairs-radio" id="stairs-on" autocomplete="off"> On</label>
+                                <label class="btn btn-primary active btn-sm"><input type="radio" name="stairs-radio" id="stairs-off" value=0 autocomplete="off" checked value=0> Off</label>
+                                <label class="btn btn-primary btn-sm"><input type="radio" name="stairs-radio" id="stairs-on" value=1 autocomplete="off"> On</label>
                             </div>
                         </div>
                     </div>
@@ -131,8 +131,8 @@
                         <div class="col">
                             <h6 class="pb-2">Are You Moving Out? (Yes/No)</h6>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-primary active btn-sm"><input type="radio" name="Move-radio" id="Move-off" autocomplete="off" checked> Off</label>
-                                <label class="btn btn-primary btn-sm"><input type="radio" name="Move-radio" id="Move-on" autocomplete="off"> On</label>
+                                <label class="btn btn-primary active btn-sm"><input type="radio" name="move-radio" id="Move-off" value=0 autocomplete="off" checked> Off</label>
+                                <label class="btn btn-primary btn-sm"><input type="radio" name="move-radio" id="Move-on" value=1 autocomplete="off"> On</label>
                             </div>
                         </div>
                     </div>
@@ -140,8 +140,8 @@
                         <div class="col">
                             <h6 class="pb-2">Is This Part of A Yard Sale (Yes/No) End Time?</h6>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-primary active btn-sm"><input type="radio" name="yard-radio" id="yard-off" autocomplete="off" checked> Off</label>
-                                <label class="btn btn-primary btn-sm"><input type="radio" name="yard-radio" id="yard-on" autocomplete="off"> On</label>
+                                <label class="btn btn-primary active btn-sm"><input type="radio" name="yard-radio" id="yard-off" value=0 autocomplete="off" checked> Off</label>
+                                <label class="btn btn-primary btn-sm"><input type="radio" name="yard-radio" id="yard-on" value=1 autocomplete="off"> On</label>
                             </div>
                         </div>
                     </div>
@@ -149,14 +149,14 @@
                         <div class="col">
                             <h6 class="pb-2">Is This Part of An Estate Auction (Yes/No) End Time?</h6>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-primary active btn-sm"><input type="radio" name="estate-radio" id="estate-off" autocomplete="off" checked> Off</label>
-                                <label class="btn btn-primary btn-sm"><input type="radio" name="estate-radio" id="estate-on" autocomplete="off"> On</label>
+                                <label class="btn btn-primary active btn-sm"><input type="radio" name="estate-radio" id="estate-off" value=0 autocomplete="off" checked> Off</label>
+                                <label class="btn btn-primary btn-sm"><input type="radio" name="estate-radio" id="estate-on" value=1 autocomplete="off"> On</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row p-2">
                         <div class="col">
-                            <button class="btn btn-primary" id="add-size">Save</button>
+                            <button class="btn btn-primary" id="add-location-details-button">Save</button>
                         </div>
                     </div>
                 </form>

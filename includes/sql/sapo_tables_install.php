@@ -156,7 +156,7 @@ function sapo_tables_install() {
 			   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
 		       created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 	           UNIQUE(id),
-		       PRIMARY KEY  (id)
+		       PRIMARY KEY  (user_id, name)
 		   ) $charset_collate;";   
 		}
 
