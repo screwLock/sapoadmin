@@ -33,7 +33,7 @@
             $wpdb->insert( 
                 $categories_table, 
                 array( 
-                    'category' => $category['name'],
+                    'name' => $category['name'],
                     'description' => $category['description'],
                     'user_id' => get_current_user_id() 
                 ), 
@@ -47,4 +47,30 @@
 
         wp_send_json_success($status);
     }
+
+    public function get_categories(){
+        global $wpdb;
+        $categories_table = $wpdb->prefix . 'sapo_categories';
+        $categories = $wpdb->get_results("SELECT name, description FROM " . $categories_table . 
+        " WHERE USER_ID = " . get_current_user_id());
+
+
+        wp_send_json_success($categories);
+    }
+
+    public function delete_category(){
+        global $wpdb;
+        $categories_table = $wpdb->prefix . 'sapo_categories';
+        $categories = array();
+        forEach($_POST['categoriesToRemove'] as $category)
+            array_push($categories, $category);
+
+        $categories = "'" .implode("','", $categories ) . "'"; 
+        $isSuccess = $wpdb->query( 
+            $wpdb->prepare( "DELETE FROM " . $categories_table . " WHERE name IN ($categories) AND user_id = %d", get_current_user_id())
+        );
+
+        wp_send_json_success($isSuccess);
+    }
+
  }

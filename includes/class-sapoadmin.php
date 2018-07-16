@@ -212,6 +212,9 @@ class Sapoadmin {
 
 		//Ajax for categories page
 		$this->loader->add_action( 'wp_ajax_save_category', $categories_ajax, 'save_category');
+		$this->loader->add_action( 'wp_ajax_get_categories', $categories_ajax, 'get_categories');
+		$this->loader->add_action( 'wp_ajax_delete_category', $categories_ajax, 'delete_category');
+
 
 
 	}
