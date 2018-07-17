@@ -123,6 +123,9 @@ class Sapoadmin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sapoadmin-public.php';
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-blackout-dates-ajax.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-zipcodes-ajax.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-categories-ajax.php';
+
 
 		
 
@@ -182,6 +185,8 @@ class Sapoadmin {
 
 		$plugin_public = new Sapoadmin_Public( $this->get_plugin_name(), $this->get_version() );
 		$blackout_dates_ajax = new BlackoutDatesAjax();
+		$zipcodes_ajax = new ZipcodesAjax();
+		$categories_ajax = new CategoriesAjax();
 		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'register_scripts' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
@@ -199,6 +204,23 @@ class Sapoadmin {
 		$this->loader->add_action( 'wp_ajax_delete_old_dates', $blackout_dates_ajax, 'delete_old_dates' );
 		$this->loader->add_action( 'wp_ajax_add_new_dates', $blackout_dates_ajax, 'add_new_dates' );
 		$this->loader->add_action( 'wp_ajax_save_disabled_weekdays', $blackout_dates_ajax, 'save_disabled_weekdays' );
+
+		//Ajax for zipcodes
+		$this->loader->add_action( 'wp_ajax_save_zipcodes', $zipcodes_ajax, 'save_zipcodes');
+		$this->loader->add_action('wp_ajax_delete_saved_zipcodes', $zipcodes_ajax, 'delete_saved_zipcodes');
+		$this->loader->add_action('wp_ajax_get_zipcodes', $zipcodes_ajax, 'get_zipcodes');
+
+		//Ajax for categories page
+		$this->loader->add_action( 'wp_ajax_save_category', $categories_ajax, 'save_category');
+		$this->loader->add_action( 'wp_ajax_get_categories', $categories_ajax, 'get_categories');
+		$this->loader->add_action( 'wp_ajax_delete_category', $categories_ajax, 'delete_category');
+
+		$this->loader->add_action( 'wp_ajax_save_size', $categories_ajax, 'save_size');
+		$this->loader->add_action( 'wp_ajax_get_sizes', $categories_ajax, 'get_sizes');
+		$this->loader->add_action( 'wp_ajax_delete_size', $categories_ajax, 'delete_size');
+
+		$this->loader->add_action( 'wp_ajax_save_location_details', $categories_ajax, 'save_location_details');
+		$this->loader->add_action( 'wp_ajax_get_location_details', $categories_ajax, 'get_location_details');
 
 
 	}

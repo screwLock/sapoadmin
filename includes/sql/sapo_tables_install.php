@@ -28,8 +28,12 @@ function sapo_tables_install() {
 			  thursday BOOLEAN NOT NULL DEFAULT 0,
 			  friday BOOLEAN NOT NULL DEFAULT 0,
 			  saturday BOOLEAN NOT NULL DEFAULT 0,
+			  enable_max_time BOOLEAN NOT NULL DEFAULT 0,
+			  max_time TIME NOT NULL DEFAULT '08:00:00',
+			  max_pickups TINYINT(255) UNSIGNED NOT NULL DEFAULT 5,
 			  created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
-			  PRIMARY KEY  (id)    
+			  UNIQUE (id),
+			  PRIMARY KEY  (user_id, zipcode)    
 		   ) $charset_collate;";
 		}
 	 
@@ -49,7 +53,7 @@ function sapo_tables_install() {
 			  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
 		      created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 		      UNIQUE (id),
-			  PRIMARY KEY  (blackout_date, group_id)
+			  PRIMARY KEY  (user_id, blackout_date, group_id)
 			) $charset_collate;";
 		}
 	 
@@ -130,8 +134,8 @@ function sapo_tables_install() {
 			$sql[] = "CREATE TABLE $categories_table(
 			   id BIGINT(20) NOT NULL AUTO_INCREMENT,
 			   user_id BIGINT(20) NOT NULL,
-			   category VARCHAR(30) NOT NULL,
-			   comments VARCHAR(200) NOT NULL,
+			   name VARCHAR(30) NOT NULL,
+			   description VARCHAR(200) NOT NULL,
 			   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
 		       created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 	           UNIQUE(id),
@@ -139,7 +143,24 @@ function sapo_tables_install() {
 		   ) $charset_collate;";   
 		}
 
-		//8. Create the blackout weekdays table
+		//8. Create Sizes Table
+		$sizes_table = $wpdb->prefix . "sapo_sizes";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $sizes_table . "'") !== $sizes_table){
+			$sql[] = "CREATE TABLE $sizes_table(
+			   id BIGINT(20) NOT NULL AUTO_INCREMENT,
+			   user_id BIGINT(20) NOT NULL,
+			   name VARCHAR(30) NOT NULL,
+			   description VARCHAR(200) NOT NULL,
+			   priority TINYINT(100) NOT NULL,
+			   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+		       created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+	           UNIQUE(id),
+		       PRIMARY KEY  (user_id, name)
+		   ) $charset_collate;";   
+		}
+
+		//9. Create the blackout weekdays table
 		$blackout_weekdays_table = $wpdb->prefix . "sapo_blackout_weekdays";
 
 		if($wpdb->get_var("SHOW TABLES LIKE '" . $blackout_weekdays_table . "'") !== $blackout_weekdays_table) {
@@ -161,19 +182,25 @@ function sapo_tables_install() {
 			) $charset_collate;";
 		}
 
-		//9. Create the maximum pickups per weekday table
-		$max_pickups_table = $wpdb->prefix . "sapo_max_pickups";
+		//10. Create Location Details Table
+		$location_details_table = $wpdb->prefix . "sapo_location_details";
 
-		if($wpdb->get_var("SHOW TABLES LIKE '" . $max_pickups_table . "'") !== $max_pickups_table){
-			$sql[] = "CREATE TABLE $max_pickups_table(
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $location_details_table . "'") !== $location_details_table){
+			$sql[] = "CREATE TABLE $location_details_table(
 			   id BIGINT(20) NOT NULL AUTO_INCREMENT,
 			   user_id BIGINT(20) NOT NULL,
-			   max_pickups TINYINT(200) NOT NULL DEFAULT 5,
-			   PRIMARY KEY  (id)
-			) $charset_collate;";
-		}		
-			
-		
+			   stairs BOOLEAN NOT NULL DEFAULT 0,
+			   moving_out BOOLEAN NOT NULL DEFAULT 0,
+			   yard_sale BOOLEAN NOT NULL DEFAULT 0,
+			   estate_auction BOOLEAN NOT NULL DEFAULT 0,
+			   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+		       created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+	           UNIQUE(id),
+		       PRIMARY KEY  (user_id)
+		   ) $charset_collate;";   
+		}
+
+				
 		if(!empty($sql)){
 		   require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		   dbDelta($sql);

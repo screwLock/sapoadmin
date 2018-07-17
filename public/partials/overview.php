@@ -12,6 +12,8 @@
 
 ?>
 
+<div class="loading-page"></div>
+
 <div id="sapo_datepicker"></div>
 <input type="hidden" id="my_hidden_input">
 

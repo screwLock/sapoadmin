@@ -74,8 +74,9 @@ class Sapoadmin_Public {
 		 */
 
 		//Stylesheet for the datepicker
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bootstrap-datepicker3.standalone.css', array(), $this->version, false );
-
+		wp_enqueue_style( $this->plugin_name . 'bootstrap-datepicker-css', plugin_dir_url( __FILE__ ) . 'css/bootstrap-datepicker3.standalone.css', array(), $this->version, false );
+		wp_enqueue_style( $this->plugin_name . 'loading-css', plugin_dir_url( __FILE__ ) . 'css/loading.css', array(), $this->version, false );
+		wp_enqueue_style( $this->plugin_name . 'sidebar-css', plugin_dir_url( __FILE__ ) . 'css/sidebar.css', array(), $this->version, false );
 
 	}
 
@@ -99,7 +100,10 @@ class Sapoadmin_Public {
 		 */
 
 		//The overview datepicker JS
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bootstrap-datepicker.js', array('jquery'), $this->version, false );		
+		wp_enqueue_script( $this->plugin_name . 'bootstrap-datepicker-js', plugin_dir_url( __FILE__ ) . 'js/bootstrap-datepicker.js', array('jquery'), $this->version, false );
+		wp_enqueue_script( $this->plugin_name . 'loading-js', plugin_dir_url( __FILE__ ) . 'js/loading.js', array('jquery'), $this->version, false );	
+		wp_enqueue_script( $this->plugin_name . 'sidebar-js', plugin_dir_url( __FILE__ ) . 'js/sidebar.js', array('jquery'), $this->version, false );			
+		
 	}
 
 	/**
@@ -127,7 +131,7 @@ class Sapoadmin_Public {
 
 		wp_register_script('blackout_dates', plugin_dir_url( __FILE__ ) . 'js/blackoutDates.js', array(), $this->version, true );
 		wp_register_script('zipcodes', plugin_dir_url( __FILE__ ) . 'js/zipcodes.js', array(), $this->version, true );
-		//wp_register_script('categories', plugin_dir_url( __FILE__ ) . 'js/categories.js', array(), $this->version, true );
+		wp_register_script('categories', plugin_dir_url( __FILE__ ) . 'js/categories.js', array(), $this->version, true );
 
 	}
 	
@@ -158,7 +162,6 @@ class Sapoadmin_Public {
 		wp_enqueue_style('sapo_timepicker_css');
 		wp_enqueue_style('sapo_navtabs_css');
 		wp_enqueue_script('sapo_bootstrap_js');
-		wp_enqueue_script('sapo_timepicker_js');
 		
 
 		wp_enqueue_script('blackout_dates');
@@ -167,17 +170,23 @@ class Sapoadmin_Public {
 	}
 
 	public function zipcodes_shortcode(){
+		wp_localize_script( 'zipcodes', 'zipcodes_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_script('sapo_bootstrap_js');
+		wp_enqueue_script('sapo_timepicker_js');
+
 		wp_enqueue_script('zipcodes');
 		include_once('partials/zipcodes_template.php');
 		return '';
 	}
 
 	public function categories_shortcode(){
+		wp_localize_script( 'categories', 'categories_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_script('sapo_bootstrap_js');
-		//wp_enqueue_script('categories');
+		wp_enqueue_style('sapo_navtabs_css');
+
+		wp_enqueue_script('categories');
 		include_once('partials/categories_template.php');
 		return '';
 	}

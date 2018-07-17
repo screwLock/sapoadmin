@@ -61,16 +61,7 @@ jQuery(window).load(function(){
         });
     jQuery('#blackout-date-range-end').datepicker('setDate', '+1d'); 
     
-
-    //Initialize the max-time datepicker
-    jQuery('#max-time').timepicker(
-        {
-            useSelect: true,
-            minTime: '08:00:00', 
-            startTime: '08:00:00',
-            step: 15
-        });
-    
+   
     //only show forms relevant to the datepicker (single or range)
     jQuery('input[type=radio][name=dateradio]').on('change', function(){
         switch(jQuery(this).val()){
@@ -87,10 +78,6 @@ jQuery(window).load(function(){
         }
     });
 
-    jQuery('input[type=radio][name=max-time-radio]').on('change', function(){
-        return;
- 
-    });
 
     //add click event listener to single date add button
     jQuery('#add-date-button').on('click', function(e){
@@ -112,10 +99,6 @@ jQuery(window).load(function(){
                 jQuery('#date-range-reason').val(), blackoutDates);
     });
 
-    //add event listener to the max time save button
-    jQuery('#change-max-time').on('click', function(e){
-        e.preventDefault();
-    });
 
     jQuery('#add-date-button').popover({
         content: "Date is already present",
@@ -135,6 +118,12 @@ jQuery(window).load(function(){
         trigger: "manual"
     });
 
+    jQuery('#change-weekdays').popover({
+        content: "No changes have been made",
+        title: "ERROR",
+        trigger: "manual"
+    });
+
     //add click event listener to submit button
     jQuery('#save-dates').on('click', function(e){
         e.preventDefault();
@@ -148,7 +137,7 @@ jQuery(window).load(function(){
                 dataType: 'json',
                 data: {
                     action: 'add_new_dates',
-                    new_dates: newDates//JSON.stringify(newDates)
+                    new_dates: newDates
                 },
                 success: function (response) {
                     registerDatesAsSaved(newDates);
@@ -211,7 +200,7 @@ jQuery(window).load(function(){
                     weekdays: getCheckedWeekdayValues()
                 },
                 success: function (response) {
-                    console.log(response);
+                    //console.log(response);
                     if(response.success === true){
                         loadedCheckedWeekdays = changedWeekdayValues;
                     }
@@ -219,9 +208,15 @@ jQuery(window).load(function(){
                     ;//console.log("there was an error");
                 },
                 error: function(xhr, status, error){
-                    // console.log(status);
+                    //console.log(status);
                 }
             });
+        }
+        else {
+            jQuery('#change-weekdays').popover('show');
+            setTimeout(function(){
+                jQuery('#change-weekdays').popover('hide');
+                }, 1000);
         }
     });
     
@@ -336,6 +331,13 @@ function deleteBlackoutDates(groupID, dateArray){
         });
 }
 
+/**
+ * Determine if a matching date is in the date array.
+ * Returns TRUE is a match is found
+ * @param {*} start 
+ * @param {*} end 
+ * @param {*} dateArray 
+ */
 function areDatesPresent(start, end, dateArray){
     var currentDate = new Date(start.getTime());
     var isDatePresent = false;
@@ -389,7 +391,7 @@ function createAndRenderOldDate(oldGroupID, reason,){
                         '<td>' + reason + '</td>' +
                         '<td>' + formattedDate + '</td>' +
                         '<td><div class="form-check"><label class="form-check-label">' +
-                        '<input class="form-check-input"type="checkbox" name="oldDate-cb" value=' + oldGroupID + '>Remove</label></div></td>'+  
+                        '<input class="form-check-input"type="checkbox" name="oldDate-cb" value=' + oldGroupID + '>Delete</label></div></td>'+  
                         '</tr>';
 
     jQuery('#old-date-entries').append(oldDateEntry).hide().show('slow');
@@ -415,6 +417,10 @@ function getUnsavedDates(dateArray){
 }
 
 //Utility functions should be included in separate js file
+
+/**
+ * Returns an array with only unique values
+ */
 function uniq_fast(a) {
     var seen = {};
     var out = [];

@@ -12,12 +12,42 @@
 
 ?>
 <?php require_once plugin_dir_path( __FILE__ ) . 'get_weekdays.php'; ?>
+<div class="loading-page"></div>
+
+<!-- Sidebar -->
+<button class="btn btn-primary" id="activate-sidebar"><strong>bring</strong></button>
+
+    <nav id="sapo-sidebar" class="">
+        
+        <div>
+            <button class="btn btn-primary" id="dismiss"><strong>-</strong></button>
+        </div>
+        <div class="sapo-sidebar-header">
+            <h3>Sapo</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>Dummy Heading</p>
+            <li class="active">
+                <a href="#homeSubmenu">Home</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Portfolio</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+    </nav>
+<!-- end of sidebar -->
 
 <nav id="sapo-nav">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-dates-tab" data-toggle="tab" href="#nav-dates" role="tab" aria-controls="nav-dates" aria-selected="true">Blackout Dates</a>
     <a class="nav-item nav-link" id="nav-weekdays-tab" data-toggle="tab" href="#nav-weekdays" role="tab" aria-controls="nav-weekdays" aria-selected="false">Weekdays</a>
-    <a class="nav-item nav-link" id="nav-max-times-tab" data-toggle="tab" href="#nav-max-times" role="tab" aria-controls="nav-max-times" aria-selected="false">Max Times</a>
   </div>
 </nav>
 
@@ -143,48 +173,6 @@
     </div>
 </div><!-- End of weekdays card -->
 </div><!-- End of weekdays tab -->
-
-<div class="tab-pane fade" id="nav-max-times" role="tabpanel" aria-labelledby="nav-max-times-tab">
-<div class="card">
-    <div class="card-body">
-    <h5 class="card-title">Set Max Time</h5>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Sunday" checked>Sunday</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Monday">Monday</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Tuesday">Tuesday</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Wednesday">Wednesday</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Thursday">Thursday</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Friday">Friday</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label"><input class="form-check-input" type="radio" name="max-time-radio" value="Saturday">Saturday</label>
-        </div>
-        <form>
-            <div class="row p-2">
-                <div class="col-4">
-                    <label class="sr-only" for="inlineFormInput">Select Max Time</label>
-                    <input type="text" class="form-control" id="max-time">
-                </div>
-            </div>
-            <div class="row p-2">
-                <div class="col-4">                    
-                    <button class="btn btn-primary" id="change-max-time">Save</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-</div>
 
 </div><!-- End of tab-content wrapper -->
 
