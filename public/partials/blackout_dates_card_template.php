@@ -14,6 +14,36 @@
 <?php require_once plugin_dir_path( __FILE__ ) . 'get_weekdays.php'; ?>
 <div class="loading-page"></div>
 
+<!-- Sidebar -->
+<button class="btn btn-primary" id="activate-sidebar"><strong>bring</strong></button>
+
+    <nav id="sapo-sidebar" class="">
+        
+        <div>
+            <button class="btn btn-primary" id="dismiss"><strong>-</strong></button>
+        </div>
+        <div class="sapo-sidebar-header">
+            <h3>Sapo</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>Dummy Heading</p>
+            <li class="active">
+                <a href="#homeSubmenu">Home</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Portfolio</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+    </nav>
+<!-- end of sidebar -->
+
 <nav id="sapo-nav">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-dates-tab" data-toggle="tab" href="#nav-dates" role="tab" aria-controls="nav-dates" aria-selected="true">Blackout Dates</a>
