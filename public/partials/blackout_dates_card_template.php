@@ -12,6 +12,7 @@
 
 ?>
 <?php require_once plugin_dir_path( __FILE__ ) . 'get_weekdays.php'; ?>
+<div class="loading-page"></div>
 
 <nav id="sapo-nav">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">

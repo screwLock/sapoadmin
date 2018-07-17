@@ -1,3 +1,4 @@
+
 var zipcodes = [];
 
 //load zipcodes from the database while page is loading
@@ -22,7 +23,6 @@ jQuery.ajax({
 
 jQuery(window).load(function(){
     jQuery("#max-time-select").hide();
-
     jQuery('input[type=radio][name=max-time-enabled]').on('change', function(){
         switch(jQuery(this).val()){
             case '0':

@@ -11,7 +11,7 @@
  */
 
 ?>
-
+<div class="loading-page"></div>
 <nav id="sapo-nav">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-categories-tab" data-toggle="tab" href="#nav-categories" role="tab" aria-controls="nav-categories" aria-selected="true">Categories</a>

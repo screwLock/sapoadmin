@@ -74,8 +74,8 @@ class Sapoadmin_Public {
 		 */
 
 		//Stylesheet for the datepicker
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bootstrap-datepicker3.standalone.css', array(), $this->version, false );
-
+		wp_enqueue_style( $this->plugin_name . 'bootstrap-datepicker-css', plugin_dir_url( __FILE__ ) . 'css/bootstrap-datepicker3.standalone.css', array(), $this->version, false );
+		wp_enqueue_style( $this->plugin_name . 'loading-css', plugin_dir_url( __FILE__ ) . 'css/loading.css', array(), $this->version, false );
 
 	}
 
@@ -99,7 +99,9 @@ class Sapoadmin_Public {
 		 */
 
 		//The overview datepicker JS
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bootstrap-datepicker.js', array('jquery'), $this->version, false );		
+		wp_enqueue_script( $this->plugin_name . 'bootstrap-datepicker-js', plugin_dir_url( __FILE__ ) . 'js/bootstrap-datepicker.js', array('jquery'), $this->version, false );
+		wp_enqueue_script( $this->plugin_name . 'loading-js', plugin_dir_url( __FILE__ ) . 'js/loading.js', array('jquery'), $this->version, false );		
+		
 	}
 
 	/**

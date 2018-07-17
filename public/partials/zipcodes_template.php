@@ -13,6 +13,7 @@
 ?>
 
 <?php require_once plugin_dir_path( __FILE__ ) . 'get_weekdays.php'; ?>
+<div class="loading-page"></div>
 
 <div class="card">
     <div class="card-body pb-2">
@@ -95,3 +96,4 @@
         </tbody>
     </table>
 </div>
+
