@@ -26,9 +26,21 @@
                 </form>
             </div>
         </div><!-- End of categories card -->
-<input type="hidden" id="my_hidden_input">
 
 <div class="container-fluid pt-2">
     <h5 id="map-title">Pickups For </h5>
     <div id="sapo_map" style="height: 500px;">Map</div>
 </div>
+
+<div class="card">
+    <div class="card-body">
+    <h5 class="card-title">Pickup Information</h5>
+        <form>
+            <div class="form-group row pb-2">
+                <div class="col-4">
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div><!-- End of categories card -->
