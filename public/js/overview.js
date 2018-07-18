@@ -8,6 +8,8 @@
  * @package    Sapoadmin
  * @subpackage Sapoadmin/public
  */
+//jQuery("#map-title").text("Pickups For: " + moment(dateText.date).format('YYYY-MM-DD'));
+
 jQuery(window).load(function(){
   var dateColumn = 3;
   var addressColumn = 13;
@@ -21,7 +23,8 @@ jQuery(window).load(function(){
       });
     jQuery('#sapo_datepicker').datepicker('setDate', 'today');
     jQuery('#sapo_datepicker').on( 'changeDate', function(dateText) {
-           drawTableByDate(wpDataTables.table_1, dateColumn, moment(dateText.date).format('YYYY-MM-DD'))
+          jQuery("#map-title").text("Pickups For: " + moment(dateText.date).format('YYYY-MM-DD'));
+          drawTableByDate(wpDataTables.table_1, dateColumn, moment(dateText.date).format('YYYY-MM-DD'))
         });
 
 

@@ -146,6 +146,8 @@ class Sapoadmin_Public {
 	 */
 
 	public function overview_shortcode(){
+		wp_enqueue_style('sapo_bootstrap_css');
+		wp_enqueue_script('sapo_bootstrap_js');
 		wp_enqueue_script( 'overview' );
 		wp_enqueue_script( 'google_maps');
 		add_filter('script_loader_tag', array($this, 'google_maps_script_attributes'), 10, 2);
