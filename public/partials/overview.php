@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The functionality for the blackout_dates 
+ * The functionality for the overview page
  *
  * @link       https://github.com/screwLock
  * @since      1.0.0
@@ -25,7 +25,7 @@
                     </div>
                 </form>
             </div>
-        </div><!-- End of categories card -->
+        </div><!-- End of datepicker card -->
 
 <div class="container-fluid pt-2">
     <h5 id="map-title">Pickups For </h5>
@@ -43,4 +43,4 @@
             </div>
         </form>
     </div>
-</div><!-- End of categories card -->
+</div><!-- End of Pickup Information card -->

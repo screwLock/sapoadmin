@@ -125,6 +125,8 @@ class Sapoadmin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-blackout-dates-ajax.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-zipcodes-ajax.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-categories-ajax.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-trucks-ajax.php';
+
 
 
 		
@@ -187,6 +189,7 @@ class Sapoadmin {
 		$blackout_dates_ajax = new BlackoutDatesAjax();
 		$zipcodes_ajax = new ZipcodesAjax();
 		$categories_ajax = new CategoriesAjax();
+		$trucks_ajax = new TrucksAjax();
 		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'register_scripts' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
@@ -197,6 +200,7 @@ class Sapoadmin {
 		$this->loader->add_shortcode( 'blackout_dates', $plugin_public, 'blackout_dates_shortcode' , 10, 2 );
 		$this->loader->add_shortcode( 'zipcodes', $plugin_public, 'zipcodes_shortcode' , 10, 2 );
 		$this->loader->add_shortcode( 'categories', $plugin_public, 'categories_shortcode' , 10, 2 );
+		$this->loader->add_shortcode( 'trucks', $plugin_public, 'trucks_shortcode',  10, 2);
 
 		//Ajax related code
 		//Ajax for blackoutDates

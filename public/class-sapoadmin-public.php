@@ -132,6 +132,8 @@ class Sapoadmin_Public {
 		wp_register_script('blackout_dates', plugin_dir_url( __FILE__ ) . 'js/blackoutDates.js', array(), $this->version, true );
 		wp_register_script('zipcodes', plugin_dir_url( __FILE__ ) . 'js/zipcodes.js', array(), $this->version, true );
 		wp_register_script('categories', plugin_dir_url( __FILE__ ) . 'js/categories.js', array(), $this->version, true );
+		wp_register_script('trucks', plugin_dir_url( __FILE__ ) . 'js/trucks.js', array(), $this->version, true );
+
 
 	}
 	
@@ -190,6 +192,17 @@ class Sapoadmin_Public {
 
 		wp_enqueue_script('categories');
 		include_once('partials/categories_template.php');
+		return '';
+	}
+
+	public function trucks_shortcode(){
+		wp_localize_script( 'trucks', 'trucks_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
+		wp_enqueue_style('sapo_bootstrap_css');
+		wp_enqueue_script('sapo_bootstrap_js');
+		wp_enqueue_style('sapo_navtabs_css');
+
+		wp_enqueue_script('trucks');
+		include_once('partials/trucks_template.php');
 		return '';
 	}
 
