@@ -77,7 +77,7 @@ class Sapoadmin_Public {
 		wp_enqueue_style( $this->plugin_name . 'bootstrap-datepicker-css', plugin_dir_url( __FILE__ ) . 'css/bootstrap-datepicker3.standalone.css', array(), $this->version, false );
 		wp_enqueue_style( $this->plugin_name . 'loading-css', plugin_dir_url( __FILE__ ) . 'css/loading.css', array(), $this->version, false );
 		wp_enqueue_style( $this->plugin_name . 'sidebar-css', plugin_dir_url( __FILE__ ) . 'css/sidebar.css', array(), $this->version, false );
-
+		wp_enqueue_style( $this->plugin_name . 'font-awesome-css', 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', array(), $this->version, false);
 	}
 
 	/**

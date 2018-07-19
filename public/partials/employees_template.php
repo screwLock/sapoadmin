@@ -11,7 +11,6 @@
  */
 
 ?>
-
 <div class="loading-page"></div>
 <nav id="sapo-nav">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -28,40 +27,89 @@
                 <form>
                     <div class="form-group row pb-2">
                         <div class="col-3">
-                            <label class="sr-only" for="employee-name-input">First Name</label>
-                            <input type="text" class="form-control" id="employee-name" aria-describedby="employee-name" placeholder="First Name" maxlength=10>
+                            <label class="sr-only" for="employee-first-name-input">First Name</label>
+                            <input type="text" class="form-control" id="employee-first-name" aria-describedby="employee-first-name" placeholder="First Name" maxlength=10>
                         </div>
                         <div class="col-3">
-                            <label class="sr-only" for="employee-name-input">Last Name</label>
-                            <input type="text" class="form-control" id="employee-name" aria-describedby="employee-name" placeholder="Last Name" maxlength=10>
+                            <label class="sr-only" for="employee-last-name-input">Last Name</label>
+                            <input type="text" class="form-control" id="employee-last-name" aria-describedby="employee-last-name" placeholder="Last Name" maxlength=10>
                         </div>
                         <div class="col-1">
-                            <label class="sr-only" for="employee-name-input">Middle Initial</label>
-                            <input type="text" class="form-control" id="employee-name" aria-describedby="employee-name" placeholder="MI" maxlength=1 size="1">
+                            <label class="sr-only" for="employee-middle-name-input">Middle Initial</label>
+                            <input type="text" class="form-control" id="employee-middle-initial" aria-describedby="employee-middle-initial" placeholder="MI" maxlength=1 size="1">
                         </div>
                     </div>
                     <div class="form-group row pb-2">
                         <div class="col-3">
                             <label class="sr-only" for="employee-email-input">E-mail</label>
-                            <input type="email" class="form-control" id="employee" aria-describedby="employee-email" placeholder="Employee Email" maxlength=15>
+                            <input type="email" class="form-control" id="employee-email" aria-describedby="employee-email" placeholder="Email" maxlength=15>
                         </div>
-                    </div>
+                        <div class="col-3">
+                            <label class="sr-only" for="employee-phone-input">Phone Number</label>
+                            <input type="text" class="form-control" id="employee-phone-number" aria-describedby="employee-phone-number" placeholder="Phone Number" maxlength=10>
+                        </div>
+                    </div>      
                     <div class="form-group row pb-2">
                         <div class="col-3">
                             <label class="sr-only" for="employee-number-input">Employee Number</label>
                             <input type="number" class="form-control" id="employee-number" aria-describedby="employee-number" placeholder="Employee Number" maxlength=10>
                         </div>
+                    </div>
+                    <div class="form-group row pb-2">
                         <div class="col-3">
-                            <label class="sr-only" for="employee-phone-input">Phone Number</label>
-                            <input type="text" class="form-control" id="employee-phone-number" aria-describedby="employee-phone-number" placeholder="Employee Phone Number" maxlength=10>
+                            <label class="sr-only" for="employee-password-input">Password</label>
+                            <input type="password" class="form-control" id="employee-password" aria-describedby="employee-password" placeholder="Password" maxlength=10>
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
+                            <label class="sr-only" for="employee-repeat-password-input">Repeat Password</label>
+                            <input type="password" class="form-control" id="employee-repeat-password" aria-describedby="employee-repeat-password" placeholder="Repeat Password" maxlength=10>
+                        </div>
+                        <div class = "col-2">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="access-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Access Level
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#" data-value = 2>Employee</a>
+                                    <a class="dropdown-item" href="#" data-value = 1>Admin</a>
+                                    <a class="dropdown-item" href="#" data-value = 3>Supervisor</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <label class="sr-only" for="add-employee-button">Save Employee Button</label>
                             <button class="btn btn-primary" id="add-employee-button">Save</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div><!-- End of Employees card -->
+        <div class="card">
+            <div class="card-body">
+            <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#employees-table-collapse" aria-expanded="false" aria-controls="collapseExample">
+            Current Employees <i class="fa fa-chevron-down"></i></button>
+            <div class="collapse" id = "employees-table-collapse">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Employee</th>
+                            <th scope="col">Access Level</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td><button class="btn btn-primary btn-sm" id="delete-employees-button">Delete</button></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                    <tbody id="current-employees">
+                    </tbody>
+                </table>
+            </div><!-- end of div .collapse -->
+            </div>
+        </div><!-- End of Table Tab -->
     </div><!-- End of Employees Tab-->
 
     <div class="tab-pane fade" id="nav-truck-drivers" role="tabpanel" aria-labelledby="nav-trucks-tab">
