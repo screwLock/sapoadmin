@@ -125,7 +125,7 @@ class Sapoadmin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-blackout-dates-ajax.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-zipcodes-ajax.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-categories-ajax.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-trucks-ajax.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-employees-ajax.php';
 
 
 
@@ -200,7 +200,7 @@ class Sapoadmin {
 		$this->loader->add_shortcode( 'blackout_dates', $plugin_public, 'blackout_dates_shortcode' , 10, 2 );
 		$this->loader->add_shortcode( 'zipcodes', $plugin_public, 'zipcodes_shortcode' , 10, 2 );
 		$this->loader->add_shortcode( 'categories', $plugin_public, 'categories_shortcode' , 10, 2 );
-		$this->loader->add_shortcode( 'trucks', $plugin_public, 'trucks_shortcode',  10, 2);
+		$this->loader->add_shortcode( 'employees', $plugin_public, 'employees_shortcode',  10, 2);
 
 		//Ajax related code
 		//Ajax for blackoutDates
@@ -226,6 +226,7 @@ class Sapoadmin {
 		$this->loader->add_action( 'wp_ajax_save_location_details', $categories_ajax, 'save_location_details');
 		$this->loader->add_action( 'wp_ajax_get_location_details', $categories_ajax, 'get_location_details');
 
+		//Ajax for employees table
 
 	}
 
