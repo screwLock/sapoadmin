@@ -164,5 +164,31 @@
                 </form>
             </div>
         </div><!-- End of Trucks card -->
+        <div class="card">
+            <div class="card-body">
+            <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#drivers-table-collapse" aria-expanded="false" aria-controls="collapse-drivers">
+            Current Drivers <i class="fa fa-chevron-down"></i></button>
+            <div class="collapse" id = "drivers-table-collapse">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Driver</th>
+                            <th scope="col">Access Level</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td><button class="btn btn-primary btn-sm" id="delete-drivers-button">Delete</button></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                    <tbody id="current-drivers">
+                    </tbody>
+                </table>
+            </div><!-- end of div .collapse -->
+            </div>
+        </div><!-- End of Table Tab -->
     </div><!-- End of Trucks tab -->
 </div><!-- End of Tabs -->

@@ -1,5 +1,6 @@
 
 var employees = [];
+var trucks = [];
 
 jQuery(window).load(function(){
     jQuery("#add-employee-button").on('click', function(e){
