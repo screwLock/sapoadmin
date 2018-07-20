@@ -52,7 +52,14 @@ function addEmployee(first, middle, last, email, pass, repPass, access){
 }
 
 function addEmployeeEntry(employee){
-    return;
+        var newEntry =      '<tr>' +
+                            '<td>' + employee.firstName + ' ' + employee.middleInitial + ' ' + employee.lastName + '</td>' +
+                            '<td>' + employee.access + '</td>' + '<td>' +
+                            '<div class="form-check"><label class="form-check-label">' +
+                            '<input class="form-check-input"type="checkbox" name="saved-category-cb" value=' + employee.email + '>Delete</label></div></td>'+  
+                            '</tr>';
+                              
+        return newEntry;
 }
 
 function validEmail(email){
