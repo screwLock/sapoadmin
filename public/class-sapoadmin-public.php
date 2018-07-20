@@ -103,7 +103,7 @@ class Sapoadmin_Public {
 		wp_enqueue_script( $this->plugin_name . 'bootstrap-datepicker-js', plugin_dir_url( __FILE__ ) . 'js/bootstrap-datepicker.js', array('jquery'), $this->version, false );
 		wp_enqueue_script( $this->plugin_name . 'loading-js', plugin_dir_url( __FILE__ ) . 'js/loading.js', array('jquery'), $this->version, false );	
 		wp_enqueue_script( $this->plugin_name . 'sidebar-js', plugin_dir_url( __FILE__ ) . 'js/sidebar.js', array('jquery'), $this->version, false );			
-		
+
 	}
 
 	/**
@@ -124,6 +124,7 @@ class Sapoadmin_Public {
 		wp_register_style('sapo_bootstrap_css', "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css");
 		wp_register_style('sapo_timepicker_css', "https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.css");
 		wp_register_style('sapo_navtabs_css', plugin_dir_url( __FILE__ ) . 'css/navtabs.css', array('sapo_bootstrap_css'));
+		wp_register_style('sapo_user_registration_css', plugin_dir_url( __FILE__ ) . 'css/sapo-user-registration.css', array('sapo_bootstrap_css'));
 
 		wp_register_script('sapo_bootstrap_js', "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js", array('jquery'));
 		wp_register_script('sapo_timepicker_js', 'https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.js');
@@ -133,6 +134,7 @@ class Sapoadmin_Public {
 		wp_register_script('zipcodes', plugin_dir_url( __FILE__ ) . 'js/zipcodes.js', array(), $this->version, true );
 		wp_register_script('categories', plugin_dir_url( __FILE__ ) . 'js/categories.js', array(), $this->version, true );
 		wp_register_script('employees', plugin_dir_url( __FILE__ ) . 'js/employees.js', array(), $this->version, true );
+		wp_register_script('user_registration', plugin_dir_url( __FILE__ ) . 'js/userRegistration.js', array(), $this->version, true );
 
 
 	}
@@ -206,14 +208,26 @@ class Sapoadmin_Public {
 		return '';
 	}
 
+	public function user_registration_shortcode(){
+		wp_localize_script( 'user_registration', 'user_registration_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
+		wp_enqueue_style('sapo_bootstrap_css');
+		wp_enqueue_script('sapo_bootstrap_js');
+		wp_enqueue_style('sapo_navtabs_css');
+		wp_enqueue_style('sapo_user_registration_css');
+
+		wp_enqueue_script('user_registration');
+		include_once('partials/user_registration_template.php');
+		return '';
+	}
+
 
 	// Add async and defer attributes
-function google_maps_script_attributes( $tag, $handle) {
-    if ( 'google_maps' !== $handle ) {
-        return $tag;
-  }
+	function google_maps_script_attributes( $tag, $handle) {
+    	if ( 'google_maps' !== $handle ) {
+        	return $tag;
+  	}
     
-    return str_replace('src', ' async="async" defer src', $tag );
-}
+    	return str_replace('src', ' async="async" defer src', $tag );
+	}
 
 }
