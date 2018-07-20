@@ -73,6 +73,7 @@
                                     <a class="dropdown-item" href="#" data-value = 2>Employee</a>
                                     <a class="dropdown-item" href="#" data-value = 1>Admin</a>
                                     <a class="dropdown-item" href="#" data-value = 3>Supervisor</a>
+                                    <a class="dropdown-item" href="#" data-value = 4>Contractor</a>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +135,11 @@
                     <div class="form-group row pb-2">
                         <div class="col-3">
                             <label class="sr-only" for="driver-email-input">E-mail</label>
-                            <input type="email" class="form-control" id="driver-email" aria-describedby="driver-email" placeholder="Driver Email" maxlength=15>
+                            <input type="email" class="form-control" id="driver-email" aria-describedby="driver-email" placeholder="Email" maxlength=15>
+                        </div>
+                        <div class="col-3">
+                            <label class="sr-only" for="driver-phone-number-input">Phone Number</label>
+                            <input type="text" class="form-control" id="driver-phone-number" aria-describedby="driver-phone-number" placeholder="Phone Number" maxlength=15>
                         </div>
                     </div>
                     <div class="form-group row pb-2">
@@ -142,9 +147,15 @@
                             <label class="sr-only" for="driver-email-input">Truck Number</label>
                             <input type="number" class="form-control" id="driver-truck-number" aria-describedby="driver-truck-number" placeholder="Truck Number" maxlength=10>
                         </div>
+                    </div>
+                    <div class="form-group row pb-2">
                         <div class="col-3">
-                            <label class="sr-only" for="driver-phone-input">Phone Number</label>
-                            <input type="text" class="form-control" id="driver-phone-number" aria-describedby="driver-phone-number" placeholder="Driver Phone Number" maxlength=10>
+                            <label class="sr-only" for="driver-phone-input">Password</label>
+                            <input type="text" class="form-control" id="driver-password" aria-describedby="driver-password" placeholder="Password" maxlength=10>
+                        </div>
+                        <div class="col-3">
+                            <label class="sr-only" for="truck-repeat-password-input">Repeat Password</label>
+                            <input type="password" class="form-control" id="truck-repeat-password" aria-describedby="truck-repeat-password" placeholder="Repeat Password" maxlength=10>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-primary" id="add-driver-button">Save</button>

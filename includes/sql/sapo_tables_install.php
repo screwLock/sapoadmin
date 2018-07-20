@@ -89,10 +89,11 @@ function sapo_tables_install() {
 	       $sql[] = "CREATE TABLE $trucks_table(
 		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
 		      user_id BIGINT(20) NOT NULL,
-		      truck_number BIGINT(20) NOT NULL,
-		      driver_name VARCHAR(30) NOT NULL,
-		      driver_phone VARCHAR(10) NOT NULL,
-		      driver_email VARCHAR(30),
+		      truck_number BIGINT(20) NOT NULL DEFAULT '0',
+		      driver_name VARCHAR(30) NOT NULL DEFAULT '0',
+		      driver_phone VARCHAR(10) NOT NULL DEFAULT '0',
+		      driver_email VARCHAR(30) NOT NULL DEFAULT '0',
+			  access_level TINYINT(10) UNSIGNED NOT NULL DEFAULT 4,
 			  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
 		      created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 		      UNIQUE(id),
@@ -108,7 +109,7 @@ function sapo_tables_install() {
 		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
 		      user_id BIGINT(20) NOT NULL,
 			  employee_id BIGINT(20) NOT NULL,
-			  access_level TINYINT(10) UNSIGNED NOT NULL DEFAULT 1,
+			  access_level TINYINT(10) UNSIGNED NOT NULL DEFAULT 2,
 			  phone_number VARCHAR(10) NOT NULL DEFAULT '',
 			  email VARCHAR(20) NOT NULL DEFAULT '',
 			  first_name VARCHAR(20) NOT NULL DEFAULT '',
@@ -206,6 +207,21 @@ function sapo_tables_install() {
 		   ) $charset_collate;";   
 		}
 
+		//11.  Create Organization Table
+		$organization_table = $wpdb->prefix . "sapo_organization";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $organization_table . "'") !== $organization_table){
+			$sql[] = "CREATE TABLE $organization_table(
+			   id BIGINT(20) NOT NULL AUTO_INCREMENT,
+			   user_id BIGINT(20) NOT NULL,
+			   organization_name VARCHAR (30) NOT NULL,
+			   organization_id BIGINT(20) NOT NULL,
+			   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+		       created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+	           UNIQUE(id),
+		       PRIMARY KEY  (user_id)
+		   ) $charset_collate;";   
+		}
 				
 		if(!empty($sql)){
 		   require_once(ABSPATH . 'wp-admin/includes/upgrade.php');

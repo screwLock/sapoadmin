@@ -31,7 +31,8 @@ jQuery(window).load(function(){
             });
         }
     });
-
+    
+    //change text and value of dropdown to selected dropdown item
     jQuery('.dropdown a').on('click', function(){
         jQuery(this).parents(".dropdown").find('.btn').html(jQuery(this).text() + ' <span class="caret"></span>');
         jQuery(this).parents(".dropdown").find('.btn').val(jQuery(this).data('value'));
@@ -39,6 +40,19 @@ jQuery(window).load(function(){
 }); // end of window on load
 
 function addEmployee(first, middle, last, email, pass, repPass, access){
+    var newEmployee = {
+        firstName: first,
+        middleInitial: middle,
+        lastName: last,
+        email: email,
+        password: pass,
+        repeatPassword: repPass,
+        accessLevel: access
+    };
+    return newEmployee;
+}
+
+function addDriver(first, middle, last, email, pass, repPass, access){
     var newEmployee = {
         firstName: first,
         middleInitial: middle,
@@ -60,6 +74,17 @@ function addEmployeeEntry(employee){
                             '</tr>';
                               
         return newEntry;
+}
+
+function addDriverEntry(driver){
+    var newEntry =      '<tr>' +
+                        '<td>' + driver.firstName + ' ' + driver.middleInitial + ' ' + driver.lastName + '</td>' +
+                        '<td>' + driver.access + '</td>' + '<td>' +
+                        '<div class="form-check"><label class="form-check-label">' +
+                        '<input class="form-check-input"type="checkbox" name="saved-category-cb" value=' + driver.email + '>Delete</label></div></td>'+  
+                        '</tr>';
+                          
+    return newEntry;
 }
 
 function validEmail(email){
