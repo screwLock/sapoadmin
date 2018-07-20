@@ -18,9 +18,11 @@
 	<h4 class="card-title mt-3 text-center">Create Account</h4>
 	<p class="text-center">Get started with your free account</p>
 	<p>
-		<button type="submit" class="btn btn-block btn-google"> <i class="fa fa-google"></i>   Login via Google</button>
-		<button type="submit" class="btn btn-block btn-facebook"> <i class="fa fa-facebook-f"></i>   Login via Facebook</button>
-	</p>
+		<button type="submit" class="btn btn-block btn-google" id="google-login-button"> <i class="fa fa-google"></i>   Continue with Google</button>
+		<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+        <div id="name"></div>
+
+    </p>
 	<p class="divider-text">
         <span class="bg-light">OR</span>
     </p>
@@ -62,3 +64,4 @@
     </form>
 </article>
 </div> <!-- card.// -->
+

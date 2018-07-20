@@ -135,6 +135,7 @@ class Sapoadmin_Public {
 		wp_register_script('categories', plugin_dir_url( __FILE__ ) . 'js/categories.js', array(), $this->version, true );
 		wp_register_script('employees', plugin_dir_url( __FILE__ ) . 'js/employees.js', array(), $this->version, true );
 		wp_register_script('user_registration', plugin_dir_url( __FILE__ ) . 'js/userRegistration.js', array(), $this->version, true );
+		wp_register_script('google_login',  'https://apis.google.com/js/api:client.js', array('user_registration'), $this->version);
 
 
 	}
@@ -216,6 +217,9 @@ class Sapoadmin_Public {
 		wp_enqueue_style('sapo_user_registration_css');
 
 		wp_enqueue_script('user_registration');
+		wp_enqueue_script('google_login');
+		add_filter('script_loader_tag', array($this, 'google_login_script_attributes'), 10, 2);
+
 		include_once('partials/user_registration_template.php');
 		return '';
 	}
@@ -224,6 +228,14 @@ class Sapoadmin_Public {
 	// Add async and defer attributes
 	function google_maps_script_attributes( $tag, $handle) {
     	if ( 'google_maps' !== $handle ) {
+        	return $tag;
+  	}
+    
+    	return str_replace('src', ' async="async" defer src', $tag );
+	}
+
+	function google_login_script_attributes( $tag, $handle) {
+    	if ( 'google_login' !== $handle ) {
         	return $tag;
   	}
     
