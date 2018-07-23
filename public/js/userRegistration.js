@@ -1,3 +1,4 @@
+//Facebook Login functinality
 window.fbAsyncInit = function() {
     FB.init({
       appId      : '2156344984583735',
@@ -6,7 +7,7 @@ window.fbAsyncInit = function() {
       version    : 'v3.0'
     });
       
-    FB.AppEvents.logPageView();   
+    //FB.AppEvents.logPageView();   
       
   };
 
@@ -18,13 +19,21 @@ window.fbAsyncInit = function() {
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
+   function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
 
+function fbLogout() {
+    FB.logout(function() {
+        document.getElementById('fbLink').setAttribute("onclick","fbLogin()");
+    });
+}
 
-
-
+//Google login functionality
 
 var client_id = '826070324612-brfobr4nrq2vje6mbmdk2isp01dlmrll.apps.googleusercontent.com';
-var googleUser = {};
 var startApp = function() {
   gapi.load('auth2', function(){
     // Retrieve the singleton for the GoogleAuth library and set up the client.
@@ -42,7 +51,8 @@ function attachSignin(element) {
   console.log(element.id);
   auth2.attachClickHandler(element, {},
       function(googleUser) {
-        ;
+        console.log('works');
+        googleUser = auth2.currentUser.get().getBasicProfile();
       }, function(error) {
         //alert(JSON.stringify(error, undefined, 2));
       });
@@ -51,16 +61,33 @@ function attachSignin(element) {
 
 jQuery(window).load(function(){
     startApp();
-});
-  
-
-jQuery("#create-user-button").on('click', function(e){
-    e.preventDefault();
-});
-
-function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
+    var orgID = getUrlParam("orgID", -1);
+    jQuery("#create-user-button").on('click', function(e){
+        e.preventDefault();
+        FB.api('/me', 'GET', {fields: 'id,first_name,last_name,email'}, function(response) {
+            console.log(response);
+            //check db for alrady created accoutn by email
+          });
     });
-  }
+
+});
+
+//Utility functions for getting URL parameters
+function getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getUrlVars()[parameter];
+        }
+    return urlparameter;
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+//users should be associated with a organizationID.  Organization ID in url
 
