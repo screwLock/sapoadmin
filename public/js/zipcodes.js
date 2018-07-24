@@ -143,7 +143,7 @@ function addZipcodeEntry(zipcode){
                         '<td>' + zipcode.maxPickups + '</td>';
     if(zipcode.maxTimeEnabled){
         newEntry +=      '<td>' + 'Yes' + '</td>' +
-                        '<td>' + zipcode.maxTime + '</td>';
+                        '<td>' + toAMPM(zipcode.maxTime) + '</td>';
     }
     else {
         newEntry +=      '<td>' + 'No' + '</td>' +
@@ -181,4 +181,27 @@ function doesPropertyExist(property, objectProperty, objectArray){
             match = (property === object[objectProperty]);
     })
     return match;
+}
+
+/**
+ * Convert a time string to a date
+ * format == "h:m"
+ * @param {*} dStr 
+ * @param {*} format 
+ */
+function toAMPM(dStr) {
+	var now = new Date();
+ 	now.setHours(dStr.substr(0,dStr.indexOf(":")));
+ 	now.setMinutes(dStr.substr(dStr.indexOf(":")+1, dStr.indexOf(":")));
+    now.setSeconds(0);
+    now.toLocaleString('en-US', { hour: 'numeric', hour12: true });
+	var hours = (now.getHours() % 12) || 12; // show midnight & noon as 12
+	return (
+		( hours < 10 ? '0' : '') + hours +
+		( now.getMinutes() < 10 ? ':0' : ':') + now.getMinutes() +
+                // optional seconds display
+		// ( now.getSeconds() < 10 ? ':0' : ':') + now.getSeconds() + 
+		( now.getHours() < 12 ? ' AM' : ' PM' )
+	); 
+
 }

@@ -136,7 +136,7 @@ class Sapoadmin_Public {
 		wp_register_script('employees', plugin_dir_url( __FILE__ ) . 'js/employees.js', array(), $this->version, true );
 		wp_register_script('user_registration', plugin_dir_url( __FILE__ ) . 'js/userRegistration.js', array(), $this->version, true );
 		wp_register_script('google_login',  'https://apis.google.com/js/api:client.js', array('user_registration'), $this->version);
-
+		wp_register_script('user_account',  plugin_dir_url( __FILE__ ) . 'js/userAccount.js', $this->version);
 
 	}
 	
@@ -218,11 +218,26 @@ class Sapoadmin_Public {
 
 		wp_enqueue_script('user_registration');
 		wp_enqueue_script('google_login');
+		wp_enqueue_script('recaptcha');
 		add_filter('script_loader_tag', array($this, 'google_login_script_attributes'), 10, 2);
 
 		include_once('partials/user_registration_template.php');
 		return '';
 	}
+
+	public function user_account_shortcode(){
+		wp_localize_script( 'zipcodes', 'zipcodes_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
+		wp_enqueue_style('sapo_bootstrap_css');
+		wp_enqueue_script('sapo_bootstrap_js');
+		wp_enqueue_style('sapo_navtabs_css');
+
+		wp_enqueue_script('user_account');
+		add_filter('script_loader_tag', array($this, 'google_login_script_attributes'), 10, 2);
+
+		include_once('partials/user_account_template.php');
+		return '';
+	}
+
 
 
 	// Add async and defer attributes

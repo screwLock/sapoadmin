@@ -2,7 +2,7 @@
 <?php
 
 /**
- * The file that defines the trucks ajax functionality.
+ * The file that defines the ajax functionality for creating new users.
  *
  * A class definition for registering new users
  *

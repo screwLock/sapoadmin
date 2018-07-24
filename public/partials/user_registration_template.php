@@ -60,8 +60,15 @@
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block" id="create-user-button"> Create Account  </button>
     </div> <!-- form-group// -->      
-    <p class="text-center">Have an account? <a href="">Log In</a> </p>                                                                 
+    <p class="text-center">Have an account? <a href="">Log In</a> </p>
+		<input type="checkbox" name="website" value="1" style="display:none !important" tabindex="-1" autocomplete="off">
     </form>
 </article>
 </div> <!-- card.// -->
 
+<!--
+-Include form validation in honeypot algorithm. (most end-user will only get 1 or 2 fields wrong; spambots will typically get most of the fields wrong)
+-Use a service like CloudFlare that automatically blocks known spam IPs
+-Have form timeouts, and prevent instant posting. (forms submitted in under 3 seconds of the page loading are typically spam)
+-Prevent any IP from posting more than once a second.
+-->

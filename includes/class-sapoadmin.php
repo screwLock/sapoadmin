@@ -202,6 +202,7 @@ class Sapoadmin {
 		$this->loader->add_shortcode( 'categories', $plugin_public, 'categories_shortcode' , 10, 2 );
 		$this->loader->add_shortcode( 'employees', $plugin_public, 'employees_shortcode',  10, 2);
 		$this->loader->add_shortcode( 'user_registration', $plugin_public, 'user_registration_shortcode',  10, 2);
+		$this->loader->add_shortcode( 'user_account', $plugin_public, 'user_account_shortcode',  10, 2);
 
 
 		//Ajax related code
