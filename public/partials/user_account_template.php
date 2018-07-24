@@ -37,9 +37,11 @@
                 <form>
                     <div class="form-group row">
                         <div class="col-2">
-                            <label class="sr-only" for="inlineFormInput">Pickup Datepicker</label>
-                            <input type="text" class="form-control" id="pickup-datepicker">
+                            <label class="sr-only">Pickup Datepicker</label>
+                            <div id="pickup-datepicker"></div>
                         </div>
+                    </div>
+                    <div class="form-group row">
                         <div class="col-2">
                             <label class="sr-only" for="inlineFormInput">Confirm Date</label>
                             <button type="button" class="btn btn-primary" id="confirm-date-button">Confirm</button>
@@ -97,7 +99,7 @@
                 <form>
                     <div class="form-group row">
                         <div class="col-2">
-                            <label class="sr-only" for="inlineFormInput">Pickup Datepicker</label>
+                            <label class="sr-only" for="inlineFormInput">Pickup Address</label>
                             <input type="text" class="form-control" id="pickup-address">
                         </div>
                     </div>
