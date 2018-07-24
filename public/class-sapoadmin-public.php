@@ -227,6 +227,7 @@ class Sapoadmin_Public {
 
 	public function user_account_shortcode(){
 		wp_localize_script( 'user_account', 'zipcodes_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
+		wp_localize_script( 'user_account', 'blackout_dates_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_script('sapo_bootstrap_js');
 		wp_enqueue_style('sapo_navtabs_css');

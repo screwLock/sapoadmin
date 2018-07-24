@@ -31,7 +31,7 @@
                 </select>
             </div>
         </div><!-- End of my-account card-->
-        <div class="card">
+        <div class="card" id="pickup-datepicker-card">
             <div class="card-body">
             <h5 class="card-title">Select The Pickup Date</h5>
                 <form>
