@@ -25,13 +25,23 @@
     <div class="tab-pane fade show active" id="nav-new-pickup" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="card">
             <div class="card-body">
-            <h5 class="card-title">New Pickup</h5>
-                <select class="custom-select class col-2">
+            <h5 class="card-title">Select The Pickup Zipcode</h5>
+                <select class="custom-select class col-2" id="zipcode-select">
                     <option selected>Select a Zipcode</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
                 </select>
+            </div>
+        </div><!-- End of my-account card-->
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title">Select The Pickup Date</h5>
+                <form>
+                    <div class="form-group row">
+                        <div class="col-2">
+                            <label class="sr-only" for="inlineFormInput">Pickup Datepicker</label>
+                            <input type="text" class="form-control" id="pickup-datepicker">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div><!-- End of my-account card-->
     </div><!-- End of my-account tab-->

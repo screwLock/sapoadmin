@@ -184,7 +184,7 @@ function doesPropertyExist(property, objectProperty, objectArray){
 }
 
 /**
- * Convert a time string to a date
+ * Convert a MYSQL time string to am pm
  * format == "h:m"
  * @param {*} dStr 
  * @param {*} format 
