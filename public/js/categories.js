@@ -53,7 +53,7 @@ jQuery.ajax({
             locationDetails[0] = createNewLocationDetails(oldLocationDetails.stairs, oldLocationDetails.moving_out, 
                 oldLocationDetails.yard_sale, oldLocationDetails.estate_auction);
                 updateLocationDetailsChecks(locationDetails[0]);
-        }
+         }
     },
     error: function(error){
        // console.log('error');

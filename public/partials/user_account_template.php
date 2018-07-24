@@ -51,11 +51,59 @@
         <div class="card" id="location-details-card">
             <div class="card-body">
             <h5 class="card-title">Location Details</h5>
-                <form id="location-details-form">
-
+                <form>
+                    <div class="form-group row" id="stairs-toggle">
+                        <div class="col">
+                            <h6 class="pb-2">Will There Be Stairs Involved?</h6>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-primary active btn-sm"><input type="radio" name="stairs-radio" id="stairs-no" value=0 autocomplete="off" checked value=0> No</label>
+                                <label class="btn btn-primary btn-sm"><input type="radio" name="stairs-radio" id="stairs-yes" value=1 autocomplete="off"> Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="move-toggle">
+                        <div class="col">
+                            <h6 class="pb-2">Is This Part of a Move?</h6>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-primary active btn-sm"><input type="radio" name="move-radio" id="Move-no" value=0 autocomplete="off" checked> No</label>
+                                <label class="btn btn-primary btn-sm"><input type="radio" name="move-radio" id="Move-yes" value=1 autocomplete="off"> Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="yard-sale-toggle">
+                        <div class="col">
+                            <h6 class="pb-2">Is This Part of A Yard Sale?</h6>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-primary active btn-sm"><input type="radio" name="yard-radio" id="yard-no" value=0 autocomplete="off" checked> No</label>
+                                <label class="btn btn-primary btn-sm"><input type="radio" name="yard-radio" id="yard-yes" value=1 autocomplete="off"> Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="estate-toggle">
+                        <div class="col">
+                            <h6 class="pb-2">Is This Part of An Estate Auction?</h6>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-primary active btn-sm"><input type="radio" name="estate-radio" id="estate-no" value=0 autocomplete="off" checked> No</label>
+                                <label class="btn btn-primary btn-sm"><input type="radio" name="estate-radio" id="estate-yes" value=1 autocomplete="off"> Yes</label>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div><!-- End of location details card-->
+        <div class="card" id="pickup-address-card">
+            <div class="card-body">
+            <h5 class="card-title">Select The Pickup Address</h5>
+                <form>
+                    <div class="form-group row">
+                        <div class="col-2">
+                            <label class="sr-only" for="inlineFormInput">Pickup Datepicker</label>
+                            <input type="text" class="form-control" id="pickup-address">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- End of pickup-address card-->
     </div><!-- End of my-account tab-->
 
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-account-tab">

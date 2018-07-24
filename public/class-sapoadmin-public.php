@@ -137,7 +137,8 @@ class Sapoadmin_Public {
 		wp_register_script('user_registration', plugin_dir_url( __FILE__ ) . 'js/userRegistration.js', array(), $this->version, true );
 		wp_register_script('google_login',  'https://apis.google.com/js/api:client.js', array('user_registration'), $this->version);
 		wp_register_script('user_account',  plugin_dir_url( __FILE__ ) . 'js/userAccount.js', $this->version);
-
+		wp_register_script('google_autocomplete', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAP9TsRTrHitDF4jNAwSXLLKajKM4LTGVc&libraries=places&callback=initAutocomplete',
+							array('user_account'), $this->version);
 	}
 	
 
@@ -218,7 +219,6 @@ class Sapoadmin_Public {
 
 		wp_enqueue_script('user_registration');
 		wp_enqueue_script('google_login');
-		wp_enqueue_script('recaptcha');
 		add_filter('script_loader_tag', array($this, 'google_login_script_attributes'), 10, 2);
 
 		include_once('partials/user_registration_template.php');
@@ -232,9 +232,11 @@ class Sapoadmin_Public {
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_script('sapo_bootstrap_js');
 		wp_enqueue_style('sapo_navtabs_css');
+		wp_enqueue_script('google_autocomplete');
 
 		wp_enqueue_script('user_account');
 		add_filter('script_loader_tag', array($this, 'google_login_script_attributes'), 10, 2);
+		add_filter('script_loader_tag', array($this, 'google_autocomplete_script_attributes'), 10, 2);
 
 		include_once('partials/user_account_template.php');
 		return '';
@@ -252,6 +254,14 @@ class Sapoadmin_Public {
 	}
 
 	function google_login_script_attributes( $tag, $handle) {
+    	if ( 'google_login' !== $handle ) {
+        	return $tag;
+  	}
+    
+    	return str_replace('src', ' async="async" defer src', $tag );
+	}
+
+	function google_autocomplete_script_attributes( $tag, $handle) {
     	if ( 'google_login' !== $handle ) {
         	return $tag;
   	}
