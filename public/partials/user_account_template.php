@@ -30,7 +30,7 @@
                     <option selected>Select a Zipcode</option>
                 </select>
             </div>
-        </div><!-- End of my-account card-->
+        </div><!-- End of zipcode card-->
         <div class="card" id="pickup-datepicker-card">
             <div class="card-body">
             <h5 class="card-title">Select The Pickup Date</h5>
@@ -40,10 +40,22 @@
                             <label class="sr-only" for="inlineFormInput">Pickup Datepicker</label>
                             <input type="text" class="form-control" id="pickup-datepicker">
                         </div>
+                        <div class="col-2">
+                            <label class="sr-only" for="inlineFormInput">Confirm Date</label>
+                            <button type="button" class="btn btn-primary" id="confirm-date-button">Confirm</button>
+                        </div>
                     </div>
                 </form>
             </div>
-        </div><!-- End of my-account card-->
+        </div><!-- End of datepicker card-->
+        <div class="card" id="location-details-card">
+            <div class="card-body">
+            <h5 class="card-title">Location Details</h5>
+                <form id="location-details-form">
+
+                </form>
+            </div>
+        </div><!-- End of location details card-->
     </div><!-- End of my-account tab-->
 
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-account-tab">
