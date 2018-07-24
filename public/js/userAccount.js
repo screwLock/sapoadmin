@@ -57,7 +57,6 @@ jQuery.ajax({
         var oldLocationDetails = response.data[0];
         locationDetails[0] = createNewLocationDetails(oldLocationDetails.stairs, oldLocationDetails.moving_out,
             oldLocationDetails.yard_sale, oldLocationDetails.estate_auction);
-        renderLocationDetails(locationDetails[0]);
     },
     error: function (error) {
         // console.log('error');
@@ -122,9 +121,10 @@ jQuery(window).load(function () {
         jQuery('#pickup-datepicker').datepicker('setDatesDisabled', blackoutDates);
     });
 
-    jQuery("#confirm-date-button").on('click', function () {
+    jQuery("#pickup-datepicker").datepicker().on('changeDate', function () {
         jQuery('#location-details-card').show('slow');
         jQuery('#pickup-address-card').show('slow');
+        renderLocationDetails(locationDetails[0]);
     });
 });
 

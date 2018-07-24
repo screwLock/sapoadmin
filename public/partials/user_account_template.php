@@ -41,12 +41,6 @@
                             <div id="pickup-datepicker"></div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-2">
-                            <label class="sr-only" for="inlineFormInput">Confirm Date</label>
-                            <button type="button" class="btn btn-primary" id="confirm-date-button">Confirm</button>
-                        </div>
-                    </div>
                 </form>
             </div>
         </div><!-- End of datepicker card-->
@@ -117,7 +111,7 @@
     </div><!-- End of my-account tab-->
 
     <div class="tab-pane fade" id="nav-pickup-history" role="tabpanel" aria-labelledby="nav-pickup-history">
-    <div class="card">
+        <div class="card">
             <div class="card-body">
             <h5 class="card-title">Previous Pickups</h5>
             </div>
