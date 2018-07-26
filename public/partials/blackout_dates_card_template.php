@@ -13,6 +13,15 @@
 ?>
 <?php require_once plugin_dir_path( __FILE__ ) . 'get_weekdays.php'; ?>
 <div class="loading-page"></div>
+<div id="sapo-sidebar" class="sidenav border-right">
+  <a href="./zipcodes">Zipcodes</a>
+  <a href="./blackout-dates">Blackout Dates</a>
+  <a href="./categories">Categories</a>
+  <a href="./employees">Employees</a>
+  <a href="./emails">Emails</a>
+</div>
+
+<div class="main">
 
 <nav id="sapo-nav">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -147,3 +156,4 @@
 </div><!-- End of tab-content wrapper -->
 
 
+</div> <!-- End of main -->

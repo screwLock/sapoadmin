@@ -8,11 +8,12 @@
     left: 0;
     /*background-color: rgb(255, 255, 255); /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 100px; /* Place content 60px from the top */
-    padding-left: 10px;
+    padding-top: 40px; /* Place content 60px from the top */
+    padding-left: 5px;
     padding-right: 5px;
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
     color: none;
+    margin-top: 130px;
 }
 
 /* The navigation menu links */

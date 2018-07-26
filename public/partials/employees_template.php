@@ -12,6 +12,15 @@
 
 ?>
 <div class="loading-page"></div>
+<div id="sapo-sidebar" class="sidenav border-right">
+  <a href="./zipcodes">Zipcodes</a>
+  <a href="./blackout-dates">Blackout Dates</a>
+  <a href="./categories">Categories</a>
+  <a href="./employees">Employees</a>
+  <a href="./emails">Emails</a>
+</div>
+
+<div class="main">
 <nav id="sapo-nav">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-employees-tab" data-toggle="tab" href="#nav-employees" role="tab" aria-controls="nav-employees" aria-selected="true">Employees</a>
@@ -192,3 +201,5 @@
         </div><!-- End of Table Tab -->
     </div><!-- End of Trucks tab -->
 </div><!-- End of Tabs -->
+
+/<div><!-- End of main -->
