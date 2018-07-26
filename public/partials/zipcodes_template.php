@@ -15,7 +15,7 @@
 <?php require_once plugin_dir_path( __FILE__ ) . 'get_weekdays.php'; ?>
 <div class="loading-page"></div>
 
-<nav class="navbar sticky-top navbar-light bg-light">
+<nav class="navbar fixed-top navbar-light bg-light">
     <a class="navbar-brand" href="#">SAPO</a>
 </nav>
 
