@@ -15,6 +15,13 @@
 <?php require_once plugin_dir_path( __FILE__ ) . 'get_weekdays.php'; ?>
 <div class="loading-page"></div>
 
+<div id="sapo-sidebar" class="sidenav">
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+</div>
+<div class="main">
 <div class="card">
     <div class="card-body pb-2">
         <h5 class="card-title">Add New Zipcodes</h5>
@@ -97,3 +104,4 @@
     </table>
 </div>
 
+</div>
