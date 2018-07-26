@@ -12,6 +12,11 @@
 
 ?>
 <div class="loading-page"></div>
+
+<nav class="navbar fixed-top navbar-light bg-light">
+    <a class="navbar-brand" href="#">SAPO</a>
+</nav>
+
 <div id="sapo-sidebar" class="sidenav border-right">
   <a href="./zipcodes">Zipcodes</a>
   <a href="./blackout-dates">Blackout Dates</a>

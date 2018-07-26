@@ -42,7 +42,6 @@
 }
 
 .sidenav a:link {
-    color: #f1f1f1;
     color: black;
 }
 
@@ -67,6 +66,8 @@ a:active {
     transition: margin-left .5s;
     padding: 20px;
     margin-left: 200px;
+    margin-top: 30px;
+
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
