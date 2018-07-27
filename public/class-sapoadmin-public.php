@@ -134,6 +134,7 @@ class Sapoadmin_Public {
 		wp_register_script('zipcodes', plugin_dir_url( __FILE__ ) . 'js/zipcodes.js', array(), $this->version, true );
 		wp_register_script('categories', plugin_dir_url( __FILE__ ) . 'js/categories.js', array(), $this->version, true );
 		wp_register_script('employees', plugin_dir_url( __FILE__ ) . 'js/employees.js', array(), $this->version, true );
+		wp_register_script('emails', plugin_dir_url( __FILE__ ) . 'js/emails.js', array(), $this->version, true );
 		wp_register_script('user_registration', plugin_dir_url( __FILE__ ) . 'js/userRegistration.js', array(), $this->version, true );
 		wp_register_script('google_login',  'https://apis.google.com/js/api:client.js', array('user_registration'), $this->version);
 		wp_register_script('user_account',  plugin_dir_url( __FILE__ ) . 'js/userAccount.js', $this->version);
@@ -196,6 +197,17 @@ class Sapoadmin_Public {
 
 		wp_enqueue_script('categories');
 		include_once('partials/categories_template.php');
+		return '';
+	}
+
+	public function emails_shortcode(){
+		//wp_localize_script( 'categories', 'categories_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
+		wp_enqueue_style('sapo_bootstrap_css');
+		wp_enqueue_script('sapo_bootstrap_js');
+		wp_enqueue_style('sapo_navtabs_css');
+
+		wp_enqueue_script('emails');
+		include_once('partials/emails_template.php');
 		return '';
 	}
 
