@@ -61,7 +61,7 @@ jQuery.ajax({
 });
 
 jQuery(window).load(function(){
-    
+    highlightMenu();
     jQuery('#add-category-button').on('click', function(e) {
         e.preventDefault();
         var categoryName = jQuery("#add-category").val();
@@ -338,3 +338,23 @@ function isEquivalent(a, b) {
     // are considered equivalent
     return true;
 }
+
+/**
+ * Highlights the active anchor link on the 
+ * sidebar
+ */
+function highlightMenu() {
+    // this will get the full URL at the address bar
+    var url = window.location.href;
+
+    // passes on every "a" tag
+    jQuery(".sidenav a").each(function() {
+        // checks if its the same on the address bar
+
+        if (url == (this.href)) {
+            jQuery(this).closest("a").addClass("active");
+            //for making parent of submenu active
+           jQuery(this).closest("a").parent().parent().addClass("active");
+        }
+    });
+};    

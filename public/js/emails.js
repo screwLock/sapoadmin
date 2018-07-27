@@ -1,4 +1,14 @@
-jQuery(function() {
+
+jQuery(window).on('load', function(){
+    highlightMenu();
+})
+
+
+/**
+ * Highlights the active anchor link on the 
+ * sidebar
+ */
+function highlightMenu() {
     // this will get the full URL at the address bar
     var url = window.location.href;
 
@@ -12,4 +22,4 @@ jQuery(function() {
            jQuery(this).closest("a").parent().parent().addClass("active");
         }
     });
-});    
+};    
