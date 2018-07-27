@@ -13,8 +13,19 @@
 ?>
 <div class="loading-page"></div>
 
-<nav class="navbar fixed-top navbar-light bg-light">
+<nav class="navbar fixed-top navbar-light bg-light navbar-expand-lg">
     <a class="navbar-brand" href="#">SAPO</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Home </a>
+            <a class="nav-item nav-link" href="#">Pickup History</a>
+            <a class="nav-item nav-link" href="#">Pricing</a>
+            <a class="nav-item nav-link" href="<?php echo wp_logout_url("./user-registration"); ?>">Logout</a>
+        </div>
+    </div>
 </nav>
 
 <div id="sapo-sidebar" class="sidenav border-right">
@@ -27,3 +38,6 @@
 
 <div class="main">
 </div><!-- End of main -->
+
+<!--
+    user image = orgName + "avatarImage";
