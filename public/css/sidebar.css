@@ -47,8 +47,8 @@
 
 
 /* selected link */
-a:active {
-    color: black;
+.sidenav a.active {
+    color: #007bff;
     font-weight: 600;
 }
 
