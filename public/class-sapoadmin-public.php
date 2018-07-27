@@ -174,7 +174,7 @@ class Sapoadmin_Public {
 		
 
 		wp_enqueue_script('blackout_dates');
-		include_once('partials/blackout_dates_card_template.php');
+		include_once('partials/blackout_dates_template.php');
 		return '';
 	}
 
