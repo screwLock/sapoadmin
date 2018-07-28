@@ -66,7 +66,7 @@
                     <div class="form-group row pb-2">
                         <div class="col-3">
                             <label class="sr-only" for="employee-number-input">Employee Number</label>
-                            <input type="number" class="form-control" id="employee-number" aria-describedby="employee-number" placeholder="Employee Number" maxlength=10>
+                            <input type="text" class="form-control" id="employee-number" aria-describedby="employee-number" placeholder="Employee Number" maxlength=10>
                         </div>
                     </div>
                     <div class="form-group row pb-2">
@@ -158,8 +158,8 @@
                     </div>
                     <div class="form-group row pb-2">
                         <div class="col-3">
-                            <label class="sr-only" for="driver-email-input">Truck Number</label>
-                            <input type="number" class="form-control" id="driver-truck-number" aria-describedby="driver-truck-number" placeholder="Truck Number" maxlength=10>
+                            <label class="sr-only" for="driver-number-input">Truck Number</label>
+                            <input type="text" class="form-control" id="driver-truck-number" aria-describedby="driver-truck-number" placeholder="Truck Number" maxlength=10>
                         </div>
                     </div>
                     <div class="form-group row pb-2">

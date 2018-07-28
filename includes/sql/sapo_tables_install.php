@@ -89,7 +89,7 @@ function sapo_tables_install() {
 	       $sql[] = "CREATE TABLE $trucks_table(
 		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
 		      user_id BIGINT(20) NOT NULL,
-		      truck_number BIGINT(20) NOT NULL DEFAULT '0',
+		      truck_number VARCHAR(20) NOT NULL DEFAULT '0',
 		      driver_name VARCHAR(30) NOT NULL DEFAULT '0',
 		      driver_phone VARCHAR(10) NOT NULL DEFAULT '0',
 		      driver_email VARCHAR(30) NOT NULL DEFAULT '0',
@@ -108,7 +108,7 @@ function sapo_tables_install() {
 		   $sql[] = "CREATE TABLE $employees_table(
 		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
 		      user_id BIGINT(20) NOT NULL,
-			  employee_id BIGINT(20) NOT NULL,
+			  employee_id VARCHAR(20) NOT NULL,
 			  access_level TINYINT(10) UNSIGNED NOT NULL DEFAULT 2,
 			  phone_number VARCHAR(10) NOT NULL DEFAULT '',
 			  email VARCHAR(20) NOT NULL DEFAULT '',
