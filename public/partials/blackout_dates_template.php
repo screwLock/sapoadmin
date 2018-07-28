@@ -53,7 +53,7 @@
                 <div class="form-group row">
                     <div class="col-4">
                         <label class="sr-only" for="inlineFormInput">Single Blackout Date</label>
-                        <input type="text" class="form-control" id="blackout-dates-single">
+                        <input type="text" class="form-control text-center" id="blackout-dates-single">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -62,7 +62,7 @@
                         <input type="text" class="form-control" id="single-date-reason" placeholder="Reason">
                     </div>
                     <div class="col-4">
-                        <button class="btn btn-primary" id="add-date-button"><strong>+</strong> Add</button>
+                        <button class="btn btn-primary" id="save-date-button">Save</button>
                     </div>
                 </div>  
             </form>
@@ -83,7 +83,7 @@
                         <input type="text" class="form-control" id="date-range-reason" placeholder="Reason">
                     </div>
                     <div class="col-4">
-                        <button class="btn btn-primary" id="add-date-range-button"><strong>+</strong> Add</button>
+                        <button class="btn btn-primary" id="save-date-range-button">Save</button>
                     </div>
                 </div>
             </form>

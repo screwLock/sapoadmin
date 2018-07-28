@@ -81,7 +81,7 @@ jQuery(window).load(function () {
 
 
     //add click event listener to single date add button
-    jQuery('#add-date-button').on('click', function (e) {
+    jQuery('#save-date-button').on('click', function (e) {
         e.preventDefault();
         addSingleDate(jQuery('#blackout-dates-single').datepicker('getDate'), jQuery('#single-date-reason').val(), blackoutDates);
         newDates = getUnsavedDates(blackoutDates);
@@ -111,7 +111,7 @@ jQuery(window).load(function () {
     });
 
     //add click event listener to date-range add button
-    jQuery('#add-date-range-button').on('click', function (e) {
+    jQuery('#save-date-range-button').on('click', function (e) {
         e.preventDefault();
         if (jQuery('#blackout-date-range-start').datepicker('getDate').toDateString() === jQuery('#blackout-date-range-end').datepicker('getDate').toDateString()) {
             jQuery('#blackout-date-range-end').popover('show');
