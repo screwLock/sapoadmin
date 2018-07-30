@@ -98,4 +98,24 @@
 
         wp_send_json_success($status); 
     }
+
+    public function get_employees(){
+        global $wpdb;
+        $employees_table = $wpdb->prefix . 'sapo_employees';
+        $employees = $wpdb->get_results("SELECT first_name,last_name,middle_initial,access_level FROM " . $employees_table . 
+        " WHERE USER_ID = " . get_current_user_id());
+
+
+        wp_send_json_success($categories);
+    }
+
+    public function get_drivers(){
+        global $wpdb;
+        $drivers_table = $wpdb->prefix . 'sapo_drivers';
+        $drivers = $wpdb->get_results("SELECT first_name, last_name,middle_initial,access_level FROM " . $drivers_table . 
+        " WHERE USER_ID = " . get_current_user_id());
+
+
+        wp_send_json_success($drivers);
+    }
  }
