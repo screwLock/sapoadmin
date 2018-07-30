@@ -53,9 +53,9 @@
     </div> <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
-		    <div class="input-group-text"> <i class="fa fa-lock"></i> </div>
-			<input class="form-control" placeholder="Repeat password" type="password" id="rpw-input">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 		</div>
+			<input class="form-control" placeholder="Repeat password" type="password" id="rpw-input">
     </div> <!-- form-group// -->          
 	<div class="form-group input-group">
 		<meter max="4" id="password-strength-meter"></meter>
