@@ -7,17 +7,19 @@ jQuery(window).load(function(){
     jQuery("#add-employee-button").on('click', function(e){
         e.preventDefault();
         var first = jQuery("#employee-first-name").val();
-        var middle = jQuery("#employee-middle-name").val();
+        var middle = jQuery("#employee-middle-initial").val();
         var last = jQuery("#employee-last-name").val();
         var email = jQuery("#employee-email").val();
-        var pn = jQuery("#employee-password").val();
-        var rpn = jQuery("#employee-repeat-password").val();
+        var pn = jQuery('#employee-phone-number-1').val() + jQuery('#employee-phone-number-2').val() + jQuery('#employee-phone-number-3').val();
+        var pass = jQuery("#employee-password").val();
+        var repPass = jQuery("#employee-repeat-password").val();
         var access = jQuery("#access-dropdown").val();
-        if(validPhoneNumber(pn) && validEmail(email) && passwordSameAsRepeat(pn,rpn)){
-            addEmployee(first, middle, last, email, pass, repPass, access);
+        var id = jQuery('#employee-number').val();
+        if(validPhoneNumber(pn) && validEmail(email) && passwordSameAsRepeat(pass,repPass) && passwordEmpty(pass)){
+            newEmployee = addEmployee(first, middle, last, email, pass, access, pn, id);
             jQuery.ajax({
                 type:"POST",
-                url: employee_ajax.ajax_url,
+                url: employees_ajax.ajax_url,
                 dataType: 'json',
                 data: {
                     action: 'save_employee',
@@ -25,7 +27,39 @@ jQuery(window).load(function(){
                 },
                 success: function (response) {
                     jQuery("#saved-employees").append(addEmployeeEntry(newEmployee)).hide().show('slow');
-                    console.log(response.data);
+                    console.log(response);
+                },
+                error: function(xhr, error, status){
+                    console.log(status);
+                }
+            });
+        }
+    });
+
+    jQuery("#add-driver-button").on('click', function(e){
+        e.preventDefault();
+        var first = jQuery("#driver-first-name").val();
+        var middle = jQuery("#driver-middle-initial").val();
+        var last = jQuery("#driver-last-name").val();
+        var email = jQuery("#driver-email").val();
+        var pn = jQuery('#driver-phone-number-1').val() + jQuery('#driver-phone-number-2').val() + jQuery('#driver-phone-number-3').val();
+        var pass = jQuery("#driver-password").val();
+        var repPass = jQuery("#driver-repeat-password").val();
+        var access = jQuery("#access-dropdown").val();
+        var id = jQuery('#driver-truck-number').val();
+        if(validPhoneNumber(pn) && validEmail(email) && passwordSameAsRepeat(pass,repPass) && passwordEmpty(pass)){
+            newDriver = addDriver(first, middle, last, email, pass, access, pn, id);
+            jQuery.ajax({
+                type:"POST",
+                url: employees_ajax.ajax_url,
+                dataType: 'json',
+                data: {
+                    action: 'save_driver',
+                    new_driver: newDriver
+                },
+                success: function (response) {
+                    jQuery("#saved-drivers").append(addDriverEntry(newDriver)).hide().show('slow');
+                    console.log(response);
                 },
                 error: function(xhr, error, status){
                     console.log(error);
@@ -41,30 +75,32 @@ jQuery(window).load(function(){
     });
 }); // end of window on load
 
-function addEmployee(first, middle, last, email, pass, repPass, access){
+function addEmployee(first, middle, last, email, pass, access, pn, id){
     var newEmployee = {
         firstName: first,
         middleInitial: middle,
         lastName: last,
         email: email,
         password: pass,
-        repeatPassword: repPass,
-        accessLevel: access
+        phoneNumber: pn,
+        accessLevel: access,
+        id: id
     };
     return newEmployee;
 }
 
-function addDriver(first, middle, last, email, pass, repPass, access){
-    var newEmployee = {
+function addDriver(first, middle, last, email, pass, access, pn, id){
+    var newDriver = {
         firstName: first,
         middleInitial: middle,
         lastName: last,
         email: email,
         password: pass,
-        repeatPassword: repPass,
-        accessLevel: access
+        phoneNumber: pn,
+        accessLevel: access,
+        id:id
     };
-    return newEmployee;
+    return newDriver;
 }
 
 function addEmployeeEntry(employee){
@@ -100,7 +136,11 @@ function validPhoneNumber(phoneNumber){
 }
 
 function passwordSameAsRepeat(pw, rpw){
-    return pw.val() === rpw.val();
+    return pw == rpw;
+}
+
+function passwordEmpty(pw){
+    return pw.length > 0;
 }
 
 /**

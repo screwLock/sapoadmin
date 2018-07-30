@@ -58,9 +58,19 @@
                             <label class="sr-only" for="employee-email-input">E-mail</label>
                             <input type="email" class="form-control" id="employee-email" aria-describedby="employee-email" placeholder="Email" maxlength=15>
                         </div>
-                        <div class="col-3">
-                            <label class="sr-only" for="employee-phone-input">Phone Number</label>
-                            <input type="text" class="form-control" id="employee-phone-number" aria-describedby="employee-phone-number" placeholder="Phone Number" maxlength=10>
+                        <div class="col-1">
+                            <label class="sr-only" for="employee-phone-1-input">Phone Number 1</label>
+                            <input type="text" class="form-control" id="employee-phone-number-1" aria-describedby="employee-phone-number-1" placeholder="Phone Number" maxlength=3>
+                        </div>
+                        <div> - </div>
+                        <div class="col-1">
+                            <label class="sr-only" for="employee-phone-2-input">Phone Number 2</label>
+                            <input type="text" class="form-control" id="employee-phone-number-2" aria-describedby="employee-phone-number-2" placeholder="Phone Number" maxlength=3>
+                        </div>
+                        <div> - </div>
+                        <div class="col-1">
+                            <label class="sr-only" for="employee-phone-3-input">Phone Number 3</label>
+                            <input type="text" class="form-control" id="employee-phone-number-3" aria-describedby="employee-phone-number-3" placeholder="Phone Number" maxlength=4>
                         </div>
                     </div>      
                     <div class="form-group row pb-2">
@@ -143,7 +153,7 @@
                         </div>
                         <div class="col-1">
                             <label class="sr-only" for="driver-middle-name-input">Middle Initial</label>
-                            <input type="text" class="form-control" id="driver-middle-name" aria-describedby="driver-middle-name" placeholder="MI" maxlength=1 size="1">
+                            <input type="text" class="form-control" id="driver-middle-initial" aria-describedby="driver-middle-initial" placeholder="MI" maxlength=1 size="1">
                         </div>
                     </div>
                     <div class="form-group row pb-2">
@@ -151,9 +161,19 @@
                             <label class="sr-only" for="driver-email-input">E-mail</label>
                             <input type="email" class="form-control" id="driver-email" aria-describedby="driver-email" placeholder="Email" maxlength=15>
                         </div>
-                        <div class="col-3">
-                            <label class="sr-only" for="driver-phone-number-input">Phone Number</label>
-                            <input type="text" class="form-control" id="driver-phone-number" aria-describedby="driver-phone-number" placeholder="Phone Number" maxlength=15>
+                        <div class="col-1">
+                            <label class="sr-only" for="driver-phone-1-input">Phone Number 1</label>
+                            <input type="text" class="form-control" id="driver-phone-number-1" aria-describedby="driver-phone-number-1" placeholder="Phone Number" maxlength=3>
+                        </div>
+                        <div> - </div>
+                        <div class="col-1">
+                            <label class="sr-only" for="driver-phone-2-input">Phone Number 2</label>
+                            <input type="text" class="form-control" id="driver-phone-number-2" aria-describedby="driver-phone-number-2" placeholder="Phone Number" maxlength=3>
+                        </div>
+                        <div> - </div>
+                        <div class="col-1">
+                            <label class="sr-only" for="driver-phone-3-input">Phone Number 3</label>
+                            <input type="text" class="form-control" id="driver-phone-number-3" aria-describedby="driver-phone-number-3" placeholder="Phone Number" maxlength=4>
                         </div>
                     </div>
                     <div class="form-group row pb-2">
@@ -168,8 +188,8 @@
                             <input type="text" class="form-control" id="driver-password" aria-describedby="driver-password" placeholder="Password" maxlength=10>
                         </div>
                         <div class="col-3">
-                            <label class="sr-only" for="truck-repeat-password-input">Repeat Password</label>
-                            <input type="password" class="form-control" id="truck-repeat-password" aria-describedby="truck-repeat-password" placeholder="Repeat Password" maxlength=10>
+                            <label class="sr-only" for="driver-repeat-password-input">Repeat Password</label>
+                            <input type="password" class="form-control" id="driver-repeat-password" aria-describedby="driver-repeat-password" placeholder="Repeat Password" maxlength=10>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-primary" id="add-driver-button">Save</button>

@@ -189,7 +189,7 @@ class Sapoadmin {
 		$blackout_dates_ajax = new BlackoutDatesAjax();
 		$zipcodes_ajax = new ZipcodesAjax();
 		$categories_ajax = new CategoriesAjax();
-		$trucks_ajax = new TrucksAjax();
+		$employees_ajax = new EmployeesAjax();
 		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'register_scripts' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
@@ -231,6 +231,8 @@ class Sapoadmin {
 		$this->loader->add_action( 'wp_ajax_get_location_details', $categories_ajax, 'get_location_details');
 
 		//Ajax for employees table
+		$this->loader->add_action( 'wp_ajax_save_employee', $employees_ajax, 'save_employee');
+		$this->loader->add_action( 'wp_ajax_save_driver', $employees_ajax, 'save_driver');
 
 	}
 

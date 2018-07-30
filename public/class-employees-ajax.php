@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The file that defines the trucks ajax functionality.
+ * The file that defines the drivers ajax functionality.
  *
  * A class definition that includes ajax functionality
  *
@@ -13,7 +13,7 @@
  */
 
 /**
- * All Ajax code for the trucks page should be
+ * All Ajax code for the drivers page should be
  * set here.
  *
  * @since      1.0.0
@@ -22,24 +22,25 @@
  * @author     Travus Helmly <helmlyw@gmail.com>
  */
 
- class TrucksAjax{
+ class EmployeesAjax{
 
     public function save_employee(){
-        wp_send_json_success();
         global $wpdb;
-        $sizes_table = $wpdb->prefix . 'sapo_sizes';
+        $employees_table = $wpdb->prefix . 'sapo_employees';
         $employee = $_POST['new_employee'];
-        
+       
         $status = 
             $wpdb->replace( 
-                $sizes_table, 
+                $employees_table, 
                 array( 
                     'first_name' => $employee['firstName'],
                     'last_name' => $employee['lastName'],
-                    'middle_initial' => $employee['MiddleInitial'],
+                    'middle_initial' => $employee['middleInitial'],
                     'email' => $employee['email'],
-                    'access' => $employee['access'],
+                    'access_level' => $employee['accessLevel'],
                     'phone_number' => $employee['phoneNumber'],
+                    'employee_password' =>$employee['password'],
+                    'employee_id' => $employee['id'],
                     //get_current_user_org
                     'user_id' => get_current_user_id() 
                 ), 
@@ -49,6 +50,46 @@
                     '%s',
                     '%s',
                     '%d',
+                    '%s',
+                    '%s',
+                    '%s',
+                    '%d' 
+                ) 
+            );
+
+
+        wp_send_json_success($status); 
+    }
+
+
+    public function save_driver(){
+        global $wpdb;
+        $drivers_table = $wpdb->prefix . 'sapo_drivers';
+        $driver = $_POST['new_driver'];
+        
+        $status = 
+            $wpdb->replace( 
+                $drivers_table, 
+                array( 
+                    'first_name' => $driver['firstName'],
+                    'last_name' => $driver['lastName'],
+                    'middle_initial' => $driver['middleInitial'],
+                    'email' => $driver['email'],
+                    'access_level' => $driver['accessLevel'],
+                    'phone_number' => $driver['phoneNumber'],
+                    'driver_password' => $driver['password'],
+                    'driver_number' => $driver['id'],
+                    //get_current_user_org
+                    'user_id' => get_current_user_id() 
+                ), 
+                array( 
+                    '%s', 
+                    '%s',
+                    '%s',
+                    '%s',
+                    '%d',
+                    '%s',
+                    '%s',
                     '%s',
                     '%d' 
                 ) 
