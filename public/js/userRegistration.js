@@ -19,6 +19,7 @@ window.fbAsyncInit = function() {
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
+
    function checkLoginState() {
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
@@ -62,14 +63,43 @@ function attachSignin(element) {
 jQuery(window).load(function(){
     startApp();
     var orgID = getUrlParam("orgID", -1);
+
     jQuery("#create-user-button").on('click', function(e){
         e.preventDefault();
-        FB.api('/me', 'GET', {fields: 'id,first_name,last_name,email'}, function(response) {
-            console.log(response);
-            //check db for alrady created accoutn by email
-          });
+        //FB.api('/me', 'GET', {fields: 'id,first_name,last_name,email'}, function(response) {
+        //    console.log(response);
+        //    //check db for alrady created accoutn by email
+        //  });
     });
+});
 
+var strength = {
+  0: "Worst ",
+  1: "Bad ",
+  2: "Weak ",
+  3: "Good ",
+  4: "Strong "
+}
+
+var password = document.getElementById('pw-input');
+var meter = document.getElementById('password-strength-meter');
+var text = document.getElementById('password-strength-text');
+
+password.addEventListener('input', function()
+{
+  var val = password.value;
+  var result = zxcvbn(val);
+
+  // Update the password strength meter
+  meter.value = result.score;
+ 
+  // Update the text indicator
+  if(val !== "") {
+      text.innerHTML = "Strength: " + "<strong>" + strength[result.score] + "</strong>" + "<span class='feedback'>" + result.feedback.warning + " " + result.feedback.suggestions + "</span"; 
+  }
+  else {
+      text.innerHTML = "";
+  }
 });
 
 //Utility functions for getting URL parameters

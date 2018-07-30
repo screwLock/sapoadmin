@@ -140,6 +140,8 @@ class Sapoadmin_Public {
 		wp_register_script('user_account',  plugin_dir_url( __FILE__ ) . 'js/userAccount.js', $this->version);
 		wp_register_script('google_autocomplete', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAP9TsRTrHitDF4jNAwSXLLKajKM4LTGVc&libraries=places&callback=initAutocomplete',
 							array('user_account'), $this->version);
+		wp_register_script('pw_strength', 'https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js');
+		wp_register_style('pw_strength_css',  plugin_dir_url( __FILE__ ) . 'css/pw-strength.css');
 	}
 	
 
@@ -231,6 +233,8 @@ class Sapoadmin_Public {
 
 		wp_enqueue_script('user_registration');
 		wp_enqueue_script('google_login');
+		wp_enqueue_script('pw_strength');
+		wp_enqueue_style('pw_strength_css');
 		add_filter('script_loader_tag', array($this, 'google_login_script_attributes'), 10, 2);
 
 		include_once('partials/user_registration_template.php');

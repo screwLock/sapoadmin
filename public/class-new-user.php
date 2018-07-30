@@ -83,6 +83,8 @@ class NewUser
             'first_name' => $first_name,
             'last_name' => $last_name,
             'nickname' => $first_name,
+            'show_admin_bar_front' => false,
+            'role' => 'subscriber'
         );
 
         $user_id = wp_insert_user($user_data);
