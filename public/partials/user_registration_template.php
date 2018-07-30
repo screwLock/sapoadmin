@@ -14,7 +14,7 @@
 <div class="loading-page"></div>
 
 <div class="card bg-light">
-<article class="card-body mx-auto" style= "max-width: 300px">
+<article class="card-body mx-auto" style= "max-width: 295px">
 	<h4 class="card-title mt-3 text-center">Create Account</h4>
 	<p class="text-center">Get started with your free account</p>
 	<p>
@@ -53,12 +53,14 @@
     </div> <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
-		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		    <div class="input-group-text"> <i class="fa fa-lock"></i> </div>
+			<input class="form-control" placeholder="Repeat password" type="password" id="rpw-input">
 		</div>
-        <input class="form-control" placeholder="Repeat password" type="password" id="rpw-input">
+    </div> <!-- form-group// -->          
+	<div class="form-group input-group">
 		<meter max="4" id="password-strength-meter"></meter>
 		<p id="password-strength-text"></p>
-    </div> <!-- form-group// -->                                    
+	</div>                          
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block" id="create-user-button"> Create Account  </button>
     </div> <!-- form-group// -->      
