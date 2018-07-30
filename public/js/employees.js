@@ -26,7 +26,7 @@ jQuery(window).load(function(){
                     new_employee: newEmployee
                 },
                 success: function (response) {
-                    jQuery("#saved-employees").append(addEmployeeEntry(newEmployee)).hide().show('slow');
+                    jQuery("#current-employees").append(addEmployeeEntry(newEmployee)).hide().show('slow');
                     console.log(response);
                 },
                 error: function(xhr, error, status){
@@ -58,7 +58,7 @@ jQuery(window).load(function(){
                     new_driver: newDriver
                 },
                 success: function (response) {
-                    jQuery("#saved-drivers").append(addDriverEntry(newDriver)).hide().show('slow');
+                    jQuery("#current-drivers").append(addDriverEntry(newDriver)).hide().show('slow');
                     console.log(response);
                 },
                 error: function(xhr, error, status){
@@ -106,7 +106,7 @@ function addDriver(first, middle, last, email, pass, access, pn, id){
 function addEmployeeEntry(employee){
         var newEntry =      '<tr>' +
                             '<td>' + employee.firstName + ' ' + employee.middleInitial + ' ' + employee.lastName + '</td>' +
-                            '<td>' + employee.access + '</td>' + '<td>' +
+                            '<td>' + employee.accessLevel + '</td>' + '<td>' +
                             '<div class="form-check"><label class="form-check-label">' +
                             '<input class="form-check-input"type="checkbox" name="saved-category-cb" value=' + employee.email + '>Delete</label></div></td>'+  
                             '</tr>';
@@ -117,7 +117,7 @@ function addEmployeeEntry(employee){
 function addDriverEntry(driver){
     var newEntry =      '<tr>' +
                         '<td>' + driver.firstName + ' ' + driver.middleInitial + ' ' + driver.lastName + '</td>' +
-                        '<td>' + driver.access + '</td>' + '<td>' +
+                        '<td>' + driver.accessLevel + '</td>' + '<td>' +
                         '<div class="form-check"><label class="form-check-label">' +
                         '<input class="form-check-input"type="checkbox" name="saved-category-cb" value=' + driver.email + '>Delete</label></div></td>'+  
                         '</tr>';
