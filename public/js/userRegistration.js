@@ -66,6 +66,8 @@ jQuery(window).load(function(){
 
     jQuery("#create-user-button").on('click', function(e){
         e.preventDefault();
+        var pwScore = zxcvbn(password.value);
+        if(pwScore.score !== 4) console.log('Password should be strong');
         //FB.api('/me', 'GET', {fields: 'id,first_name,last_name,email'}, function(response) {
         //    console.log(response);
         //    //check db for alrady created accoutn by email
@@ -73,6 +75,11 @@ jQuery(window).load(function(){
     });
 });
 
+/**
+* Setting up the password strength meter
+*
+*
+**/
 var strength = {
   0: "Worst ",
   1: "Bad ",

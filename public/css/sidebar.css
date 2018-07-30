@@ -31,13 +31,13 @@
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover{
-    background-color: #fcf8f8;
+    background-color: #f8f9fa;
     text-decoration: none;
     color: black;
 }
 
 .sidenav a:visited{
-    background-color: #fcf8f8;
+    background-color: #f8f9fa;
     color: black;
 }
 
@@ -50,7 +50,7 @@
 .sidenav a.active {
     color: #007bff;
     font-weight: 600;
-    background-color: #fcf8f8;
+    background-color: #f8f9fa;
 }
 
 .sidenav a.active:hover {

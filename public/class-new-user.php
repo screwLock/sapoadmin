@@ -57,7 +57,7 @@ class NewUser
      *
      * @return int|WP_Error         The id of the user that was created, or error if failed.
      */
-    private function register_user($email, $first_name, $last_name)
+    private function register_user($email, $first_name, $last_name, $password)
     {
         $errors = new WP_Error();
  
@@ -73,9 +73,6 @@ class NewUser
             return $errors;
         }
  
-        // Generate the password so that the subscriber will have to check email...
-        $password = wp_generate_password(12, false);
-
         $user_data = array(
             'user_login' => $email,
             'user_email' => $email,

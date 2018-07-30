@@ -14,7 +14,7 @@
 <div class="loading-page"></div>
 
 <div class="card bg-light">
-<article class="card-body mx-auto" style= "max-width: 295px">
+<article class="card-body mx-auto" style= "max-width: 293px">
 	<h4 class="card-title mt-3 text-center">Create Account</h4>
 	<p class="text-center">Get started with your free account</p>
 	<p>
@@ -31,31 +31,31 @@
 		<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
 		 </div>
-        <input name="" class="form-control" placeholder="First name" type="text">
+        <input name="" class="form-control" placeholder="First name" type="text" required>
     </div> <!-- form-group// -->
 	<div class="form-group input-group">
 		<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
 		 </div>
-        <input name="" class="form-control" placeholder="Last name" type="text">
+        <input name="" class="form-control" placeholder="Last name" type="text" required>
     </div> <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 		 </div>
-        <input name="" class="form-control" placeholder="Email address" type="email">
+        <input name="" class="form-control" placeholder="Email address" type="email" required>
     </div> <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 		</div>
-        <input class="form-control" placeholder="Create password" type="password" id="pw-input">
+        <input class="form-control" placeholder="Create password" type="password" id="pw-input" required>
     </div> <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 		</div>
-			<input class="form-control" placeholder="Repeat password" type="password" id="rpw-input">
+			<input class="form-control" placeholder="Repeat password" type="password" id="rpw-input" required>
     </div> <!-- form-group// -->          
 	<div class="form-group input-group">
 		<meter max="4" id="password-strength-meter"></meter>
