@@ -1,6 +1,48 @@
 
 var employees = [];
-var trucks = [];
+var drivers = [];
+
+jQuery.ajax({
+    type:"POST",
+    url: employees_ajax.ajax_url,
+    dataType: 'json',
+    data: {
+        action: 'get_employees'
+    },
+    success: function (response) {
+        response.data.map(function(oldEmployee){
+            var oe = createEmployee(oldEmployee.first_name, 
+                oldEmployee.middle_initial, oldEmployee.last_name, oldEmployee.email, '',oldEmployee.phone_number, oldEmployee.access_level,
+                oldEmployee.id);
+            employees.push(oe);
+            jQuery("#current-employees").append(addEmployeeEntry(oe)).hide().show('slow');
+        }); 
+    },
+    error: function(xhr,status, error){
+        console.log(error);
+    }
+});
+
+jQuery.ajax({
+    type:"POST",
+    url: employees_ajax.ajax_url,
+    dataType: 'json',
+    data: {
+        action: 'get_drivers'
+    },
+    success: function (response) {
+        response.data.map(function(oldDriver){
+            var od = createEmployee(oldDriver.first_name, 
+                oldDriver.middle_initial, oldDriver.last_name, oldDriver.email, '',oldDriver.phone_number, oldDriver.access_level,
+                oldDriver.driver_number);
+            drivers.push(od);
+            jQuery("#current-drivers").append(addDriverEntry(od)).hide().show('slow');
+        }); 
+    },
+    error: function(xhr,status, error){
+        console.log(error);
+    }
+});
 
 jQuery(window).load(function(){
     highlightMenu();
@@ -16,7 +58,8 @@ jQuery(window).load(function(){
         var access = jQuery("#access-dropdown").val();
         var id = jQuery('#employee-number').val();
         if(validPhoneNumber(pn) && validEmail(email) && passwordSameAsRepeat(pass,repPass) && passwordEmpty(pass)){
-            newEmployee = addEmployee(first, middle, last, email, pass, access, pn, id);
+            newEmployee = createEmployee(first, middle, last, email, pass, pn, access, id);
+            employees.push(newEmployee);
             jQuery.ajax({
                 type:"POST",
                 url: employees_ajax.ajax_url,
@@ -27,6 +70,7 @@ jQuery(window).load(function(){
                 },
                 success: function (response) {
                     jQuery("#current-employees").append(addEmployeeEntry(newEmployee)).hide().show('slow');
+                    employees.push(newEmployee);
                     console.log(response);
                 },
                 error: function(xhr, error, status){
@@ -48,7 +92,8 @@ jQuery(window).load(function(){
         var access = jQuery("#access-dropdown").val();
         var id = jQuery('#driver-truck-number').val();
         if(validPhoneNumber(pn) && validEmail(email) && passwordSameAsRepeat(pass,repPass) && passwordEmpty(pass)){
-            newDriver = addDriver(first, middle, last, email, pass, access, pn, id);
+            newDriver = createDriver(first, middle, last, email, pass, pn, access, id);
+            drivers.push(newDriver);
             jQuery.ajax({
                 type:"POST",
                 url: employees_ajax.ajax_url,
@@ -59,6 +104,7 @@ jQuery(window).load(function(){
                 },
                 success: function (response) {
                     jQuery("#current-drivers").append(addDriverEntry(newDriver)).hide().show('slow');
+                    drivers.push(newDriver);
                     console.log(response);
                 },
                 error: function(xhr, error, status){
@@ -67,6 +113,70 @@ jQuery(window).load(function(){
             });
         }
     });
+
+    //event listener and AJAX for the delete button
+    //on the saved employees table
+    jQuery('#delete-employees-button').on('click', function(e){
+        e.preventDefault();
+        if(getCheckedEmployees().length >= 1){
+            jQuery.ajax({
+                type:"POST",
+                url: employees_ajax.ajax_url,
+                dataType: 'json',
+                data: {
+                    action: 'delete_employee',
+                    employeesToRemove: getCheckedEmployees()
+                },
+                success: function (response) {
+                    console.log(response);
+                    if(response.success === true){
+                        jQuery('input[name="saved-employees-cb"]:checked').each(function(){
+                            var target = jQuery(this).closest("tr");
+                            target.fadeOut(500, function(){jQuery(this).remove()});
+                                employees = deleteEmployees(jQuery(this).val(), employees);
+                        });
+                    }
+                    else
+                    console.log("there was an error");
+                },
+                error: function(xhr, status, error){
+                     console.log(status);
+                }
+            });
+        }
+    }); 
+
+    //event listener and AJAX for the delete button
+    //on the saved drivers table
+    jQuery('#delete-drivers-button').on('click', function(e){
+        e.preventDefault();
+        if(getCheckedDrivers().length >= 1){
+            jQuery.ajax({
+                type:"POST",
+                url: employees_ajax.ajax_url,
+                dataType: 'json',
+                data: {
+                    action: 'delete_driver',
+                    driversToRemove: getCheckedDrivers()
+                },
+                success: function (response) {
+                    console.log(response);
+                    if(response.success === true){
+                        jQuery('input[name="saved-drivers-cb"]:checked').each(function(){
+                            var target = jQuery(this).closest("tr");
+                            target.fadeOut(500, function(){jQuery(this).remove()});
+                                drivers = deleteDrivers(jQuery(this).val(), drivers);
+                        });
+                    }
+                    else
+                    console.log("there was an error");
+                },
+                error: function(xhr, status, error){
+                     console.log(status);
+                }
+            });
+        }
+    }); 
     
     //change text and value of dropdown to selected dropdown item
     jQuery('.dropdown a').on('click', function(){
@@ -75,7 +185,7 @@ jQuery(window).load(function(){
     });
 }); // end of window on load
 
-function addEmployee(first, middle, last, email, pass, access, pn, id){
+function createEmployee(first, middle, last, email, pass = '', access, pn, id){
     var newEmployee = {
         firstName: first,
         middleInitial: middle,
@@ -89,7 +199,7 @@ function addEmployee(first, middle, last, email, pass, access, pn, id){
     return newEmployee;
 }
 
-function addDriver(first, middle, last, email, pass, access, pn, id){
+function createDriver(first, middle, last, email, pass = '', access, pn, id){
     var newDriver = {
         firstName: first,
         middleInitial: middle,
@@ -106,9 +216,10 @@ function addDriver(first, middle, last, email, pass, access, pn, id){
 function addEmployeeEntry(employee){
         var newEntry =      '<tr>' +
                             '<td>' + employee.firstName + ' ' + employee.middleInitial + ' ' + employee.lastName + '</td>' +
+                            '<td>' + employee.email + '</td>' +
                             '<td>' + employee.accessLevel + '</td>' + '<td>' +
                             '<div class="form-check"><label class="form-check-label">' +
-                            '<input class="form-check-input"type="checkbox" name="saved-category-cb" value=' + employee.email + '>Delete</label></div></td>'+  
+                            '<input class="form-check-input"type="checkbox" name="saved-employees-cb" value=' + employee.email + '>Delete</label></div></td>'+  
                             '</tr>';
                               
         return newEntry;
@@ -117,12 +228,37 @@ function addEmployeeEntry(employee){
 function addDriverEntry(driver){
     var newEntry =      '<tr>' +
                         '<td>' + driver.firstName + ' ' + driver.middleInitial + ' ' + driver.lastName + '</td>' +
+                        '<td>' + driver.email + '</td>' +
                         '<td>' + driver.accessLevel + '</td>' + '<td>' +
                         '<div class="form-check"><label class="form-check-label">' +
-                        '<input class="form-check-input"type="checkbox" name="saved-category-cb" value=' + driver.email + '>Delete</label></div></td>'+  
+                        '<input class="form-check-input"type="checkbox" name="saved-drivers-cb" value=' + driver.email + '>Delete</label></div></td>'+  
                         '</tr>';
                           
     return newEntry;
+}
+
+function getCheckedEmployees(){
+    return jQuery('input[name="saved-employees-cb"]:checked').map(function(){
+                        return jQuery(this).val();
+                         }).get();
+}
+
+function getCheckedDrivers(){
+    return jQuery('input[name="saved-drivers-cb"]:checked').map(function(){
+                        return jQuery(this).val();
+                         }).get();
+}
+
+function deleteEmployees(employeeEmail, employeeArray){
+    return employeeArray.filter(function(employee){
+            return employee.email !== employeeEmail;
+        });
+}
+
+function deleteDrivers(driverEmail, driverArray){
+    return driverArray.filter(function(driver){
+            return driver.email !== driverEmail;
+        });
 }
 
 function validEmail(email){

@@ -118,6 +118,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Employee</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Access Level</th>
                             <th scope="col"></th>
                         </tr>
@@ -125,6 +126,7 @@
                     <tfoot>
                         <tr>
                             <td><button class="btn btn-primary btn-sm" id="delete-employees-button">Delete</button></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -207,6 +209,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Driver</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Access Level</th>
                             <th scope="col"></th>
                         </tr>
@@ -214,6 +217,7 @@
                     <tfoot>
                         <tr>
                             <td><button class="btn btn-primary btn-sm" id="delete-drivers-button">Delete</button></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>

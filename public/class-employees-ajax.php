@@ -102,20 +102,50 @@
     public function get_employees(){
         global $wpdb;
         $employees_table = $wpdb->prefix . 'sapo_employees';
-        $employees = $wpdb->get_results("SELECT first_name,last_name,middle_initial,access_level FROM " . $employees_table . 
+        $employees = $wpdb->get_results("SELECT first_name,last_name,middle_initial,access_level,phone_number,employee_password,employee_id,email FROM " . $employees_table . 
         " WHERE USER_ID = " . get_current_user_id());
 
 
-        wp_send_json_success($categories);
+        wp_send_json_success($employees);
     }
 
     public function get_drivers(){
         global $wpdb;
         $drivers_table = $wpdb->prefix . 'sapo_drivers';
-        $drivers = $wpdb->get_results("SELECT first_name, last_name,middle_initial,access_level FROM " . $drivers_table . 
+        $drivers = $wpdb->get_results("SELECT first_name,last_name,middle_initial,access_level,phone_number,driver_number,email FROM " . $drivers_table . 
         " WHERE USER_ID = " . get_current_user_id());
 
 
         wp_send_json_success($drivers);
+    }
+
+    public function delete_employee(){
+        global $wpdb;
+        $employees_table = $wpdb->prefix . 'sapo_employees';
+        $employees = array();
+        forEach($_POST['employeesToRemove'] as $employee)
+            array_push($employees, $employee);
+
+        $employees = "'" .implode("','", $employees ) . "'"; 
+        $isSuccess = $wpdb->query( 
+            $wpdb->prepare( "DELETE FROM " . $employees_table . " WHERE email IN ($employees) AND user_id = %d", get_current_user_id())
+        );
+
+        wp_send_json_success();
+    }
+    
+    public function delete_driver(){
+        global $wpdb;
+        $drivers_table = $wpdb->prefix . 'sapo_drivers';
+        $drivers = array();
+        forEach($_POST['driversToRemove'] as $driver)
+            array_push($drivers, $driver);
+
+        $drivers = "'" .implode("','", $drivers ) . "'"; 
+        $isSuccess = $wpdb->query( 
+            $wpdb->prepare( "DELETE FROM " . $drivers_table . " WHERE email IN ($drivers) AND user_id = %d", get_current_user_id())
+        );
+
+        wp_send_json_success($isSuccess);
     }
  }

@@ -233,6 +233,10 @@ class Sapoadmin {
 		//Ajax for employees table
 		$this->loader->add_action( 'wp_ajax_save_employee', $employees_ajax, 'save_employee');
 		$this->loader->add_action( 'wp_ajax_save_driver', $employees_ajax, 'save_driver');
+		$this->loader->add_action( 'wp_ajax_get_employees', $employees_ajax, 'get_employees');
+		$this->loader->add_action( 'wp_ajax_get_drivers', $employees_ajax, 'get_drivers');
+		$this->loader->add_action( 'wp_ajax_delete_employee', $employees_ajax, 'delete_employee');
+		$this->loader->add_action( 'wp_ajax_delete_driver', $employees_ajax, 'delete_driver');
 
 	}
 
