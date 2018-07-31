@@ -240,6 +240,7 @@ function sapo_tables_install() {
 			   last_name VARCHAR(20) NOT NULL DEFAULT '',
 			   organization_id BIGINT(20) NOT NULL DEFAULT 0,
 			   donor_password VARCHAR(15) NOT NULL DEFAULT 'blah',
+			   login_type TINYINT (5) NOT NULL,
 			   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
 		       created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 	           UNIQUE(id),

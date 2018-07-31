@@ -69,7 +69,7 @@ jQuery(window).load(function(){
         var fn = jQuery('#first-name-input').val();
         var ln = jQuery('#last-name-input').val();
         var email = jQuery('#email-input').val();
-        //get org id
+        var ordID = getUrlParam('id', 0);
         //get login methodology (fb, google, sapo)
         //users table pk=orgid,email
         var pw = jQuery('#pw-input').val();
@@ -161,5 +161,4 @@ function getUrlVars() {
     return vars;
 }
 
-//users should be associated with a organizationID.  Organization ID in url
 
