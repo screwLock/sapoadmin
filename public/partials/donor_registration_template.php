@@ -41,7 +41,7 @@
     </div> <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
-		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+		    <span class="input-group-text"> <i id="email-env" class="fa fa-envelope"></i> </span>
 		 </div>
         <input id="email-input" class="form-control" placeholder="Email address" type="email" required>
     </div> <!-- form-group// -->

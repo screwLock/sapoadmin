@@ -68,6 +68,11 @@ jQuery(window).load(function(){
       content: "An account already exists with this email.  Login instead.",
       trigger: "manual",
     })
+    jQuery('#email-env').popover({
+      content: "Enter a valid email",
+      trigger: "manual",
+      placement: 'left'
+    })
     jQuery('#pw-input').popover({
       content: "Password must be strong.",
       trigger: "manual",
@@ -99,6 +104,13 @@ jQuery(window).load(function(){
         var pw = jQuery('#pw-input').val();
         var rpw = jQuery('#rpw-input').val();
         var pwScore = zxcvbn(password.value);
+        if(!validEmail(email)){
+          jQuery('#email-env').popover('show');
+          setTimeout(function () {
+              jQuery('#email-env').popover('hide');
+          }, 2000);
+          return false;
+        }
         if(pwScore.score !== 4) {
           jQuery('#pw-input').popover('show');
           setTimeout(function () {
@@ -206,4 +218,9 @@ function areFieldsEmpty(){
   var fields = jQuery('input:text').filter(function() { return jQuery(this).val() == ""; });
   if(fields.length > 1) return true;
   else return false;
+}
+
+function validEmail(email){
+  var reEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return reEmail.test(email);
 }
