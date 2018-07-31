@@ -55,18 +55,25 @@ class NewDonorsAjax
      **/
     private function register_donor()
     {
+        $donors_table = $wpdb->prefix . "sapo_donors";
         $new_donor = $_POST['new_donor'];
+        $email = $new_donor['email'];
+        $orgID = $new_donor['orgID'];
         $errors = new WP_Error();
  
         // Email address is used as both username and email. It is also the only
         // parameter we need to validate
-        if (!is_email($new_donor['email'])) {
-            $errors->add('email', $this->get_error_message('email'));
-            return $errors;
-        }
+        $wpdb->get_results( 
+            "
+            SELECT email
+            FROM $donors_table
+            WHERE email in ($email)
+                AND organization_id = $orgID
+            "
+        );
 
-        if (username_exists($new_donor['email']) || email_exists($new_donor['email'])) {
-            $errors->add('email_exists', $this->get_error_message('email_exists'));
+        if ($wpdb->num_rows != 0) {
+            $errors->add('email', $this->get_error_message('email'));
             return $errors;
         }
  
@@ -75,12 +82,13 @@ class NewDonorsAjax
             'user_pass' => $new_donor['password'],
             'first_name' => $new_donor['firstName'],
             'last_name' => $new_donor['lastName'],
+            'organization_id' => $new_donor['orgID'],
+            'login_method' => $new_donor['login']
         );
 
-        $user_id = wp_insert_user($donor_data);
+        $status = $wpdb->insert($donors_table, $donor_data, array('%s','%s','%s','%s','%d','%d'));
         //wp_new_user_notification($user_id, $password);
-
-        return $user_id;
+        wp_send_json_success($status); 
     }  //register_user()
     
     /**

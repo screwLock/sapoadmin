@@ -69,16 +69,16 @@ jQuery(window).load(function(){
         var fn = jQuery('#first-name-input').val();
         var ln = jQuery('#last-name-input').val();
         var email = jQuery('#email-input').val();
-        var ordID = getUrlParam('id', 0);
-        //get login methodology (fb, google, sapo)
+        var orgID = getUrlParam('id', 0);
+        var login = 0;
         //users table pk=orgid,email
         var pw = jQuery('#pw-input').val();
-        var newDonor = createDonor(fn, ln, email, pw);
         var pwScore = zxcvbn(password.value);
         if(pwScore.score !== 4) {
           console.log('Password not strong enough');
           return false;
         }
+        var newDonor = createDonor(fn, ln, email, pw,orgID, login);
         jQuery.ajax({
           type:"POST",
           url: new_donors_ajax.ajax_url,
@@ -100,12 +100,14 @@ jQuery(window).load(function(){
     });
 });
 
-function createDonor(firstName,lastName,email,password){
+function createDonor(firstName,lastName,email,password, orgID=0, login=0){
     var donor = {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      password: password
+      password: password,
+      orgID: orgID,
+      login: login
     };
     return donor;
 }
@@ -160,5 +162,4 @@ function getUrlVars() {
     });
     return vars;
 }
-
 
