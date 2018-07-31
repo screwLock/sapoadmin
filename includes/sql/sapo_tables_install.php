@@ -227,6 +227,25 @@ function sapo_tables_install() {
 		       PRIMARY KEY  (user_id)
 		   ) $charset_collate;";   
 		}
+
+		//12.  Create Donors Table
+		$donors_table = $wpdb->prefix . "sapo_donors";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $donors_table  . "'") !== $donors_table ){
+			$sql[] = "CREATE TABLE $donors_table (
+			   id BIGINT(20) NOT NULL AUTO_INCREMENT,
+			   phone_number VARCHAR(10) NOT NULL DEFAULT '',
+			   email VARCHAR(20) NOT NULL DEFAULT '',
+			   first_name VARCHAR(20) NOT NULL DEFAULT '',
+			   last_name VARCHAR(20) NOT NULL DEFAULT '',
+			   organization_id BIGINT(20) NOT NULL DEFAULT 0,
+			   donor_password VARCHAR(15) NOT NULL DEFAULT 'blah',
+			   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+		       created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+	           UNIQUE(id),
+		       PRIMARY KEY  (email)
+		   ) $charset_collate;";   
+		}		
 				
 		if(!empty($sql)){
 		   require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
