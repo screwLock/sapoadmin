@@ -62,20 +62,55 @@ function attachSignin(element) {
 
 jQuery(window).load(function(){
     startApp();
+
+    //Initialize popovers
+    jQuery('#email-input').popover({
+      content: "An account already exists with this email.  Login instead.",
+      trigger: "manual",
+    })
+    jQuery('#pw-input').popover({
+      content: "Password must be strong.",
+      trigger: "manual",
+    })
+    jQuery('#rpw-input').popover({
+      content: "Passwords must match",
+      trigger: "manual",
+    })
+    jQuery('#create-donor-button').popover({
+      content: "All fields required",
+      trigger: "manual",
+    })
     var orgID = getUrlParam("orgID", -1);
 
     jQuery("#create-donor-button").on('click', function(e){
         e.preventDefault();
+        if(areFieldsEmpty()){
+          jQuery('#create-donor-button').popover('show');
+          setTimeout(function () {
+              jQuery('#create-donor-button').popover('hide');
+          }, 2000);
+          return false;
+        }
         var fn = jQuery('#first-name-input').val();
         var ln = jQuery('#last-name-input').val();
         var email = jQuery('#email-input').val();
         var orgID = getUrlParam('id', 0);
         var login = 0;
-        //users table pk=orgid,email
         var pw = jQuery('#pw-input').val();
+        var rpw = jQuery('#rpw-input').val();
         var pwScore = zxcvbn(password.value);
         if(pwScore.score !== 4) {
-          console.log('Password not strong enough');
+          jQuery('#pw-input').popover('show');
+          setTimeout(function () {
+              jQuery('#pw-input').popover('hide');
+          }, 2000);
+          return false;
+        }
+        if(pw !== rpw) {
+          jQuery('#rpw-input').popover('show');
+          setTimeout(function () {
+              jQuery('#rpw-input').popover('hide');
+          }, 2000);
           return false;
         }
         var newDonor = createDonor(fn, ln, email, pw,orgID, login);
@@ -88,10 +123,16 @@ jQuery(window).load(function(){
               new_donor: newDonor
           },
           success: function (response) {
-            console.log(response);
+            if(response.success === false) {
+              jQuery('#email-input').popover('show');
+              setTimeout(function () {
+                  jQuery('#email-input').popover('hide');
+              }, 2000);
+            }
+            else
+              window.location.replace("/user-account");
           },
           error: function(error){
-             // console.log('error');
           }
       });        //FB.api('/me', 'GET', {fields: 'id,first_name,last_name,email'}, function(response) {
         //    console.log(response);
@@ -133,10 +174,8 @@ password.addEventListener('input', function()
 {
   var val = password.value;
   var result = zxcvbn(val);
-
   // Update the password strength meter
   meter.value = result.score;
- 
   // Update the text indicator
   if(val !== "") {
       text.innerHTML = "Strength: " + "<strong>" + strength[result.score] + "</strong>" + "<span class='feedback'>" + result.feedback.warning + " " + result.feedback.suggestions + "</span>"; 
@@ -163,3 +202,8 @@ function getUrlVars() {
     return vars;
 }
 
+function areFieldsEmpty(){
+  var fields = jQuery('input:text').filter(function() { return jQuery(this).val() == ""; });
+  if(fields.length > 1) return true;
+  else return false;
+}

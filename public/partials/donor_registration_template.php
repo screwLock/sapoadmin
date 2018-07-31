@@ -64,7 +64,7 @@
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block" id="create-donor-button"> Create Account  </button>
     </div> <!-- form-group// -->      
-    <p class="text-center">Have an account? <a href="">Log In</a> </p>
+    <p class="text-center">Have an account? <a id="login-anchor" href="">Log In</a> </p>
 		<input type="checkbox" name="website" value="1" style="display:none !important" tabindex="-1" autocomplete="off">
     </form>
 </article>

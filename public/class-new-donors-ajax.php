@@ -53,34 +53,30 @@ class NewDonorsAjax
      *
      * @return int|WP_Error         The id of the user that was created, or error if failed.
      **/
-    private function register_donor()
+    public function register_donor()
     {
-        wp_send_json_success("gay"); 
-
+        global $wpdb;
         $donors_table = $wpdb->prefix . "sapo_donors";
         $new_donor = $_POST['new_donor'];
         $email = $new_donor['email'];
         $orgID = $new_donor['orgID'];
-        $errors = new WP_Error();
- 
         // Email address is used as both username and email. It is also the only
-        // parameter we need to validate
-        $wpdb->get_results( 
+        // parameter we need to validate/*
+        $count = $wpdb->get_var( $wpdb->prepare(
             "
-            SELECT email
-            FROM $donors_table
-            WHERE email in ($email)
-                AND organization_id = $orgID
-            "
+            SELECT COUNT(*) FROM $donors_table
+            WHERE email IN (%s)
+            AND organization_id = %d
+            ", $email, $orgID
+            )
         );
 
-        if ($wpdb->num_rows != 0) {
-            $errors->add('email', $this->get_error_message('email'));
-            return $errors;
+        if ($count > 0) {
+            wp_send_json_error(new WP_Error( 'broke', __( "I've fallen and can't get up", "my_textdomain" )));
         }
  
         $donor_data = array(
-            'email' => $$new_donor['email'],
+            'email' => $new_donor['email'],
             'donor_password' => $new_donor['password'],
             'first_name' => $new_donor['firstName'],
             'last_name' => $new_donor['lastName'],
@@ -88,10 +84,10 @@ class NewDonorsAjax
             'login_method' => $new_donor['login']
         );
 
-        $status = $wpdb->insert($donors_table, $donor_data, array('%s','%s','%s','%s','%d','%d'));
+        //$status = $wpdb->insert($donors_table, $donor_data, array('%s','%s','%s','%s','%d','%d'));
         //wp_new_user_notification($user_id, $password);
-        wp_send_json_success($new_donor); 
-    }  //register_user()
+        wp_send_json_success(); 
+    } 
     
     /**
      * Handles the registration of a new user.
