@@ -55,6 +55,8 @@ class NewDonorsAjax
      **/
     private function register_donor()
     {
+        wp_send_json_success("gay"); 
+
         $donors_table = $wpdb->prefix . "sapo_donors";
         $new_donor = $_POST['new_donor'];
         $email = $new_donor['email'];
@@ -78,8 +80,8 @@ class NewDonorsAjax
         }
  
         $donor_data = array(
-            'user_email' => $$new_donor['email'],
-            'user_pass' => $new_donor['password'],
+            'email' => $$new_donor['email'],
+            'donor_password' => $new_donor['password'],
             'first_name' => $new_donor['firstName'],
             'last_name' => $new_donor['lastName'],
             'organization_id' => $new_donor['orgID'],
@@ -88,7 +90,7 @@ class NewDonorsAjax
 
         $status = $wpdb->insert($donors_table, $donor_data, array('%s','%s','%s','%s','%d','%d'));
         //wp_new_user_notification($user_id, $password);
-        wp_send_json_success($status); 
+        wp_send_json_success($new_donor); 
     }  //register_user()
     
     /**
