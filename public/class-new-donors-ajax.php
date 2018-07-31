@@ -21,37 +21,15 @@
  * @subpackage Sapoadmin/public
  * @author     Travus Helmly <helmlyw@gmail.com>
  */
+require_once( '/path/to/wp-includes/class-phpass.php' );
+
 class NewDonorsAjax
 {
 
     /**
-     * A shortcode for rendering the new donor registration form.
-     *
-     * @param  array   $attributes  Shortcode attributes.
-     * @param  string  $content     The text content for shortcode. Not used.
-     *
-     * @return string  The shortcode output
-     *
-    public function render_register_form($attributes, $content = null)
-    {
-        // Parse shortcode attributes
-        $default_attributes = array('show_title' => false);
-        $attributes = shortcode_atts($default_attributes, $attributes);
-
-        if (is_user_logged_in()) {
-            return __('You are already signed in.', 'personalize-login');
-        } elseif (!get_option('users_can_register')) {
-            return __('Registering new users is currently not allowed.', 'personalize-login');
-        } else {
-            return $this->get_template_html('register_form', $attributes);
-        }
-    } //end of render_register_form() 
-    **/
-    /**
-     * Validates and then completes the new user signup process if all went well.
+     * Handles registration of a new donor
      *
      *
-     * @return int|WP_Error         The id of the user that was created, or error if failed.
      **/
     public function register_donor()
     {
@@ -72,7 +50,7 @@ class NewDonorsAjax
         );
 
         if ($count > 0) {
-            wp_send_json_error(new WP_Error( 'broke', __( "I've fallen and can't get up", "my_textdomain" )));
+            wp_send_json_error(new WP_Error( 'email', __( "Email exists", "email" )));
         }
  
         $donor_data = array(
@@ -84,46 +62,19 @@ class NewDonorsAjax
             'login_method' => $new_donor['login']
         );
 
-        //$status = $wpdb->insert($donors_table, $donor_data, array('%s','%s','%s','%s','%d','%d'));
+        $status = $wpdb->insert($donors_table, $donor_data, array('%s','%s','%s','%s','%d','%d'));
         //wp_new_user_notification($user_id, $password);
         wp_send_json_success(); 
     } 
-    
-    /**
-     * Handles the registration of a new user.
-     *
-     * Used through the action hook "login_form_register" activated on wp-login.php
-     * when accessed through the registration action.
-     *
-    public function do_register_user()
-    {
-        if ('POST' == $_SERVER['REQUEST_METHOD']) {
-            $redirect_url = home_url('member-register');
 
-            if (!get_option('users_can_register')) {
-            // Registration closed, display error
-                $redirect_url = add_query_arg('register-errors', 'closed', $redirect_url);
-            } else {
-                $email = $_POST['email'];
-                $first_name = sanitize_text_field($_POST['first_name']);
-                $last_name = sanitize_text_field($_POST['last_name']);
+    private function hash_password($password){
+        $wp_hasher = new PasswordHash( 8, TRUE );
+        $hashed_password = $wp_hasher->HashPassword( $password );
+        return $hashed_password;
+    }
 
-                $result = $this->register_user($email, $first_name, $last_name);
-
-                if (is_wp_error($result)) {
-                // Parse errors into a string and append as parameter to redirect
-                    $errors = join(',', $result->get_error_codes());
-                    $redirect_url = add_query_arg('register-errors', $errors, $redirect_url);
-                } else {
-                // Success, redirect to login page.
-                    $redirect_url = home_url('member-login');
-                    $redirect_url = add_query_arg('registered', $email, $redirect_url);
-                }
-            }
-
-            wp_redirect($redirect_url);
-            exit;
-        }
-    } // end of do_register_user() function
-    */
+    private function validate_password($password, $stored ) {
+        $hasher = new PasswordHash(8, TRUE);    
+        return $hasher->CheckPassword( $password, $stored );
+    }
 }
