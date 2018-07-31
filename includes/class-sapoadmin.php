@@ -126,10 +126,7 @@ class Sapoadmin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-zipcodes-ajax.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-categories-ajax.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-employees-ajax.php';
-
-
-
-		
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-new-donors-ajax.php';
 
 		$this->loader = new Sapoadmin_Loader();
 
@@ -190,6 +187,7 @@ class Sapoadmin {
 		$zipcodes_ajax = new ZipcodesAjax();
 		$categories_ajax = new CategoriesAjax();
 		$employees_ajax = new EmployeesAjax();
+		$new_donors_ajax = new NewDonorsAjax();
 		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'register_scripts' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
@@ -201,7 +199,7 @@ class Sapoadmin {
 		$this->loader->add_shortcode( 'zipcodes', $plugin_public, 'zipcodes_shortcode' , 10, 2 );
 		$this->loader->add_shortcode( 'categories', $plugin_public, 'categories_shortcode' , 10, 2 );
 		$this->loader->add_shortcode( 'employees', $plugin_public, 'employees_shortcode',  10, 2);
-		$this->loader->add_shortcode( 'user_registration', $plugin_public, 'user_registration_shortcode',  10, 2);
+		$this->loader->add_shortcode( 'donor_registration', $plugin_public, 'donor_registration_shortcode',  10, 2);
 		$this->loader->add_shortcode( 'user_account', $plugin_public, 'user_account_shortcode',  10, 2);
 		$this->loader->add_shortcode( 'emails', $plugin_public, 'emails_shortcode',  10, 2);
 
@@ -238,6 +236,8 @@ class Sapoadmin {
 		$this->loader->add_action( 'wp_ajax_delete_employee', $employees_ajax, 'delete_employee');
 		$this->loader->add_action( 'wp_ajax_delete_driver', $employees_ajax, 'delete_driver');
 
+		//Ajax for new users table
+		$this->loader->add_action( 'wp_ajax_register_donor', $new_donors_ajax, 'register_donor');
 	}
 
 	/**

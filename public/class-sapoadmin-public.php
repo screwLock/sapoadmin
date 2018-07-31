@@ -135,8 +135,8 @@ class Sapoadmin_Public {
 		wp_register_script('categories', plugin_dir_url( __FILE__ ) . 'js/categories.js', array(), $this->version, true );
 		wp_register_script('employees', plugin_dir_url( __FILE__ ) . 'js/employees.js', array(), $this->version, true );
 		wp_register_script('emails', plugin_dir_url( __FILE__ ) . 'js/emails.js', array(), $this->version, true );
-		wp_register_script('user_registration', plugin_dir_url( __FILE__ ) . 'js/userRegistration.js', array(), $this->version, true );
-		wp_register_script('google_login',  'https://apis.google.com/js/api:client.js', array('user_registration'), $this->version);
+		wp_register_script('donor_registration', plugin_dir_url( __FILE__ ) . 'js/donorRegistration.js', array(), $this->version, true );
+		wp_register_script('google_login',  'https://apis.google.com/js/api:client.js', array('donor_registration'), $this->version);
 		wp_register_script('user_account',  plugin_dir_url( __FILE__ ) . 'js/userAccount.js', $this->version);
 		wp_register_script('google_autocomplete', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAP9TsRTrHitDF4jNAwSXLLKajKM4LTGVc&libraries=places&callback=initAutocomplete',
 							array('user_account'), $this->version);
@@ -224,20 +224,21 @@ class Sapoadmin_Public {
 		return '';
 	}
 
-	public function user_registration_shortcode(){
-		wp_localize_script( 'user_registration', 'user_registration_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
+	public function donor_registration_shortcode(){
+		wp_localize_script( 'donor_registration', 'new_donors_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
+		wp_localize_script( 'donor_registration', 'user_registration_ajax', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
 		wp_enqueue_style('sapo_bootstrap_css');
 		wp_enqueue_script('sapo_bootstrap_js');
 		wp_enqueue_style('sapo_navtabs_css');
 		wp_enqueue_style('sapo_user_registration_css');
 
-		wp_enqueue_script('user_registration');
+		wp_enqueue_script('donor_registration');
 		wp_enqueue_script('google_login');
 		wp_enqueue_script('pw_strength');
 		wp_enqueue_style('pw_strength_css');
 		add_filter('script_loader_tag', array($this, 'google_login_script_attributes'), 10, 2);
 
-		include_once('partials/user_registration_template.php');
+		include_once('partials/donor_registration_template.php');
 		return '';
 	}
 

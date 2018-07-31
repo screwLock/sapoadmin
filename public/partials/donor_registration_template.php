@@ -31,19 +31,19 @@
 		<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
 		 </div>
-        <input name="" class="form-control" placeholder="First name" type="text" required>
+        <input id="first-name-input" class="form-control" placeholder="First name" type="text" required>
     </div> <!-- form-group// -->
 	<div class="form-group input-group">
 		<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
 		 </div>
-        <input name="" class="form-control" placeholder="Last name" type="text" required>
+        <input id="last-name-input" class="form-control" placeholder="Last name" type="text" required>
     </div> <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 		 </div>
-        <input name="" class="form-control" placeholder="Email address" type="email" required>
+        <input id="email-input" class="form-control" placeholder="Email address" type="email" required>
     </div> <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
@@ -62,7 +62,7 @@
 		<p id="password-strength-text"></p>
 	</div>                          
     <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-block" id="create-user-button"> Create Account  </button>
+        <button type="submit" class="btn btn-primary btn-block" id="create-donor-button"> Create Account  </button>
     </div> <!-- form-group// -->      
     <p class="text-center">Have an account? <a href="">Log In</a> </p>
 		<input type="checkbox" name="website" value="1" style="display:none !important" tabindex="-1" autocomplete="off">

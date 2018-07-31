@@ -64,16 +64,51 @@ jQuery(window).load(function(){
     startApp();
     var orgID = getUrlParam("orgID", -1);
 
-    jQuery("#create-user-button").on('click', function(e){
+    jQuery("#create-donor-button").on('click', function(e){
         e.preventDefault();
+        var fn = jQuery('#first-name-input').val();
+        var ln = jQuery('#last-name-input').val();
+        var email = jQuery('#email-input').val();
+        //get org id
+        //get login methodology (fb, google, sapo)
+        //users table pk=orgid,email
+        var pw = jQuery('#pw-input').val();
+        var newDonor = createDonor(fn, ln, email, pw);
         var pwScore = zxcvbn(password.value);
-        if(pwScore.score !== 4) console.log('Password should be strong');
-        //FB.api('/me', 'GET', {fields: 'id,first_name,last_name,email'}, function(response) {
+        if(pwScore.score !== 4) {
+          console.log('Password not strong enough');
+          return false;
+        }
+        jQuery.ajax({
+          type:"POST",
+          url: new_donors_ajax.ajax_url,
+          dataType: 'json',
+          data: {
+              action: 'register_donor',
+              new_donor: newDonor
+          },
+          success: function (response) {
+            console.log(response);
+          },
+          error: function(error){
+             // console.log('error');
+          }
+      });        //FB.api('/me', 'GET', {fields: 'id,first_name,last_name,email'}, function(response) {
         //    console.log(response);
         //    //check db for alrady created accoutn by email
         //  });
     });
 });
+
+function createDonor(firstName,lastName,email,password){
+    var donor = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    };
+    return donor;
+}
 
 /**
 * Setting up the password strength meter

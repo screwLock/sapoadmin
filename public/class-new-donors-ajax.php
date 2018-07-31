@@ -1,10 +1,9 @@
-
 <?php
 
 /**
- * The file that defines the ajax functionality for creating new users.
+ * The file that defines the ajax functionality for creating new donors.
  *
- * A class definition for registering new users
+ * A class definition for registering new donors
  *
  * @link       https://github.com/screwLock
  * @since      1.0.0
@@ -14,7 +13,7 @@
  */
 
 /**
- * All User Registration code for the sapo site should be
+ * All Donor Registration code for the sapo site should be
  * set here.
  *
  * @since      1.0.0
@@ -22,17 +21,17 @@
  * @subpackage Sapoadmin/public
  * @author     Travus Helmly <helmlyw@gmail.com>
  */
-class NewUser
+class NewDonorsAjax
 {
 
     /**
-     * A shortcode for rendering the new user registration form.
+     * A shortcode for rendering the new donor registration form.
      *
      * @param  array   $attributes  Shortcode attributes.
      * @param  string  $content     The text content for shortcode. Not used.
      *
      * @return string  The shortcode output
-     */
+     *
     public function render_register_form($attributes, $content = null)
     {
         // Parse shortcode attributes
@@ -47,55 +46,49 @@ class NewUser
             return $this->get_template_html('register_form', $attributes);
         }
     } //end of render_register_form() 
-
+    **/
     /**
      * Validates and then completes the new user signup process if all went well.
      *
-     * @param string $email         The new user's email address
-     * @param string $first_name    The new user's first name
-     * @param string $last_name     The new user's last name
      *
      * @return int|WP_Error         The id of the user that was created, or error if failed.
-     */
-    private function register_user($email, $first_name, $last_name, $password)
+     **/
+    private function register_donor()
     {
+        $new_donor = $_POST['new_donor'];
         $errors = new WP_Error();
  
         // Email address is used as both username and email. It is also the only
         // parameter we need to validate
-        if (!is_email($email)) {
+        if (!is_email($new_donor['email'])) {
             $errors->add('email', $this->get_error_message('email'));
             return $errors;
         }
 
-        if (username_exists($email) || email_exists($email)) {
+        if (username_exists($new_donor['email']) || email_exists($new_donor['email'])) {
             $errors->add('email_exists', $this->get_error_message('email_exists'));
             return $errors;
         }
  
-        $user_data = array(
-            'user_login' => $email,
-            'user_email' => $email,
-            'user_pass' => $password,
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'nickname' => $first_name,
-            'show_admin_bar_front' => false,
-            'role' => 'subscriber'
+        $donor_data = array(
+            'user_email' => $$new_donor['email'],
+            'user_pass' => $new_donor['password'],
+            'first_name' => $new_donor['firstName'],
+            'last_name' => $new_donor['lastName'],
         );
 
-        $user_id = wp_insert_user($user_data);
-        wp_new_user_notification($user_id, $password);
+        $user_id = wp_insert_user($donor_data);
+        //wp_new_user_notification($user_id, $password);
 
         return $user_id;
     }  //register_user()
-
+    
     /**
      * Handles the registration of a new user.
      *
      * Used through the action hook "login_form_register" activated on wp-login.php
      * when accessed through the registration action.
-     */
+     *
     public function do_register_user()
     {
         if ('POST' == $_SERVER['REQUEST_METHOD']) {
@@ -126,4 +119,5 @@ class NewUser
             exit;
         }
     } // end of do_register_user() function
+    */
 }
