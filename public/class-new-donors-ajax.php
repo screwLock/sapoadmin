@@ -68,11 +68,11 @@ class NewDonorsAjax
     public function login_donor(){
         global $wpdb;
         $donors_table = $wpdb->prefix . "sapo_donors";
-        $new_donor = $_POST['new_donor'];
-        $email = $new_donor['email'];
-        $orgID = $new_donor['orgID'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $orgID = $_POST['orgID'];
 
-        $count = $wpdb->get_var( $wpdb->prepare(
+        $stored_pw = $wpdb->get_var( $wpdb->prepare(
             "
             SELECT donor_password FROM $donors_table
             WHERE email IN (%s)
@@ -80,6 +80,8 @@ class NewDonorsAjax
             ", $email, $orgID
             )
         );
+        if($password != $stored_pw) 
+            wp_send_json_error(new WP_Error( 'login', __( "login fail", "login" )));
         wp_send_json_success();
     }
 

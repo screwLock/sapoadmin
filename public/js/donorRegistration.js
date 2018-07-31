@@ -151,7 +151,29 @@ jQuery(window).load(function(){
         //    //check db for alrady created accoutn by email
         //  });
     });//End of donor create button ajax
-
+    jQuery("#modal-login-button").on('click', function(e){
+      e.preventDefault();
+      jQuery.ajax({
+        type:"POST",
+        url: new_donors_ajax.ajax_url,
+        dataType: 'json',
+        data: {
+            action: 'login_donor',
+            email: jQuery('#modal-email').val(),
+            password: jQuery('#modal-pw').val(),
+            orgID: getUrlParam('id', 0)
+        },
+        success: function (response) {
+          if(response.success === false) {
+            console.log('wrong info');
+          }
+          else
+            window.location.replace("/user-account");
+        },
+        error: function(error){
+        }
+    });
+    });
 
   
 });

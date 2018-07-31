@@ -238,6 +238,7 @@ class Sapoadmin {
 
 		//Ajax for new users table
 		$this->loader->add_action( 'wp_ajax_register_donor', $new_donors_ajax, 'register_donor');
+		$this->loader->add_action( 'wp_ajax_login_donor', $new_donors_ajax, 'login_donor');
 	}
 
 	/**

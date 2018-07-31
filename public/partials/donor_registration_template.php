@@ -95,7 +95,7 @@
                     </div>
                     <div class="form-group py-4">
                         <button class="btn btn-outline-secondary" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                        <button type="submit" class="btn btn-primary float-right" id="btnLogin">Login</button>
+                        <button type="submit" class="btn btn-primary float-right" id="modal-login-button">Login</button>
                     </div>
                 </form>
             </div>
