@@ -37,8 +37,7 @@ class NewDonorsAjax
         $new_donor = $_POST['new_donor'];
         $email = $new_donor['email'];
         $orgID = $new_donor['orgID'];
-        // Email address is used as both username and email. It is also the only
-        // parameter we need to validate/*
+
         $count = $wpdb->get_var( $wpdb->prepare(
             "
             SELECT COUNT(*) FROM $donors_table
@@ -65,6 +64,24 @@ class NewDonorsAjax
         //wp_new_user_notification($user_id, $password);
         wp_send_json_success(); 
     } 
+
+    public function login_donor(){
+        global $wpdb;
+        $donors_table = $wpdb->prefix . "sapo_donors";
+        $new_donor = $_POST['new_donor'];
+        $email = $new_donor['email'];
+        $orgID = $new_donor['orgID'];
+
+        $count = $wpdb->get_var( $wpdb->prepare(
+            "
+            SELECT donor_password FROM $donors_table
+            WHERE email IN (%s)
+            AND organization_id = %d
+            ", $email, $orgID
+            )
+        );
+        wp_send_json_success();
+    }
 
     private function hash_password($password){
         $wp_hasher = new PasswordHash( 8, TRUE );

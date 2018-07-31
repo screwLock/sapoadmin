@@ -71,7 +71,7 @@ jQuery(window).load(function(){
     jQuery('#email-env').popover({
       content: "Enter a valid email",
       trigger: "manual",
-      placement: 'left'
+      placement: 'left '
     })
     jQuery('#pw-input').popover({
       content: "Password must be strong.",
@@ -150,7 +150,10 @@ jQuery(window).load(function(){
         //    console.log(response);
         //    //check db for alrady created accoutn by email
         //  });
-    });
+    });//End of donor create button ajax
+
+
+  
 });
 
 function createDonor(firstName,lastName,email,password, orgID=0, login=0){

@@ -64,11 +64,44 @@
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block" id="create-donor-button"> Create Account  </button>
     </div> <!-- form-group// -->      
-    <p class="text-center">Have an account? <a id="login-anchor" href="">Log In</a> </p>
+    <p class="text-center">Have an account? <a id="login-anchor" href="#login-modal" data-toggle="modal" role="button">Log In</a> </p>
 		<input type="checkbox" name="website" value="1" style="display:none !important" tabindex="-1" autocomplete="off">
     </form>
 </article>
 </div> <!-- card.// -->
+
+<div id="login-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control form-control-lg" name="email" id="modal-email" required="">
+                        <div class="invalid-feedback">Oops, you missed this one.</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control form-control-lg" id="modal-pw" required="" autocomplete="new-password">
+                        <div class="invalid-feedback">Enter your password too!</div>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="rememberMe">
+                      <label class="custom-control-label" for="rememberMe">Remember me on this computer</label>
+                    </div>
+                    <div class="form-group py-4">
+                        <button class="btn btn-outline-secondary" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                        <button type="submit" class="btn btn-primary float-right" id="btnLogin">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--
 -Include form validation in honeypot algorithm. (most end-user will only get 1 or 2 fields wrong; spambots will typically get most of the fields wrong)
