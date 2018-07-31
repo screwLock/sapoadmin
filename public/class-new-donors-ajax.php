@@ -21,8 +21,7 @@
  * @subpackage Sapoadmin/public
  * @author     Travus Helmly <helmlyw@gmail.com>
  */
-require_once( '/path/to/wp-includes/class-phpass.php' );
-
+require_once ABSPATH . WPINC . '/class-phpass.php';
 class NewDonorsAjax
 {
 
