@@ -127,6 +127,7 @@ class Sapoadmin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-categories-ajax.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-employees-ajax.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-new-donors-ajax.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-logout-ajax.php';
 
 		$this->loader = new Sapoadmin_Loader();
 
@@ -188,6 +189,7 @@ class Sapoadmin {
 		$categories_ajax = new CategoriesAjax();
 		$employees_ajax = new EmployeesAjax();
 		$new_donors_ajax = new NewDonorsAjax();
+		$logout_ajax = new LogoutAjax();
 		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'register_scripts' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
@@ -239,6 +241,10 @@ class Sapoadmin {
 		//Ajax for new users table
 		$this->loader->add_action( 'wp_ajax_register_donor', $new_donors_ajax, 'register_donor');
 		$this->loader->add_action( 'wp_ajax_login_donor', $new_donors_ajax, 'login_donor');
+
+		//Ajax for logging out
+		$this->loader->add_action( 'wp_ajax_logout', $logout_ajax, 'logout');
+
 	}
 
 	/**
