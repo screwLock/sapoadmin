@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The view for the user registration page
  *

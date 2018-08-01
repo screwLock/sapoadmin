@@ -67,6 +67,7 @@ class NewDonorsAjax
 
     public function login_donor(){
         global $wpdb;
+        session_start();
         $donors_table = $wpdb->prefix . "sapo_donors";
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -82,6 +83,7 @@ class NewDonorsAjax
         );
         if($password != $stored_pw) 
             wp_send_json_error(new WP_Error( 'login', __( "login fail", "login" )));
+        $_SESSION['user'] = $email;
         wp_send_json_success();
     }
 

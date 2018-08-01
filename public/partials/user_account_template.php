@@ -9,7 +9,11 @@
  * @package    Sapoadmin
  * @subpackage Sapoadmin/public/partials
  */
-
+    session_start();
+    require_once plugin_dir_path( __FILE__ ) . 'redirect.php'; 
+    if (!isset($_SESSION['user'])) {
+        redirect('/user-registration');
+}
 ?>
 
 <div class="loading-page"></div>

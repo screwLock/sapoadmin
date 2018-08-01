@@ -23,7 +23,7 @@
             <a class="nav-item nav-link active" href="#">Home </a>
             <a class="nav-item nav-link" href="#">Pickup History</a>
             <a class="nav-item nav-link" href="#">Pricing</a>
-            <a class="nav-item nav-link" href="<?php echo wp_logout_url("./user-registration"); ?>">Logout</a>
+            <a class="nav-item nav-link" href="#">Logout</a>
         </div>
     </div>
 </nav>
