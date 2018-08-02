@@ -30,7 +30,7 @@
 
         session_start();
         session_destroy();
-        redirect('/user-registration');
+        //redirect('/user-registration');
         //echo wp_logout_url("./user-registration");
         wp_send_json_success();
     }
