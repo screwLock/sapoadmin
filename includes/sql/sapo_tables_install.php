@@ -82,21 +82,26 @@ function sapo_tables_install() {
 		   ) $charset_collate;";   
 		}
 
-		//4. Create Trucks table
-		$trucks_table = $wpdb->prefix . "sapo_trucks";
+		//4. Create Drivers table
+		$drivers_table = $wpdb->prefix . "sapo_drivers";
 
-		if($wpdb->get_var("SHOW TABLES LIKE '" . $trucks_table . "'") !== $trucks_table) {
-	       $sql[] = "CREATE TABLE $trucks_table(
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $drivers_table . "'") !== $drivers_table) {
+	       $sql[] = "CREATE TABLE $drivers_table(
 		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
 		      user_id BIGINT(20) NOT NULL,
-		      truck_number BIGINT(20) NOT NULL,
-		      driver_name VARCHAR(30) NOT NULL,
-		      driver_phone VARCHAR(10) NOT NULL,
-		      driver_email VARCHAR(30),
+		      driver_number VARCHAR(20) NOT NULL DEFAULT '0',
+			  first_name VARCHAR(20) NOT NULL DEFAULT '',
+			  last_name VARCHAR(20) NOT NULL DEFAULT '',
+			  middle_initial CHAR(1) NOT NULL DEFAULT '',
+		      phone_number VARCHAR(10) NOT NULL DEFAULT '0',
+		      email VARCHAR(30) NOT NULL DEFAULT '0',
+			  access_level TINYINT(10) UNSIGNED NOT NULL DEFAULT 4,
+			  driver_password VARCHAR(15) NOT NULL DEFAULT 'blah',
+			  organization_id BIGINT(20) NOT NULL DEFAULT 5,
 			  updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
 		      created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 		      UNIQUE(id),
-			  PRIMARY KEY  (id)
+			  PRIMARY KEY  (email)
 			) $charset_collate;";
 		}
 		//5.  Create Employees table
@@ -107,12 +112,19 @@ function sapo_tables_install() {
 		   $sql[] = "CREATE TABLE $employees_table(
 		      id BIGINT(20) NOT NULL AUTO_INCREMENT,
 		      user_id BIGINT(20) NOT NULL,
-			  employee_id BIGINT(20) NOT NULL,
-			  access_level VARCHAR(10) NOT NULL DEFAULT 'employee',
+			  employee_id VARCHAR(20) NOT NULL DEFAULT '',
+			  access_level TINYINT(10) UNSIGNED NOT NULL DEFAULT 2,
+			  phone_number VARCHAR(10) NOT NULL DEFAULT '',
+			  email VARCHAR(20) NOT NULL DEFAULT '',
+			  first_name VARCHAR(20) NOT NULL DEFAULT '',
+			  last_name VARCHAR(20) NOT NULL DEFAULT '',
+			  middle_initial CHAR(1) NOT NULL DEFAULT '',
+			  employee_password VARCHAR(15) NOT NULL DEFAULT 'blah',
+			  organization_id BIGINT(20) NOT NULL DEFAULT 5,
 		      updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
 		      created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
 	          UNIQUE(id),
-		      PRIMARY KEY  (id)
+		      PRIMARY KEY  (email)
 		   ) $charset_collate;";   
 		}
 
@@ -200,6 +212,41 @@ function sapo_tables_install() {
 		   ) $charset_collate;";   
 		}
 
+		//11.  Create Organization Table
+		$organization_table = $wpdb->prefix . "sapo_organization";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $organization_table . "'") !== $organization_table){
+			$sql[] = "CREATE TABLE $organization_table(
+			   id BIGINT(20) NOT NULL AUTO_INCREMENT,
+			   user_id BIGINT(20) NOT NULL,
+			   organization_name VARCHAR (30) NOT NULL,
+			   organization_id BIGINT(20) NOT NULL,
+			   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+		       created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+	           UNIQUE(id),
+		       PRIMARY KEY  (user_id)
+		   ) $charset_collate;";   
+		}
+
+		//12.  Create Donors Table
+		$donors_table = $wpdb->prefix . "sapo_donors";
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . $donors_table  . "'") !== $donors_table ){
+			$sql[] = "CREATE TABLE $donors_table (
+			   id BIGINT(20) NOT NULL AUTO_INCREMENT,
+			   phone_number VARCHAR(10) NOT NULL DEFAULT '',
+			   email VARCHAR(20) NOT NULL DEFAULT '',
+			   first_name VARCHAR(20) NOT NULL DEFAULT '',
+			   last_name VARCHAR(20) NOT NULL DEFAULT '',
+			   organization_id BIGINT(20) NOT NULL DEFAULT 0,
+			   donor_password VARCHAR(20) NOT NULL DEFAULT 'blah',
+			   login_method TINYINT (5) NOT NULL,
+			   updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
+		       created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+	           UNIQUE(id),
+		       PRIMARY KEY  (email, organization_id)
+		   ) $charset_collate;";   
+		}		
 				
 		if(!empty($sql)){
 		   require_once(ABSPATH . 'wp-admin/includes/upgrade.php');

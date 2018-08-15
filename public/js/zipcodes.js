@@ -22,6 +22,7 @@ jQuery.ajax({
 
 
 jQuery(window).load(function(){
+    highlightMenu();
     jQuery("#max-time-select").hide();
     jQuery('input[type=radio][name=max-time-enabled]').on('change', function(){
         switch(jQuery(this).val()){
@@ -143,7 +144,7 @@ function addZipcodeEntry(zipcode){
                         '<td>' + zipcode.maxPickups + '</td>';
     if(zipcode.maxTimeEnabled){
         newEntry +=      '<td>' + 'Yes' + '</td>' +
-                        '<td>' + zipcode.maxTime + '</td>';
+                        '<td>' + toAMPM(zipcode.maxTime) + '</td>';
     }
     else {
         newEntry +=      '<td>' + 'No' + '</td>' +
@@ -182,3 +183,47 @@ function doesPropertyExist(property, objectProperty, objectArray){
     })
     return match;
 }
+
+/**
+ * Convert a MYSQL time string to am pm
+ * format == "h:m"
+ * @param {*} dStr 
+ * @param {*} format 
+ */
+function toAMPM(dStr) {
+	var now = new Date();
+ 	now.setHours(dStr.substr(0,dStr.indexOf(":")));
+ 	now.setMinutes(dStr.substr(dStr.indexOf(":")+1, dStr.indexOf(":")));
+    now.setSeconds(0);
+    now.toLocaleString('en-US', { hour: 'numeric', hour12: true });
+	var hours = (now.getHours() % 12) || 12; // show midnight & noon as 12
+	return (
+		( hours < 10 ? '0' : '') + hours +
+		( now.getMinutes() < 10 ? ':0' : ':') + now.getMinutes() +
+                // optional seconds display
+		// ( now.getSeconds() < 10 ? ':0' : ':') + now.getSeconds() + 
+		( now.getHours() < 12 ? ' AM' : ' PM' )
+	); 
+
+}
+
+
+/**
+ * Highlights the active anchor link on the 
+ * sidebar
+ */
+function highlightMenu() {
+    // this will get the full URL at the address bar
+    var url = window.location.href;
+
+    // passes on every "a" tag
+    jQuery(".sidenav a").each(function() {
+        // checks if its the same on the address bar
+
+        if (url == (this.href)) {
+            jQuery(this).closest("a").addClass("active");
+            //for making parent of submenu active
+           jQuery(this).closest("a").parent().parent().addClass("active");
+        }
+    });
+};    

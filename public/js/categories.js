@@ -48,11 +48,12 @@ jQuery.ajax({
         action: 'get_location_details'
     },
     success: function (response) {
-            console.log(response.data[0]);
+        if(response.data[0]){
             var oldLocationDetails = response.data[0];
             locationDetails[0] = createNewLocationDetails(oldLocationDetails.stairs, oldLocationDetails.moving_out, 
                 oldLocationDetails.yard_sale, oldLocationDetails.estate_auction);
-            setTimeout(function(){updateLocationDetailsChecks(locationDetails[0]);}, 2000); 
+                updateLocationDetailsChecks(locationDetails[0]);
+         }
     },
     error: function(error){
        // console.log('error');
@@ -60,7 +61,7 @@ jQuery.ajax({
 });
 
 jQuery(window).load(function(){
-
+    highlightMenu();
     jQuery('#add-category-button').on('click', function(e) {
         e.preventDefault();
         var categoryName = jQuery("#add-category").val();
@@ -120,7 +121,7 @@ jQuery(window).load(function(){
         var yardSale = parseInt(jQuery('input[type=radio][name=yard-radio]:checked').val());
         var estateAuction = parseInt(jQuery('input[type=radio][name=estate-radio]:checked').val());
         var newLocation = createNewLocationDetails(stairs, movingOut, yardSale, estateAuction);
-        if(!isEquivalent(newLocation, locationDetails[0])){
+         if(locationDetails.length === 0 || !isEquivalent(newLocation, locationDetails[0])){
             jQuery.ajax({
                 type:"POST",
                 url: categories_ajax.ajax_url,
@@ -285,10 +286,12 @@ function getCheckedSize(){
 }
 
 function updateLocationDetailsChecks(locationDetails){
-    if(locationDetails.stairs===1)jQuery('#stairs-on').prop('checked', true);
-    if(locationDetails.movingOut===1)jQuery('#move-on').prop('checked', true);
-    if(locationDetails.yardSale===1)jQuery('#yard-on').prop('checked', true);
-    if(locationDetails.estateAuction===1)jQuery('#estate-on').prop('checked', true);
+    //this checkbox style only responds to click events
+    if(locationDetails.stairs==1)jQuery('#stairs-on').click();
+    if(locationDetails.movingOut==1)jQuery('#move-on').click();
+    if(locationDetails.yardSale==1)jQuery('#yard-on').click();
+    if(locationDetails.estateAuction==1)jQuery('#estate-on').click();
+
 }
 
 /**
@@ -335,3 +338,23 @@ function isEquivalent(a, b) {
     // are considered equivalent
     return true;
 }
+
+/**
+ * Highlights the active anchor link on the 
+ * sidebar
+ */
+function highlightMenu() {
+    // this will get the full URL at the address bar
+    var url = window.location.href;
+
+    // passes on every "a" tag
+    jQuery(".sidenav a").each(function() {
+        // checks if its the same on the address bar
+
+        if (url == (this.href)) {
+            jQuery(this).closest("a").addClass("active");
+            //for making parent of submenu active
+           jQuery(this).closest("a").parent().parent().addClass("active");
+        }
+    });
+};    

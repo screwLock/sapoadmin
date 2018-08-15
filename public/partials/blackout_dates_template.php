@@ -53,7 +53,7 @@
                 <div class="form-group row">
                     <div class="col-4">
                         <label class="sr-only" for="inlineFormInput">Single Blackout Date</label>
-                        <input type="text" class="form-control" id="blackout-dates-single">
+                        <input type="text" class="form-control text-center" id="blackout-dates-single">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -62,7 +62,7 @@
                         <input type="text" class="form-control" id="single-date-reason" placeholder="Reason">
                     </div>
                     <div class="col-4">
-                        <button class="btn btn-primary" id="add-date-button"><strong>+</strong> Add</button>
+                        <button class="btn btn-primary" id="save-date-button">Save</button>
                     </div>
                 </div>  
             </form>
@@ -83,7 +83,7 @@
                         <input type="text" class="form-control" id="date-range-reason" placeholder="Reason">
                     </div>
                     <div class="col-4">
-                        <button class="btn btn-primary" id="add-date-range-button"><strong>+</strong> Add</button>
+                        <button class="btn btn-primary" id="save-date-range-button">Save</button>
                     </div>
                 </div>
             </form>
@@ -93,7 +93,7 @@
 </div><!-- End of blackout dates card -->
 
 <div class="container-fluid pt-2">
-<h5 class="p-2">Dates To Be Saved</h5>
+<h5 class="p-2">Current Blackout Dates</h5>
     <table class="table">
         <thead>
             <tr>
@@ -104,34 +104,12 @@
         </thead>
         <tfoot>
             <tr>
-                <td><button class="btn btn-primary" id="save-dates">Save</button></td>
+                <td><button class="btn btn-primary" id="delete-dates-button">Delete</button></td>
                 <td></td>
                 <td></td>
             </tr>
         </tfoot>
-        <tbody id="new-date-cards">
-        </tbody>
-    </table>
-</div>
-
-<div class="container-fluid pt-2">
-<h5 class="p-2">Old Blackout Dates</h5>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Reason</th>
-                <th scope="col">Date</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <td><button class="btn btn-primary" id="alter-old-dates">Delete</button></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tfoot>
-        <tbody id="old-date-entries">
+        <tbody id="current-blackout-dates-table">
         </tbody>
     </table>
 </div>

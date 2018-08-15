@@ -15,6 +15,21 @@
 <?php require_once plugin_dir_path( __FILE__ ) . 'get_weekdays.php'; ?>
 <div class="loading-page"></div>
 
+<nav class="navbar fixed-top navbar-light bg-light">
+    <a class="navbar-brand" href="#">SAPO</a>
+</nav>
+
+<div id="sapo-sidebar" class="sidenav border-right border-top">
+  <a href="./zipcodes">Zipcodes</a>
+  <a href="./blackout-dates">Blackout Dates</a>
+  <a href="./categories">Categories</a>
+  <a href="./employees">Employees</a>
+  <a href="./emails">Emails</a>
+</div>
+
+
+<div class="main">
+
 <div class="card">
     <div class="card-body pb-2">
         <h5 class="card-title">Add New Zipcodes</h5>
@@ -97,3 +112,4 @@
     </table>
 </div>
 
+</div>

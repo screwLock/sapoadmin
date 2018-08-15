@@ -1,24 +1,13 @@
-jQuery(document).ready(function () {
-    //$("#sidebar").mCustomScrollbar({
-    //    theme: "minimal"
-    //});
-    jQuery('#activate-sidebar').on('click', function() {
-        jQuery('#sapo-sidebar').toggleClass('active');
-    });
-    jQuery('#dismiss').on('click', function () {
-        // hide sidebar
-        jQuery('#sapo-sidebar').removeClass('active');
-        // hide overlay
-        //$('.overlay').removeClass('active');
-    });
-/*
-    $('#sidebarCollapse').on('click', function () {
-        // open sidebar
-        $('#sidebar').addClass('active');
-        // fade in the overlay
-        $('.overlay').addClass('active');
-        $('.collapse.in').toggleClass('in');
-        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-    });
-*/
-});
+/* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
+function openNav() {
+    //document.getElementById("sapo-sidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+    //document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+/* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+function closeNav() {
+    //document.getElementById("sapo-sidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+    //document.body.style.backgroundColor = "white";
+} 
